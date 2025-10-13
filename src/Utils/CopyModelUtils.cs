@@ -39,10 +39,13 @@ namespace ProjectOrbitalRing.Utils
             CopyModelProto(488, ProtoID.M反物质炮弹);
             CopyModelProto(46, ProtoID.M蓄电器, Color.HSVToRGB(0.0833f, 0.8f, 1.0f));
             CopyModelProto(48, ProtoID.M深空货舰);
-            CopyModelProto(50, ProtoID.M星环电网枢纽, new Color(0.7373f, 0.2118f, 0.8510f)); 
+            CopyModelProto(50, ProtoID.M天枢座, new Color(0.7373f, 0.2118f, 0.8510f));
+            CopyModelProto(36, ProtoID.M星环电网组件, new Color(0.7373f, 0.2118f, 0.8510f)); 
             CopyModelProto(72, ProtoID.M轨道弹射器, new Color(0.1404f, 0.8294f, 0.9882f)); 
             CopyModelProto(49, ProtoID.M轨道空投站, new Color(0.9814f, 0.6620f, 0.8471f));
             CopyModelProto(35, ProtoID.M轨道连接组件, new Color(1f, 1f, 1f));
+            CopyModelProto(37, ProtoID.M粒子加速轨道, new Color(1f, 1f, 1f));
+            CopyModelProto(402, ProtoID.M星环护盾组件, new Color(1f, 1f, 1f));
 
             //AddHyperRelayReactor();
             ChangeAccumulatorColor();

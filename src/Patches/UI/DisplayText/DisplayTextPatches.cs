@@ -179,10 +179,10 @@ namespace ProjectOrbitalRing.Patches.UI.DisplayText
 
                     return;
 
-                case 18:
-                    if (__instance.prefabDesc.isCollectStation && __instance.ID == ProtoID.I大气采集器) __result = "行星大气".TranslateFromJson();
+                //case 18:
+                //    if (__instance.prefabDesc.isCollectStation && __instance.ID == ProtoID.I大气采集器) __result = "行星大气".TranslateFromJson();
 
-                    return;
+                //    return;
 
                 case 19:
                     if (__instance.prefabDesc.minerType == EMinerType.Oil)

@@ -344,36 +344,11 @@
         "ZHCN": "甲烷海",
         "ENUS": "Methane Sea"
     },
-    //{
-    //    "Name": "硅石",
-    //    "ZHCN": "硅石",
-    //    "ENUS": "Silicon ore"
-    //},
     {
         "Name": "钛矿",
         "ZHCN": "钛矿",
         "ENUS": "Titanium ore"
     },
-    //{
-    //    "Name": "石矿",
-    //    "ZHCN": "石矿",
-    //    "ENUS": "Stone"
-    //},
-    //{
-    //    "Name": "煤矿",
-    //    "ZHCN": "煤矿",
-    //    "ENUS": "Coal"
-    //},
-    //{
-    //    "Name": "星辉碳氢体",
-    //    "ZHCN": "星辉碳氢体",
-    //    "ENUS": "Starry hydrocarbon"
-    //},
-    //{
-    //    "Name": "金伯利矿石",
-    //    "ZHCN": "金伯利矿石",
-    //    "ENUS": "Kimberlite ore"
-    //},
     {
         "Name": "莫桑石矿脉",
         "ZHCN": "莫桑石矿脉",
@@ -389,16 +364,6 @@
         "ZHCN": "莫桑石为天然存在的一种碳化硅晶体矿物，在高温、高压等极端条件下表现出优异的性能，可用于制作高性能的碳化硅陶瓷材料。",
         "ENUS": "Moissanite is a naturally occurring silicon carbide crystal mineral that exhibits excellent properties under extreme conditions such as high temperature and high pressure, and can be used to produce high-performance silicon carbide ceramic materials."
     },
-    //{
-    //    "Name": "光栅石",
-    //    "ZHCN": "光栅石",
-    //    "ENUS": "Optical grating crystal"
-    //},
-    //{
-    //    "Name": "刺笋结晶",
-    //    "ZHCN": "刺笋结晶",
-    //    "ENUS": "Spiniform stalagmite crystal"
-    //},
     {
         "Name": "黑雾",
         "ZHCN": "黑雾",
@@ -3583,8 +3548,8 @@
     },
     {
         "Name": "T星环巨构",
-        "ZHCN": "太空电梯是高效快捷的离星通道，成熟的星际文明不可能绕过太空电梯发展，而太空电梯只能建设在赤道，这也使得依附于太空电梯的同步轨道设施也要建造于赤道面，那么，当同步轨道设施连绵成片时，便是星环：一个巨型的环星轨道结构，这代表了行星开发的高度，也是工程学上的奇迹。",
-        "ENUS": "The space elevator is an efficient and fast way to leave the star. Mature interstellar civilizations cannot develop without the space elevator, and the space elevator can only be built at the equator. This also requires the synchronous orbit facilities attached to the space elevator to be built on the equatorial plane. Therefore, when the synchronous orbit facilities are connected in patches, it is a giant ring orbit structure, which represents the height of planetary development and is also an engineering miracle."
+        "ZHCN": "太空的发展是循序渐进的，从一颗小小的卫星，到载人舱，到空间站，再到空间站连接组网，最后沿着赤道不断连接，直至首尾相连时，便是星环：一个巨型的环星轨道结构，这代表了行星开发的高度，也是工程学上的奇迹。\n<color=\"#FD965ECC\">当有一个完整的环时，该星环上的轨道设施以及附属太空电梯获得共享储存空间，物品大于/小于设置上限的一半，自动向共享空间存/取物品，每秒一次。制造类轨道设施自动从共享空间获取原料与输入产物。</color> \n<color=\"#FD965ECC\">当有第二个完整的环时，该星环上的轨道设施可以额外再建造20个。</color>",
+        "ENUS": "The development of space is gradual, from a small satellite, to a manned spacecraft, to a space station, then to a network of space station connections, and finally to continuous connections along the equator, until they are connected end-to-end, which is the ring of stars: a giant orbital structure representing the height of planetary development and also a miracle in engineering.\n<color=\"#FD965ECC\">When there is a complete ring, the orbital facilities and attached space elevators on the ring obtain shared storage space. If the items are greater than/less than half of the set upper limit, they will automatically store/retrieve items from the shared space once per second. Manufacturing track facilities automatically obtain raw materials and input products from shared spaces.</color> \n<color=\"#FD965ECC\">When there is a second complete ring, an additional 20 orbital facilities can be built on that ring.</color>"
     },
     {
         "Name": "星环电网",
@@ -3597,14 +3562,14 @@
         "ENUS": "Electricity is the nerve of industrial giants, and power supply is the beginning of industrial operations. From ground connections, to long-distance power supply, and then to satellite power distribution, you may think that satellite power distribution is already sufficient, but engineers have provided a more ambitious plan to build a synchronous orbit power grid hub, which will coordinate with other synchronous orbit facilities in the same ring as a carrier to broadcast a space ring power grid covering the entire planet."
     },
     {
-        "Name": "星环电网枢纽",
-        "ZHCN": "星环电网枢纽",
-        "ENUS": "Orbital Ring Power Grid Hub"
+        "Name": "星环电网组件",
+        "ZHCN": "星环电网组件",
+        "ENUS": "Orbital Ring Power Grid Components"
     },
     {
-        "Name": "I星环电网枢纽",
-        "ZHCN": "一个同步轨道电力协调设施，借助同一个星环里的其他设施安装附属的电力广播设施，电网枢纽能协调整个星环向行星发送覆盖全行星的电力广播，以此达成全球无线电力连接。\n必须建设在<color=\"#FD965ECC\">完整的星环</color>中才能使<color=\"#FD965ECC\">全球供电</color>。",
-        "ENUS": "A synchronous orbit power coordination facility, with the help of other facilities installed in the same ring, can coordinate the entire ring to send power broadcasts covering the entire planet, thereby achieving global wireless power connection.\n It must be built within <color=\"#FD965ECC\">a complete orbital ring</color> to provide <color=\"#FD965ECC\">global power supply</color>."
+        "Name": "I星环电网组件",
+        "ZHCN": "一个无线输电同调组件，借助星环里轨道连接组件提供的支撑和连接，如同连接组件一样建设成首尾相连的星环电网，所有组件相互协调同频，向行星发送覆盖全行星的电力广播，以此达成全球无线电力连接。\n<color=\"#FD965ECC\">连接组件起码连接一环以上和电网组件环必须完整才能使全球供电。</color>",
+        "ENUS": "A wireless transmission synchronization component, with the support and connection provided by the orbital connection component in the star ring, is constructed as a connected star ring power grid like a connection component. All components coordinate with each other on the same frequency and send power broadcasts covering the entire planet to achieve global wireless power connection.\n<color=\"#FD965ECC\">The connecting components must be connected to at least one ring and the power grid components must be complete in order to provide global power supply.</color>"
     },
     {
         "Name": "星环对撞机",
@@ -3625,6 +3590,46 @@
         "Name": "I星环对撞机总控站",
         "ZHCN": "星环对撞机在轨总控设施，建造时会将各节加速轨道加装到星环上的各轨道设施上。星环对撞机总控站负责控制整个星环的加速轨道，以及目标粒子的输入输出。\n因为以整个星环为加速轨道，因此<color=\"#FD965ECC\">一个星环只能建造一个星环对撞机总控站。</color>\n且需要<color=\"#FD965ECC\">星环完整</color>才能运作\n<color=\"#FD965ECC\">需要由底下的太空电梯提供物品的输入输出。</color>",
         "ENUS": "The in orbit control facility of the Star Ring Collider will be constructed by installing each section of the acceleration orbit onto the various orbital facilities on the star ring. The main control station of the Star Ring Collider is responsible for controlling the acceleration orbit of the entire star ring and the input and output of target particles.\n Because the entire ring is used as the acceleration orbit, only <color=\"#FD965ECC\">one ring collider control station can be built for each ring.</color>\n And it requires the <color=\"#FD965ECC\">complete orbital ring</color> to operate \n<color=\"#FD965ECC\">The input and output of items need to be provided by the space elevator below</color>"
+    },
+    {
+        "Name": "粒子加速轨道",
+        "ZHCN": "粒子加速轨道",
+        "ENUS": "Particle Acceleration Orbit"
+    },
+    {
+        "Name": "I粒子加速轨道",
+        "ZHCN": "回旋加速器，利用磁场加速并约束带电粒子，在一圈圈的回旋加速轨道中将粒子束加速至亚光速并对撞。曾经，在地面上加速轨道直径达数十公里的粒子对撞机就被称之为超级对撞机，而如今，我们将建造以星球大小为直径的星环对撞机，由一节节加速轨道拼接而成的，星球级回旋加速器。",
+        "ENUS": "A cyclotron uses a magnetic field to accelerate and constrain charged particles, accelerating the particle beam to sub light speed and colliding in a circular orbit. Once, particle colliders that accelerated to orbit diameters of tens of kilometers on the ground were called supercolliders, but now we will build ring colliders with diameters the size of planets，A planetary level cyclotron composed of a series of accelerated orbits pieced together."
+    },
+    {
+        "Name": "天枢座",
+        "ZHCN": "天枢座",
+        "ENUS": "Tianzhu Seat"
+    },
+    {
+        "Name": "I天枢座",
+        "ZHCN": "星环作为一个行星级巨型结构，承载着统筹全球资源，协调各工厂运作的能力，而星环本身，也需要一个控制空间站，协调星环的资源分配，各组件的协调运作，这就是天枢座的职能。通过接入不同的组件，天枢座便能承担起不同的全球功能支持。",
+        "ENUS": "As a planetary giant structure, the Star Ring carries the ability to coordinate global resources and coordinate the operation of various factories. However, the Star Ring itself also requires a control space station to coordinate the allocation of resources and the coordinated operation of various components. This is the function of the Celestial Pivot constellation. By connecting different components, the Tianzhu constellation can undertake different global functional support."
+    },
+    {
+        "Name": "星环护盾",
+        "ZHCN": "星环护盾",
+        "ENUS": "Orbital Ring Shield"
+    },
+    {
+        "Name": "T星环护盾",
+        "ZHCN": "星环巨构是个大型太空巨构设施，能建成星环的星球都是拥有重要地位的行星，若要将其进行要塞化保护，星环本身，就是个理想的护盾发生器载体，高居于轨道之上，环绕整个行星，从星环发射的护盾可以轻松包裹住整个行星。",
+        "ENUS": "The Star Ring Giant Structure is a large-scale space facility, and planets that can build star rings are important planets. To protect them as fortresses, the Star Ring itself is an ideal shield generator carrier, standing on the orbit and orbiting the entire planet. The shield emitted from the Star Ring can easily wrap around the entire planet."
+    },
+    {
+        "Name": "星环护盾组件",
+        "ZHCN": "星环护盾组件",
+        "ENUS": "Orbital Ring Shield Component"
+    },
+    {
+        "Name": "I星环护盾组件",
+        "ZHCN": "大型轨道设施，在建设时会将护盾发生器安装在同一星环的其他轨道设施上，经由该组件对全星环内的护盾发生器进行协调组网，最终发射出覆盖全行星的完整行星级护盾。",
+        "ENUS": "During the construction of large-scale orbital facilities, shield generators will be installed on other orbital facilities in the same ring. Through this component, the shield generators within the entire ring will be coordinated and networked, ultimately launching a complete planetary level shield covering the entire planet."
     },
     {
         "Name": "轨道防御炮台",
@@ -3688,8 +3693,8 @@
     },
     {
         "Name": "星环解锁",
-        "ZHCN": "沿着赤道上或下其中一圈，建设同步轨道设施，达到40个时，解锁该科技。\n其他描述需要星环的要求也是这个标准：所在的圈建造轨道设施达到40个",
-        "ENUS": "Construct synchronous orbit facilities along one of the circles above or below the equator, and unlock the technology when reaching 40. \nThe other requirements for star rings are also based on this standard: the orbit facilities built in the circle should reach 40"
+        "ZHCN": "使用轨道连接组件，沿着某个纬度建造成首尾相连的完整的圆时，解锁该科技。\n其他描述需要星环的要求也是这个标准：轨道连接组件连成一个环",
+        "ENUS": "Unlock this technology when constructing a complete circle connected end-to-end along a certain latitude using orbital connection components. \nThe other requirements for the star ring are also based on this standard: the orbital connecting components are connected into a ring"
     },
     // 巨构mod
     {

@@ -3673,7 +3673,6 @@
             1152
         ],
         "PreTechsImplicit": [
-            1123,
             1711
         ],
         "Items": [
@@ -6569,7 +6568,7 @@
             28.0
         ],
         "PreTechs": [
-            1936 //1970
+            1970
         ],
         "PreTechsImplicit": [],
         "Items": [
@@ -6579,7 +6578,9 @@
             1
         ],
         "HashNeeded": 3600,
-        "UnlockRecipes": [],
+        "UnlockRecipes": [
+            829
+        ],
         "UnlockFunctions": [],
         "UnlockValues": [],
         "Published": true,
@@ -7127,7 +7128,8 @@
         ],
         "HashNeeded": 288000,
         "UnlockRecipes": [
-            817
+            817,
+            827
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -7347,48 +7349,48 @@
         "PropertyOverrideItems": [],
         "PropertyItemCounts": []
     },
-    //{
-    //    "ID": 1970,
-    //    "Name": "轨道设施连接工程",
-    //    "IconPath": "Icons/Tech/1811",
-    //    "Desc": "T轨道设施连接工程",
-    //    "Conclusion": "T轨道设施连接工程",
-    //    "IsHiddenTech": false,
-    //    "PreItem": [],
-    //    "Position": [
-    //        52.0,
-    //        28.0
-    //    ],
-    //    "PreTechs": [
-    //        1936
-    //    ],
-    //    "PreTechsImplicit": [],
-    //    "Items": [
-    //        6003,
-    //        6278
-    //    ],
-    //    "ItemPoints": [
-    //        10,
-    //        10
-    //    ],
-    //    "HashNeeded": 180000,
-    //    "UnlockRecipes": [
-    //        824
-    //    ],
-    //    "UnlockFunctions": [],
-    //    "UnlockValues": [],
-    //    "Published": true,
-    //    "Level": 0,
-    //    "MaxLevel": 0,
-    //    "LevelCoef1": 0,
-    //    "LevelCoef2": 0,
-    //    "IsLabTech": true,
-    //    "PreTechsMax": false,
-    //    "AddItems": [],
-    //    "AddItemCounts": [],
-    //    "PropertyOverrideItems": [],
-    //    "PropertyItemCounts": []
-    //},
+    {
+        "ID": 1970,
+        "Name": "轨道设施连接工程",
+        "IconPath": "Icons/Tech/1811",
+        "Desc": "T轨道设施连接工程",
+        "Conclusion": "T轨道设施连接工程",
+        "IsHiddenTech": false,
+        "PreItem": [],
+        "Position": [
+            52.0,
+            28.0
+        ],
+        "PreTechs": [
+            1936
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6003,
+            6278
+        ],
+        "ItemPoints": [
+            10,
+            10
+        ],
+        "HashNeeded": 180000,
+        "UnlockRecipes": [
+            824
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
     {
         "ID": 1972,
         "Name": "高级钛矿冶炼",
@@ -7417,6 +7419,49 @@
         "UnlockRecipes": [
             422,
             825
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
+        "ID": 1973,
+        "Name": "星环护盾",
+        "IconPath": "Icons/Tech/1811",
+        "Desc": "T星环护盾",
+        "Conclusion": "T星环护盾",
+        "IsHiddenTech": false,
+        "PreItem": [],
+        "Position": [
+            64.0,
+            20.0
+        ],
+        "PreTechs": [
+            1951
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6279,
+            6004
+        ],
+        "ItemPoints": [
+            10,
+            10
+        ],
+        "HashNeeded": 180000,
+        "UnlockRecipes": [
+            828,
+            
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],

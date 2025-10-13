@@ -517,7 +517,7 @@
     },
     {
         "ModelID": 824,
-        "isBelt": false,
-        "beltSpeed": 0
+        //"isBelt": false,
+        //"beltSpeed": 0
     }
 ]

@@ -7,6 +7,8 @@ using UnityEngine;
 using ProjectOrbitalRing.Utils;
 using GalacticScale;
 using UnityEngine.Playables;
+using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
+using static ProjectOrbitalRing.ProjectOrbitalRing;
 
 namespace ProjectOrbitalRing.Patches.Logic
 {
@@ -17,6 +19,13 @@ namespace ProjectOrbitalRing.Patches.Logic
             PrefabDesc megaPumper = LDB.models.Select(modelIndex).prefabDesc;
             Pose[] newPortPoses = new Pose[] { };
             megaPumper.portPoses = newPortPoses;
+        }
+
+        private static void DelSlotPose(int modelIndex)
+        {
+            PrefabDesc megaPumper = LDB.models.Select(modelIndex).prefabDesc;
+            Pose[] newSlotPoses = new Pose[] { };
+            megaPumper.slotPoses = newSlotPoses;
         }
 
         internal static void StationPrefabDescPostAdd()
@@ -57,68 +66,84 @@ namespace ProjectOrbitalRing.Patches.Logic
 
         }
 
-        // 解除传送带的高度受科技限制，为了适配小塔刚解锁时17层接口就可以用
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(BuildTool_Path), "CheckBuildConditions")]
+        [HarmonyTranspiler]
+        [HarmonyPatch(typeof(BuildTool_Path), nameof(BuildTool_Path.CheckBuildConditions))]
+        public static IEnumerable<CodeInstruction> BuildTool_Path_CheckBuildConditions_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var matcher = new CodeMatcher(instructions);
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Br), new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldfld), new CodeMatch(OpCodes.Brfalse));
+            object label = matcher.Advance(3).Operand;
+            //matcher.Advance(-5).InsertAndAdvance(new CodeInstruction(OpCodes.Br_S, label));
+
+            matcher.Advance(12).InsertAndAdvance(new CodeInstruction(OpCodes.Br_S, label));
+
+            //matcher.Advance(10);
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Add), new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldfld), new CodeMatch(OpCodes.Callvirt));
+
+            object label1 = matcher.Advance(11).Operand;
+
+            matcher.Advance(-5).InsertAndAdvance(new CodeInstruction(OpCodes.Br_S, label1));
+
+            //matcher.LogInstructionEnumeration();
+            return matcher.InstructionEnumeration();
+        }
+
+       // 解除传送带的高度受科技限制，为了适配小塔刚解锁时17层接口就可以用
+       [HarmonyPostfix]
+       [HarmonyPatch(typeof(BuildTool_Path), "CheckBuildConditions")]
         public static void CheckBuildConditionsPatch(BuildTool_Path __instance, ref bool __result)
         {
             GameHistoryData history = __instance.actionBuild.history;
             int count = __instance.buildPreviews.Count;
             int num = count - 1;
-            for (int i = 0; i < count; i++)
-            {
+            for (int i = 0; i < count; i++) {
                 BuildPreview buildPreview = __instance.buildPreviews[i];
-                if (buildPreview.condition == EBuildCondition.OutOfVerticalConstructionHeight)
-                {
-                    if (history.buildMaxHeight + 0.5f <= 64f)
-                    {
-                        buildPreview.condition = EBuildCondition.Ok;
-                        __result = true;
-                        __instance.actionBuild.model.cursorState = 0;
-                        __instance.actionBuild.model.cursorText = BuildPreview.GetConditionText(EBuildCondition.Ok);
-                        float num36 = __instance.altitude;
-                        float num37 = __instance.altitude;
-                        float num38 = __instance.tilt;
-                        float num39 = __instance.tilt;
-                        if (count > 0)
-                        {
-                            num36 = (__instance.buildPreviews[0].lpos.magnitude - __instance.planet.realRadius - 0.2f) / 1.33333325f;
-                            num37 = (__instance.buildPreviews[count - 1].lpos.magnitude - __instance.planet.realRadius - 0.2f) / 1.33333325f;
-                            num36 = Mathf.Round(num36 * 100f) / 100f;
-                            num37 = Mathf.Round(num37 * 100f) / 100f;
-                            if ((double)num36 < 0.041)
-                            {
-                                num36 = 0f;
+                if (buildPreview.item.ID == ProtoID.I轨道连接组件 || buildPreview.item.ID == ProtoID.I粒子加速轨道 || buildPreview.item.ID == ProtoID.I星环电网组件) {
+                    if (buildPreview.condition == EBuildCondition.Collide) {
+                        if (history.buildMaxHeight + 0.5f <= 64f) {
+                            buildPreview.condition = EBuildCondition.Ok;
+                            __result = true;
+                            __instance.actionBuild.model.cursorState = 0;
+                            __instance.actionBuild.model.cursorText = BuildPreview.GetConditionText(EBuildCondition.Ok);
+                            float num36 = __instance.altitude;
+                            float num37 = __instance.altitude;
+                            float num38 = __instance.tilt;
+                            float num39 = __instance.tilt;
+                            if (count > 0) {
+                                num36 = (__instance.buildPreviews[0].lpos.magnitude - __instance.planet.realRadius - 0.2f) / 1.33333325f;
+                                num37 = (__instance.buildPreviews[count - 1].lpos.magnitude - __instance.planet.realRadius - 0.2f) / 1.33333325f;
+                                num36 = Mathf.Round(num36 * 100f) / 100f;
+                                num37 = Mathf.Round(num37 * 100f) / 100f;
+                                if ((double)num36 < 0.041) {
+                                    num36 = 0f;
+                                }
+
+                                if ((double)num37 < 0.041) {
+                                    num37 = 0f;
+                                }
+
+                                num38 = __instance.buildPreviews[0].tilt;
+                                num39 = __instance.buildPreviews[count - 1].tilt;
                             }
 
-                            if ((double)num37 < 0.041)
-                            {
-                                num37 = 0f;
-                            }
+                            if (num36 > 0f || num37 > 0f || num38 != 0f || num39 != 0f || Mathf.Abs(__instance.maxSlope) > 1E-06f) {
+                                __instance.actionBuild.model.cursorText += "<size=12>";
+                                if (num36 > 0f || num37 > 0f) {
+                                    string arg = ((num36 != num37) ? $"{num36:0.##}\u2006～\u2006{num37:0.##}" : $"{num36:0.##}");
+                                    __instance.actionBuild.model.cursorText += string.Format("传送带高度提示".Translate(), arg);
+                                }
 
-                            num38 = __instance.buildPreviews[0].tilt;
-                            num39 = __instance.buildPreviews[count - 1].tilt;
-                        }
+                                if (num38 != 0f || num39 != 0f) {
+                                    string arg2 = ((num38 != num39) ? $"{0f - num38:+0.#;-0.#;0}\u2006～\u2006{0f - num39:+0.#;-0.#;0}" : $"{0f - num38:+0.#;-0.#;0}°");
+                                    __instance.actionBuild.model.cursorText += string.Format("传送带倾斜提示".Translate(), arg2);
+                                }
 
-                        if (num36 > 0f || num37 > 0f || num38 != 0f || num39 != 0f || Mathf.Abs(__instance.maxSlope) > 1E-06f)
-                        {
-                            __instance.actionBuild.model.cursorText += "<size=12>";
-                            if (num36 > 0f || num37 > 0f)
-                            {
-                                string arg = ((num36 != num37) ? $"{num36:0.##}\u2006～\u2006{num37:0.##}" : $"{num36:0.##}");
-                                __instance.actionBuild.model.cursorText += string.Format("传送带高度提示".Translate(), arg);
-                            }
-
-                            if (num38 != 0f || num39 != 0f)
-                            {
-                                string arg2 = ((num38 != num39) ? $"{0f - num38:+0.#;-0.#;0}\u2006～\u2006{0f - num39:+0.#;-0.#;0}" : $"{0f - num38:+0.#;-0.#;0}°");
-                                __instance.actionBuild.model.cursorText += string.Format("传送带倾斜提示".Translate(), arg2);
-                            }
-
-                            if (Mathf.Abs(__instance.maxSlope) > 0.01f)
-                            {
-                                string arg3 = ((!(Mathf.Abs(__instance.maxSlope) < 500f)) ? "几乎垂直".Translate() : $"{__instance.maxSlope:0.##}");
-                                __instance.actionBuild.model.cursorText += string.Format("传送带坡度提示".Translate(), arg3);
+                                if (Mathf.Abs(__instance.maxSlope) > 0.01f) {
+                                    string arg3 = ((!(Mathf.Abs(__instance.maxSlope) < 500f)) ? "几乎垂直".Translate() : $"{__instance.maxSlope:0.##}");
+                                    __instance.actionBuild.model.cursorText += string.Format("传送带坡度提示".Translate(), arg3);
+                                }
                             }
                         }
                     }
@@ -157,12 +182,12 @@ namespace ProjectOrbitalRing.Patches.Logic
             DelStationPose(803); // 太空船坞
             DelStationPose(804); // 轨道观测站
             DelStationPose(806); // 深空物流港
-            //DelStationPose(807); // 轨道反物质堆核心
+            DelSlotPose(807); // 轨道反物质堆核心
             DelStationPose(811); // 星环对撞机总控站
             DelStationPose(814); // 轨道反物质堆基座
             DelStationPose(820); // 星环电网枢纽
             DelStationPose(821); // 超空间中继器核心
-            //DelStationPose(822); // 重型电磁弹射器
+            DelSlotPose(822); // 重型电磁弹射器
 
             megaPumper = LDB.models.Select(805).prefabDesc;
             newPortPoses = new Pose[]{ new Pose(megaPumper.portPoses[0].position, megaPumper.portPoses[0].rotation),
@@ -187,7 +212,48 @@ namespace ProjectOrbitalRing.Patches.Logic
                 newPortPoses[i].position.y = 22.5f;
             }
             megaPumper.portPoses = newPortPoses;
+
+
+            megaPumper = LDB.models.Select(64).prefabDesc;
+            Pose[] newSlotPoses = new Pose[]{
+                new Pose(megaPumper.slotPoses[0].position, megaPumper.slotPoses[0].rotation),
+                new Pose(megaPumper.slotPoses[1].position, megaPumper.slotPoses[1].rotation),
+                new Pose(megaPumper.slotPoses[2].position, megaPumper.slotPoses[2].rotation),
+                new Pose(megaPumper.slotPoses[3].position, megaPumper.slotPoses[3].rotation),
+                new Pose(megaPumper.slotPoses[4].position, megaPumper.slotPoses[4].rotation),
+                new Pose(megaPumper.slotPoses[5].position, megaPumper.slotPoses[5].rotation),
+                new Pose(megaPumper.slotPoses[6].position, megaPumper.slotPoses[6].rotation),
+                new Pose(megaPumper.slotPoses[7].position, megaPumper.slotPoses[7].rotation),
+                new Pose(megaPumper.slotPoses[7].position, megaPumper.slotPoses[7].rotation),
+                new Pose(megaPumper.slotPoses[7].position, megaPumper.slotPoses[7].rotation),
+            };
+            newSlotPoses[8].position = new Vector3(3.8f, -0.02f, 0.1f);
+            newSlotPoses[8].rotation = new Quaternion(0f, 0.7071f, 0f, 0.7071f);
+            newSlotPoses[9].position = new Vector3(3.8f, -0.02f, 1.1f);
+            newSlotPoses[9].rotation = new Quaternion(0f, 0.7071f, 0f, 0.7071f);
+            megaPumper.slotPoses = newSlotPoses;
+
+            megaPumper = LDB.models.Select(376).prefabDesc;
+            newSlotPoses = new Pose[]{
+                new Pose(megaPumper.slotPoses[0].position, megaPumper.slotPoses[0].rotation),
+                new Pose(megaPumper.slotPoses[1].position, megaPumper.slotPoses[1].rotation),
+                new Pose(megaPumper.slotPoses[2].position, megaPumper.slotPoses[2].rotation),
+                new Pose(megaPumper.slotPoses[3].position, megaPumper.slotPoses[3].rotation),
+                new Pose(megaPumper.slotPoses[4].position, megaPumper.slotPoses[4].rotation),
+                new Pose(megaPumper.slotPoses[5].position, megaPumper.slotPoses[5].rotation),
+                new Pose(megaPumper.slotPoses[6].position, megaPumper.slotPoses[6].rotation),
+                new Pose(megaPumper.slotPoses[7].position, megaPumper.slotPoses[7].rotation),
+                new Pose(megaPumper.slotPoses[7].position, megaPumper.slotPoses[7].rotation),
+                new Pose(megaPumper.slotPoses[7].position, megaPumper.slotPoses[7].rotation),
+            };
+            newSlotPoses[8].position = new Vector3(3.8f, -0.02f, 0.1f);
+            newSlotPoses[8].rotation = new Quaternion(0f, 0.7071f, 0f, 0.7071f);
+            newSlotPoses[9].position = new Vector3(3.8f, -0.02f, 1.1f);
+            newSlotPoses[9].rotation = new Quaternion(0f, 0.7071f, 0f, 0.7071f);
+            megaPumper.slotPoses = newSlotPoses;
+
         }
+
         /*
         [HarmonyPatch(typeof(BuildingGizmo), nameof(BuildingGizmo.SetGizmoDesc))]
         [HarmonyPrefix]

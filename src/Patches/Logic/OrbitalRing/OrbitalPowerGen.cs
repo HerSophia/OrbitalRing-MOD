@@ -30,7 +30,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                             if (storage[k].itemId == __instance.fuelId && storage[k].count >= 1) {
                                 __instance.fuelCount += 1;
                                 //storage[k].count -= 1;
-                                int inc = OrbitalStationManager.Instance.split_inc(ref storage[k].count, ref storage[k].inc, 1);
+                                int inc = split_inc(ref storage[k].count, ref storage[k].inc, 1);
                                 __instance.fuelInc += (short)inc;
                                 //storage[k].inc -= inc;
                             } else if (__instance.fuelId == 0) {
@@ -40,7 +40,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                 }
                                 for (int z = 0; z < array.Length; z++) {
                                     if (array[z] == storage[k].itemId && storage[k].count >= 1) {
-                                        int inc = OrbitalStationManager.Instance.split_inc(ref storage[k].count, ref storage[k].inc, 1);
+                                        int inc = split_inc(ref storage[k].count, ref storage[k].inc, 1);
                                         __instance.SetNewFuel(storage[k].itemId, 1, (short)inc);
                                         //storage[k].count -= 1;
                                     }
@@ -58,7 +58,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         public static void GameTickPatch(ref PowerSystem __instance)
         {
             for (int i = 0; i < __instance.genPool.Length; i++) {
-                if (__instance.factory.entityPool[__instance.genPool[i].entityId].protoId == 6261) {
+                if (__instance.factory.entityPool[__instance.genPool[i].entityId].protoId == ProtoID.I轨道反物质堆核心) {
                     OrbitalPowerGenInternalUpdate(ref __instance.genPool[i], __instance.planet.id);
                 }
             }
@@ -70,17 +70,15 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         public static void CreateEntityLogicComponentsPatch(ref PlanetFactory __instance, int entityId)
         {
             int modelId = __instance.entityPool[entityId].modelIndex;
-            if (modelId == ProtoID.M轨道反物质堆基座 || modelId == ProtoID.M星环电网枢纽) {
+            if (modelId == ProtoID.M轨道反物质堆基座) {
                 Vector3 thisPos = __instance.entityPool[entityId].pos;
-                int position = IsBuildingPosXZCorrect(thisPos.x, thisPos.z);
+                int position = IsBuildingPosXZCorrect(thisPos.x, thisPos.z, true);
                 int ringIndex = isBuildingPosYCorrect(thisPos);
                 OrbitalStationManager.Instance.AddPlanetId(__instance.planet.id);
                 var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(__instance.planet.id);
                 // 在赤道上/下圈？号位置添加轨道设施
                 if (modelId == ProtoID.M轨道反物质堆基座) {
                     planetOrbitalRingData.Rings[ringIndex].AddOrbitalStation(position, entityId, StationType.PowerGenBase);
-                } else if (modelId == ProtoID.M星环电网枢纽) {
-                    planetOrbitalRingData.Rings[ringIndex].AddOrbitalStation(position, entityId, StationType.GlobalPower);
                 }
             }
         }
@@ -91,7 +89,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         {
             if (__instance.factory.entityPool[entityId].protoId == 6261) {
                 Vector3 thisPos = __instance.factory.entityPool[entityId].pos;
-                int position = IsBuildingPosXZCorrect(thisPos.x, thisPos.z);
+                int position = IsBuildingPosXZCorrect(thisPos.x, thisPos.z, true);
                 int ringIndex = isBuildingPosYCorrect(thisPos);
                 var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(__instance.planet.id);
                 // 在赤道上/下圈？号位置添加轨道设施

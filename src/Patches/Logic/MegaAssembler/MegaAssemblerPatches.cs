@@ -3,8 +3,10 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
 using ProjectOrbitalRing.Utils;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalAssembler;
+using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalRingStorageCalculate;
 using static ProjectOrbitalRing.Utils.ERecipeType;
 
 // ReSharper disable InconsistentNaming
@@ -18,10 +20,10 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
         private static readonly FieldInfo EntityData_StationId_Field = AccessTools.Field(typeof(EntityData), nameof(EntityData.stationId)),
                                           EntityData_AssemblerId_Field =
                                               AccessTools.Field(typeof(EntityData), nameof(EntityData.assemblerId)),
+                                          FactorySystem_factory_Field =
+                                              AccessTools.Field(typeof(FactorySystem), nameof(FactorySystem.factory)),
                                           PlanetFactory_EntityPool_Field =
-                                              AccessTools.Field(typeof(PlanetFactory), nameof(PlanetFactory.entityPool)),
-                                          FactorySystem_AssemblerPool_Field = AccessTools.Field(typeof(FactorySystem),
-                                              nameof(FactorySystem.assemblerPool));
+                                              AccessTools.Field(typeof(PlanetFactory), nameof(PlanetFactory.entityPool));
 
         private static readonly MethodInfo AssemblerComponent_InternalUpdate_Method =
                                                AccessTools.Method(typeof(AssemblerComponent), nameof(AssemblerComponent.InternalUpdate)),
@@ -45,7 +47,8 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             matcher.CreateLabelAt(matcher.Pos + 4, out Label label1);
 
             matcher.Advance(-1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ldloc_S, local1),
-                new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldloc_S, power1),
+                new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldfld, FactorySystem_factory_Field),
+                new CodeInstruction(OpCodes.Ldloc_S, power1),
                 new CodeInstruction(OpCodes.Call, MegaAssembler_AssemblerComponent_InternalUpdate_Patch_Method),
                 new CodeInstruction(OpCodes.Brfalse_S, label1), new CodeInstruction(OpCodes.Pop));
 
@@ -53,31 +56,73 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                 new CodeMatch(OpCodes.Ldloc_1), new CodeMatch(OpCodes.Ldloc_2),
                 new CodeMatch(OpCodes.Call, AssemblerComponent_InternalUpdate_Method));
 
-            if (matcher.IsValid)
-            {
-                object local2 = matcher.Operand;
-                object power2 = matcher.Advance(1).Operand;
 
-                matcher.CreateLabelAt(matcher.Pos + 4, out Label label2);
+            object local2 = matcher.Operand;
+            object power2 = matcher.Advance(1).Operand;
 
-                matcher.Advance(-1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ldloc_S, local2),
-                    new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldloc_S, power2),
-                    new CodeInstruction(OpCodes.Call, MegaAssembler_AssemblerComponent_InternalUpdate_Patch_Method),
-                    new CodeInstruction(OpCodes.Brfalse_S, label2), new CodeInstruction(OpCodes.Pop));
-            }
+            matcher.CreateLabelAt(matcher.Pos + 4, out Label label2);
+
+            matcher.Advance(-1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ldloc_S, local2),
+                new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldfld, FactorySystem_factory_Field),
+                new CodeInstruction(OpCodes.Ldloc_S, power2),
+                new CodeInstruction(OpCodes.Call, MegaAssembler_AssemblerComponent_InternalUpdate_Patch_Method),
+                new CodeInstruction(OpCodes.Brfalse_S, label2), new CodeInstruction(OpCodes.Pop));
 
             return matcher.InstructionEnumeration();
         }
 
-        public static bool GameTick_AssemblerComponent_InternalUpdate_Patch(ref AssemblerComponent __instance, FactorySystem factorySystem,
+        [HarmonyPatch(typeof(GameLogic), nameof(GameLogic._assembler_parallel))]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> GameLogic_assembler_parallel_Transpiler(IEnumerable<CodeInstruction> instructions,
+            ILGenerator generator)
+        {
+            var matcher = new CodeMatcher(instructions, generator);
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldloc_S),
+                new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(PlanetFactory), nameof(PlanetFactory.entityAnimPool))));
+
+            object factory = matcher.Operand;
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldloc_S), new CodeMatch(OpCodes.Ldloc_S), new CodeMatch(OpCodes.Ldloc_S),
+                new CodeMatch(OpCodes.Ldloc_S), new CodeMatch(OpCodes.Call, AssemblerComponent_InternalUpdate_Method));
+
+            object local1 = matcher.Operand;
+            object power1 = matcher.Advance(1).Operand;
+
+            matcher.CreateLabelAt(matcher.Pos + 4, out Label label1);
+
+            matcher.Advance(-1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ldloc_S, local1),
+                new CodeInstruction(OpCodes.Ldloc_S, factory), new CodeInstruction(OpCodes.Ldloc_S, power1),
+                new CodeInstruction(OpCodes.Call, MegaAssembler_AssemblerComponent_InternalUpdate_Patch_Method),
+                new CodeInstruction(OpCodes.Brfalse_S, label1), new CodeInstruction(OpCodes.Pop));
+
+            matcher.Advance(5).MatchForward(false, new CodeMatch(OpCodes.Ldloc_S), new CodeMatch(OpCodes.Ldloc_S),
+                new CodeMatch(OpCodes.Ldloc_S), new CodeMatch(OpCodes.Ldloc_S),
+                new CodeMatch(OpCodes.Call, AssemblerComponent_InternalUpdate_Method));
+
+            object local2 = matcher.Operand;
+            object power2 = matcher.Advance(1).Operand;
+
+            matcher.CreateLabelAt(matcher.Pos + 4, out Label label2);
+
+            matcher.Advance(-1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ldloc_S, local2),
+                new CodeInstruction(OpCodes.Ldloc_S, factory), new CodeInstruction(OpCodes.Ldloc_S, power2),
+                new CodeInstruction(OpCodes.Call, MegaAssembler_AssemblerComponent_InternalUpdate_Patch_Method),
+                new CodeInstruction(OpCodes.Brfalse_S, label2), new CodeInstruction(OpCodes.Pop));
+
+
+            return matcher.InstructionEnumeration();
+        }
+
+        public static bool GameTick_AssemblerComponent_InternalUpdate_Patch(ref AssemblerComponent __instance, PlanetFactory factory,
             float power)
         {
-            PlanetFactory factory = factorySystem.factory;
-
+            
             int buildIngItemId = factory.entityPool[__instance.entityId].protoId;
 
-            if (buildIngItemId == 6257 || buildIngItemId == 6501 || buildIngItemId == 6265)
+            if (buildIngItemId == ProtoID.I太空船坞 || buildIngItemId == ProtoID.I轨道熔炼站 || buildIngItemId == ProtoID.I星环对撞机)
             {
+                ShareStorageForOrbitalAssembler(ref __instance, factory.factorySystem);
                 OrbitalAssemblerInternalUpdate(ref __instance, factory.planetId);
             }
 
@@ -94,8 +139,22 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
 
                 //if (__instance.recipeId != ProtoID.R物质分解)
                 //{
-                    UpdateOutputSlots(ref __instance, cargoTraffic, slotdata, entitySignPool, stationPilerLevel);
-                    UpdateInputSlots(ref __instance, cargoTraffic, slotdata, entitySignPool);
+                for (int i = 0; i < __instance.products.Length; i++) {
+                    for (int j = 0; j < __instance.requires.Length; j++) {
+                        if (__instance.products[i] == __instance.requires[j] && __instance.produced[i] > 0) {
+                            if (__instance.produced[i] >= __instance.requireCounts[j]) {
+                                __instance.produced[i] -= __instance.requireCounts[j];
+                                __instance.served[j] += __instance.requireCounts[j];
+                            } else {
+                                __instance.served[j] += __instance.produced[i];
+                                __instance.produced[i] = 0;
+                            }
+                        }
+                    }
+                }
+
+                UpdateOutputSlots(ref __instance, cargoTraffic, slotdata, entitySignPool, stationPilerLevel);
+                UpdateInputSlots(ref __instance, cargoTraffic, slotdata, entitySignPool);
                 //}
                 //else if (b)
                 //{

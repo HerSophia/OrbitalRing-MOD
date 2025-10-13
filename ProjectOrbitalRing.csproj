@@ -156,7 +156,9 @@
     <Compile Include="src\Patches\Logic\ModifyUpgradeTech\Unlock_Save_Load.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalAssembler.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalATField.cs" />
+    <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalConnect.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalPowerGen.cs" />
+    <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalRingStorage.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalStationManager.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalSpaceStation.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalTurret.cs" />
