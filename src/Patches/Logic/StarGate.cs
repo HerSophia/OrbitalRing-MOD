@@ -61,35 +61,27 @@ namespace ProjectOrbitalRing.Patches.Logic
         [HarmonyPatch(typeof(BuildTool_Click), "CheckBuildConditions")]
         public static bool CheckBuildConditionsPrePatch(BuildTool_Click __instance, ref bool __result)
         {
-            if (__instance.planet.type != EPlanetType.Gas)
-            {
+            if (__instance.planet.type != EPlanetType.Gas) {
                 return true;
             }
             int count = __instance.buildPreviews.Count;
-            if (count == 0)
-            {
+            if (count == 0) {
                 __result = false;
                 return false;
             }
-            for (int i = 0; i < count; i++)
-            {
+            for (int i = 0; i < count; i++) {
                 BuildPreview buildPreview = __instance.buildPreviews[i];
-                if (buildPreview.item.ID == 6511)
-                {
-                    for (int j = 0; j < __instance.factory.prebuildPool.Length; j++)
-                    {
-                        if (__instance.factory.prebuildPool[j].protoId != 0 && __instance.factory.prebuildPool[j].protoId != 6281)
-                        {
-                            if (CheckBuildingPos(__instance.factory.prebuildPool[j].pos, buildPreview.lpos))
-                            {
+                if (buildPreview.item.ID == 6511) {
+                    for (int j = 0; j < __instance.factory.prebuildPool.Length; j++) {
+                        if (__instance.factory.prebuildPool[j].protoId != 0 && __instance.factory.prebuildPool[j].protoId != 6281) {
+                            if (CheckBuildingPos(__instance.factory.prebuildPool[j].pos, buildPreview.lpos)) {
                                 buildPreview.condition = EBuildCondition.Collide;
                                 __result = false;
                                 return false;
                             }
                         }
                     }
-                    if (count > 1)
-                    {
+                    if (count > 1) {
                         buildPreview.condition = EBuildCondition.Failure;
                         __result = false;
                         return false;
@@ -97,28 +89,22 @@ namespace ProjectOrbitalRing.Patches.Logic
 
                     var entityPool = __instance.planet.factory.entityPool;
                     bool flag = false;
-                    for (int y = 0; y < entityPool.Length; y++)
-                    {
-                        if (entityPool[y].protoId == 0)
-                        {
+                    for (int y = 0; y < entityPool.Length; y++) {
+                        if (entityPool[y].protoId == 0) {
                             continue;
                         }
-                        if (CheckBuildingPos(entityPool[y].pos, buildPreview.lpos))
-                        {
-                            if (entityPool[y].protoId != 6281)
-                            {
+                        if (CheckBuildingPos(entityPool[y].pos, buildPreview.lpos)) {
+                            if (entityPool[y].protoId != 6281) {
                                 buildPreview.condition = EBuildCondition.Collide;
                                 __result = false;
                                 return false;
-                            } else
-                            {
+                            } else {
                                 flag = true;
                             }
                         }
-                        
+
                     }
-                    if (!flag)
-                    {
+                    if (!flag) {
                         buildPreview.condition = (EBuildCondition)98;
                         __result = false;
                         return false;
@@ -132,13 +118,10 @@ namespace ProjectOrbitalRing.Patches.Logic
         [HarmonyPostfix]
         public static void CheckBuildConditionsPostPatch(BuildTool_Click __instance, ref bool __result)
         {
-            if (__instance.planet.type != EPlanetType.Gas)
-            {
-                for (int i = 0; i < __instance.buildPreviews.Count; i++)
-                {
+            if (__instance.planet.type != EPlanetType.Gas) {
+                for (int i = 0; i < __instance.buildPreviews.Count; i++) {
                     BuildPreview buildPreview = __instance.buildPreviews[i];
-                    if (buildPreview.item.ID == ProtoID.I超空间中继器基座)
-                    {
+                    if (buildPreview.item.ID == ProtoID.I超空间中继器基座) {
                         buildPreview.condition = EBuildCondition.Failure;
                         __result = false;
                         return;
@@ -146,18 +129,14 @@ namespace ProjectOrbitalRing.Patches.Logic
                 }
             }
             int count = __instance.buildPreviews.Count;
-            if (count == 0)
-            {
+            if (count == 0) {
                 return;
             }
-            for (int i = 0; i < __instance.buildPreviews.Count; i++)
-            {
+            for (int i = 0; i < __instance.buildPreviews.Count; i++) {
                 BuildPreview buildPreview = __instance.buildPreviews[i];
-                if (buildPreview.item.ID == 6511)
-                {
+                if (buildPreview.item.ID == 6511) {
                     if (buildPreview.condition == EBuildCondition.OutOfReach || buildPreview.condition == EBuildCondition.OutOfVerticalConstructionHeight ||
-                        buildPreview.condition == EBuildCondition.NeedGround)
-                    {
+                        buildPreview.condition == EBuildCondition.NeedGround) {
                         buildPreview.condition = EBuildCondition.Ok;
                         __result = true;
                         __instance.actionBuild.model.cursorState = 0;
@@ -165,10 +144,8 @@ namespace ProjectOrbitalRing.Patches.Logic
                         __instance.actionBuild.model.cursorText = "点击鼠标建造".Translate() + text;
                     }
                 }
-                if (buildPreview.item.ID == ProtoID.I超空间中继器基座)
-                {
-                    if (buildPreview.lpos.y != 0)
-                    {
+                if (buildPreview.item.ID == ProtoID.I超空间中继器基座) {
+                    if (buildPreview.lpos.y != 0) {
                         buildPreview.condition = EBuildCondition.BuildInEquator;
                         __result = false;
                     }

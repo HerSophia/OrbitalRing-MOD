@@ -79,22 +79,22 @@ namespace ProjectOrbitalRing.Compatibility
             HarmonyPatch.Patch(OnPlanetDataSet7Prefix, null, null,
                 new HarmonyMethod(typeof(GalacticScale), nameof(OnPlanetDataSet_Transpiler)));
 
-            HarmonyPatch.Patch(OnPlanetDataSet7Prefix, null, null,
-                new HarmonyMethod(typeof(PlanetGasPatches), nameof(PlanetGasPatches.OnDataSet_ChangeWaterId_Transpiler)));
+            //HarmonyPatch.Patch(OnPlanetDataSet7Prefix, null, null,
+            //    new HarmonyMethod(typeof(PlanetGasPatches), nameof(PlanetGasPatches.OnDataSet_ChangeWaterId_Transpiler)));
 
             HarmonyPatch.Patch(OnPlanetDataSet7Prefix, null, null,
                 new HarmonyMethod(typeof(GalacticScale), nameof(OnPlanetDataSet_ChangeVeinData_Transpiler)));
 
             MethodInfo OnStarDataSet2 = AccessTools.Method(assembly.GetType("GalacticScale.PatchOnUIStarDetail"), "OnStarDataSet2");
 
-            HarmonyPatch.Patch(OnStarDataSet2, null, null,
-                new HarmonyMethod(typeof(PlanetGasPatches), nameof(PlanetGasPatches.OnDataSet_ChangeWaterId_Transpiler)));
+            //HarmonyPatch.Patch(OnStarDataSet2, null, null,
+            //    new HarmonyMethod(typeof(PlanetGasPatches), nameof(PlanetGasPatches.OnDataSet_ChangeWaterId_Transpiler)));
 
-            HarmonyPatch.Patch(OnStarDataSet2, null, null,
-                new HarmonyMethod(typeof(PlanetGasPatches), nameof(PlanetGasPatches.PlanetGen_SetPlanetTheme_Transpiler)));
+            //HarmonyPatch.Patch(OnStarDataSet2, null, null,
+            //    new HarmonyMethod(typeof(PlanetGasPatches), nameof(PlanetGasPatches.PlanetGen_SetPlanetTheme_Transpiler)));
 
-            HarmonyPatch.Patch(OnStarDataSet2, null, null,
-                new HarmonyMethod(typeof(PlanetGasPatches), nameof(PlanetGasPatches.OnStarDataSet_Transpiler)));
+            //HarmonyPatch.Patch(OnStarDataSet2, null, null,
+            //    new HarmonyMethod(typeof(PlanetGasPatches), nameof(PlanetGasPatches.OnStarDataSet_Transpiler)));
 
             HarmonyPatch.Patch(OnStarDataSet2, null, null,
                 new HarmonyMethod(typeof(GalacticScale), nameof(OnStarDataSet_ChangeVeinData_Transpiler)));
@@ -353,8 +353,8 @@ namespace ProjectOrbitalRing.Compatibility
             matcher.MatchForward(false,
                 new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(StationComponent), nameof(StationComponent.collectionPerTick))));
 
-            matcher.Advance(-2).InsertAndAdvance(new CodeInstruction(OpCodes.Call,
-                AccessTools.Method(typeof(PlanetGasPatches), nameof(PlanetGasPatches.GetMiningSpeedScale))));
+            //matcher.Advance(-2).InsertAndAdvance(new CodeInstruction(OpCodes.Call,
+            //    AccessTools.Method(typeof(PlanetGasPatches), nameof(PlanetGasPatches.GetMiningSpeedScale))));
 
             return matcher.InstructionEnumeration();
         }

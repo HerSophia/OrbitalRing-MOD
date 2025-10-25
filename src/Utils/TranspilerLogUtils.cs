@@ -7,9 +7,7 @@ namespace ProjectOrbitalRing.Utils
     {
         public static void LogInstructionEnumeration(this CodeMatcher matcher)
         {
-            int i = 0;
             foreach (CodeInstruction codeInstruction in matcher.InstructionEnumeration()) {
-                if (i++ >= 7000) break;
                 ProjectOrbitalRing.logger.LogInfo(codeInstruction.ToString());
             }
         }

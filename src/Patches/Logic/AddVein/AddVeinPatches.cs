@@ -373,87 +373,64 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
         [HarmonyPatch(typeof(BuildTool_Click), "CheckBuildConditions")]
         public static void CheckBuildConditionsPatch(BuildTool_Click __instance, ref bool __result)
         {
-            for (int i = 0; i < __instance.buildPreviews.Count; i++)
-            {
+            for (int i = 0; i < __instance.buildPreviews.Count; i++) {
                 BuildPreview buildPreview = __instance.buildPreviews[i];
                 Vector3 vector2 = buildPreview.lpos;
                 Quaternion quaternion = buildPreview.lrot;
                 Pose lPose = new Pose(buildPreview.lpos, buildPreview.lrot);
                 Vector3 forward = lPose.forward;
                 Vector3 up = lPose.up;
-                if (buildPreview.desc.veinMiner)
-                {
+                if (buildPreview.desc.veinMiner) {
                     Array.Clear(BuildTool._tmp_ids, 0, BuildTool._tmp_ids.Length);
                     PrebuildData prebuildData = default(PrebuildData);
                     int paramCount = 0;
-                    if (buildPreview.desc.isVeinCollector)
-                    {
+                    if (buildPreview.desc.isVeinCollector) {
                         Vector3 center = vector2.normalized * __instance.controller.cmd.test.magnitude + forward * -10f;
                         int veinsInAreaNonAlloc = __instance.actionBuild.nearcdLogic.GetVeinsInAreaNonAlloc(center, 18f, ref BuildTool._tmp_ids);
                         prebuildData.InitParametersArray(veinsInAreaNonAlloc);
                         VeinData[] veinPool = __instance.factory.veinPool;
                         EVeinType eVeinType = EVeinType.None;
-                        for (int j = 0; j < veinsInAreaNonAlloc; j++)
-                        {
-                            if (BuildTool._tmp_ids[j] != 0 && veinPool[BuildTool._tmp_ids[j]].id == BuildTool._tmp_ids[j])
-                            {
-                                if (veinPool[BuildTool._tmp_ids[j]].type == EVeinType.Oil || veinPool[BuildTool._tmp_ids[j]].type == EVeinType.Ice || veinPool[BuildTool._tmp_ids[j]].type == EVeinType.DeepMagma || !MinerComponent.IsTargetVeinInRange(veinPool[BuildTool._tmp_ids[j]].pos, lPose, buildPreview.desc))
-                                {
+                        for (int j = 0; j < veinsInAreaNonAlloc; j++) {
+                            if (BuildTool._tmp_ids[j] != 0 && veinPool[BuildTool._tmp_ids[j]].id == BuildTool._tmp_ids[j]) {
+                                if (veinPool[BuildTool._tmp_ids[j]].type == EVeinType.Oil || veinPool[BuildTool._tmp_ids[j]].type == EVeinType.Ice || veinPool[BuildTool._tmp_ids[j]].type == EVeinType.DeepMagma || !MinerComponent.IsTargetVeinInRange(veinPool[BuildTool._tmp_ids[j]].pos, lPose, buildPreview.desc)) {
                                     continue;
                                 }
 
-                                if (eVeinType != veinPool[BuildTool._tmp_ids[j]].type)
-                                {
-                                    if (eVeinType == EVeinType.None)
-                                    {
+                                if (eVeinType != veinPool[BuildTool._tmp_ids[j]].type) {
+                                    if (eVeinType == EVeinType.None) {
                                         eVeinType = veinPool[BuildTool._tmp_ids[j]].type;
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         buildPreview.condition = EBuildCondition.NeedSingleResource;
                                     }
                                 }
 
                                 prebuildData.parameters[paramCount++] = BuildTool._tmp_ids[j];
-                            }
-                            else
-                            {
+                            } else {
                                 Assert.CannotBeReached();
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         Vector3 center2 = vector2.normalized * __instance.controller.cmd.test.magnitude + forward * -1.2f;
                         int veinsInAreaNonAlloc2 = __instance.actionBuild.nearcdLogic.GetVeinsInAreaNonAlloc(center2, 12f, ref BuildTool._tmp_ids);
                         prebuildData.InitParametersArray(veinsInAreaNonAlloc2);
                         VeinData[] veinPool2 = __instance.factory.veinPool;
                         EVeinType eVeinType2 = EVeinType.None;
-                        for (int k = 0; k < veinsInAreaNonAlloc2; k++)
-                        {
-                            if (BuildTool._tmp_ids[k] != 0 && veinPool2[BuildTool._tmp_ids[k]].id == BuildTool._tmp_ids[k])
-                            {
-                                if (veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.Oil || veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.Ice || veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.DeepMagma || !MinerComponent.IsTargetVeinInRange(veinPool2[BuildTool._tmp_ids[k]].pos, lPose, buildPreview.desc))
-                                {
+                        for (int k = 0; k < veinsInAreaNonAlloc2; k++) {
+                            if (BuildTool._tmp_ids[k] != 0 && veinPool2[BuildTool._tmp_ids[k]].id == BuildTool._tmp_ids[k]) {
+                                if (veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.Oil || veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.Ice || veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.DeepMagma || !MinerComponent.IsTargetVeinInRange(veinPool2[BuildTool._tmp_ids[k]].pos, lPose, buildPreview.desc)) {
                                     continue;
                                 }
 
-                                if (eVeinType2 != veinPool2[BuildTool._tmp_ids[k]].type)
-                                {
-                                    if (eVeinType2 == EVeinType.None)
-                                    {
+                                if (eVeinType2 != veinPool2[BuildTool._tmp_ids[k]].type) {
+                                    if (eVeinType2 == EVeinType.None) {
                                         eVeinType2 = veinPool2[BuildTool._tmp_ids[k]].type;
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         buildPreview.condition = EBuildCondition.NeedResource;
                                     }
                                 }
 
                                 prebuildData.parameters[paramCount++] = BuildTool._tmp_ids[k];
-                            }
-                            else
-                            {
+                            } else {
                                 Assert.CannotBeReached();
                             }
                         }
@@ -461,36 +438,28 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
 
                     prebuildData.paramCount = paramCount;
                     prebuildData.ArrangeParametersArray();
-                    if (buildPreview.desc.isVeinCollector)
-                    {
-                        if (buildPreview.paramCount == 0)
-                        {
+                    if (buildPreview.desc.isVeinCollector) {
+                        if (buildPreview.paramCount == 0) {
                             buildPreview.parameters = new int[2048];
                             buildPreview.paramCount = 2048;
                         }
 
-                        if (prebuildData.paramCount > 0)
-                        {
+                        if (prebuildData.paramCount > 0) {
                             Array.Resize(ref buildPreview.parameters, buildPreview.paramCount + prebuildData.paramCount);
                             Array.Copy(prebuildData.parameters, 0, buildPreview.parameters, buildPreview.paramCount, prebuildData.paramCount);
                             buildPreview.paramCount += prebuildData.paramCount;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         buildPreview.parameters = prebuildData.parameters;
                         buildPreview.paramCount = prebuildData.paramCount;
                     }
 
                     Array.Clear(BuildTool._tmp_ids, 0, BuildTool._tmp_ids.Length);
-                    if (prebuildData.paramCount == 0)
-                    {
+                    if (prebuildData.paramCount == 0) {
                         buildPreview.condition = EBuildCondition.NeedResource;
                         continue;
                     }
-                }
-                else if (buildPreview.desc.oilMiner)
-                {
+                } else if (buildPreview.desc.oilMiner) {
                     Array.Clear(BuildTool._tmp_ids, 0, BuildTool._tmp_ids.Length);
                     Vector3 vector4 = vector2;
                     Vector3 vector5 = -up;
@@ -502,16 +471,13 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
                     int num2 = 0;
                     float num3 = 100f;
                     Vector3 pos = vector4;
-                    for (int l = 0; l < veinsInAreaNonAlloc3; l++)
-                    {
-                        if (BuildTool._tmp_ids[l] != 0 && veinPool3[BuildTool._tmp_ids[l]].id == BuildTool._tmp_ids[l] && (veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.Oil || veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.Ice || veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.DeepMagma))
-                        {
+                    for (int l = 0; l < veinsInAreaNonAlloc3; l++) {
+                        if (BuildTool._tmp_ids[l] != 0 && veinPool3[BuildTool._tmp_ids[l]].id == BuildTool._tmp_ids[l] && (veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.Oil || veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.Ice || veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.DeepMagma)) {
                             Vector3 pos2 = veinPool3[BuildTool._tmp_ids[l]].pos;
                             Vector3 vector6 = pos2 - vector4;
                             float num4 = Vector3.Dot(vector5, vector6);
                             float sqrMagnitude = (vector6 - vector5 * num4).sqrMagnitude;
-                            if (sqrMagnitude < num3)
-                            {
+                            if (sqrMagnitude < num3) {
                                 num3 = sqrMagnitude;
                                 num2 = BuildTool._tmp_ids[l];
                                 pos = pos2;
@@ -520,8 +486,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
                         }
                     }
 
-                    if (num2 == 0)
-                    {
+                    if (num2 == 0) {
                         buildPreview.condition = EBuildCondition.NeedResource;
                         continue;
                     }
@@ -541,19 +506,16 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
             }
 
             __result = true;
-            for (int num86 = 0; num86 < __instance.buildPreviews.Count; num86++)
-            {
+            for (int num86 = 0; num86 < __instance.buildPreviews.Count; num86++) {
                 BuildPreview buildPreview4 = __instance.buildPreviews[num86];
-                if (buildPreview4.condition != 0 && buildPreview4.condition != EBuildCondition.NeedConn)
-                {
+                if (buildPreview4.condition != 0 && buildPreview4.condition != EBuildCondition.NeedConn) {
                     __result = false;
                     __instance.actionBuild.model.cursorState = -1;
                     __instance.actionBuild.model.cursorText = buildPreview4.conditionText;
                     break;
                 }
             }
-            if (__result)
-            {
+            if (__result) {
                 __instance.actionBuild.model.cursorState = 0;
                 __instance.actionBuild.model.cursorText = BuildPreview.GetConditionText(EBuildCondition.Ok);
             }
