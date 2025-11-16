@@ -4637,10 +4637,10 @@
         "IconPath": "Assets/texpack/氯化钠_新",
         "GridIndex": 4213,
         "StackSize": 200,
-        "Type": 2,
+        "Type": 1,
         "PreTechOverride": 0,
         "DescFields": [
-            1,
+            0,
             40
         ],
         "FuelType": 0,
@@ -4649,7 +4649,7 @@
         "IsFluid": false,
         "Productive": true,
         "SubID": 0,
-        "MiningFrom": "",
+        "MiningFrom": "植物",
         "ProduceFrom": "",
         "Grade": 0,
         "Upgrades": [],
@@ -4684,7 +4684,7 @@
         "Description": "I速生苗",
         "IconPath": "Assets/texpack/塑料基板",
         "GridIndex": 4214,
-        "StackSize": 50,
+        "StackSize": 20,
         "Type": 2,
         "PreTechOverride": 0,
         "DescFields": [

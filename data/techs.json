@@ -1624,7 +1624,8 @@
             -12.0
         ],
         "PreTechs": [
-            1403
+            1403,
+            1913
         ],
         "PreTechsImplicit": [
             1403
@@ -5882,17 +5883,14 @@
             1102
         ],
         "Items": [
-            6001,
-            6002
+            6001
         ],
         "ItemPoints": [
-            10,
             10
         ],
         "HashNeeded": 72000,
         "UnlockRecipes": [
-            23,
-            822
+            23
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],

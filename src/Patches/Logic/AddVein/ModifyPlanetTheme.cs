@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using HarmonyLib;
 using ProjectOrbitalRing.Utils;
 using UnityEngine;
 
@@ -55,6 +56,21 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
                         theme.BriefIntroduction = "潘多拉沼泽介绍";
                         break;
                 }
+            }
+        }
+
+        [HarmonyPatch(typeof(PlanetAlgorithm), nameof(PlanetAlgorithm.CalcWaterPercent))]
+        [HarmonyPrefix]
+        public static void PlanetAlgorithm_RegenerateTerrain(PlanetAlgorithm __instance)
+        {
+            PlanetData planet = __instance.planet;
+
+            switch (planet.waterItemId) {
+                case ProtoID.I原油:
+                    var planetAlgorithm3 = new PlanetAlgorithm3();
+                    planetAlgorithm3.Reset(planet.seed, planet);
+                    planetAlgorithm3.GenerateTerrain(planet.mod_x, planet.mod_y);
+                    break;
             }
         }
 

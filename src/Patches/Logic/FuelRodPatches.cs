@@ -117,11 +117,6 @@ namespace ProjectOrbitalRing.Patches.Logic
 
                     break;
 
-                case ProtoID.I氘氦混合聚变燃料棒:
-                    count = 2;
-
-                    break;
-
                 case ProtoID.IMOX燃料棒:
                     count = 3;
 

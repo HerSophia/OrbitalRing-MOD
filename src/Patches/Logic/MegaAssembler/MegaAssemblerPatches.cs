@@ -135,7 +135,7 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             bool b = power >= 0.1f;
 
             // MegaBuildings
-            if (factory.entityPool[__instance.entityId].protoId == 6264)
+            if (factory.entityPool[__instance.entityId].protoId == ProtoID.I生态穹顶)
             {
                 SlotData[] slotdata = GetSlots(factory.planetId, __instance.entityId);
                 CargoTraffic cargoTraffic = factory.cargoTraffic;
@@ -146,11 +146,11 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                 //if (__instance.recipeId != ProtoID.R物质分解)
                 //{
                 for (int i = 0; i < __instance.products.Length; i++) {
-                    for (int j = 0; j < __instance.requires.Length; j++) {
-                        if (__instance.products[i] == __instance.requires[j] && __instance.produced[i] > 0) {
-                            if (__instance.produced[i] >= __instance.requireCounts[j]) {
-                                __instance.produced[i] -= __instance.requireCounts[j];
-                                __instance.served[j] += __instance.requireCounts[j];
+                    for (int j = 0; j < __instance.needs.Length; j++) {
+                        if (__instance.products[i] == __instance.needs[j] && __instance.produced[i] > 0) {
+                            if (__instance.produced[i] >= __instance.requireCounts[j] * 2) {
+                                __instance.produced[i] -= __instance.requireCounts[j] * 2;
+                                __instance.served[j] += __instance.requireCounts[j] * 2;
                             } else {
                                 __instance.served[j] += __instance.produced[i];
                                 __instance.produced[i] = 0;
