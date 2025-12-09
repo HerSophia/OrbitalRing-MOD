@@ -76,8 +76,8 @@
     },
     {
         "ModelID": 54,
-        "genEnergyPerTick": 72000,
-        "useFuelPerTick": 90000
+        "genEnergyPerTick": 144000,
+        "useFuelPerTick": 180000
     },
     {
         "ModelID": 55,

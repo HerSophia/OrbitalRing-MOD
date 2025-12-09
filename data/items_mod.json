@@ -3684,8 +3684,8 @@
     },
     {
         "ID": 6524,
-        "Name": "燃料回收",
-        "Description": "I燃料回收",
+        "Name": "汲水地基",
+        "Description": "I汲水地基",
         "IconPath": "Assets/texpack/星球飞升-火力发电",
         "GridIndex": 3113,
         "StackSize": 1,

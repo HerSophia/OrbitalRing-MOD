@@ -9,7 +9,7 @@ namespace ProjectOrbitalRing.Patches.Logic.PlanetFocus
 {
     public static partial class PlanetFocusPatches
     {
-        internal const int FocusMaxCount = 2;
+        internal const int FocusMaxCount = 1;
 
         private static readonly ConcurrentDictionary<int, int[]> PlanetFocuses = new ConcurrentDictionary<int, int[]>();
 
@@ -17,7 +17,7 @@ namespace ProjectOrbitalRing.Patches.Logic.PlanetFocus
         {
             { 6522, "工厂电力需求 -10%" },
             { 6523, "研究上传速度 +10%" },
-            { 6524, "火力发电效率 +20%" },
+            { 6524, "所有需要水的生产建筑水自动填满" },
             { 6525, "风力发电效率 +20%" },
             { 6526, "光伏发电效率 +20%" },
             { 6527, "聚变发电效率 +10%" },

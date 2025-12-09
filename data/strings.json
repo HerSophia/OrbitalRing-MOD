@@ -1,5 +1,15 @@
 [
     {
+        "Name": "汲水地基",
+        "ZHCN": "汲水地基",
+        "ENUS": "Draw Water Foundation"
+    },
+    {
+        "Name": "I汲水地基",
+        "ZHCN": "在水世界建造的地基为半浮岛型地基，这层人造地面底下设有大型抽水器，并留有接口为建造在其上的建筑接入供水。\n<color=\"#FD965ECC\">所有需要水的生产建筑水自动填满</color>",
+        "ENUS": "The foundation built in the Water World is a semi floating island foundation, which is equipped with large water pumps under the artificial ground and has interfaces for connecting water supply to the buildings built on it.\n<color=\"#FD965ECC\">All production buildings that require water are automatically filled with water</color>"
+    },
+    {
         "Name": "电力节约",
         "ZHCN": "电力节约",
         "ENUS": "Energy Saving"

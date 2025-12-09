@@ -4891,7 +4891,7 @@
         "Name": "高级岩浆炼磁铁",
         "Description": "R高级岩浆炼磁铁",
         "IconPath": "",
-        "Type": 1,
+        "Type": 11,
         "GridIndex": 3509,
         "Time": 120,
         "Input": [
@@ -4971,7 +4971,7 @@
         "Name": "钛铁联产处理",
         "Description": "R钛铁联产处理",
         "IconPath": "",
-        "Type": 1,
+        "Type": 11,
         "GridIndex": 3507,
         "Time": 60,
         "Input": [
@@ -5511,20 +5511,20 @@
         "IconPath": "",
         "Type": 1,
         "GridIndex": 3814,
-        "Time": 600,
+        "Time": 120,
         "Input": [
             1031
         ],
         "InCounts": [
-            20
+            6
         ],
         "Output": [
             1007,
             1120
         ],
         "OutCounts": [
-            10,
-            5
+            2,
+            1
         ],
         "Explicit": true,
         "Handcraft": true,

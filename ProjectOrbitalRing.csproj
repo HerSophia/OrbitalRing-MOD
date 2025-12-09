@@ -166,6 +166,7 @@
     <Compile Include="src\Patches\Logic\OrbitalRing\PosTool.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\UI.cs" />
     <Compile Include="src\Patches\Logic\OverWriteBirthGalaxy.cs" />
+    <Compile Include="src\Patches\Logic\PlanetFactory_Import_Patch.cs" />
     <Compile Include="src\Patches\Logic\PlanetFocus\DarkFrogPatches.cs" />
     <Compile Include="src\Patches\Logic\PlanetFocus\DronePatches.cs" />
     <Compile Include="src\Patches\Logic\PlanetFocus\FactoryPowerPatches.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="src\Patches\Logic\SpaceMissilePatches.cs" />
     <Compile Include="src\Patches\Logic\StarGate.cs" />
     <Compile Include="src\Patches\Logic\StationOutputPatches.cs" />
+    <Compile Include="src\Patches\Logic\StorageStackMultiplying.cs" />
     <Compile Include="src\Patches\Logic\TankComponentPatches.cs" />
     <Compile Include="src\Patches\Logic\VFPreloadPatches.cs" />
     <Compile Include="src\Patches\UI\AdvancedLaserPatches.cs" />

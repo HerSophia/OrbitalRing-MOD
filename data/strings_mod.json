@@ -270,9 +270,9 @@
     "ENUS": "Enabled for all recipes"
   },
   {
-    "Name": "星球基地",
-    "ZHCN": "行星协调中心",
-    "ENUS": "Coordination Center"
+    "Name": "星球特质",
+    "ZHCN": "星球特质",
+    "ENUS": "Planetary Characteristics"
   },
   {
     "Name": "星球倾向",
@@ -303,6 +303,21 @@
     "Name": "研究上传速度 +10%",
     "ZHCN": "研究上传速度 +10%",
     "ENUS": "Research Speed +10%"
+  },
+  {
+    "Name": "生态穹顶执行配方自动增产",
+    "ZHCN": "生态穹顶执行配方自动增产",
+    "ENUS": "Ecological dome executes formula to automatically increase production"
+  },
+  {
+    "Name": "可以从树木采集种子和本土菌种",
+    "ZHCN": "可以从树木采集种子和本土菌种",
+    "ENUS": "Seeds and native bacterial strains can be collected from trees"
+  },
+  {
+    "Name": "所有需要水的生产建筑水自动填满",
+    "ZHCN": "所有需要水的生产建筑水自动填满",
+    "ENUS": "All production buildings that require water are automatically filled with water"
   },
   {
     "Name": "火力发电效率 +20%",

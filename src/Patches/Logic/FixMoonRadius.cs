@@ -386,7 +386,7 @@ namespace ProjectOrbitalRing.Patches.Logic
 
 
 
-        
+
 
         /*
 
@@ -801,5 +801,46 @@ namespace ProjectOrbitalRing.Patches.Logic
             return (T)Convert.ChangeType(realRadius, typeof(T));
         }
         */
+
+
+
+        [HarmonyPatch(typeof(MinerComponent), nameof(MinerComponent.IsTargetVeinInRange))]
+        [HarmonyPrefix]
+        public static bool IsTargetVeinInRangePatch(Vector3 vPos, Pose lPose, PrefabDesc desc, ref bool __result)
+        {
+            Vector3 forward = lPose.forward;
+            if (desc.veinMiner) {
+                //vPos = vPos.normalized * 200f;
+                //lPose.position = lPose.position.normalized * 200f;
+                if (desc.isVeinCollector) {
+                    Vector3 b = lPose.position + forward * -10f;
+                    Vector3 rhs = -forward;
+                    Vector3 right = lPose.right;
+                    Vector3 lhs = vPos - b;
+                    float sqrMagnitude = lhs.sqrMagnitude;
+                    float num = Mathf.Abs(Vector3.Dot(lhs, rhs));
+                    float num2 = Mathf.Abs(Vector3.Dot(lhs, right));
+                    if (sqrMagnitude > 100f || num > 7.75f || num2 > 6.25f) {
+                        __result = false;
+                        return false;
+                    }
+                } else {
+                    Vector3 b2 = lPose.position + forward * -1.2f;
+                    Vector3 rhs2 = -forward;
+                    Vector3 up = lPose.up;
+                    Vector3 vector = vPos - b2;
+                    float num3 = Vector3.Dot(up, vector);
+                    vector -= up * num3;
+                    float sqrMagnitude2 = vector.sqrMagnitude;
+                    float num4 = Vector3.Dot(vector.normalized, rhs2);
+                    if (sqrMagnitude2 > 60.0625f || num4 < 0.73f || Mathf.Abs(num3) > 2f) {
+                        __result = false;
+                        return false;
+                    }
+                }
+            }
+            __result = true;
+            return false;
+        }
     }
 }

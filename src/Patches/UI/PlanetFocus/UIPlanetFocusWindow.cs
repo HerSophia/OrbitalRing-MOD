@@ -20,6 +20,8 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
         public RectTransform windowTrans;
         public Text nameText;
 
+        public Text characteristicsText;
+
         private readonly UIButton[] _iconBtns = new UIButton[FocusMaxCount];
         private readonly Image[] _iconImgs = new Image[FocusMaxCount];
         private readonly Text[] _iconTexts = new Text[FocusMaxCount];
@@ -29,14 +31,14 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
         private RectTransform _tab1;
 
         internal static UIPlanetFocusWindow CreateWindow() =>
-            CreateWindow<UIPlanetFocusWindow>("UIPlanetFocusWindow", "星球基地".TranslateFromJson());
+            CreateWindow<UIPlanetFocusWindow>("UIPlanetFocusWindow", "星球特质".TranslateFromJson());
 
         public void OpenWindow() => MyWindowCtl.OpenWindow(this);
 
         public override void _OnCreate()
         {
             windowTrans = GetRectTransform(this);
-            windowTrans.sizeDelta = new Vector2(380f, 250f);
+            windowTrans.sizeDelta = new Vector2(380f, 190f);
 
             CreateUI();
         }
@@ -51,26 +53,32 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
             nameText = CreateText("", 16);
             NormalizeRectWithTopLeft(nameText.transform, 0f, 20f, _tab1);
 
-            for (var i = 0; i < FocusMaxCount; ++i)
-            {
-                CreateSignalIcon("选择星球倾向", "选择星球倾向描述", out UIButton iconBtn, out Image iconImage);
-                _iconBtns[i] = iconBtn;
-                _iconImgs[i] = iconImage;
-                _iconTexts[i] = CreateText("", 16);
+            characteristicsText = CreateText("", 16);
+            NormalizeRectWithTopLeft(characteristicsText.transform, 0f, 72f, _tab1);
 
-                // works for 2x2
-                // Util.NormalizeRectWithTopLeft(iconBtn.transform, (i & 1) * 60, 60 + (i >> 1) * 60, _tab1);
-                // Util.NormalizeRectWithTopLeft(_iconTexts[i].transform, 150, 60 + i * 30, _tab1);
+            //for (var i = 0; i < FocusMaxCount; ++i)
+            //{
+            //    CreateSignalIcon("", "", out UIButton iconBtn, out Image iconImage);
+            //    _iconBtns[i] = iconBtn;
+            //    _iconImgs[i] = iconImage;
+            //    _iconTexts[i] = CreateText("", 16);
 
-                NormalizeRectWithTopLeft(iconBtn.transform, 0, 60 + i * 60, _tab1);
-                NormalizeRectWithTopLeft(_iconTexts[i].transform, 55, 72 + i * 60, _tab1);
+            //    // works for 2x2
+            //    // Util.NormalizeRectWithTopLeft(iconBtn.transform, (i & 1) * 60, 60 + (i >> 1) * 60, _tab1);
+            //    // Util.NormalizeRectWithTopLeft(_iconTexts[i].transform, 150, 60 + i * 30, _tab1);
 
-                int id = i;
-                iconBtn.onClick += _ => OnIconBtnClick(id);
-                iconBtn.onRightClick += _ => OnIconBtnRightClick(id);
-            }
+            //    NormalizeRectWithTopLeft(iconBtn.transform, 0, 60 + i * 60, _tab1);
+            //    NormalizeRectWithTopLeft(_iconTexts[i].transform, 55, 72 + i * 60, _tab1);
 
-            _tagNotSelectedSprite = _iconImgs[0].sprite;
+            //    int id = i;
+            //    //iconBtn.onClick += _ => OnIconBtnClick(id);
+            //    //iconBtn.onRightClick += _ => OnIconBtnRightClick(id);
+            //}
+            //if (GameMain.data.galaxy.PlanetById(CurPlanetId).theme == 1) {
+            //SetPlanetFocus(CurPlanetId, 0, 6524);
+            //}
+
+            //_tagNotSelectedSprite = _iconImgs[0].sprite;
         }
 
         public override void _OnUpdate()
@@ -84,26 +92,26 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
 
         internal void OnPlanetChanged(int planetId)
         {
-            _currentFocusIds = GetPlanetFocus(planetId);
+            //_currentFocusIds = GetPlanetFocus(planetId);
 
-            for (var i = 0; i < FocusMaxCount; ++i)
-            {
-                int currentFocusId = _currentFocusIds[i];
+            //for (var i = 0; i < FocusMaxCount; ++i)
+            //{
+            //    int currentFocusId = _currentFocusIds[i];
 
-                if (currentFocusId == 0)
-                {
-                    _iconImgs[i].sprite = _tagNotSelectedSprite;
-                    _iconTexts[i].text = "";
+            //    if (currentFocusId == 0)
+            //    {
+            //        _iconImgs[i].sprite = _tagNotSelectedSprite;
+            //        _iconTexts[i].text = "";
 
-                    continue;
-                }
+            //        continue;
+            //    }
 
-                ItemProto proto = LDB.items.Select(currentFocusId);
-                _iconTexts[i].text = FocusIds[currentFocusId].TranslateFromJson();
-                Sprite sprite = proto.iconSprite;
+            //    //ItemProto proto = LDB.items.Select(currentFocusId);
+            //    //_iconTexts[i].text = FocusIds[currentFocusId].TranslateFromJson();
+            //    //Sprite sprite = proto.iconSprite;
 
-                if (sprite != null) _iconImgs[i].sprite = sprite;
-            }
+            //    //if (sprite != null) _iconImgs[i].sprite = sprite;
+            //}
         }
 
         private void OnIconBtnClick(int id)
