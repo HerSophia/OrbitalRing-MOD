@@ -38,6 +38,7 @@ using static ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine.UI;
 using static ProjectOrbitalRing.Patches.Logic.SatellitePowerDistributionPatch;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.PosTool;
 using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
+using ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow;
 //ProjectGenesis
 
 // ReSharper disable UnusedVariable
@@ -62,8 +63,11 @@ namespace ProjectOrbitalRing
     {
         public const string MODGUID = "org.ProfessorCat305.OrbitalRing";
         public const string MODNAME = "OrbitalRing";
-        public const string VERSION = "0.8.25";
+        public const string VERSION = "0.8.26";
         public const string DEBUGVERSION = "";
+
+
+        public static int importVersion = 0;
 
         public static bool LoadCompleted;
 
@@ -72,6 +76,7 @@ namespace ProjectOrbitalRing
         internal static ManualLogSource logger;
         internal static ConfigFile configFile;
         internal static UIPlanetFocusWindow PlanetFocusWindow;
+        internal static UIOrbitalRingStorageWindow OrbitalRingStorageWindow;
 
         internal static int[] TableID;
 
@@ -208,6 +213,7 @@ namespace ProjectOrbitalRing
         public void Import(BinaryReader r)
         {
             int version = r.ReadInt32();
+            importVersion = version;
             MegaAssemblerPatches.Import(r);
             PlanetFocusPatches.Import(r);
             QuantumStoragePatches.Import(r);

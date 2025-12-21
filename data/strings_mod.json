@@ -320,14 +320,14 @@
     "ENUS": "All production buildings that require water are automatically filled with water"
   },
   {
-    "Name": "火力发电效率 +20%",
-    "ZHCN": "燃料电池效率 +20%",
-    "ENUS": "Fuel Cell Efficiency +20%"
+    "Name": "手动砍树或挖石头有概率掉落隐藏以解锁隐藏科技",
+    "ZHCN": "手动砍树或挖石头有概率掉落隐藏以解锁隐藏科技",
+    "ENUS": "Manually cutting down trees or digging stones has a chance of falling and hiding to unlock hidden technology"
   },
   {
-    "Name": "风力发电效率 +20%",
-    "ZHCN": "风力发电效率 +20%",
-    "ENUS": "Wind Turbine Efficiency +20%"
+    "Name": "伺服器需要的能耗-50%",
+    "ZHCN": "伺服器需要的能耗-50%",
+    "ENUS": "The energy consumption required by the server is -50%"
   },
   {
     "Name": "光伏发电效率 +20%",

@@ -32,12 +32,11 @@
   },
   {
     "ID": 34,
-    "Name": "行星协调中心介绍标题",
-    "PreText": "行星协调中心介绍前字",
-    "DeterminatorName": "TOR_TechUnlocked",
+    "Name": "行星特质介绍标题",
+    "PreText": "行星特质介绍前字",
+    "DeterminatorName": "TOR_OnBuild",
     "DeterminatorParams": [
-      1936,
-      7
+      2204
     ]
   },
   {

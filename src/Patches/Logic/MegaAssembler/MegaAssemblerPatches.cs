@@ -7,7 +7,7 @@ using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
 using ProjectOrbitalRing.Utils;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalAssembler;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalRingStorageCalculate;
-using static ProjectOrbitalRing.Utils.ERecipeType;
+using ProjectOrbitalRing.Patches.Logic.AssemblerModule;
 
 // ReSharper disable InconsistentNaming
 
@@ -132,18 +132,8 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                 CheckRecipeCount(ref __instance, factory.planet.radius == 100f);
             }
 
-            // 樱林海
-            if (factory.planet.theme == 18 && __instance.recipeType == (ERecipeType)14) {
-                if (__instance.replicating == true && __instance.productive && !__instance.forceAccMode) {
-                    __instance.extraSpeed = (int)((double)__instance.speed * Cargo.incTableMilli[4] * 10.0 + 0.1);
-                    __instance.speedOverride = __instance.speed;
-                    __instance.extraPowerRatio = Cargo.powerTable[4];
-                } else {
-                    __instance.extraSpeed = 0;
-                    __instance.speedOverride = (int)((double)__instance.speed * (1.0 + Cargo.accTableMilli[4]) + 0.1);
-                    __instance.extraPowerRatio = Cargo.powerTable[4];
-                }
-            }
+            // 插件处理入口
+            AssemblerModulePatches.AssemblerModuleProcess(factory, ref __instance);
 
             bool b = power >= 0.1f;
 

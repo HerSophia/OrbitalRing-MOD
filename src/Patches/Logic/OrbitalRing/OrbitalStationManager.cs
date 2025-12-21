@@ -60,6 +60,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 w.Write(outerPair.Key);
                 // 写入PlanetOrbitalRingData里Rings个数
                 w.Write(outerPair.Value.Rings.Count);
+                // 写入planetIncLevel
+                w.Write(outerPair.Value.planetIncLevel);
 
                 for (int i = 0; i < outerPair.Value.Rings.Count; i++) {
                     w.Write(outerPair.Value.Rings[i].Capacity);
@@ -71,6 +73,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                         w.Write(pair.OrbitalStationPoolId);
                         w.Write((int)pair.stationType);
                         w.Write(pair.OrbitalCorePoolId);
+                        w.Write(outerPair.Value.Rings[i].incCoreLevel[j]);
                     }
                     w.Write(outerPair.Value.Rings[i].orbitalRingStorage.storageItem.Count);
                     foreach (var kvp in outerPair.Value.Rings[i].orbitalRingStorage.storageItem) {
@@ -102,12 +105,17 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             try {
                 // 读取外层字典条目数
                 int AllplanetsOrbitalRingsCount = r.ReadInt32();
-
+                LogError($"scppppppppppppppppppppppppppppppppppppppppppp importVersion {ProjectOrbitalRing.importVersion}");
                 for (int i = 0; i < AllplanetsOrbitalRingsCount; i++) {
                     int planetId = r.ReadInt32();
                     PlanetOrbitalRingData data = new PlanetOrbitalRingData(planetId);
                     // 读取内层字典条目数
                     int OnePlanetRingsCount = r.ReadInt32();
+                    if (ProjectOrbitalRing.importVersion < 524314) {
+                        data.planetIncLevel = 0;
+                    } else {
+                        data.planetIncLevel = r.ReadInt32();
+                    }
                     for (var j = 0; j < OnePlanetRingsCount; j++) {
                         EquatorRing OnePlanetOneRing = new EquatorRing(r.ReadInt32(), planetId);
                         //OnePlanetOneRingnew.spaceStationCount = r.ReadInt32();
@@ -121,6 +129,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                             OnePlanetOneRing.AddElevator(k, elevatorPoolId);
                             OnePlanetOneRing.AddOrbitalStation(k, OrbitalStationPoolId, stationType);
                             OnePlanetOneRing.AddOrbitalCore(k, OrbitalCorePoolId, stationType);
+                            if (ProjectOrbitalRing.importVersion < 524314) {
+                                OnePlanetOneRing.incCoreLevel[k] = 0;
+                            } else {
+                                OnePlanetOneRing.incCoreLevel[k] = r.ReadInt32();
+                            }
+                            
                         }
                         int storageItemCount = r.ReadInt32();
                         for (int y = 0; y < storageItemCount; y++) {
@@ -158,6 +172,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
     {
         public int PlanetId { get; }
         public List<EquatorRing> Rings { get; } = new List<EquatorRing>();
+
+        public int planetIncLevel = 0;
 
         // 赤道上下两圈的索引常量
         public const int UpperRingIndex = 0;
@@ -214,6 +230,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         private int spaceStationCount;
         private readonly Position[] positions;
 
+        public int[] incCoreLevel;
+
         public OrbitalRingStorage orbitalRingStorage;
 
         public readonly bool[] insideRingPositions = new bool[1000];
@@ -235,8 +253,10 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 this.planetId = planetId;
                 Capacity = capacity;
                 positions = new Position[capacity];
+                incCoreLevel = new int[capacity];
                 for (int i = 0; i < capacity; i++) {
                     positions[i] = new Position(-1, -1, StationType.None, -1);
+                    incCoreLevel[i] = 0;
                 }
                 orbitalRingStorage = new OrbitalRingStorage();
                 for (int i = 0; i < 1000; i++) {
@@ -334,6 +354,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             lock (_lock) {
                 positions[position].OrbitalCorePoolId = -1;
                 positions[position].OrbitalStationType = (GetBase(positions[position].OrbitalStationType));
+                incCoreLevel[position] = 0;
                 spaceStationCount--;
             }
             return true;
@@ -490,6 +511,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 case StationType.EjectorCore:
                     return StationType.TurretBase;
                 case StationType.ATFeildCore:
+                case StationType.GlobalIncCore:
                     return StationType.GlobalSupportBase;
                 default:
                     return type;
@@ -509,7 +531,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             TurretCore = 7,
             EjectorCore = 9,
             GlobalSupportBase = 10,
-            ATFeildCore = 11
+            ATFeildCore = 11,
+            GlobalIncCore = 12
         }
     }
 }

@@ -111,6 +111,13 @@ namespace ProjectOrbitalRing.Utils
 
             foreach (PrefabDescJson json in prefabDescs) { json.ToPrefabDesc(LDB.models.Select(json.ModelID).prefabDesc); }
 
+            PrefabDesc megaPumper = LDB.models.Select(ProtoID.M伺服天穹组件).prefabDesc;
+            megaPumper.beaconSignalRadius = 0f;
+            megaPumper = LDB.models.Select(ProtoID.M智能方尖碑).prefabDesc;
+            megaPumper.beaconSignalRadius = 0f;
+            megaPumper = LDB.models.Select(ProtoID.M亿万械国).prefabDesc;
+            megaPumper.beaconSignalRadius = 0f;
+
             //PrefabDesc megaPumper = LDB.models.Select(ProtoID.M大抽水机).prefabDesc;
             //megaPumper.waterPoints = new[] { Vector3.zero, };
             //megaPumper.portPoses = new[] { megaPumper.portPoses[0], };

@@ -155,8 +155,11 @@
     <Compile Include="src\Patches\Logic\ModifyUpgradeTech\ModifyUpgradeTech.cs" />
     <Compile Include="src\Patches\Logic\ModifyUpgradeTech\UniverseObserveTech.cs" />
     <Compile Include="src\Patches\Logic\ModifyUpgradeTech\Unlock_Save_Load.cs" />
+    <Compile Include="src\Patches\Logic\Module\AssemblerModule.cs" />
+    <Compile Include="src\Patches\Logic\Module\AssemblerModuleData.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalAssembler.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalATField.cs" />
+    <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalBeacon.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalConnect.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalPowerGen.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\OrbitalRingStorage.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="src\Patches\Logic\PlanetGasPatches.cs" />
     <Compile Include="src\Patches\Logic\PowerGeneratorEnergyCapPatches.cs" />
     <Compile Include="src\Patches\Logic\ProductOverflowPatches.cs" />
+    <Compile Include="src\Patches\Logic\PumpWaterDoubleSpeed.cs" />
     <Compile Include="src\Patches\Logic\QuantumStorage\InternalFunctions.cs" />
     <Compile Include="src\Patches\Logic\QuantumStorage\QuantumStoragePatches.cs" />
     <Compile Include="src\Patches\Logic\QuantumStorage\UIPatches.cs" />
@@ -200,7 +204,10 @@
     <Compile Include="src\Patches\UI\GridIndexExpandPatches.cs" />
     <Compile Include="src\Patches\UI\HarmonyLogPatches.cs" />
     <Compile Include="src\Patches\UI\IconSetPatches.cs" />
+    <Compile Include="src\Patches\UI\Module\UIAssemblerWindowPatch.cs" />
     <Compile Include="src\Patches\UI\MultiProductionPatches.cs" />
+    <Compile Include="src\Patches\UI\OrbitalRingStorage\UIOrbitalRingStorageDetailExpand.cs" />
+    <Compile Include="src\Patches\UI\OrbitalRingStorage\UIOrbitalRingStorageWindow.cs" />
     <Compile Include="src\Patches\UI\PlanetFocus\UIPlanetDetailExpand.cs" />
     <Compile Include="src\Patches\UI\PlanetFocus\UIPlanetFocusWindow.cs" />
     <Compile Include="src\Patches\UI\ResearchLabPatches.cs" />

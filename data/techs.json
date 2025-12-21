@@ -1640,7 +1640,8 @@
         ],
         "HashNeeded": 108000,
         "UnlockRecipes": [
-            51
+            51,
+            835
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -6282,8 +6283,45 @@
         "PropertyOverrideItems": [],
         "PropertyItemCounts": []
     },
-    // 1942待回收
-    
+    {
+        "ID": 1942,
+        "Name": "预加工",
+        "IconPath": "Assets/texpack/先进组件",
+        "Desc": "T预加工",
+        "Conclusion": "T预加工",
+        "IsHiddenTech": false,
+        "PreItem": null,
+        "Position": [
+            36.0,
+            36.0
+        ],
+        "PreTechs": [],
+        "PreTechsImplicit": [],
+        "Items": [
+            6003
+        ],
+        "ItemPoints": [
+            10
+        ],
+        "HashNeeded": 216000,
+        "UnlockRecipes": [
+            834,
+            836
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
     {
         "ID": 1943,
         "Name": "T伴生菌种培育",
@@ -6754,7 +6792,6 @@
         "LevelCoef2": 0,
         "IsLabTech": true,
         "PreTechsMax": false,
-        "AddItems": [],
         "AddItems": [],
         "AddItemCounts": [],
         "PropertyOverrideItems": [],
@@ -7343,7 +7380,7 @@
         "MaxLevel": 0,
         "LevelCoef1": 0,
         "LevelCoef2": 0,
-        "IsLabTech": false,
+        "IsLabTech": true,
         "PreTechsMax": false,
         "AddItems": [],
         "AddItemCounts": [],
@@ -7974,6 +8011,177 @@
         "HashNeeded": 18000,
         "UnlockRecipes": [
             755
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": false,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
+        "ID": 1983,
+        "Name": "活性化编程",
+        "IconPath": "Assets/texpack/尖端组件",
+        "Desc": "T活性化编程",
+        "Conclusion": "T活性化编程",
+        "IsHiddenTech": false,
+        "PreItem": [],
+        "Position": [
+            64.0,
+            40.0
+        ],
+        "PreTechs": [
+            1942
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6279,
+            6004
+        ],
+        "ItemPoints": [
+            10,
+            10
+        ],
+        "HashNeeded": 360000,
+        "UnlockRecipes": [
+            837
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
+        "ID": 1984,
+        "Name": "星环伺服天穹",
+        "IconPath": "Assets/texpack/尖端组件",
+        "Desc": "T星环伺服天穹",
+        "Conclusion": "T星环伺服天穹",
+        "IsHiddenTech": false,
+        "PreItem": [],
+        "Position": [
+            64.0,
+            36.0
+        ],
+        "PreTechs": [
+            1942,
+            1951
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6279,
+            6004
+        ],
+        "ItemPoints": [
+            10,
+            10
+        ],
+        "HashNeeded": 288000,
+        "UnlockRecipes": [
+            838
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
+        "ID": 1985,
+        "Name": "智能方尖碑",
+        "IconPath": "Assets/texpack/尖端组件",
+        "Desc": "T智能方尖碑",
+        "Conclusion": "T智能方尖碑",
+        "IsHiddenTech": false,
+        "PreItem": [],
+        "Position": [
+            72.0,
+            36.0
+        ],
+        "PreTechs": [
+            1984
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6279,
+            6004,
+            6005
+        ],
+        "ItemPoints": [
+            10,
+            10,
+            10
+        ],
+        "HashNeeded": 360000,
+        "UnlockRecipes": [
+            839
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
+        "ID": 1986,
+        "Name": "亿万械国",
+        "IconPath": "Assets/texpack/尖端组件",
+        "Desc": "未完成",
+        "Conclusion": "未完成",
+        "IsHiddenTech": true,
+        "PreItem": [
+            6528
+        ],
+        "Position": [
+            88.0,
+            36.0
+        ],
+        "PreTechs": [
+            1985
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6528
+        ],
+        "ItemPoints": [
+            1
+        ],
+        "HashNeeded": 3600,
+        "UnlockRecipes": [
+            840
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],

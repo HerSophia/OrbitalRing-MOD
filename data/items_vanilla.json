@@ -4429,7 +4429,7 @@
             40
         ],
         "FuelType": 16,
-        "HeatValue": 3000000000,
+        "HeatValue": 8640000000,
         "ReactorInc": 3.0,
         "IsFluid": false,
         "Productive": true,

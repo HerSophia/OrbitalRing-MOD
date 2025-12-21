@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using static ProjectOrbitalRing.Patches.Logic.PlanetFocus.PlanetFocusPatches;
 using static ProjectOrbitalRing.Patches.UI.Utils.Util;
 using static ProjectOrbitalRing.Patches.UI.Utils.MyWindowCtl;
+using ProjectOrbitalRing.Patches.Logic.AssemblerModule;
 
 namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
 {
@@ -20,7 +21,7 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
         public RectTransform windowTrans;
         public Text nameText;
 
-        public Text characteristicsText;
+        public int FocusId;
 
         private readonly UIButton[] _iconBtns = new UIButton[FocusMaxCount];
         private readonly Image[] _iconImgs = new Image[FocusMaxCount];
@@ -38,7 +39,7 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
         public override void _OnCreate()
         {
             windowTrans = GetRectTransform(this);
-            windowTrans.sizeDelta = new Vector2(380f, 190f);
+            windowTrans.sizeDelta = new Vector2(480f, 190f);
 
             CreateUI();
         }
@@ -53,11 +54,20 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
             nameText = CreateText("", 16);
             NormalizeRectWithTopLeft(nameText.transform, 0f, 20f, _tab1);
 
-            characteristicsText = CreateText("", 16);
-            NormalizeRectWithTopLeft(characteristicsText.transform, 0f, 72f, _tab1);
+            CreateSignalIcon("", "", out UIButton iconBtn, out Image iconImage);
+            _iconBtns[0] = iconBtn;
+            _iconImgs[0] = iconImage;
+            _iconTexts[0] = CreateText("", 16);
 
-            //for (var i = 0; i < FocusMaxCount; ++i)
-            //{
+            NormalizeRectWithTopLeft(iconBtn.transform, 0, 60, _tab1);
+            NormalizeRectWithTopLeft(_iconTexts[0].transform, 55, 72, _tab1);
+
+            ItemProto itemProto = LDB.items.Select(FocusId);
+            _iconImgs[0].sprite = (FocusId == 0) ? null : itemProto.iconSprite;
+            _iconTexts[0].text = FocusIds[FocusId].TranslateFromJson();
+            _iconBtns[0].tips.itemId = FocusId;
+
+            //for (var i = 0; i < FocusMaxCount; ++i) {
             //    CreateSignalIcon("", "", out UIButton iconBtn, out Image iconImage);
             //    _iconBtns[i] = iconBtn;
             //    _iconImgs[i] = iconImage;
@@ -75,7 +85,7 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
             //    //iconBtn.onRightClick += _ => OnIconBtnRightClick(id);
             //}
             //if (GameMain.data.galaxy.PlanetById(CurPlanetId).theme == 1) {
-            //SetPlanetFocus(CurPlanetId, 0, 6524);
+            //    SetPlanetFocus(CurPlanetId, 0, 6524);
             //}
 
             //_tagNotSelectedSprite = _iconImgs[0].sprite;
@@ -106,11 +116,12 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
             //        continue;
             //    }
 
-            //    //ItemProto proto = LDB.items.Select(currentFocusId);
-            //    //_iconTexts[i].text = FocusIds[currentFocusId].TranslateFromJson();
-            //    //Sprite sprite = proto.iconSprite;
+            ItemProto proto = LDB.items.Select(FocusId);
+            _iconTexts[0].text = FocusIds[FocusId].TranslateFromJson();
+            Sprite sprite = (FocusId == 0) ? null : proto.iconSprite;
 
-            //    //if (sprite != null) _iconImgs[i].sprite = sprite;
+            _iconImgs[0].sprite = sprite;
+            _iconBtns[0].tips.itemId = FocusId;
             //}
         }
 

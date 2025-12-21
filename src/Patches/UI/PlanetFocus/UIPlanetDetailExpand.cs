@@ -43,25 +43,39 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
                 ProjectOrbitalRing.PlanetFocusWindow.nameText.text = __instance.planet.displayName + " - " + "星球特质".TranslateFromJson();
                 switch (__instance.planet.theme) {
                     case 1:
-                        ProjectOrbitalRing.PlanetFocusWindow.characteristicsText.text = "可以从树木采集种子和本土菌种".TranslateFromJson();
+                        ProjectOrbitalRing.PlanetFocusWindow.FocusId = 6526;
                         break;
                     //case 16:
-                    //    ProjectOrbitalRing.PlanetFocusWindow.characteristicsText.text = "所有需要水的生产建筑水自动填满".TranslateFromJson();
+                    //    ProjectOrbitalRing.PlanetFocusWindow.FocusId = 6524;
                     //    break;
                     case 18:
-                        ProjectOrbitalRing.PlanetFocusWindow.characteristicsText.text = "生态穹顶执行配方自动增产".TranslateFromJson();
+                        ProjectOrbitalRing.PlanetFocusWindow.FocusId = 6527;
+                        break;
+                    case 7:
+                    case 10:
+                    case 20:
+                    case 24:
+                        ProjectOrbitalRing.PlanetFocusWindow.FocusId = 6525;
+                        break;
+                    case 6:
+                    case 8:
+                    case 14:
+                    case 15:
+                    case 17:
+                    case 22:
+                    case 25:
+                        ProjectOrbitalRing.PlanetFocusWindow.FocusId = 6529;
                         break;
                     default:
-                        ProjectOrbitalRing.PlanetFocusWindow.characteristicsText.text = "";
+                        ProjectOrbitalRing.PlanetFocusWindow.FocusId = 0;
                         break;
                 }
-                
 
-                //if (UIPlanetFocusWindow.CurPlanetId != __instance.planet.id)
-                //{
-                //    UIPlanetFocusWindow.CurPlanetId = __instance.planet.id;
-                //    ProjectOrbitalRing.PlanetFocusWindow.OnPlanetChanged(UIPlanetFocusWindow.CurPlanetId);
-                //}
+
+                if (UIPlanetFocusWindow.CurPlanetId != __instance.planet.id) {
+                    UIPlanetFocusWindow.CurPlanetId = __instance.planet.id;
+                    ProjectOrbitalRing.PlanetFocusWindow.OnPlanetChanged(UIPlanetFocusWindow.CurPlanetId);
+                }
             }
         }
     }

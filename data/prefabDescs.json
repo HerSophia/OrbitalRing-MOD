@@ -92,8 +92,8 @@
     },
     {
         "ModelID": 56,
-        "genEnergyPerTick": 3500000,
-        "useFuelPerTick": 3500000,
+        "genEnergyPerTick": 4800000,
+        "useFuelPerTick": 4800000,
         "fuelMask": 16
     },
     {
@@ -204,8 +204,8 @@
     },
     {
         "ModelID": 118,
-        "genEnergyPerTick": 400000,
-        "useFuelPerTick": 400000
+        "genEnergyPerTick": 800000,
+        "useFuelPerTick": 1000000
     },
     {
         "ModelID": 194,
@@ -537,5 +537,32 @@
     {
         "ModelID": 829,
         "beltSpeed": 10
+    },
+    {
+        "ModelID": 830,
+        "powerCoverRadius": 0.0,
+        "workEnergyPerTick": 4200000,
+        "idleEnergyPerTick": 4200000,
+        "beaconSignalRadius": 0.0,
+        "beaconSpaceSignalRange": 0.0,
+        "powerConnectDistance": 0.5
+    },
+    {
+        "ModelID": 831,
+        "powerCoverRadius": 0.0,
+        "workEnergyPerTick": 8400000,
+        "idleEnergyPerTick": 8400000,
+        "beaconSignalRadius": 0.0,
+        "beaconSpaceSignalRange": 0.0,
+        "powerConnectDistance": 0.5
+    },
+    {
+        "ModelID": 832,
+        "powerCoverRadius": 0.0,
+        "workEnergyPerTick": 21000000,
+        "idleEnergyPerTick": 21000000,
+        "beaconSignalRadius": 0.0,
+        "beaconSpaceSignalRange": 0.0,
+        "powerConnectDistance": 0.5
     }
 ]

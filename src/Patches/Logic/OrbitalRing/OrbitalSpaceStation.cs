@@ -221,6 +221,10 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                 if (result.stationType != StationType.GlobalSupportBase) {
                                     flag = true;
                                 }
+                            } else if (previewItem == ProtoID.I伺服天穹组件) {
+                                if (result.stationType != StationType.GlobalSupportBase) {
+                                    flag = true;
+                                }
                             }
                             if (flag) {
                                 buildPreview.condition = (EBuildCondition)98;
@@ -374,6 +378,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                     __result = false;
                                     return false;
                                 }
+                            } else if (previewItem == ProtoID.I伺服天穹组件) {
+                                if (result.stationType != StationType.GlobalSupportBase) {
+                                    buildPreview.condition = (EBuildCondition)98;
+                                    __result = false;
+                                    return false;
+                                }
                             }
                         }
 
@@ -409,6 +419,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 case ProtoID.I重型电浆炮: // 重型电浆炮
                 case ProtoID.I重型电磁弹射器: // 重型电磁弹射器
                 case ProtoID.I星环护盾组件: // 重型电磁弹射器
+                case ProtoID.I伺服天穹组件: // 伺服天穹组件
                     return true;
                 default:
                     return false;
@@ -655,6 +666,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
 
                                     if (pair.stationType == StationType.ATFeildCore) {
                                         int colId = __instance.factory.entityPool[__instance.factory.defenseSystem.fieldGenerators.buffer[pair.OrbitalCorePoolId].entityId].colliderId;
+                                        ColliderData colliderData = __instance.actionBuild.planetPhysics.GetColliderData(colId);
+                                        __instance.actionBuild.DoDismantleObject(colliderData.objId);
+                                    }
+
+                                    if (pair.stationType == StationType.GlobalIncCore) {
+                                        int colId = __instance.factory.entityPool[__instance.factory.defenseSystem.beacons.buffer[pair.OrbitalCorePoolId].entityId].colliderId;
                                         ColliderData colliderData = __instance.actionBuild.planetPhysics.GetColliderData(colId);
                                         __instance.actionBuild.DoDismantleObject(colliderData.objId);
                                     }

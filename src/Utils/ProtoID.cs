@@ -94,6 +94,7 @@ namespace ProjectOrbitalRing.Utils
                            I氧 = 7019,
                            I种子 = 7021,
                            I钢芯弹箱 = 7607,
+                           I伺服天穹组件 = 7619,
                            I钨块 = 7705,
                            I石墨矿 = 7706,
                            I组装厂交互塔 = 9512;
@@ -169,7 +170,10 @@ namespace ProjectOrbitalRing.Utils
                            M星环电网组件 = 826,
                            M星环护盾组件 = 827,
                            M黑盒 = 828,
-                           M空轨 = 829;
+                           M空轨 = 829,
+                           M伺服天穹组件 = 830,
+                           M智能方尖碑 = 831,
+                           M亿万械国 = 832;
 
         internal const int T戴森球计划 = 1,
                            T电磁学 = 1001,

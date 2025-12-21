@@ -95,7 +95,7 @@
         ],
         "Explicit": false,
         "Handcraft": true,
-        "NonProductive": false
+        "NonProductive": true
     },
     {
         "ID": 5,
@@ -1344,7 +1344,7 @@
     {
         "ID": 51,
         "Name": "芯片",
-        "Description": "",
+        "Description": "I芯片",
         "IconPath": "",
         "Type": 4,
         "GridIndex": 1304,
@@ -1365,7 +1365,7 @@
         "OutCounts": [
             5
         ],
-        "Explicit": false,
+        "Explicit": true,
         "Handcraft": false,
         "NonProductive": false
     },
@@ -3031,18 +3031,14 @@
         "GridIndex": 2107,
         "Time": 900,
         "Input": [
-            1108,
+            2204,
             7501,
-            7018,
-            1203,
-            1113
+            7018
         ],
         "InCounts": [
-            20,
+            2,
             6,
-            50,
-            10,
-            4
+            50
         ],
         "Output": [
             2211
@@ -4850,7 +4846,7 @@
         ],
         "OutCounts": [
             1,
-            3
+            2
         ],
         "Explicit": true,
         "Handcraft": true,
@@ -6447,7 +6443,7 @@
         "ID": 711,
         "Name": "煤气化",
         "Description": "R煤气化",
-        "IconPath": "Assets/texpack/焦油循环",
+        "IconPath": "",
         "Type": 2,
         "GridIndex": 4204,
         "Time": 6,
@@ -8404,6 +8400,212 @@
             4
         ],
         "Explicit": true,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 834,
+        "Name": "预加工伺服器",
+        "Description": "",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2802,
+        "Time": 240,
+        "Input": [
+            7501,
+            1303,
+            1203,
+            1101
+        ],
+        "InCounts": [
+            2,
+            1,
+            1,
+            4
+        ],
+        "Output": [
+            7617
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 835,
+        "Name": "超净室过滤器",
+        "Description": "",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2801,
+        "Time": 240,
+        "Input": [
+            1203,
+            1110,
+            1115,
+            1101
+        ],
+        "InCounts": [
+            1,
+            2,
+            1,
+            4
+        ],
+        "Output": [
+            7616
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 836,
+        "Name": "水冷伺服器",
+        "Description": "R水冷伺服器",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2803,
+        "Time": 1200,
+        "Input": [
+            7501,
+            1000,
+            1203,
+            1101
+        ],
+        "InCounts": [
+            6,
+            6,
+            3,
+            12
+        ],
+        "Output": [
+            7617
+        ],
+        "OutCounts": [
+            3
+        ],
+        "Explicit": true,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 837,
+        "Name": "智能伺服器",
+        "Description": "",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2804,
+        "Time": 360,
+        "Input": [
+            7805,
+            7019,
+            7006,
+            1203
+        ],
+        "InCounts": [
+            1,
+            2,
+            6,
+            1
+        ],
+        "Output": [
+            7618
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 838,
+        "Name": "伺服天穹组件",
+        "Description": "",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2807,
+        "Time": 2700,
+        "Input": [
+            7617,
+            1123,
+            1107,
+            3007
+        ],
+        "InCounts": [
+            75,
+            50,
+            20,
+            4
+        ],
+        "Output": [
+            7619
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 839,
+        "Name": "智能方尖碑",
+        "Description": "",
+        "IconPath": "",
+        "Type": 10,
+        "GridIndex": 2808,
+        "Time": 3600,
+        "Input": [
+            7618,
+            6523,
+            3007
+        ],
+        "InCounts": [
+            50,
+            20,
+            12
+        ],
+        "Output": [
+            7620
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 840,
+        "Name": "亿万械国",
+        "Description": "",
+        "IconPath": "",
+        "Type": 10,
+        "GridIndex": 2809,
+        "Time": 4500,
+        "Input": [
+            6530,
+            7620,
+            9486
+        ],
+        "InCounts": [
+            1,
+            1,
+            4
+        ],
+        "Output": [
+            7621
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
         "Handcraft": false,
         "NonProductive": false
     }

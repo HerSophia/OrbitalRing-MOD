@@ -10,54 +10,54 @@
         "ENUS": "The foundation built in the Water World is a semi floating island foundation, which is equipped with large water pumps under the artificial ground and has interfaces for connecting water supply to the buildings built on it.\n<color=\"#FD965ECC\">All production buildings that require water are automatically filled with water</color>"
     },
     {
-        "Name": "电力节约",
-        "ZHCN": "电力节约",
-        "ENUS": "Energy Saving"
+        "Name": "自然降温",
+        "ZHCN": "自然降温",
+        "ENUS": "Natural Cooling "
     },
     {
-        "Name": "I电力节约",
-        "ZHCN": "采用智能控制系统，实时监控能源消耗、自动调节设备的运行状态，减少不必要的能耗。\n<color=\"#FD965ECC\">工厂电力需求 -10%</color>",
-        "ENUS": "By using intelligent control systems, real-time monitoring of energy consumption and automatic adjustment of equipment operating status can reduce unnecessary energy usage.\n<color=\"#FD965ECC\">Assembler Power Consumption -10%</color>"
+        "Name": "I自然降温",
+        "ZHCN": "在表面寒风呼啸的星球，伺服器可以利用自然寒风为处理器冷却降温，以节省冷却系统的功耗。\n<color=\"#FD965ECC\">伺服器需要的能耗-50%</color>",
+        "ENUS": "On a planet with howling cold winds on its surface, servers can utilize natural cold winds to cool processors and save power on the cooling system.\n<color=\"#FD965ECC\">The energy consumption required by the server is -50%</color>"
     },
     {
-        "Name": "上传扩容",
-        "ZHCN": "上传扩容",
-        "ENUS": "Upload Bandwidth Expansion"
+        "Name": "母星特质",
+        "ZHCN": "母星特质",
+        "ENUS": "Mother Planet Characteristics"
     },
     {
-        "Name": "I上传扩容",
-        "ZHCN": "通过提高上行带宽、更换高效传输协议、压缩数据并行上传，确保高效的数据传输。\n<color=\"#FD965ECC\">研究上传速度 +10%</color>",
-        "ENUS": "By increasing the upload bandwidth, switching to efficient transfer protocols, compressing data, and uploading in parallel, efficient data transmission can be ensured.\n<color=\"#FD965ECC\">Research Speed +10%</color>"
+        "Name": "I母星特质",
+        "ZHCN": "接下来，砍树很有用。\n<color=\"#FD965ECC\">可以从树木采集种子和本土菌种</color>",
+        "ENUS": "Next, cutting down trees is very useful.\n<color=\"#FD965ECC\">Seeds and native bacterial strains can be collected from trees</color>"
     },
     {
-        "Name": "燃料回收",
-        "ZHCN": "燃料回收",
+        "Name": "信息素",
+        "ZHCN": "信息素",
         "ENUS": "Thermal Fuel Recycling"
     },
     {
-        "Name": "I燃料回收",
-        "ZHCN": "优化电堆设计、改进控制策略、集成热电联产系统等措施的综合应用，可以有效提高燃料电池发电厂的效率。\n<color=\"#FD965ECC\">燃料电池效率 +20%</color>",
-        "ENUS": "The comprehensive application of measures such as optimizing stack design, improving control strategies, and integrating combined heat and power systems can effectively enhance the efficiency of fuel cell power plants.\n<color=\"#FD965ECC\">Fuel Cell Efficiency +20%</color>"
+        "Name": "I信息素",
+        "ZHCN": "当地植物在花期分泌的某种信息素，对于生命的繁育有促进作用。\n<color=\"#FD965ECC\">生态穹顶执行配方自动增产</color>",
+        "ENUS": "A certain pheromone secreted by local plants during flowering promotes the reproduction of life.\n<color=\"#FD965ECC\">Ecological dome executes formula to automatically increase production</color>"
     },
     {
-        "Name": "风力扩容",
-        "ZHCN": "风力扩容",
+        "Name": "真空冶炼",
+        "ZHCN": "真空冶炼",
         "ENUS": "Wind Turbine Capacity Expansion"
     },
     {
-        "Name": "I风力扩容",
+        "Name": "I真空冶炼",
         "ZHCN": "通过风力涡轮机与中央控制系统之间的数据交换实现对多台风力涡轮机的协调控制，优化整个风电场的能量输出。\n<color=\"#FD965ECC\">风力发电效率 +20%</color>",
         "ENUS": "By enabling data exchange between wind turbines and the central control system, coordinated control of multiple wind turbines can be achieved, optimizing the energy output of the entire wind farm.\n<color=\"#FD965ECC\">Wind Turbine Efficiency +20%</color>"
     },
     {
-        "Name": "光伏扩容",
-        "ZHCN": "光伏扩容",
-        "ENUS": "Solar Panel Capacity Expansion"
+        "Name": "拥有隐藏",
+        "ZHCN": "拥有隐藏",
+        "ENUS": "Having Hidden"
     },
     {
-        "Name": "I光伏扩容",
-        "ZHCN": "通过监测环境和气象条件，实现太阳能板的智能化管理和调度，从而提高能源利用效率。\n<color=\"#FD965ECC\">光伏发电效率 +20%</color>",
-        "ENUS": "By monitoring environmental and weather conditions, intelligent management and scheduling of solar panels can be achieved, thereby improving the efficiency of energy utilization.\n<color=\"#FD965ECC\">Solar Panel Efficiency +20%</color>"
+        "Name": "I拥有隐藏",
+        "ZHCN": "该星球拥有隐藏。\n<color=\"#FD965ECC\">手动砍树或挖石头有概率掉落隐藏以解锁隐藏科技</color>",
+        "ENUS": "This planet has hidden features.\n<color=\"#FD965ECC\">Manually cutting down trees or digging stones has a chance of falling and hiding to unlock hidden technology</color>"
     },
     {
         "Name": "热聚增效",
@@ -240,14 +240,14 @@
         "ENUS": "Mega buildings are a class of production facilities with a high degree of integration. Although they look similar to a logistics station, they do not carry a logistics transporter. \n\nOne mega building can export raw materials or products to the next mega building via a conveyor belt, thus making efficient use of space."
     },
     {
-        "Name": "行星协调中心介绍标题",
-        "ZHCN": "行星协调中心",
-        "ENUS": "Coordination Center Introduction"
+        "Name": "行星特质介绍标题",
+        "ZHCN": "行星特质",
+        "ENUS": "Planetary Characteristics"
     },
     {
-        "Name": "行星协调中心介绍前字",
-        "ZHCN": "一个行星协调中心可为星球工厂提供多种增益，可在行星视图中（默认快捷键为M键）切换增益以适应不同发展阶段的需求。",
-        "ENUS": "A Planetary Coordination Center can provide multiple gains for a planetary factory, with the ability to switch gains in the planet view (Default shortcut is M key) to accommodate different stages of development."
+        "Name": "行星特质介绍前字",
+        "ZHCN": "一个行星可能会拥有某种全球性的加成特质或隐藏，可在行星视图中（默认快捷键为M键）点击行星特质打开查看。",
+        "ENUS": "A planet may possess certain global bonus traits or hidden features, which can be accessed by clicking on the planet traits in the planet view (default shortcut key is M)."
     },
     {
         "Name": "物质分解设施介绍标题",
@@ -383,6 +383,16 @@
         "Name": "R银浆印刷电路",
         "ZHCN": "利用银导电性能更优异的特性，将导电银浆印刷在基材上形成电路，制成更高性能的电路板。",
         "ENUS": "By utilizing the superior conductivity of silver, conductive silver paste is printed onto a substrate to form circuits, resulting in higher performance circuit boards."
+    },
+    {
+        "Name": "超高效过滤器",
+        "ZHCN": "超高效过滤器",
+        "ENUS": "Ultra Low Penetration Air Filter"
+    },
+    {
+        "Name": "I超高效过滤器",
+        "ZHCN": "超高效过滤器ULPA，用于维持加工环境达到ISO 1级洁净度，即每立方米空气中大于等于0.1微米的颗粒物不超过10颗，使用超细玻璃纤维作为核心滤材，常用于芯片等高精度加工环境。",
+        "ENUS": "Ultra Low Penetration Air Filter is used to maintain the processing environment to achieve ISO Class 1 cleanliness, which means that there are no more than 10 particles greater than or equal to 0.1 microns per cubic meter of air. It uses ultra-fine glass fiber as the core filter material and is commonly used in high-precision processing environments such as chips."
     },
     {
         "Name": "芯片",
@@ -1193,15 +1203,85 @@
         "ZHCN": "加工磁流体的副产物，内部的纳米结构已无法成型，只有加热熔融将微观结构全部抹除才能重新加工。",
         "ENUS": "As a byproduct of processing magnetic fluids, the internal nanostructures cannot be formed and can only be reprocessed by heating and melting to completely remove the microstructure."
     },
-    { // 废弃物品
-        "Name": "增殖燃料棒",
-        "ZHCN": "增殖燃料棒",
-        "ENUS": "Proliferation Fuel Rod"
+    {
+        "Name": "预加工",
+        "ZHCN": "预加工",
+        "ENUS": "Pre-Processing"
     },
     {
-        "Name": "I增殖燃料棒",
-        "ZHCN": "用碳化硅外壳封装了以铀238为主的核燃料棒，在核反应中将转变为可裂变的钚239，钚239裂变将提供稳定且强大的能量输出。",
-        "ENUS": "A nuclear fuel rod mainly composed of uranium-238 is encapsulated in a silicon carbide shell, which will be transformed into fissionable plutonium-239 in a nuclear reaction. Plutonium-239 fission will provide stable and powerful energy output."
+        "Name": "T预加工",
+        "ZHCN": "自动化流水线总是给人严丝合缝的感觉，然而实际上原料依旧有误差，成分的误差，形状的误差，这些规定范围内的误差不影响工业机器的正常加工，但要达成更快的加工速度，更高的良品率，则需要更加精细，更加完美的原部件。通过加装智能伺服器，对原部件先进行预加工，使其更加适配后续的加工步骤，从而实现高效的智慧工厂。",
+        "ENUS": "Automated assembly lines always give people a feeling of tight fitting, but in reality, there are still errors in raw materials, composition, and shape. These errors within the specified range do not affect the normal processing of industrial machines, but to achieve faster processing speed and higher yield, more refined and perfect raw parts are needed. By installing intelligent servers, the original components are pre processed to better adapt to subsequent processing steps, thereby achieving an efficient smart factory."
+    },
+    {
+        "Name": "预加工伺服器",
+        "ZHCN": "预加工伺服器",
+        "ENUS": "Preprocessing Server"
+    },
+    {
+        "Name": "I预加工伺服器",
+        "ZHCN": "通过大量传感器以及服务器群集，对所属工厂的每一批原料进行精细地测量，并实时生成对应的预加工步骤并操控机床完成，从而使正式加工环节能以更快的速度，更高的良品率加工出成品。\n<color=\"#FD965ECC\">放置在制造台的插件槽生效，使该制造台以二级增产状态运行</color>\n<color=\"#FD965ECC\">该伺服器会使安装的制造台额外增加5.04mw能耗</color>",
+        "ENUS": "Through a large number of sensors and server clusters, each batch of raw materials in the factory is finely measured, and corresponding pre-processing steps are generated in real time and controlled by the machine tool to complete them, so that the formal processing process can produce finished products at a faster speed and higher yield.\n<color=\"#FD965ECC\">The plug-in slot placed in the manufacturing station takes effect, allowing the manufacturing station to operate in a secondary production state</color>\n<color=\"#FD965ECC\">This server will add an additional 5.04mw of energy consumption to the installed manufacturing station</color>"
+    },
+    {
+        "Name": "活性化编程",
+        "ZHCN": "活性化编程",
+        "ENUS": "Activation Programming"
+    },
+    {
+        "Name": "T活性化编程",
+        "ZHCN": "物质的世界千变万化，原料零件的误差也千差万别，用一般编程穷举所有情况并预设方案完成预加工终究有些力不从心。靠量子计算架构，我们得以部署深度学习网络，它不再是死板的预设程序，而是会自己学习，分析，生成方案的半活性化自动程序集。",
+        "ENUS": "The material world is ever-changing, and the errors of raw materials and parts vary greatly. Using general programming to exhaustively search for all situations and preset solutions to complete pre-processing is ultimately somewhat inadequate. By relying on quantum computing architecture, we are able to deploy deep learning networks, which are no longer rigid preset programs, but semi active automated program sets that learn, analyze, and generate solutions on their own."
+    },
+    {
+        "Name": "智能伺服器",
+        "ZHCN": "智能伺服器",
+        "ENUS": "Intelligent Server"
+    },
+    {
+        "Name": "I智能伺服器",
+        "ZHCN": "部署了活性化深度学习网络的量子伺服器，强大的自适应学习能力能根据原料之间细微的差别专门定制出更加贴合实际情况的预加工方案。\n<color=\"#FD965ECC\">放置在制造台的插件槽生效，使该制造台以三级增产状态运行</color>\n<color=\"#FD965ECC\">该伺服器会使安装的制造台额外增加12.6mw能耗</color>",
+        "ENUS": "A quantum server with activated deep learning networks has been deployed, and its powerful adaptive learning ability can customize pre-processing solutions that are more tailored to actual situations based on subtle differences between raw materials.\n<color=\"#FD965ECC\">The plug-in slot placed in the manufacturing station takes effect, allowing the manufacturing station to operate in a three-level production increase state</color>\n<color=\"#FD965ECC\">This server will add an additional 12.6mw of energy consumption to the installed manufacturing station</color>"
+    },
+    {
+        "Name": "水冷伺服器",
+        "ZHCN": "水冷伺服器",
+        "ENUS": "Water Cooled Server"
+    },
+    {
+        "Name": "R水冷伺服器",
+        "ZHCN": "CPU全负荷运转时温度会急剧飙升，使用风扇进行风冷的优点是结构简单，制造简便。但是要榨取处理器更高的性能时，就需要水冷，使用水来完成更高效的热量转移循环。",
+        "ENUS": "When the CPU is running at full load, the temperature will soar sharply. The advantage of using a fan for air cooling is its simple structure and easy manufacturing. But to extract higher performance from the processor, water cooling is needed, using water to complete a more efficient heat transfer cycle."
+    },
+    {
+        "Name": "星环伺服天穹",
+        "ZHCN": "星环伺服天穹",
+        "ENUS": "OrbitalRing Servo Sky Dome"
+    },
+    {
+        "Name": "T星环伺服天穹",
+        "ZHCN": "星环代表了行星开发的高度，在高度发达的工业行星，星环能从伺服天穹组件统筹协调全行星的工厂，抬头就能望见的星环将在天穹俯视全球的工厂，并为全球工厂提供预加工伺服能力。",
+        "ENUS": "OrbitalRing represent the height of planetary development. In highly developed industrial planets, star rings can coordinate factories across the planet from servo dome components. The visible star rings will overlook factories around the world from the sky and provide pre-processing servo capabilities for factories worldwide."
+    },
+    {
+        "Name": "伺服天穹组件",
+        "ZHCN": "伺服天穹组件",
+        "ENUS": "Servo Sky Component"
+    },
+    {
+        "Name": "I伺服天穹组件",
+        "ZHCN": "安装在天枢座的大型服务器群集组件，利用石墨烯的超高导热性，以面积巨大的散热膜维持这个行星级超算服务器的散热，当所属的星环建设完整时，将为全行星的制造台提供预加工伺服能力。\n<color=\"#FD965ECC\">建造在拥有完整星环的天枢座，且供电充足时，为全球的制造台提供一级增产状态</color>",
+        "ENUS": "The large server cluster component installed in the constellation of the Celestial Pivot utilizes the ultra-high thermal conductivity of graphene and a large heat dissipation film to maintain the heat dissipation of this row star supercomputer server. When the corresponding star ring is fully constructed, it will provide pre-processing servo capabilities for the manufacturing stations of the entire planet.\n<color=\"#FD965ECC\">Built in the constellation of Nexus with a complete orbital ring and sufficient power supply, it provides a first level production status for manufacturing stations worldwide</color>"
+    },
+    {
+        "Name": "T智能方尖碑",
+        "ZHCN": "传统计算架构的超算提升算力是有上限的，如果想要对全球的工厂进行更加细致，更加高效的加工方案调整，就需要以量子比特架构为主的量子超算组成的全球协调组件：智能方尖碑。",
+        "ENUS": "The supercomputing of traditional computing architectures has a limit to improving computing power. If we want to make more detailed and efficient adjustments to processing plans for factories around the world, we need a global coordination component composed mainly of quantum supercomputers based on quantum bit architecture: the intelligent obelisk."
+    },
+    {
+        "Name": "I智能方尖碑",
+        "ZHCN": "安装在天枢座的超级量子超算，强大的算力通过星环能对全球每一个工厂的每一次制造过程都提供独立的定制优化加工方案，只有极为繁荣的工业星才会安装这种协调中枢。\n<color=\"#FD965ECC\">建造在拥有完整星环的天枢座，且供电充足时，为全球的制造台提供二级增产状态</color>",
+        "ENUS": "The super quantum supercomputer installed in the constellation of the Celestial Pivot provides independent customized and optimized processing solutions for every manufacturing process in every factory around the world through its powerful computing power. Only highly prosperous industrial stars would install this coordination center.\n<color=\"#FD965ECC\">Built in the constellation of Nexus with a complete orbital ring and sufficient power supply, it provides a second level production status for manufacturing stations worldwide</color>"
     },
     {
         "Name": "铀燃料棒",
@@ -1430,8 +1510,8 @@
     },
     {
         "Name": "I流体抽取平台",
-        "ZHCN": "用于抽取液体资源并提纯的设施，直接建造于水面，可以适配多种海洋类型。",
-        "ENUS": "A colorless gas with a strong irritating odor. It is usually stored as a liquid."
+        "ZHCN": "用于抽取液体资源并提纯的设施，直接建造于水面，可以适配多种海洋类型。\n<color=\"#FD965ECC\">当抽取流体为水时，速度翻倍</color>",
+        "ENUS": "A colorless gas with a strong irritating odor. It is usually stored as a liquid.\n<color=\"#FD965ECC\">When extracting fluid as water, the speed doubles</color>"
     },
     {
         "Name": "攻击无人机",
@@ -2394,9 +2474,9 @@
         "ENUS": "Simulate the matrix analysis array of the main brain through some means to improve the research speed that cannot be studied by the research station."
     },
     {
-        "Name": "I大抽水机",
-        "ZHCN": "利用光子聚束技术，快速汲取大量液体。",
-        "ENUS": "Using photon beam technology, quickly extract large amounts of liquid."
+        "Name": "I大型采矿机",
+        "ZHCN": "利用量子芯片对激发器产生的光子群在跃迁过程加以正向干预，能够使激光束产生明显的聚束效应。聚束后的激光束在特殊引力场的作用下沿着预定的路径对矿脉局部迅速加热，将矿物以粒子态的形式进行运输并封装，可以更方便的建造和更高速的采集矿物。采集的矿物可以用传送带或者物流运输机运送出去。\n<color=\"#FD965ECC\">覆盖矿簇时覆盖数获得x2</color>",
+        "ENUS": "By using quantum chips to positively intervene in the transition process of the photon group generated by the exciter, a significant beam focusing effect can be achieved in the laser beam. The laser beam, after being focused, rapidly heats up the ore vein along a predetermined path under the action of a special gravitational field, transporting and encapsulating minerals in particle form, making it more convenient to construct and collect minerals at higher speeds. The collected minerals can be transported out by conveyor belts or logistics transport planes.\n<color=\"#FD965ECC\">When covering the mineral cluster, obtain x2 coverage numbers</color>"
     },
     {
         "Name": "大气收集设施",

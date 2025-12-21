@@ -10,7 +10,7 @@ using UnityEngine;
 using System.Reflection.Emit;
 using ProjectOrbitalRing.Patches.Logic.AddVein;
 using ProjectOrbitalRing.Utils;
-using static ProjectOrbitalRing.ProjectOrbitalRing;
+using ProjectOrbitalRing.Patches.Logic.AssemblerModule;
 
 namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
 {
@@ -62,6 +62,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                         power = 0.0f;
                     }
                 }
+            } else {
+                AssemblerModulePatches.AssemblerFilterModuleProcess(factorySystem, poolId, ref power);
             }
         }
 
