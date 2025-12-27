@@ -3866,7 +3866,7 @@
         "ID": 6528,
         "Name": "真空冶炼",
         "Description": "I真空冶炼",
-        "IconPath": "Assets/texpack/神经元重编程",
+        "IconPath": "Icons/Tech/1401",
         "GridIndex": 0,
         "StackSize": 1,
         "Type": 1,

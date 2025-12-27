@@ -6911,29 +6911,33 @@
     },
     {
         "ID": 775,
-        "Name": "辐射诱变迭代",
-        "Description": "R辐射诱变迭代",
+        "Name": "共生繁育",
+        "Description": "R共生繁育",
         "IconPath": "",
         "Type": 14,
-        "GridIndex": 4111,
+        "GridIndex": 4311,
         "Time": 240,
         "Input": [
             7002,
             6226,
             6212,
-            7017
+            7017,
+            7022
         ],
         "InCounts": [
             4,
             4,
             1,
-            1
+            1,
+            3
         ],
         "Output": [
-            6212
+            6212,
+            7022
         ],
         "OutCounts": [
-            5
+            5,
+            3
         ],
         "Explicit": true,
         "Handcraft": false,
@@ -7164,6 +7168,36 @@
         "Explicit": false,
         "Handcraft": false,
         "NonProductive": false
+    },
+    {
+        "ID": 784,
+        "Name": "辐射诱变迭代",
+        "Description": "R辐射诱变迭代",
+        "IconPath": "",
+        "Type": 14,
+        "GridIndex": 4111,
+        "Time": 1920,
+        "Input": [
+            6212,
+            6208,
+            6226,
+            7017
+        ],
+        "InCounts": [
+            1,
+            4,
+            30,
+            32
+        ],
+        "Output": [
+            6212
+        ],
+        "OutCounts": [
+            2
+        ],
+        "Explicit": true,
+        "Handcraft": false,
+        "NonProductive": true
     },
     {
         "ID": 785,

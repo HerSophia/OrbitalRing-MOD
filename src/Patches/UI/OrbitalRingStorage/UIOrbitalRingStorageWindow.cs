@@ -16,11 +16,14 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
     {
         const int StorageXCount = 10;
         const int StorageYCount = 10;
-        private readonly UIButton[] _iconBtns = new UIButton[StorageXCount + StorageYCount];
-        private readonly Image[] _iconImgs = new Image[StorageXCount + StorageYCount];
-        private readonly Text[] _iconTexts = new Text[StorageXCount + StorageYCount];
+        private readonly UIButton[] _iconBtns = new UIButton[StorageXCount * StorageYCount];
+        private readonly Image[] _iconImgs = new Image[StorageXCount * StorageYCount];
+        private readonly Text[] _iconTexts = new Text[StorageXCount * StorageYCount];
         public RectTransform windowTrans;
         private RectTransform _tab1;
+
+        private static Sprite _tagNotSelectedSprite;
+
         internal static UIOrbitalRingStorageWindow CreateWindow() =>
             CreateWindow<UIOrbitalRingStorageWindow>("UIOrbitalRingStorageWindow", "星环共享空间".TranslateFromJson());
 
@@ -44,22 +47,23 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
             for (var i = 0; i < StorageXCount; ++i) {
                 for (var j = 0; j < StorageYCount; ++j) {
                     CreateSignalIcon("", "", out UIButton iconBtn, out Image iconImage);
-                    _iconBtns[i + j] = iconBtn;
-                    _iconImgs[i + j] = iconImage;
-                    _iconTexts[i + j] = CreateText("", 16);
+                    _iconBtns[i * 10 + j] = iconBtn;
+                    _iconImgs[i * 10 + j] = iconImage;
+                    _iconTexts[i * 10 + j] = CreateText("", 16);
 
                     NormalizeRectWithTopLeft(iconBtn.transform, 0 + i * 110, 60 + j * 60, _tab1);
                     NormalizeRectWithTopLeft(_iconTexts[i + j].transform, 55 + i * 110, 72 + j * 60, _tab1);
                 }
             }
+            _tagNotSelectedSprite = _iconImgs[0].sprite;
         }
 
         public void SetStorageData(Dictionary<int, int[]> storageItem)
         {
-            int count = Math.Min(storageItem.Count, StorageXCount + StorageYCount);
+            int count = Math.Min(storageItem.Count, StorageXCount * StorageYCount);
             int i = 0;
             foreach (var kvp in storageItem) {
-                if (i >= StorageXCount + StorageYCount) {
+                if (i >= StorageXCount * StorageYCount) {
                     break;
                 }
                 ItemProto proto = LDB.items.Select(kvp.Key);
@@ -69,6 +73,11 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
                 if (sprite != null) _iconImgs[i].sprite = sprite;
                 _iconBtns[i].tips.itemId = kvp.Key;
                 i++;
+            }
+            for (; i < StorageXCount * StorageYCount; i++) {
+                _iconImgs[i].sprite = _tagNotSelectedSprite;
+                _iconTexts[i].text = "";
+                _iconBtns[i].tips.itemId = 0;
             }
         }
     }

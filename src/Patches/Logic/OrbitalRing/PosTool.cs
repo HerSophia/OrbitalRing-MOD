@@ -94,7 +94,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                         continue;
                     }
                 } else {
-                    if (index % ((isFullRing) ? 0 : 2) != 0) {
+                    // 当 isFullRing=true 或 index 为奇数时执行
+                    if (isFullRing || (index % 2 != 0)) {
                         index++;
                         continue;
                     }

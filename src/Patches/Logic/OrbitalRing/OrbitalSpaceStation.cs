@@ -221,7 +221,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                 if (result.stationType != StationType.GlobalSupportBase) {
                                     flag = true;
                                 }
-                            } else if (previewItem == ProtoID.I伺服天穹组件) {
+                            } else if (previewItem == ProtoID.I伺服天穹组件 || previewItem == ProtoID.I智能方尖碑 || previewItem == ProtoID.I亿万械国) {
                                 if (result.stationType != StationType.GlobalSupportBase) {
                                     flag = true;
                                 }
@@ -378,7 +378,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                     __result = false;
                                     return false;
                                 }
-                            } else if (previewItem == ProtoID.I伺服天穹组件) {
+                            } else if (previewItem == ProtoID.I伺服天穹组件 || previewItem == ProtoID.I智能方尖碑 || previewItem == ProtoID.I亿万械国) {
                                 if (result.stationType != StationType.GlobalSupportBase) {
                                     buildPreview.condition = (EBuildCondition)98;
                                     __result = false;
@@ -420,6 +420,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 case ProtoID.I重型电磁弹射器: // 重型电磁弹射器
                 case ProtoID.I星环护盾组件: // 重型电磁弹射器
                 case ProtoID.I伺服天穹组件: // 伺服天穹组件
+                case ProtoID.I智能方尖碑: // 伺服天穹组件
+                case ProtoID.I亿万械国: // 伺服天穹组件
                     return true;
                 default:
                     return false;

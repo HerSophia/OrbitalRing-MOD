@@ -42,12 +42,12 @@
     {
         "Name": "真空冶炼",
         "ZHCN": "真空冶炼",
-        "ENUS": "Wind Turbine Capacity Expansion"
+        "ENUS": "Vacuum Smelting"
     },
     {
         "Name": "I真空冶炼",
-        "ZHCN": "通过风力涡轮机与中央控制系统之间的数据交换实现对多台风力涡轮机的协调控制，优化整个风电场的能量输出。\n<color=\"#FD965ECC\">风力发电效率 +20%</color>",
-        "ENUS": "By enabling data exchange between wind turbines and the central control system, coordinated control of multiple wind turbines can be achieved, optimizing the energy output of the entire wind farm.\n<color=\"#FD965ECC\">Wind Turbine Efficiency +20%</color>"
+        "ZHCN": "在无大气的星球表面，仅需简单的封闭就可以让熔炼反应在真空下进行，没有空气的氧气以及其他杂质干扰，可以轻易产出高品质的金属。\n<color=\"#FD965ECC\">熔炉产物自带3级增产</color>",
+        "ENUS": "On the surface of a planet without an atmosphere, melting reactions can be carried out under vacuum with simple sealing, without the interference of air, oxygen, and other impurities, making it easy to produce high-quality metals.\n<color=\"#FD965ECC\">The furnace product comes with a three-level increase in production</color>"
     },
     {
         "Name": "拥有隐藏",
@@ -1480,6 +1480,16 @@
     },
     {
         "Name": "R辐射诱变迭代",
+        "ZHCN": "共生菌核的发展与扩张极为霸道，在面对其他菌种时，如果营养充足，它们会毫不犹豫地尝试吞噬，同化其他菌种，它甚至会利用放射性元素构成有机蛋白质团，对其他菌种的基因进行靶向攻击并诱导变异。",
+        "ENUS": "The development and expansion of symbiotic sclerotia are extremely dominant. When facing other bacterial species, if they have sufficient nutrition, they will not hesitate to try to engulf and assimilate them. They may even use radioactive elements to form organic protein clusters, target and attack the genes of other bacterial species, and induce mutations."
+    },
+    {
+        "Name": "共生繁育",
+        "ZHCN": "共生繁育",
+        "ENUS": "Symbiotic Breeding"
+    },
+    {
+        "Name": "R共生繁育",
         "ZHCN": "一开始我们将共生菌核产生的增生组织按生物防治条例进行焚毁处理，但接着菌群种群就出现了的负增长，直到一名工程师违规将增生组织重新用于菌群的培养。似乎曾经对增生组织的焚烧处理让菌群认为这是有威胁，不利于生长的环境，而将增生组织重新回收培养能让菌群判定为“只是一次试图让宿主更加适应环境改造的失败”，这里还是安全的，循环的生态圈。",
         "ENUS": "At the beginning, we incinerated the proliferative tissue produced by symbiotic sclerotia according to biological control regulations, but then there was a negative growth in the microbial population, until an engineer illegally reused the proliferative tissue for microbial cultivation. It seems that the incineration treatment of proliferating tissues once made the microbiota consider it a threatening and unfavorable environment for growth, while the recycling and cultivation of proliferating tissues can make the microbiota judge it as \"just a failed attempt to make the host more adaptable to the environment\". This is still a safe and circular ecosystem."
     },

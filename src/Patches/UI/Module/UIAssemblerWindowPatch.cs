@@ -44,7 +44,7 @@ namespace ProjectOrbitalRing.Patches.UI
                 component2.color = component.color;
                 LithographyPatches._obj.GetComponent<RectTransform>().sizeDelta = new Vector2(68f, 68f);
                 LithographyPatches._obj.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-                LithographyPatches._obj.transform.localPosition = new Vector3(173f, -52f, 0f);
+                LithographyPatches._obj.transform.localPosition = new Vector3(0f, -120f, 0f);
                 Transform transform2 = LithographyPatches._obj.transform;
                 GameObject original = GameObject.Find("UI Root/Overlay Canvas/In Game/Windows/Power Generator Window/ray-receiver/catalytic/eff-text");
                 GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(original, transform2);
@@ -91,7 +91,7 @@ namespace ProjectOrbitalRing.Patches.UI
                 } else {
                     bool flag3 = ((assemblerComponent.recipeType == ERecipeType.Assemble || assemblerComponent.recipeType == (ERecipeType)10 ||
                         assemblerComponent.recipeType == (ERecipeType)12 || assemblerComponent.recipeId == 775 || assemblerComponent.recipeId == 778 ||
-                         assemblerComponent.recipeId == 800 || assemblerComponent.recipeId == 624) && assemblerComponent.speed < 40000);
+                         assemblerComponent.recipeId == 800 || assemblerComponent.recipeId == 624 || assemblerComponent.recipeId == 784) && assemblerComponent.speed < 40000);
                     if (flag3) {
                         LithographyPatches.ChangeAssemblerModuleData(__instance, assemblerComponent);
                     } else {

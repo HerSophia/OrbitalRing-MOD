@@ -132,7 +132,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                             bool flag5 = false;
                             if (!flag5) {
                                 Player mainPlayer = GameMain.mainPlayer;
-                                bool flag6 = moduleId != AssemblerModuleData.ItemId;
+                                bool flag6 = (moduleId == 7616 && moduleId != AssemblerModuleData.ItemId) || (moduleId == 7617 && AssemblerModuleData.ItemId != 7617 && AssemblerModuleData.ItemId != 7618);
                                 if (flag6) {
                                     int upCount = mainPlayer.TryAddItemToPackage(AssemblerModuleData.ItemId, AssemblerModuleData.ItemCount, AssemblerModuleData.ItemInc, true, 0);
                                     AssemblerModuleData.ItemCount = 0;
@@ -140,13 +140,13 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                                 }
                                 int num = AssemblerModuleData.NeedCount - AssemblerModuleData.ItemCount;
                                 int itemInc = 0;
-                                bool flag7 = num > 0;
-                                if (flag7) {
-                                    mainPlayer.TakeItemFromPlayer(ref moduleId, ref num, out itemInc, fromPackage, itemBundle);
+                                if (num > 0 && (mainPlayer.inhandItemId == moduleId || moduleId == 7617 && mainPlayer.inhandItemId == 7618)) {
+                                    int itemId = mainPlayer.inhandItemId;
+                                    mainPlayer.TakeItemFromPlayer(ref itemId, ref num, out itemInc, fromPackage, itemBundle);
                                 }
                                 bool flag8 = num > 0;
                                 if (flag8) {
-                                    AssemblerModuleData.ItemId = moduleId;
+                                    AssemblerModuleData.ItemId = mainPlayer.inhandItemId;
                                     AssemblerModuleData.ItemCount += num;
                                     AssemblerModuleData.ItemInc = itemInc;
                                     AssemblerModulePatches.SetAssemblerModuleData(__instance.factorySystem.planet.id, entityData.assemblerId, AssemblerModuleData);

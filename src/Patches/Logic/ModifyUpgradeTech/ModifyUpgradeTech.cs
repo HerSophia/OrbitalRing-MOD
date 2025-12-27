@@ -41,26 +41,26 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
             tech.UnlockValues = new[] { 1000100.0, 1000100.0, };
 
             tech = LDB.techs.Select(ProtoID.T批量建造2);
-            tech.IsHiddenTech = true;
-            tech.PreItem = new[] { 6228, };
-            tech.UnlockValues = new[] { 0.0, 0.0, };
+            //tech.IsHiddenTech = true;
+            //tech.PreItem = new[] { 6228, };
+            //tech.UnlockValues = new[] { 0.0, 0.0, };
 
             tech = LDB.techs.Select(ProtoID.T批量建造3);
-            tech.IsHiddenTech = true;
+            //tech.IsHiddenTech = true;
             tech.PreItem = new[] { 6228, };
             tech.UnlockValues = new[] { 1800.0, 14400.0, };
 
             tech = LDB.techs.Select(2704);
-            tech.IsHiddenTech = true;
-            tech.PreItem = new[] { 6228, };
+            //tech.IsHiddenTech = true;
+            //tech.PreItem = new[] { 6228, };
 
             tech = LDB.techs.Select(2705);
-            tech.IsHiddenTech = true;
-            tech.PreItem = new[] { 6228, };
+            //tech.IsHiddenTech = true;
+            //tech.PreItem = new[] { 6228, };
 
             tech = LDB.techs.Select(2706);
-            tech.IsHiddenTech = true;
-            tech.PreItem = new[] { 6228, };
+            //tech.IsHiddenTech = true;
+            //tech.PreItem = new[] { 6228, };
 
             tech = LDB.techs.Select(ProtoID.T能量回路4);
             tech.Items = Items4;

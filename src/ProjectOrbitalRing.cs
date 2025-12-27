@@ -64,7 +64,7 @@ namespace ProjectOrbitalRing
     {
         public const string MODGUID = "org.ProfessorCat305.OrbitalRing";
         public const string MODNAME = "OrbitalRing";
-        public const string VERSION = "0.8.27";
+        public const string VERSION = "0.8.28";
         public const string DEBUGVERSION = "";
 
 
@@ -210,6 +210,7 @@ namespace ProjectOrbitalRing
             StarGate.Export(w);
             OrbitalStationManager.Export(w);
             AssemblerModulePatches.Export(w);
+            MoonPatch.Export(w);
         }
 
         public void Import(BinaryReader r)
@@ -225,6 +226,7 @@ namespace ProjectOrbitalRing
             StarGate.Import(r);
             OrbitalStationManager.Import(r);
             AssemblerModulePatches.Import(r);
+            MoonPatch.Import(r);
         }
 
         public void IntoOtherSave()
@@ -238,6 +240,7 @@ namespace ProjectOrbitalRing
             StarGate.IntoOtherSave();
             OrbitalStationManager.IntoOtherSave();
             AssemblerModulePatches.IntoOtherSave();
+            MoonPatch.IntoOtherSave();
         }
 
         public string Version => VERSION;

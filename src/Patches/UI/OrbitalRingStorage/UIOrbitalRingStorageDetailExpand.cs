@@ -44,7 +44,7 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
                 var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(factory.planetId);
                 if (planetOrbitalRingData == null) return;
                 for (int ringId = 0; ringId < planetOrbitalRingData.Rings.Count; ringId++) {
-                    if (!planetOrbitalRingData.Rings[ringId].IsOneFull()) continue;
+                    //if (!planetOrbitalRingData.Rings[ringId].IsOneFull()) continue;
                     for (int i = 0; i < planetOrbitalRingData.Rings[ringId].Capacity; i++) {
                         var pair = planetOrbitalRingData.Rings[ringId].GetPair(i);
                         if (pair.OrbitalStationPoolId == objId) {
