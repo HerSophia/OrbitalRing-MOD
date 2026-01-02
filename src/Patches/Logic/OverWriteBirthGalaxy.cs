@@ -597,7 +597,7 @@ namespace ProjectOrbitalRing.Patches.Logic
 
         [HarmonyTranspiler]
         [HarmonyPatch(typeof(PlanetGen), nameof(PlanetGen.SetPlanetTheme))]
-        public static IEnumerable<CodeInstruction> BuildTool_Path_CheckBuildConditions_Transpiler(IEnumerable<CodeInstruction> instructions)
+        public static IEnumerable<CodeInstruction> PlanetGen_SetPlanetTheme_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             var matcher = new CodeMatcher(instructions);
 

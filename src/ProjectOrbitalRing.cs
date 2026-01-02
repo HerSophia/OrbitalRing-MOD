@@ -64,7 +64,7 @@ namespace ProjectOrbitalRing
     {
         public const string MODGUID = "org.ProfessorCat305.OrbitalRing";
         public const string MODNAME = "OrbitalRing";
-        public const string VERSION = "0.8.29";
+        public const string VERSION = "0.8.30";
         public const string DEBUGVERSION = "";
 
 
@@ -405,6 +405,18 @@ namespace ProjectOrbitalRing
             var version = new Version();
             version.FromFullString(VERSION);
             return version.sig;
+        }
+
+
+        // 尝试解决过场动画报错的问题
+        [HarmonyPatch(typeof(LogisticDroneRenderer), nameof(LogisticDroneRenderer.Update))]
+        [HarmonyPrefix]
+        public static bool LogisticDroneRenderer_Update_Patch()
+        {
+            if (DSPGame.IsMenuDemo || GameMain.mainPlayer == null) {
+                return false;
+            }
+            return true;
         }
     }
 }

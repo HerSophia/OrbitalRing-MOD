@@ -123,14 +123,14 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
 
             if (buildIngItemId == ProtoID.I太空船坞 || buildIngItemId == ProtoID.I轨道熔炼站 || buildIngItemId == ProtoID.I星环对撞机)
             {
-                ShareStorageForOrbitalAssembler(ref __instance, factory.factorySystem);
                 OrbitalAssemblerInternalUpdate(ref __instance, factory.planetId);
+                ShareStorageForOrbitalAssembler(ref __instance, factory.factorySystem);
             }
             if (buildIngItemId == ProtoID.I轨道熔炼站) {
-                CheckRecipeCount(ref __instance, false);
+                CheckRecipeCount(ref __instance, 30, false);
             }
             if (buildIngItemId == ProtoID.I星环对撞机) {
-                CheckRecipeCount(ref __instance, factory.planet.radius == 100f);
+                CheckRecipeCount(ref __instance, 50, factory.planet.radius == 100f);
             }
 
             // 水世界星球特质处理入口

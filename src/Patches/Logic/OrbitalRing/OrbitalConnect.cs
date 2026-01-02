@@ -377,5 +377,36 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 }
             }
         }
+
+        // 范围拆除时过滤轨道连接组件，粒子加速轨道，星环电网组件
+        [HarmonyPatch(typeof(BuildTool_Dismantle), nameof(BuildTool_Dismantle.DeterminePreviews))]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> BuildTool_Dismantle_DeterminePreviews_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var matcher = new CodeMatcher(instructions);
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldelem_I4), new CodeMatch(OpCodes.Call, AccessTools.Field(typeof(BuildTool), nameof(BuildTool.GetItemProto))));
+            object V_14 = matcher.Advance(2).Operand;
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(PrefabDesc), nameof(PrefabDesc.isStation))));
+            object IL_06C2 = matcher.Advance(1).Operand;
+
+            matcher.Advance(1).InsertAndAdvance(
+                new CodeInstruction(OpCodes.Ldloc_S, V_14),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ItemProto), nameof(ItemProto.ID))),
+                new CodeInstruction(OpCodes.Ldc_I4, 6515),
+                new CodeInstruction(OpCodes.Beq, IL_06C2),
+                new CodeInstruction(OpCodes.Ldloc_S, V_14),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ItemProto), nameof(ItemProto.ID))),
+                new CodeInstruction(OpCodes.Ldc_I4, 6516),
+                new CodeInstruction(OpCodes.Beq, IL_06C2),
+                new CodeInstruction(OpCodes.Ldloc_S, V_14),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ItemProto), nameof(ItemProto.ID))),
+                new CodeInstruction(OpCodes.Ldc_I4, 6517),
+                new CodeInstruction(OpCodes.Beq, IL_06C2)
+            );
+            //matcher.LogInstructionEnumeration();
+            return matcher.InstructionEnumeration();
+        }
     }
 }

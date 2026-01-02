@@ -4814,7 +4814,8 @@
             15,
             16,
             17,
-            19
+            19,
+            35
         ],
         "UnlockValues": [
             9,
@@ -4822,7 +4823,8 @@
             0.5,
             1.0,
             0,
-            1000
+            1800,
+            20
         ],
         "Published": true,
         "Level": 0,
@@ -6238,8 +6240,12 @@
         "LevelCoef2": 0,
         "IsLabTech": true,
         "PreTechsMax": false,
-        "AddItems": [],
-        "AddItemCounts": [],
+        "AddItems": [
+            7709
+        ],
+        "AddItemCounts": [
+            1
+        ],
         "PropertyOverrideItems": [],
         "PropertyItemCounts": []
     },
@@ -6469,9 +6475,7 @@
             68.0,
             4.0
         ],
-        "PreTechs": [
-            1902
-        ],
+        "PreTechs": [],
         "PreTechsImplicit": [],
         "Items": [
             6215,
@@ -7509,8 +7513,12 @@
         "LevelCoef2": 0,
         "IsLabTech": true,
         "PreTechsMax": false,
-        "AddItems": [],
-        "AddItemCounts": [],
+        "AddItems": [
+            7710
+        ],
+        "AddItemCounts": [
+            1
+        ],
         "PropertyOverrideItems": [],
         "PropertyItemCounts": []
     },

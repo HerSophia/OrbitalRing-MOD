@@ -11,6 +11,7 @@ using CommonAPI;
 using GalacticScale;
 using HarmonyLib;
 using Newtonsoft.Json.Linq;
+using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
 using ProjectOrbitalRing.Utils;
 using UnityEngine;
 
@@ -368,160 +369,84 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
             return true;
         }
 
-
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(BuildTool_Click), "CheckBuildConditions")]
-        public static void CheckBuildConditionsPatch(BuildTool_Click __instance, ref bool __result)
+        private static bool VeinTypeIsDeepMagmaOrIce(EVeinType type)
         {
-            for (int i = 0; i < __instance.buildPreviews.Count; i++) {
-                BuildPreview buildPreview = __instance.buildPreviews[i];
-                Vector3 vector2 = buildPreview.lpos;
-                Quaternion quaternion = buildPreview.lrot;
-                Pose lPose = new Pose(buildPreview.lpos, buildPreview.lrot);
-                Vector3 forward = lPose.forward;
-                Vector3 up = lPose.up;
-                if (buildPreview.desc.veinMiner) {
-                    Array.Clear(BuildTool._tmp_ids, 0, BuildTool._tmp_ids.Length);
-                    PrebuildData prebuildData = default(PrebuildData);
-                    int paramCount = 0;
-                    if (buildPreview.desc.isVeinCollector) {
-                        Vector3 center = vector2.normalized * __instance.controller.cmd.test.magnitude + forward * -10f;
-                        int veinsInAreaNonAlloc = __instance.actionBuild.nearcdLogic.GetVeinsInAreaNonAlloc(center, 18f, ref BuildTool._tmp_ids);
-                        prebuildData.InitParametersArray(veinsInAreaNonAlloc);
-                        VeinData[] veinPool = __instance.factory.veinPool;
-                        EVeinType eVeinType = EVeinType.None;
-                        for (int j = 0; j < veinsInAreaNonAlloc; j++) {
-                            if (BuildTool._tmp_ids[j] != 0 && veinPool[BuildTool._tmp_ids[j]].id == BuildTool._tmp_ids[j]) {
-                                if (veinPool[BuildTool._tmp_ids[j]].type == EVeinType.Oil || veinPool[BuildTool._tmp_ids[j]].type == EVeinType.Ice || veinPool[BuildTool._tmp_ids[j]].type == EVeinType.DeepMagma || !MinerComponent.IsTargetVeinInRange(veinPool[BuildTool._tmp_ids[j]].pos, lPose, buildPreview.desc)) {
-                                    continue;
-                                }
-
-                                if (eVeinType != veinPool[BuildTool._tmp_ids[j]].type) {
-                                    if (eVeinType == EVeinType.None) {
-                                        eVeinType = veinPool[BuildTool._tmp_ids[j]].type;
-                                    } else {
-                                        buildPreview.condition = EBuildCondition.NeedSingleResource;
-                                    }
-                                }
-
-                                prebuildData.parameters[paramCount++] = BuildTool._tmp_ids[j];
-                            } else {
-                                Assert.CannotBeReached();
-                            }
-                        }
-                    } else {
-                        Vector3 center2 = vector2.normalized * __instance.controller.cmd.test.magnitude + forward * -1.2f;
-                        int veinsInAreaNonAlloc2 = __instance.actionBuild.nearcdLogic.GetVeinsInAreaNonAlloc(center2, 12f, ref BuildTool._tmp_ids);
-                        prebuildData.InitParametersArray(veinsInAreaNonAlloc2);
-                        VeinData[] veinPool2 = __instance.factory.veinPool;
-                        EVeinType eVeinType2 = EVeinType.None;
-                        for (int k = 0; k < veinsInAreaNonAlloc2; k++) {
-                            if (BuildTool._tmp_ids[k] != 0 && veinPool2[BuildTool._tmp_ids[k]].id == BuildTool._tmp_ids[k]) {
-                                if (veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.Oil || veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.Ice || veinPool2[BuildTool._tmp_ids[k]].type == EVeinType.DeepMagma || !MinerComponent.IsTargetVeinInRange(veinPool2[BuildTool._tmp_ids[k]].pos, lPose, buildPreview.desc)) {
-                                    continue;
-                                }
-
-                                if (eVeinType2 != veinPool2[BuildTool._tmp_ids[k]].type) {
-                                    if (eVeinType2 == EVeinType.None) {
-                                        eVeinType2 = veinPool2[BuildTool._tmp_ids[k]].type;
-                                    } else {
-                                        buildPreview.condition = EBuildCondition.NeedResource;
-                                    }
-                                }
-
-                                prebuildData.parameters[paramCount++] = BuildTool._tmp_ids[k];
-                            } else {
-                                Assert.CannotBeReached();
-                            }
-                        }
-                    }
-
-                    prebuildData.paramCount = paramCount;
-                    prebuildData.ArrangeParametersArray();
-                    if (buildPreview.desc.isVeinCollector) {
-                        if (buildPreview.paramCount == 0) {
-                            buildPreview.parameters = new int[2048];
-                            buildPreview.paramCount = 2048;
-                        }
-
-                        if (prebuildData.paramCount > 0) {
-                            Array.Resize(ref buildPreview.parameters, buildPreview.paramCount + prebuildData.paramCount);
-                            Array.Copy(prebuildData.parameters, 0, buildPreview.parameters, buildPreview.paramCount, prebuildData.paramCount);
-                            buildPreview.paramCount += prebuildData.paramCount;
-                        }
-                    } else {
-                        buildPreview.parameters = prebuildData.parameters;
-                        buildPreview.paramCount = prebuildData.paramCount;
-                    }
-
-                    Array.Clear(BuildTool._tmp_ids, 0, BuildTool._tmp_ids.Length);
-                    if (prebuildData.paramCount == 0) {
-                        buildPreview.condition = EBuildCondition.NeedResource;
-                        continue;
-                    }
-                } else if (buildPreview.desc.oilMiner) {
-                    Array.Clear(BuildTool._tmp_ids, 0, BuildTool._tmp_ids.Length);
-                    Vector3 vector4 = vector2;
-                    Vector3 vector5 = -up;
-                    int veinsInAreaNonAlloc3 = __instance.actionBuild.nearcdLogic.GetVeinsInAreaNonAlloc(vector4, 10f, ref BuildTool._tmp_ids);
-                    PrebuildData prebuildData2 = default(PrebuildData);
-                    prebuildData2.isDestroyed = false;
-                    prebuildData2.InitParametersArray(veinsInAreaNonAlloc3);
-                    VeinData[] veinPool3 = __instance.factory.veinPool;
-                    int num2 = 0;
-                    float num3 = 100f;
-                    Vector3 pos = vector4;
-                    for (int l = 0; l < veinsInAreaNonAlloc3; l++) {
-                        if (BuildTool._tmp_ids[l] != 0 && veinPool3[BuildTool._tmp_ids[l]].id == BuildTool._tmp_ids[l] && (veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.Oil || veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.Ice || veinPool3[BuildTool._tmp_ids[l]].type == EVeinType.DeepMagma)) {
-                            Vector3 pos2 = veinPool3[BuildTool._tmp_ids[l]].pos;
-                            Vector3 vector6 = pos2 - vector4;
-                            float num4 = Vector3.Dot(vector5, vector6);
-                            float sqrMagnitude = (vector6 - vector5 * num4).sqrMagnitude;
-                            if (sqrMagnitude < num3) {
-                                num3 = sqrMagnitude;
-                                num2 = BuildTool._tmp_ids[l];
-                                pos = pos2;
-                                buildPreview.condition = EBuildCondition.Ok;
-                            }
-                        }
-                    }
-
-                    if (num2 == 0) {
-                        buildPreview.condition = EBuildCondition.NeedResource;
-                        continue;
-                    }
-
-                    prebuildData2.parameters[0] = num2;
-                    prebuildData2.paramCount = 1;
-                    prebuildData2.ArrangeParametersArray();
-                    buildPreview.parameters = prebuildData2.parameters;
-                    buildPreview.paramCount = prebuildData2.paramCount;
-                    Vector3 vector7 = __instance.factory.planet.aux.Snap(pos, onTerrain: true);
-                    vector2 = (lPose.position = (buildPreview.lpos2 = (buildPreview.lpos = vector7)));
-                    quaternion = (lPose.rotation = (buildPreview.lrot2 = (buildPreview.lrot = Maths.SphericalRotation(vector7, __instance.yaw))));
-                    forward = lPose.forward;
-                    up = lPose.up;
-                    Array.Clear(BuildTool._tmp_ids, 0, BuildTool._tmp_ids.Length);
-                }
-            }
-
-            __result = true;
-            for (int num86 = 0; num86 < __instance.buildPreviews.Count; num86++) {
-                BuildPreview buildPreview4 = __instance.buildPreviews[num86];
-                if (buildPreview4.condition != 0 && buildPreview4.condition != EBuildCondition.NeedConn) {
-                    __result = false;
-                    __instance.actionBuild.model.cursorState = -1;
-                    __instance.actionBuild.model.cursorText = buildPreview4.conditionText;
-                    break;
-                }
-            }
-            if (__result) {
-                __instance.actionBuild.model.cursorState = 0;
-                __instance.actionBuild.model.cursorText = BuildPreview.GetConditionText(EBuildCondition.Ok);
-            }
+            if (type == EVeinType.Oil || type == EVeinType.DeepMagma || type == EVeinType.Ice) return true;
+            return false;
         }
 
-        // 母星系星球矿物储量定制
+        [HarmonyTranspiler]
+        [HarmonyPatch(typeof(BuildTool_Click), nameof(BuildTool_Click.CheckBuildConditions))]
+        public static IEnumerable<CodeInstruction> BuildTool_Click_CheckBuildConditions_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var matcher = new CodeMatcher(instructions);
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(VeinData), nameof(VeinData.type))),
+                new CodeMatch(OpCodes.Ldc_I4_7));
+
+            object V_29 = matcher.Advance(-5).Operand;
+            object V_31 = matcher.Advance(2).Operand;
+            object IL_046F = matcher.Advance(5).Operand;
+            Type veinDataType = typeof(VeinData);
+
+            matcher.Advance(1).InsertAndAdvance(
+                new CodeInstruction(OpCodes.Ldloc_S, V_29),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(BuildTool), nameof(BuildTool._tmp_ids))),
+                new CodeInstruction(OpCodes.Ldloc_S, V_31),
+                new CodeInstruction(OpCodes.Ldelem_I4),
+                new CodeInstruction(OpCodes.Ldelema, veinDataType),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(VeinData), nameof(VeinData.type))),
+                new CodeInstruction(OpCodes.Ldc_I4_S, (sbyte)16),
+                new CodeInstruction(OpCodes.Beq, IL_046F),
+                new CodeInstruction(OpCodes.Ldloc_S, V_29),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(BuildTool), nameof(BuildTool._tmp_ids))),
+                new CodeInstruction(OpCodes.Ldloc_S, V_31),
+                new CodeInstruction(OpCodes.Ldelem_I4),
+                new CodeInstruction(OpCodes.Ldelema, veinDataType),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(VeinData), nameof(VeinData.type))),
+                new CodeInstruction(OpCodes.Ldc_I4_S, (sbyte)19),
+                new CodeInstruction(OpCodes.Beq, IL_046F)
+            );
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(VeinData), nameof(VeinData.type))),
+                new CodeMatch(OpCodes.Ldc_I4_7));
+
+            object V_34 = matcher.Advance(-5).Operand;
+            object V_36 = matcher.Advance(2).Operand;
+            object IL_05BA = matcher.Advance(5).Operand;
+
+            matcher.Advance(1).InsertAndAdvance(
+                new CodeInstruction(OpCodes.Ldloc_S, V_34),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(BuildTool), nameof(BuildTool._tmp_ids))),
+                new CodeInstruction(OpCodes.Ldloc_S, V_36),
+                new CodeInstruction(OpCodes.Ldelem_I4),
+                new CodeInstruction(OpCodes.Ldelema, veinDataType),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(VeinData), nameof(VeinData.type))),
+                new CodeInstruction(OpCodes.Ldc_I4_S, (sbyte)16),
+                new CodeInstruction(OpCodes.Beq, IL_05BA),
+                new CodeInstruction(OpCodes.Ldloc_S, V_34),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(BuildTool), nameof(BuildTool._tmp_ids))),
+                new CodeInstruction(OpCodes.Ldloc_S, V_36),
+                new CodeInstruction(OpCodes.Ldelem_I4),
+                new CodeInstruction(OpCodes.Ldelema, veinDataType),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(VeinData), nameof(VeinData.type))),
+                new CodeInstruction(OpCodes.Ldc_I4_S, (sbyte)19),
+                new CodeInstruction(OpCodes.Beq, IL_05BA)
+            );
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(VeinData), nameof(VeinData.type))),
+                new CodeMatch(OpCodes.Ldc_I4_7));
+            object IL_07E1 = matcher.Advance(2).Operand;
+
+            matcher.Advance(-1).SetInstruction(
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(AddVeinPatches), nameof(VeinTypeIsDeepMagmaOrIce)))
+            );
+            matcher.Advance(1).SetInstruction(new CodeInstruction(OpCodes.Brfalse_S, IL_07E1));
+
+            //matcher.LogInstructionEnumeration();
+            return matcher.InstructionEnumeration();
+        }
+
         public static void AddBirthGalaxyRareVein(PlanetAlgorithm algorithm, ref int[] array, ref float[] array2, ref float[] array3)
         {
             // 月球的矿物削减

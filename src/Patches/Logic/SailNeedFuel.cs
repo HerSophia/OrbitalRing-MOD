@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
 using ProjectOrbitalRing.Utils;
-using UnityEngine;
+using static ProjectOrbitalRing.ProjectOrbitalRing;
 
 namespace ProjectOrbitalRing.Patches.Logic
 {
     internal class SailNeedFuel
     {
+        private static double RodNeeded = 15;
         private static bool UseFuelRod(Player player, int count)
         {
             int itemId = ProtoID.I化学燃料罐;
@@ -30,13 +31,13 @@ namespace ProjectOrbitalRing.Patches.Logic
         }
         private static bool CheckSailFuel(PlayerMove_Fly instance)
         {
-            double rodNeeded = 15;
+            double rodNeeded = RodNeeded;
             //Debug.LogFormat("T驱动引擎4TechUnlocked {0} T驱动引擎3TechUnlocked {1}", GameMain.history.TechUnlocked(ProtoID.T驱动引擎4), GameMain.history.TechUnlocked(ProtoID.T驱动引擎3));
             if (GameMain.history.TechUnlocked(ProtoID.T驱动引擎4)) {
                 return true;
             }
             if (GameMain.history.TechUnlocked(ProtoID.T驱动引擎3)) {
-                rodNeeded = 7.5;
+                rodNeeded = RodNeeded / 2;
             }
             double weight = 0;
             int rodCount = 0;
@@ -58,6 +59,16 @@ namespace ProjectOrbitalRing.Patches.Logic
                 if (itemId != 0) {
                     item = LDB.items.Select(instance.player.deliveryPackage.grids[i].itemId);
                     weight += (double)instance.player.deliveryPackage.grids[i].count / item.StackSize;
+                }
+            }
+            for (int i = 0; i < instance.player.mecha.forge.tasks.Count; i++) {
+                ForgeTask forgeTask = instance.player.mecha.forge.tasks[i];
+                for (int j = 0; j < forgeTask.itemCounts.Length; j++) {
+                    itemId = forgeTask.itemIds[j];
+                    if (itemId != 0) {
+                        item = LDB.items.Select(itemId);
+                        weight += (double)forgeTask.itemCounts[j] * forgeTask.count / item.StackSize;
+                    }
                 }
             }
             if (instance.player.inhandItemId != 0) {

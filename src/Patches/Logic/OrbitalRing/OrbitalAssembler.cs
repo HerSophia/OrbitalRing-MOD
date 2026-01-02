@@ -229,9 +229,9 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             }
         }
 
-        public static void CheckRecipeCount(ref AssemblerComponent __instance, bool isMoon)
+        public static void CheckRecipeCount(ref AssemblerComponent __instance, int ProductionMultiplier, bool isMoon)
         {
-            int ProductionMultiplier = isMoon ? 15 : 30;
+            ProductionMultiplier = isMoon ? (ProductionMultiplier / 2) : ProductionMultiplier;
             RecipeProto recipeProto = null;
             if (__instance.recipeId != 0) {
                 recipeProto = LDB.recipes.Select(__instance.recipeId);

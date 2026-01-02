@@ -513,9 +513,51 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
 
         internal static void ModifySpacecraftExpansionUpgradeTechs()
         {
-            TechProto techProto = LDB.techs.Select(3508);
+            TechProto techProto = LDB.techs.Select(3501);
+            techProto.HashNeeded = 18000;
+            techProto.Items = new int[] { 6001, 6002 };
+            techProto.ItemPoints = new int[] { 10, 10 };
+
+            techProto = LDB.techs.Select(3502);
+            techProto.HashNeeded = 54000;
+            techProto.Items = new int[] { 6003 };
+            techProto.ItemPoints = new int[] { 10 };
+
+            techProto = LDB.techs.Select(3503);
+            techProto.UnlockValues = new double[] { 2, 5, 50 };
+            techProto.HashNeeded = 108000;
+            techProto.Items = new int[] { 6003 };
+            techProto.ItemPoints = new int[] { 10 };
+
+            techProto = LDB.techs.Select(3504);
+            techProto.UnlockValues = new double[] { 2, 10, 50 };
+            techProto.HashNeeded = 216000;
+            techProto.Items = new int[] { 6003 };
+            techProto.ItemPoints = new int[] { 10 };
+
+            techProto = LDB.techs.Select(3505);
+            techProto.HashNeeded = 360000;
+            techProto.Items = new int[] { 6003, 6278 };
+            techProto.ItemPoints = new int[] { 10, 8 };
+
+            techProto = LDB.techs.Select(3506);
+            techProto.HashNeeded = 360000;
+            techProto.Items = new int[] { 6003, 6278 };
+            techProto.ItemPoints = new int[] { 10, 8 };
+
+            techProto = LDB.techs.Select(3507);
+            techProto.UnlockValues = new double[] { 2, 10, 100 };
+
+            techProto = LDB.techs.Select(3508);
+            techProto.HashNeeded = 1080000;
             techProto.Items = new int[] { 6279, 6004, 6005 };
-            techProto.ItemPoints = new int[] { techProto.ItemPoints[0], techProto.ItemPoints[0], techProto.ItemPoints[0] };
+            techProto.ItemPoints = new int[] { 10, 10, 8 };
+
+            techProto = LDB.techs.Select(3509);
+            techProto.UnlockValues = new double[] { 20, 200, 1000, 1000 };
+
+            techProto = LDB.techs.Select(3510);
+            techProto.UnlockValues = new double[] { 20, 200, 1000, 1000 };
         }
 
         internal static void ModifyMinerUpgradeTechs()

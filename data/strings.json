@@ -959,6 +959,11 @@
         "ENUS": "Using fuel (such as coal) as raw material, complete combustion reaction is carried out in a combustion chamber lined with silicon carbide, converting water into steam and then converting it into electrical energy by a steam turbine. As the original multi-stage energy conversion power generation method, an 80% energy conversion rate is already the limit of engineers."
     },
     {
+        "Name": "I能量枢纽",
+        "ZHCN": "电力转换装置，既可以将电网内富余的电能存储到空蓄电器mk2内，制成满蓄电器mk2；也可以将满蓄电器mk2储存的电能释放出来。\n当处于充电状态时，空蓄电器mk2只能从横向入口输入，但可以在横向入口输出，因此可以直接将空蓄电器mk2<color=\"#FD965ECC\">串联</color>输入多个能量枢纽",
+        "ENUS": "The power conversion device can either store excess electric energy from the power grid in the empty storage device mk2, turning it into a full storage device mk2, or release the stored electric energy from the full storage device mk2.\nWhen in a charging state, the empty storage device mk2 can only be inputted through the horizontal entrance, but can be outputted through the same entrance. Therefore, it is possible to directly input multiple energy hubs <color=\"#FD965ECC\">in series</color> with the empty storage device mk2"
+    },
+    {
         "Name": "重油",
         "ZHCN": "重油",
         "ENUS": "heavy oil"
@@ -1261,7 +1266,7 @@
     {
         "Name": "T星环伺服天穹",
         "ZHCN": "星环代表了行星开发的高度，在高度发达的工业行星，星环能从伺服天穹组件统筹协调全行星的工厂，抬头就能望见的星环将在天穹俯视全球的工厂，并为全球工厂提供预加工伺服能力。",
-        "ENUS": "OrbitalRing represent the height of planetary development. In highly developed industrial planets, star rings can coordinate factories across the planet from servo dome components. The visible star rings will overlook factories around the world from the sky and provide pre-processing servo capabilities for factories worldwide."
+        "ENUS": "OrbitalRing represent the height of planetary development. In highly developed industrial planets, Orbital Rings can coordinate factories across the planet from servo dome components. The visible Orbital Rings will overlook factories around the world from the sky and provide pre-processing servo capabilities for factories worldwide."
     },
     {
         "Name": "伺服天穹组件",
@@ -1271,7 +1276,7 @@
     {
         "Name": "I伺服天穹组件",
         "ZHCN": "安装在天枢座的大型服务器群集组件，利用石墨烯的超高导热性，以面积巨大的散热膜维持这个行星级超算服务器的散热，当所属的星环建设完整时，将为全行星的制造台提供预加工伺服能力。\n<color=\"#FD965ECC\">建造在拥有完整星环的天枢座，且供电充足时，为全球的制造台提供一级增产状态</color>",
-        "ENUS": "The large server cluster component installed in the constellation of the Celestial Pivot utilizes the ultra-high thermal conductivity of graphene and a large heat dissipation film to maintain the heat dissipation of this row star supercomputer server. When the corresponding star ring is fully constructed, it will provide pre-processing servo capabilities for the manufacturing stations of the entire planet.\n<color=\"#FD965ECC\">Built in the constellation of Nexus with a complete orbital ring and sufficient power supply, it provides a first level production status for manufacturing stations worldwide</color>"
+        "ENUS": "The large server cluster component installed in the constellation of the Celestial Pivot utilizes the ultra-high thermal conductivity of graphene and a large heat dissipation film to maintain the heat dissipation of this row star supercomputer server. When the corresponding Orbital Ring is fully constructed, it will provide pre-processing servo capabilities for the manufacturing stations of the entire planet.\n<color=\"#FD965ECC\">Built in the constellation of Nexus with a complete orbital ring and sufficient power supply, it provides a first level production status for manufacturing stations worldwide</color>"
     },
     {
         "Name": "T智能方尖碑",
@@ -4214,6 +4219,26 @@
         "ENUS": "One orbital ring can only build one Orbital Ring Particle Accelerator Collider Control Station"
     },
     {
+        "Name": "轨道设施说明书",
+        "ZHCN": "轨道设施说明书",
+        "ENUS": "Specification for synchronous orbit facilities"
+    },
+    {
+        "Name": "I轨道设施说明书",
+        "ZHCN": "<color=\"#FD965ECC\">太空电梯</color>的建造位置固定，行星赤道有1000格，每50格可建造一个电梯。建造时会自动吸附最近的可建造点位，一个行星最多可建造40个，赤道上下各20个，<color=\"#FD965ECC\">太空电梯是轨道设施的配套建筑</color>，轨道设施与太空电梯一样建造点位固定，只不过太空电梯建造于地表，而轨道设施建造于同步轨道。当轨道设施的正下方建造了太空电梯时，<color=\"#FD965ECC\">太空电梯的储存空间将对轨道设施开放</color>，生产类轨道设施会自动从太空电梯获取原料，输出产物，物流港则会与太空电梯同步物品槽。",
+        "ENUS": "The construction location of <color=\"#FD965ECC\">space elevators</color> is fixed. There are 1000 grids on the equator of a planet, and one elevator can be built every 50 grids. During construction, the nearest buildable point will be automatically adsorbed. A planet can have a maximum of 40 elevators, with 20 on each side of the equator. <color=\"#FD965ECC\">Space elevators are supporting buildings for orbital facilities</color>. Orbital facilities, like space elevators, have fixed construction points, except that space elevators are built on the surface, while orbital facilities are built in geostationary orbit. When a space elevator is built directly below an orbital facility, <color=\"#FD965ECC\">the storage space of the space elevator will be open to the orbital facility</color>. Production-type orbital facilities will automatically obtain raw materials from the space elevator and output products. Logistics ports will synchronize with the space elevator's item slots."
+    },
+    {
+        "Name": "星环说明书",
+        "ZHCN": "星环说明书",
+        "ENUS": "Orbital Ring Manual"
+    },
+    {
+        "Name": "I星环说明书",
+        "ZHCN": "一个行星上拥有两个<color=\"#FD965ECC\">星环</color>，分别在赤道的上下各一个，每个星环可拥有两个<color=\"#FD965ECC\">组件环</color>，组件环由<color=\"#FD965ECC\">轨道连接组件</color>完整绕星球一圈建造而成，会将属于这个星环的轨道设施串联起来。\n当星环建成一个组件环时，将获得<color=\"#FD965ECC\">共享空间</color>，属于这个星环的太空电梯，若将物品槽的<color=\"#FD965ECC\">存储上限拉到最大</color>，物品数量大于上限的一半时，超过一半的部分会被送入这个星环的共享空间。低于一半时，会尝试从共享空间补充到上限的一半。生产类轨道设施原料的获取和产物的存入会优先选择共享空间。\n 当星环建成第二个组件环时，将获得<color=\"#FD965ECC\">额外20个</color>轨道设施建造点位，夹在原20个点位中间（只有额外20个轨道设施点位，没有太空电梯的，额外的20个轨道设施靠共享空间提供物品存取能力）。",
+        "ENUS": "A planet possesses two <color=\"#FD965ECC\">Orbital Rings</color>, one located above and one below the equator. Each Orbital Ring can have two <color=\"#FD965ECC\">component rings</color>, which are constructed by <color=\"#FD965ECC\">Orbital Connection Components</color> to complete a full orbit around the planet, thereby connecting the orbital facilities belonging to that Orbital Ring. \n When a component ring of the Orbital Ring is completed, it will gain a <color=\"#FD965ECC\">shared space</color>. For the space elevator belonging to this Orbital Ring, if the storage limit of the item slot is <color=\"#FD965ECC\">maximized</color> and the number of items exceeds half of the limit, the excess items will be sent to the shared space of this Orbital Ring. If the number of items is less than half, an attempt will be made to replenish the shared space to half of the limit. For the acquisition of raw materials for production-related orbital facilities and the storage of products, the underlying space elevator will be chosen first, followed by the shared space. \n When the second component ring of the Orbital Ring is completed, an <color=\"#FD965ECC\">additional 20</color> orbital facility construction points will be obtained, sandwiched between the original 20 points (only additional 20 orbital facility points are available, without a space elevator; the additional 20 orbital facilities rely on the shared space to provide item storage and retrieval capabilities)."
+    },
+    {
         "Name": "太空电梯",
         "ZHCN": "太空电梯",
         "ENUS": "Space Elevator"
@@ -4291,7 +4316,7 @@
     {
         "Name": "I星环电网组件",
         "ZHCN": "一个无线输电同调组件，借助星环里轨道连接组件提供的支撑和连接，如同连接组件一样建设成首尾相连的星环电网，所有组件相互协调同频，向行星发送覆盖全行星的电力广播，以此达成全球无线电力连接。\n<color=\"#FD965ECC\">连接组件起码连接一环以上和电网组件环必须完整才能使全球供电。</color>",
-        "ENUS": "A wireless transmission synchronization component, with the support and connection provided by the orbital connection component in the star ring, is constructed as a connected star ring power grid like a connection component. All components coordinate with each other on the same frequency and send power broadcasts covering the entire planet to achieve global wireless power connection.\n<color=\"#FD965ECC\">The connecting components must be connected to at least one ring and the power grid components must be complete in order to provide global power supply.</color>"
+        "ENUS": "A wireless transmission synchronization component, with the support and connection provided by the orbital connection component in the Orbital Ring, is constructed as a connected Orbital Ring power grid like a connection component. All components coordinate with each other on the same frequency and send power broadcasts covering the entire planet to achieve global wireless power connection.\n<color=\"#FD965ECC\">The connecting components must be connected to at least one ring and the power grid components must be complete in order to provide global power supply.</color>"
     },
     {
         "Name": "星环对撞机",
@@ -4301,7 +4326,7 @@
     {
         "Name": "T星环对撞机",
         "ZHCN": "粒子回旋加速对撞机，让粒子在环形的加速轨道里被磁场不断加速，达到速度后撞击目标粒子，即是粒子对撞机的原理，回旋加速轨道有多大直接决定了最终能加速的速度。那么，如果以星环巨构为支点搭建加速轨道为环行星的对撞机，那么其效率将远胜地面上笨重迟缓的微型粒子对撞机。",
-        "ENUS": "The particle cyclotron accelerator collider accelerates particles continuously by a magnetic field in a circular acceleration orbit, and after reaching velocity, collides with the target particle. This is the principle of the particle collider, and the size of the cyclotron acceleration orbit directly determines the final speed that can be accelerated. So, if a collider with an accelerating orbit around a planet is built using the star ring structure as a fulcrum, its efficiency will be much better than the bulky and sluggish micro particle collider on the ground."
+        "ENUS": "The particle cyclotron accelerator collider accelerates particles continuously by a magnetic field in a circular acceleration orbit, and after reaching velocity, collides with the target particle. This is the principle of the particle collider, and the size of the cyclotron acceleration orbit directly determines the final speed that can be accelerated. So, if a collider with an accelerating orbit around a planet is built using the Orbital Ring structure as a fulcrum, its efficiency will be much better than the bulky and sluggish micro particle collider on the ground."
     },
     {
         "Name": "星环对撞机总控站",
@@ -4311,7 +4336,7 @@
     {
         "Name": "I星环对撞机总控站",
         "ZHCN": "星环对撞机在轨总控设施，建造时会将各节加速轨道加装到星环上的各轨道设施上。星环对撞机总控站负责控制整个星环的加速轨道，以及目标粒子的输入输出。\n因为以整个星环为加速轨道，因此<color=\"#FD965ECC\">一个星环只能建造一个星环对撞机总控站。</color>\n此建筑<color=\"#FD965ECC\">30倍</color>堆叠生产（在卫星为<color=\"#FD965ECC\">15倍</color>）\n且需要<color=\"#FD965ECC\">星环完整</color>才能运作\n<color=\"#FD965ECC\">需要由底下的太空电梯提供物品的输入输出。</color>",
-        "ENUS": "The in orbit control facility of the Star Ring Collider will be constructed by installing each section of the acceleration orbit onto the various orbital facilities on the star ring. The main control station of the Star Ring Collider is responsible for controlling the acceleration orbit of the entire star ring and the input and output of target particles.\n Because the entire ring is used as the acceleration orbit, only <color=\"#FD965ECC\">one ring collider control station can be built for each ring.</color>\nThis building is <color=\"#FD965ECC\">30 times</color> stacked for production (<color=\"#FD965ECC\">15 times</color> on satellite)\n And it requires the <color=\"#FD965ECC\">complete orbital ring</color> to operate \n<color=\"#FD965ECC\">The input and output of items need to be provided by the space elevator below</color>"
+        "ENUS": "The in orbit control facility of the Star Ring Collider will be constructed by installing each section of the acceleration orbit onto the various orbital facilities on the Orbital Ring. The main control station of the Star Ring Collider is responsible for controlling the acceleration orbit of the entire Orbital Ring and the input and output of target particles.\n Because the entire ring is used as the acceleration orbit, only <color=\"#FD965ECC\">one ring collider control station can be built for each ring.</color>\nThis building is <color=\"#FD965ECC\">30 times</color> stacked for production (<color=\"#FD965ECC\">15 times</color> on satellite)\n And it requires the <color=\"#FD965ECC\">complete orbital ring</color> to operate \n<color=\"#FD965ECC\">The input and output of items need to be provided by the space elevator below</color>"
     },
     {
         "Name": "粒子加速轨道",
@@ -4341,7 +4366,7 @@
     {
         "Name": "T星环护盾",
         "ZHCN": "星环巨构是个大型太空巨构设施，能建成星环的星球都是拥有重要地位的行星，若要将其进行要塞化保护，星环本身，就是个理想的护盾发生器载体，高居于轨道之上，环绕整个行星，从星环发射的护盾可以轻松包裹住整个行星。",
-        "ENUS": "The Star Ring Giant Structure is a large-scale space facility, and planets that can build star rings are important planets. To protect them as fortresses, the Star Ring itself is an ideal shield generator carrier, standing on the orbit and orbiting the entire planet. The shield emitted from the Star Ring can easily wrap around the entire planet."
+        "ENUS": "The Star Ring Giant Structure is a large-scale space facility, and planets that can build Orbital Rings are important planets. To protect them as fortresses, the Star Ring itself is an ideal shield generator carrier, standing on the orbit and orbiting the entire planet. The shield emitted from the Star Ring can easily wrap around the entire planet."
     },
     {
         "Name": "星环护盾组件",
@@ -4416,7 +4441,7 @@
     {
         "Name": "星环解锁",
         "ZHCN": "使用轨道连接组件，沿着某个纬度建造成首尾相连的完整的圆时，解锁该科技。\n其他描述需要星环的要求也是这个标准：轨道连接组件连成一个环",
-        "ENUS": "Unlock this technology when constructing a complete circle connected end-to-end along a certain latitude using orbital connection components. \nThe other requirements for the star ring are also based on this standard: the orbital connecting components are connected into a ring"
+        "ENUS": "Unlock this technology when constructing a complete circle connected end-to-end along a certain latitude using orbital connection components. \nThe other requirements for the Orbital Ring are also based on this standard: the orbital connecting components are connected into a ring"
     },
     // 巨构mod
     {

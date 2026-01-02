@@ -52,7 +52,7 @@
         "ModelID": 49,
         "workEnergyPerTick": 50000,
         "stationMaxEnergyAcc": 90000000,
-        "stationMaxItemCount": 10000,
+        "stationMaxItemCount": 5000,
         //"stationMaxItemKinds": 4,
         "stationMaxDroneCount": 30
     },
@@ -60,7 +60,7 @@
         "ModelID": 50,
         "workEnergyPerTick": 500000,
         "stationMaxEnergyAcc": 6000000000,
-        "stationMaxItemCount": 20000,
+        "stationMaxItemCount": 15000,
         "stationMaxDroneCount": 0
     },
     {
@@ -355,7 +355,7 @@
         "ModelID": 805,
         //"workEnergyPerTick": 50000,
         //"stationMaxEnergyAcc": 90000000,
-        "stationMaxItemCount": 20000,
+        "stationMaxItemCount": 15000,
         "stationMaxItemKinds": 5,
         "stationMaxDroneCount": 30,
         //"isStellar": true,
@@ -371,7 +371,7 @@
         "ModelID": 806,
         //"workEnergyPerTick": 50000,
         //"stationMaxEnergyAcc": 12000000000,
-        "stationMaxItemCount": 20000,
+        "stationMaxItemCount": 15000,
         "stationMaxDroneCount": 0
         //"stationMaxItemKinds": 6
         //"isCollectStation": true,
@@ -518,7 +518,7 @@
         "isStellarStation": true,
         "workEnergyPerTick": 50000,
         "stationMaxEnergyAcc": 90000000,
-        "stationMaxItemCount": 10000,
+        "stationMaxItemCount": 5000,
         "stationMaxItemKinds": 5,
         "stationMaxDroneCount": 30,
         "stationMaxShipCount": 0

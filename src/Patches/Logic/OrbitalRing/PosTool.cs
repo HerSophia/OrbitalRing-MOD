@@ -95,7 +95,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                     }
                 } else {
                     // 当 isFullRing=true 或 index 为奇数时执行
-                    if (isFullRing || (index % 2 != 0)) {
+                    if (!isFullRing && (index % 2 != 0)) {
                         index++;
                         continue;
                     }
@@ -331,6 +331,9 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         {
             if (n == 0) {
                 return 0;
+            }
+            if (n - p < 0) {
+                p = n;
             }
             int num = m / n;
             int num2 = m - num * n;
