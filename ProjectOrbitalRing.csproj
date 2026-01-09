@@ -134,6 +134,7 @@
     <Compile Include="src\Patches\Logic\FastStartOptionPatches.cs" />
     <Compile Include="src\Patches\Logic\FastTravelPatches.cs" />
     <Compile Include="src\Patches\Logic\FelTreeObjects.cs" />
+    <Compile Include="src\Patches\Logic\FixOpeningAnimationError.cs" />
     <Compile Include="src\Patches\Logic\FuelRodPatches.cs" />
     <Compile Include="src\Patches\Logic\GeothermalStrengthPatches.cs" />
     <Compile Include="src\Patches\Logic\GlobalPowerSupplyPatches.cs" />

@@ -65,7 +65,7 @@ namespace ProjectOrbitalRing
     {
         public const string MODGUID = "org.ProfessorCat305.OrbitalRing";
         public const string MODNAME = "OrbitalRing";
-        public const string VERSION = "0.8.31";
+        public const string VERSION = "0.8.32";
         public const string DEBUGVERSION = "";
 
 
@@ -409,43 +409,6 @@ namespace ProjectOrbitalRing
             var version = new Version();
             version.FromFullString(VERSION);
             return version.sig;
-        }
-
-
-        // 尝试解决过场动画报错的问题
-        [HarmonyPatch(typeof(LogisticDroneRenderer), nameof(LogisticDroneRenderer.Update))]
-        [HarmonyPrefix]
-        public static bool LogisticDroneRenderer_Update_Patch(LogisticDroneRenderer __instance)
-        {
-            __instance.droneCount = 0;
-            if (__instance.transport == null) {
-                return false;
-            }
-
-            for (int i = 1; i < __instance.transport.stationCursor; i++) {
-                StationComponent stationComponent = __instance.transport.stationPool[i];
-                if (stationComponent == null || stationComponent.id != i) {
-                    continue;
-                }
-
-                int num = __instance.droneCount + stationComponent.workDroneCount;
-                if (num > 0) {
-                    while (__instance.capacity < num) {
-                        __instance.Expand2x();
-                    }
-
-                    if (stationComponent.workDroneCount < stationComponent.workDroneDatas.Length) {
-                        __instance.SetCapacity(__instance.droneCount + stationComponent.workDroneDatas.Length);
-                    }
-                    Array.Copy(stationComponent.workDroneDatas, 0, __instance.dronesArr, __instance.droneCount, stationComponent.workDroneCount);
-                    __instance.droneCount = num;
-                }
-            }
-
-            if (__instance.dronesBuffer != null) {
-                __instance.dronesBuffer.SetData(__instance.dronesArr, 0, 0, __instance.droneCount);
-            }
-            return false;
         }
     }
 }

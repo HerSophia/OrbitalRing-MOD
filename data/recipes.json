@@ -6145,26 +6145,32 @@
     },
     {
         "ID": 642,
-        "Name": "突触凝炼机",
-        "Description": "R突触凝炼机",
+        "Name": "突触凝练机",
+        "Description": "",
         "IconPath": "",
-        "Type": 0,
+        "Type": 10,
         "GridIndex": 4812,
-        "Time": 1,
+        "Time": 3600,
         "Input": [
-            6253
+            7017,
+            1303,
+            7804,
+            6523
         ],
         "InCounts": [
-            2
+            100,
+            50,
+            50,
+            10
         ],
         "Output": [
-            6254
+            7803
         ],
         "OutCounts": [
             1
         ],
-        "Explicit": true,
-        "Handcraft": true,
+        "Explicit": false,
+        "Handcraft": false,
         "NonProductive": false
     },
     {

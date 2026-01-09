@@ -6018,7 +6018,9 @@
         ],
         "HashNeeded": 7200,
         "UnlockRecipes": [
-            409
+            409,
+            522,
+            718
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -6119,10 +6121,10 @@
     },
     {
         "ID": 1938,
-        "Name": "突触凝炼机",
+        "Name": "可缩放储备池计算",
         "IconPath": "Assets/texpack/虚拟技术革新",
-        "Desc": "T突触凝炼机",
-        "Conclusion": "T突触凝炼机",
+        "Desc": "T突触凝练机",
+        "Conclusion": "T突触凝练机",
         "IsHiddenTech": true,
         "PreItem": [
             6245
@@ -6136,15 +6138,13 @@
         ],
         "PreTechsImplicit": [],
         "Items": [
-            6252
+            6253
         ],
         "ItemPoints": [
             1
         ],
         "HashNeeded": 720000,
         "UnlockRecipes": [
-            522,
-            718,
             642
         ],
         "UnlockFunctions": [],
@@ -6485,7 +6485,7 @@
             1,
             100
         ],
-        "HashNeeded": 36000,
+        "HashNeeded": 3600,
         "UnlockRecipes": [
             403,
             424,
@@ -7092,7 +7092,7 @@
         "MaxLevel": 0,
         "LevelCoef1": 0,
         "LevelCoef2": 0,
-        "IsLabTech": false,
+        "IsLabTech": true,
         "PreTechsMax": false,
         "AddItems": [],
         "AddItemCounts": [],
@@ -7463,8 +7463,7 @@
         ],
         "HashNeeded": 144000,
         "UnlockRecipes": [
-            701,
-            787
+            701
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -8286,6 +8285,44 @@
         "LevelCoef1": 0,
         "LevelCoef2": 0,
         "IsLabTech": false,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
+        "ID": 1989,
+        "Name": "光速修改",
+        "IconPath": "Icons/Tech/6006",
+        "Desc": "T光速修改",
+        "Conclusion": "T光速修改",
+        "IsHiddenTech": true,
+        "PreItem": [
+            6528
+        ],
+        "Position": [
+            88.0,
+            -16.0
+        ],
+        "PreTechs": [],
+        "PreTechsImplicit": [],
+        "Items": [
+            6006
+        ],
+        "ItemPoints": [
+            10
+        ],
+        "HashNeeded": 360000,
+        "UnlockRecipes": [],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 1,
+        "MaxLevel": 10000,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
         "PreTechsMax": false,
         "AddItems": [],
         "AddItemCounts": [],

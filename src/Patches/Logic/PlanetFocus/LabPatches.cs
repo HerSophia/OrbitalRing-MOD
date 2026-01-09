@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
+using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalBeacon;
 
 namespace ProjectOrbitalRing.Patches.Logic.PlanetFocus
 {

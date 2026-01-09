@@ -570,5 +570,15 @@
         "fuelMask": 0,
         "useFuelPerTick": 0,
         "genEnergyPerTick": 4800000
+    },
+    {
+        "ModelID": 834,
+        //"isBeacon": false,
+        "powerCoverRadius": 0.0,
+        "workEnergyPerTick": 8400000,
+        "idleEnergyPerTick": 8400000,
+        "beaconSignalRadius": 0.0,
+        "beaconSpaceSignalRange": 0.0,
+        "powerConnectDistance": 0.5
     }
 ]

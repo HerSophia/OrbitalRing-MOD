@@ -117,6 +117,8 @@ namespace ProjectOrbitalRing.Utils
             megaPumper.beaconSignalRadius = 0f;
             megaPumper = LDB.models.Select(ProtoID.M亿万械国).prefabDesc;
             megaPumper.beaconSignalRadius = 0f;
+            megaPumper = LDB.models.Select(ProtoID.M突触凝练机).prefabDesc;
+            megaPumper.beaconSignalRadius = 0f;
 
             //PrefabDesc megaPumper = LDB.models.Select(ProtoID.M大抽水机).prefabDesc;
             //megaPumper.waterPoints = new[] { Vector3.zero, };

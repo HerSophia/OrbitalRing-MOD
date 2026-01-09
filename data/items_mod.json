@@ -1659,7 +1659,7 @@
         "EnemyDropMask": 0,
         "EnemyDropMaskRatio": 0.0
     },
-    {
+    {//预删除
         "ID": 6254,
         "Name": "手动研究加速",
         "Description": "I手动研究加速",
@@ -5910,15 +5910,16 @@
     },
     {
         "ID": 7803,
-        "Name": "光学处理器",
-        "Description": "I光学处理器",
-        "IconPath": "Assets/texpack/光学芯片",
-        "GridIndex": 0,
-        "StackSize": 100,
+        "Name": "突触凝练机",
+        "Description": "I突触凝练机",
+        "IconPath": "Icons/ItemRecipe/turret-signal",
+        "GridIndex": 4812,
+        "StackSize": 5,
         "Type": 3,
         "PreTechOverride": 0,
         "DescFields": [
-            1
+            1,
+            40
         ],
         "FuelType": 0,
         "HeatValue": 0,
@@ -5930,23 +5931,23 @@
         "ProduceFrom": "",
         "Grade": 0,
         "Upgrades": [],
-        "IsEntity": false,
-        "CanBuild": false,
+        "IsEntity": true,
+        "CanBuild": true,
         "BuildInGas": false,
-        "ModelIndex": 0,
-        "ModelCount": 0,
-        "HpMax": 0,
+        "ModelIndex": 834,
+        "ModelCount": 1,
+        "HpMax": 3000,
         "Ability": 0,
         "Potential": 0,
         "BuildIndex": 0,
-        "BuildMode": 0,
+        "BuildMode": 1,
         "UnlockKey": 0,
         "MechaMaterialID": 0,
         "AmmoType": 0,
         "BombType": 0,
         "CraftType": 0,
-        "DropRate": 0.0,
-        "EnemyDropLevel": 0, //8,
+        "DropRate": 0,
+        "EnemyDropLevel": 0,
         "EnemyDropRange": [
             0, //0.996,
             0 //0.003

@@ -906,6 +906,12 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                     if (DysonEnergy > 10000000) {
                         LDB.techs.Select(1987).IsHiddenTech = false; // 解除无限应用课题的隐藏状态
                     }
+                } else if (GameMain.history.TechUnlocked(1960) && LDB.techs.Select(1989).IsHiddenTech == true) {
+                    long ThirdLevelEnergy = DysonEnergy - EnergyCalculate.SecondLevelEnergy;
+                    double coefficient = ThirdLevelEnergy / 4000000.0;
+                    if ((long)((EnergyCalculate.SecondLevelEnergy / 2000) * coefficient) > 10000000) {
+                        LDB.techs.Select(1989).IsHiddenTech = false; // 解除光速修改的隐藏状态
+                    }
                     //} else if (!GameMain.history.TechUnlocked(1960)) {
                     //    if (__instance.energyGenCurrentTick > 40000000) {
                     //        GameMain.history.UnlockTech(1960);

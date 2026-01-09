@@ -41,9 +41,9 @@ namespace ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine
         }
 
 
-        public static void RemoveSailsByOrbit()
+        public static void MathematicalRateEngineRemoveSails()
         {
-            for (int i = 0; i < GameMain.galaxy.starCount; i++) {
+            for (int i = 0; i < GameMain.galaxy.stars.Length; i++) {
                 StarData star = GameMain.galaxy.stars[i];
                 if (star.type != EStarType.BlackHole) continue;
                 if (ProjectOrbitalRing.MoreMegaStructureCompatibility) {

@@ -512,6 +512,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                     return StationType.TurretBase;
                 case StationType.ATFeildCore:
                 case StationType.GlobalIncCore:
+                case StationType.SynapticLathe:
                     return StationType.GlobalSupportBase;
                 default:
                     return type;
@@ -524,7 +525,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             None = 0,
             Station = 1,
             Assembler = 2,
-            GlobalPower = 3, // 已废弃
+            SynapticLathe = 3,
             PowerGenBase = 4,
             PowerGenCore = 5,
             TurretBase = 6,

@@ -1770,8 +1770,8 @@
     },
     {
         "Name": "I生态穹顶",
-        "ZHCN": "旧时代广泛使用的外星殖民用生态穹顶，其经典设计在如今依旧毫不过时，垂直多层的强透光培养槽，使用成熟的气雾培技术，智能气候调节系统。哪怕在无大气的死寂星球，高度集成的生化反应室和实验室都可以完成绝大多数生物的培育和生化反应。",
-        "ENUS": "The ecological dome widely used in the old era for extraterrestrial colonization still retains its classic design today, featuring vertically multi-layered strong light transmission cultivation tanks, mature aerosol cultivation technology, and an intelligent climate control system. Even on a lifeless planet without an atmosphere, highly integrated biochemical reaction chambers and laboratories can complete the cultivation and biochemical reactions of the vast majority of organisms."
+        "ZHCN": "旧时代广泛使用的外星殖民用生态穹顶，其经典设计在如今依旧毫不过时，垂直多层的强透光培养槽，使用成熟的气雾培技术，智能气候调节系统。哪怕在无大气的死寂星球，高度集成的生化反应室和实验室都可以完成绝大多数生物的培育和生化反应。\n<color=\"#FD965ECC\">产物和原料为同一种东西时将自动从产物回填到原料</color>",
+        "ENUS": "The ecological dome widely used in the old era for extraterrestrial colonization still retains its classic design today, featuring vertically multi-layered strong light transmission cultivation tanks, mature aerosol cultivation technology, and an intelligent climate control system. Even on a lifeless planet without an atmosphere, highly integrated biochemical reaction chambers and laboratories can complete the cultivation and biochemical reactions of the vast majority of organisms.\n<color=\"#FD965ECC\">When the product and the raw material are the same thing, the product will be automatically refilled into the raw material</color>"
     },
     {
         "Name": "零素装甲",
@@ -2484,19 +2484,24 @@
         "ENUS": "Anyway, there is still a gap between biological brains and gate circuit computers in terms of numerical computation and multithreading. To achieve the same effect, it is necessary to overclock the wet host, and overclocking the wet host does not require voltage adjustment, just inputting glucose."
     },
     {
-        "Name": "突触凝炼机",
-        "ZHCN": "突触凝炼机",
-        "ENUS": "Synaptic Condenser"
+        "Name": "可缩放储备池计算",
+        "ZHCN": "可缩放储备池计算",
+        "ENUS": "Scalable Reserve Pool Calculation"
     },
     {
-        "Name": "T突触凝炼机",
-        "ZHCN": "将大型生物神经网络做成的神经芯片，进行算力并网，并将研究算法分配给每个神经芯片，通过这种方法模拟主脑的哈希阵列，以此来研究不属于COSMO指定的科研任务。当多个神经芯片同时运算时，算力叠加互补会让整体算力呈指数上升，但是带来的思维冲突压力也导致消耗的神经芯片数量呈指数上升。另外，研究完成或切换导致的回路切断会报废掉所有并网的神经芯片。",
-        "ENUS": "A neural chip made of a large biological neural network is connected to the grid for computing power, and research algorithms are assigned to each neural chip. Through this method, the hash array of the main brain is simulated to study research tasks that are not specified by COSMO. When multiple neural chips are operating simultaneously, the superposition and complementarity of computing power will result in an exponential increase in overall computing power, but the resulting cognitive conflict pressure also leads to an exponential increase in the number of neural chips consumed. In addition, circuit disconnection caused by research completion or switching will result in the scrapping of all connected neural chips."
+        "Name": "T突触凝练机",
+        "ZHCN": "将大型生物神经网络做成的神经芯片，进行算力并网，并将研究算法分配给每个神经芯片，通过这种方法模拟主脑的哈希阵列，以此来加速研究科研任务。当多个神经芯片同时运算时，算力叠加互补会让整体算力呈指数上升，但是带来的思维冲突压力也导致消耗的神经芯片数量呈指数上升。",
+        "ENUS": "Neural chips, crafted from large biological neural networks, are connected for computing power grid integration. Research algorithms are allocated to each neural chip, simulating the hash array of the main brain to expedite scientific research tasks. When multiple neural chips operate simultaneously, the superposition and complementarity of computing power lead to an exponential increase in overall computing power. However, the resulting cognitive conflict pressure also leads to an exponential increase in the number of neural chips consumed."
     },
     {
-        "Name": "R突触凝炼机",
-        "ZHCN": "如果当前研究科技为<color=\"#FD965ECC\">非研究站科技</color>，会使手动研究速度增加120哈希每秒，此后每执行一次该配方，会使增加的研究速度<color=\"#FD965ECC\">翻倍</color>，同时也会使该配方下次执行消耗的神经芯片数量<color=\"#FD965ECC\">翻倍</color>。当科技研究<color=\"#FD965ECC\">完成</color>或<color=\"#FD965ECC\">切换</color>时，<color=\"#FD965ECC\">翻倍与加速均清零</color>。",
-        "ENUS": "If the current research technology is <color=\"#FD965ECC\">non Lab technology</color>, it will increase the manual research speed by 120 hashes per second. After that, every time the formula is executed, the increased research speed will <color=\"#FD965ECC\">double</color>, and the number of neural chips consumed in the next execution of the formula will also <color=\"#FD965ECC\">double</color>. When technology research is <color=\"#FD965ECC\">completed</color> or <color=\"#FD965ECC\">switched</color>, <color=\"#FD965ECC\">both doubling and acceleration are reset to zero.</color>"
+        "Name": "突触凝练机",
+        "ZHCN": "突触凝练机",
+        "ENUS": "Synaptic Lathe"
+    },
+    {
+        "Name": "I突触凝练机",
+        "ZHCN": "突触凝练机是一座巨大的储备池计算系统。它用错综复杂的电缆、晶体管和生命维持舱将数以千计的湿件主机互相连接，以此为研究站提供巨额算力支持。对个体处理器官的强烈压榨将不可避免地导致一些联网“部件”的脑损伤。\n<color=\"#FD965ECC\">根据底下太空电梯的湿件主机数量增加该星球研究站科研模式下额外哈希产出，每个增加0.1%，同时消耗湿件主机，每个增加0.03个/s消耗</color>",
+        "ENUS": "The Synaptic Lathe Machine is a massive computational system akin to a reserve pool. It utilizes a complex network of cables, transistors, and life support modules to interconnect thousands of wetware hosts, thereby providing substantial computational power support to the research station.The intense exploitation of individual processing organs will inevitably lead to brain damage in some networked \"components\".\n<color=\"#FD965ECC\">Based on the number of wetware hosts in the space elevator below, the additional hash output in the research mode of the planet's research station will be increased by 0.1% for each additional host, while consuming wetware hosts at a rate of 0.03 hosts per second for each additional host</color>"
     },
     {
         "Name": "手动研究加速",
@@ -4677,8 +4682,18 @@
     },
     {
         "Name": "T城市化",
-        "ZHCN": "行星要塞，行星要塞，还是行星要塞",
-        "ENUS": "Planetary fortress, planetary fortress, and planetary fortress"
+        "ZHCN": "三矿行星要塞，四矿行星要塞，二矿被打掉了补行星要塞，主矿？当然还是行星要塞",
+        "ENUS": "Third is Planetary fortress, Fourth is planetary fortress, Natural has been destroyed and rebuilt the Planetary Fortress, Main? Of course still a planetary fortress"
+    },
+    {
+        "Name": "光速修改",
+        "ZHCN": "光速修改",
+        "ENUS": "Speed-of-Light Modification"
+    },
+    {
+        "Name": "T光速修改",
+        "ZHCN": "我们对现实的一个实验让光速显著变化了！这将导致恒星的能量输出变化，但我们也担心会对星区造成长期影响。一切终会逐渐恢复正常，但在那之前或许还要做最坏的准备。\n\n<color=\"#FD965ECC\">随机增加全星区除黑洞中子星之外所有恒星光度0至0.3</color>",
+        "ENUS": "Our experiment with reality has significantly altered the speed of light! This will lead to changes in the energy output of stars, but we are also concerned about the long-term impact on the star system. Everything will eventually return to normal, but until then, we may need to prepare for the worst."
     },
     {
         "Name": "规划",

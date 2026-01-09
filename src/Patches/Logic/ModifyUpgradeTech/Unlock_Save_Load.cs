@@ -7,6 +7,7 @@ using static ProjectOrbitalRing.Utils.RandomUtils;
 using ProjectOrbitalRing.Utils;
 using static ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine.EnergyCalculate;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
 {
@@ -62,7 +63,6 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
         public static int PilerEjectorLevel;
 
         struct gachaData { public int item; public int count; }
-
         private static readonly gachaData[] gachaDatas = {
            new gachaData { item = ProtoID.I氢, count = 114 },
            new gachaData { item = ProtoID.I单极磁石, count = 1000 },
@@ -73,8 +73,9 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
            new gachaData { item = ProtoID.ISCP310恒燃之火, count = 1 },
            new gachaData { item = ProtoID.I黑萝卜, count = 1 },
         };
-
         private static int gachaIndex = 0;
+
+        private static float[] StarLuminosity = new float[0];
 
         private static void InitData()
         {
@@ -128,6 +129,7 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
             OrbitalTurretTech(_techId);
             PilerEjectorTechs(_techId);
             Gacha(_techId);
+            SpeedOfLightModification(_techId);
         }
 
         static void UAVHPAndfiringRateUpgrade(int level)
@@ -617,7 +619,7 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                     techProto = LDB.techs.Select(1814);
                     techProto.IsHiddenTech = false;
 
-                    RemoveSailsByOrbit();
+                    MathematicalRateEngineRemoveSails();
                     CalculateThirdLevelMathematicalRateEngine();
                     break;
             }
@@ -710,11 +712,23 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
             if (techId == 1987) {
                 TechProto techProto;
                 techProto = LDB.techs.Select(1987);
-                techProto.Conclusion = "无限应用课题完成".TranslateFromJson() + gachaDatas[gachaIndex].count.ToString() + " " + LDB.items.Select(gachaDatas[gachaIndex].item).Name + "无限应用课题完成英文结尾".TranslateFromJson();
+                techProto.Conclusion = "无限应用课题完成".TranslateFromJson() + "\n" + gachaDatas[gachaIndex].count.ToString() + " " + LDB.items.Select(gachaDatas[gachaIndex].item).Name + "\n" + "无限应用课题完成英文结尾".TranslateFromJson();
                 techProto.RefreshTranslation();
                 int package = GameMain.mainPlayer.TryAddItemToPackage(gachaDatas[gachaIndex].item, gachaDatas[gachaIndex].count, 0, true);
 
                 gachaIndex = GetRandInt(0, gachaDatas.Length);
+            }
+        }
+
+        static void SpeedOfLightModification(int techId)
+        {
+            if (techId == 1989) {
+                float luminosityChange = (float)(GetRandDouble() / 3);
+                for (int i = 0; i < GameMain.galaxy.starCount; i++) {
+                    if (GameMain.galaxy.stars[i].type != EStarType.BlackHole && GameMain.galaxy.stars[i].type != EStarType.NeutronStar) {
+                        GameMain.galaxy.stars[i].luminosity += luminosityChange;
+                    }
+                }
             }
         }
 
@@ -735,6 +749,10 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
             }
             w.Write(isOrbitalTurretUnlock);
             w.Write(PilerEjectorLevel);
+            w.Write(GameMain.galaxy.starCount);
+            for (int i = 0; i < GameMain.galaxy.starCount; i++) {
+                w.Write(GameMain.galaxy.stars[i].luminosity);
+            }
         }
 
         internal static void Import(BinaryReader r)
@@ -813,6 +831,17 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                     itemProto.RefreshTranslation();
                 }
                 PilerEjectorLevel = r.ReadInt32();
+
+                int starCount;
+                if (ProjectOrbitalRing.importVersion < 524320) {
+                    starCount = 0;
+                } else {
+                    starCount = r.ReadInt32();
+                }
+                StarLuminosity = new float[starCount];
+                for (int i = 0; i < starCount; i++) {
+                    StarLuminosity[i] = r.ReadSingle();
+                }
             }
             catch (EndOfStreamException)
             {
@@ -853,8 +882,21 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
             gachaIndex = GetRandInt(0, gachaDatas.Length);
             TechProto techProto;
             techProto = LDB.techs.Select(1987);
-            techProto.Conclusion = "无限应用课题完成".TranslateFromJson() + gachaDatas[gachaIndex].count.ToString() + " " + LDB.items.Select(gachaDatas[gachaIndex].item).Name + "无限应用课题完成英文结尾".TranslateFromJson();
+            techProto.Conclusion = "无限应用课题完成".TranslateFromJson() + "\n" + gachaDatas[gachaIndex].count.ToString() + " " + LDB.items.Select(gachaDatas[gachaIndex].item).Name + "\n" + "无限应用课题完成英文结尾".TranslateFromJson();
             techProto.RefreshTranslation();
+
+            StarLuminosity = null;
+        }
+
+        [HarmonyPatch(typeof(GameData), nameof(GameData.Import))]
+        [HarmonyPostfix]
+        public static void GameData_Import_Patch(GameData __instance)
+        {
+            if (StarLuminosity.Length == GameMain.galaxy.starCount) {
+                for (int i = 0; i < GameMain.galaxy.starCount; i++) {
+                    GameMain.galaxy.stars[i].luminosity = StarLuminosity[i];
+                }
+            }
         }
 
         public static void AddUniverseObserveBuilding(int itemId)

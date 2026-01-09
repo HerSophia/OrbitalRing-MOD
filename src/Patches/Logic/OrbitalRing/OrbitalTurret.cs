@@ -94,6 +94,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 planetOrbitalRingData.Rings[ringIndex].AddOrbitalCore(position, thisTurretId, StationType.ATFeildCore);
             } else if (itemId == ProtoID.I伺服天穹组件 || itemId == ProtoID.I智能方尖碑 || itemId == ProtoID.I亿万械国) {
                 planetOrbitalRingData.Rings[ringIndex].AddOrbitalCore(position, thisTurretId, StationType.GlobalIncCore);
+            } else if (itemId == ProtoID.I突触凝练机) {
+                planetOrbitalRingData.Rings[ringIndex].AddOrbitalCore(position, thisTurretId, StationType.SynapticLathe);
             }
 
         }
@@ -123,7 +125,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         public static void NewBeaconComponentPatch(ref DefenseSystem __instance, int entityId, PrefabDesc desc, int __result)
         {
             var itemId = __instance.factory.entityPool[entityId].protoId;
-            if (itemId == ProtoID.I伺服天穹组件 || itemId == ProtoID.I智能方尖碑 || itemId == ProtoID.I亿万械国) {
+            if (itemId == ProtoID.I伺服天穹组件 || itemId == ProtoID.I智能方尖碑 || itemId == ProtoID.I亿万械国 || itemId == ProtoID.I突触凝练机) {
                 BuildOrbitalDefense(__instance, __result, entityId, itemId);
             }
         }

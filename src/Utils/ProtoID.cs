@@ -66,6 +66,7 @@ namespace ProjectOrbitalRing.Utils
                            I奇夸克样本 = 6244,
                            I菌丝母株 = 6245,
                            I大型神经网络 = 6252,
+                           I湿件主机 = 6253,
                            I太空船坞 = 6257,
                            I太空电梯 = 6258,
                            I天枢座 = 6259,
@@ -104,6 +105,7 @@ namespace ProjectOrbitalRing.Utils
                            I亿万械国 = 7621,
                            I钨块 = 7705,
                            I石墨矿 = 7706,
+                           I突触凝练机 = 7803,
                            I组装厂交互塔 = 9512;
 
         internal const int R等离子精炼 = 16,
@@ -181,7 +183,8 @@ namespace ProjectOrbitalRing.Utils
                            M伺服天穹组件 = 830,
                            M智能方尖碑 = 831,
                            M亿万械国 = 832,
-                           MSCP310恒燃之火 = 833;
+                           MSCP310恒燃之火 = 833,
+                           M突触凝练机 = 834;
 
         internal const int T戴森球计划 = 1,
                            T电磁学 = 1001,

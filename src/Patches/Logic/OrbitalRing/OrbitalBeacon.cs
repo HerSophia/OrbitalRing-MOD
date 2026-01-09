@@ -1,17 +1,24 @@
 ﻿using HarmonyLib;
+using ProjectOrbitalRing.Patches.Logic.PlanetFocus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+using System.Reflection.Emit;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.EquatorRing;
 using static ProjectOrbitalRing.ProjectOrbitalRing;
+using ProjectOrbitalRing.Utils;
+using UnityEngine.PostProcessing;
 
 namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
 {
     internal class OrbitalBeacon
     {
+        public static Dictionary<FactorySystem, int> SynapticLathePlanet = new Dictionary<FactorySystem, int>();
+        //private static Dictionary<LabComponent, int> SynapticLatheLabPool = new Dictionary<LabComponent, int>();
+        //private static bool UpdateSynapticLatheSpeed = false;
+
         [HarmonyPatch(typeof(BeaconComponent), nameof(BeaconComponent.GameTick))]
         [HarmonyPrefix]
         public static bool GameTickPatch(ref BeaconComponent __instance, PlanetFactory factory, PrefabDesc pdesc, EAggressiveLevel agglv, float power, long time)
@@ -41,8 +48,52 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                 ring.incCoreLevel[j] = 0;
                             }
                             return false;
+                        } else if (pair.stationType == StationType.SynapticLathe && pair.OrbitalCorePoolId == __instance.id) {
+                            if (power == 1) {
+                                
+                                
+                                var storage = ring.GetElevatorStorage(j);
+                                for (int k = 0; k < storage.Length; k++) {
+                                    int itemId = storage[k].itemId;
+                                    if (itemId == ProtoID.I湿件主机) {
+                                        if (storage[k].count > 33) {
+                                            int SynapticLatheSpeed = storage[k].count * 100;
+                                            if (!SynapticLathePlanet.ContainsKey(factory.factorySystem)) {
+                                                SynapticLathePlanet.Add(factory.factorySystem, SynapticLatheSpeed);
+                                            } else {
+                                                LogError($"Planet speed {SynapticLathePlanet[factory.factorySystem]}");
+                                                SynapticLathePlanet[factory.factorySystem] = SynapticLatheSpeed;
+                                            }
+                                            //foreach (var planet in SynapticLathePlanet) {
+                                            //    LogError($"planet {planet.Key} speed {planet.Value}");
+                                            //    foreach (var lab in SynapticLatheLabPool) {
+                                            //        LogError($"lab {lab.Key.id} speed {lab.Value}");
+                                            //    }
+                                            //}
+                                            storage[k].count -= (int)(storage[k].count * 0.03);
+                                            //UpdateSynapticLatheSpeed = true;
+                                        } else if (storage[k].count <= 33 && SynapticLathePlanet.ContainsKey(factory.factorySystem)) {
+                                            SynapticLathePlanet.Remove(factory.factorySystem);
+                                            //for (int l = 0; l < factory.factorySystem.labPool.Length; l++) {
+                                            //    if (SynapticLatheLabPool.ContainsKey(factory.factorySystem.labPool[l])) {
+                                            //        SynapticLatheLabPool.Remove(factory.factorySystem.labPool[l]);
+                                            //    }
+                                            //}
+                                        }
+                                        return false;
+                                    }
+                                }
+                            }
                         }
                     }
+                }
+                if (SynapticLathePlanet.ContainsKey(factory.factorySystem)) {
+                    SynapticLathePlanet.Remove(factory.factorySystem);
+                    //for (int l = 0; l < factory.factorySystem.labPool.Length; l++) {
+                    //    if (SynapticLatheLabPool.ContainsKey(factory.factorySystem.labPool[l])) {
+                    //        SynapticLatheLabPool.Remove(factory.factorySystem.labPool[l]);
+                    //    }
+                    //}
                 }
                 return false;
             }
@@ -63,6 +114,75 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 }
             }
             planetOrbitalRingData.planetIncLevel = incLevel;
+        }
+
+        //[HarmonyPatch(typeof(FactorySystem), nameof(FactorySystem.GameTickLabResearchMode))]
+        //[HarmonyPrefix]
+        //public static void FactorySystem_GameTickLabResearchMode_Patch(FactorySystem __instance, long time)
+        //{
+        //    //LogError($"planet.id {factorySystem.planet.id}");
+        //    //LogError($"ContainsKey {SynapticLathePlanet.ContainsKey(factorySystem.planet.id)}");
+        //    //LogError($"scpppppppppppppppphhhhhhhhhh");
+        //    int num = (int)(time % 60);
+        //    if (num != 0) {
+        //        return;
+        //    }
+        //    if (SynapticLathePlanet.ContainsKey(__instance)) {
+        //        if (UpdateSynapticLatheSpeed) {
+        //            //LogError($"scpppppppppppppppp123");
+        //            for (int i = 0; i < __instance.labPool.Length; i++) {
+        //                if (__instance.labPool[i].speed == 0) { continue; }
+        //                if (!SynapticLatheLabPool.ContainsKey(__instance.labPool[i])) {
+        //                    LogError($"scppppppppppppppppp lab id {__instance.labPool[i].id}");
+        //                    //LogError($"notContainsKey speed {SynapticLathePlanet[factorySystem.planet.id]}");
+        //                    SynapticLatheLabPool.Add(__instance.labPool[i], SynapticLathePlanet[__instance]);
+        //                } else {
+        //                    //LogError($"ContainsKey speed {SynapticLathePlanet[factorySystem.planet.id]}");
+        //                    SynapticLatheLabPool[__instance.labPool[i]] = SynapticLathePlanet[__instance];
+        //                }
+        //            }
+        //            //LogError($"labPool.Length {factorySystem.labPool.Length}");
+        //            foreach (var planet in SynapticLathePlanet) {
+        //                LogError($"scppppp planet {planet.Key} speed {planet.Value}");
+        //                foreach (var lab in SynapticLatheLabPool) {
+        //                    LogError($"lab {lab.Key.id} labspeed {lab.Key.speed} speed {lab.Value}");
+        //                }
+        //            }
+        //            UpdateSynapticLatheSpeed = false;
+        //        }
+        //    }
+        //}
+
+        public static void LabResearchInc(ref LabComponent labComponent)
+        {
+            foreach (var planet in SynapticLathePlanet) {
+                if (planet.Key.labPool[labComponent.id].Equals(labComponent)) {
+                    labComponent.extraSpeed += planet.Value;
+                    //LogError($"planet {planet.Key} speed {planet.Value}");
+                }
+            }
+            //if (SynapticLatheLabPool.ContainsKey(labComponent)) {
+            //    //LogError($"speed {SynapticLatheLabPool[labComponent]}");
+            //    labComponent.extraSpeed += SynapticLatheLabPool[labComponent];
+            //}
+        }
+
+        [HarmonyPatch(typeof(LabComponent), nameof(LabComponent.InternalUpdateResearch))]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> LabComponent_InternalUpdateResearch_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var matcher = new CodeMatcher(instructions);
+
+            matcher.MatchForward(true,
+                new CodeMatch(OpCodes.Ldsfld, AccessTools.Field(typeof(Cargo), nameof(Cargo.incTableMilli))));
+
+            //matcher.Advance(10).InsertAndAdvance(new CodeInstruction(OpCodes.Ldarga, (byte)0));
+            matcher.Advance(10).InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0));
+            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Call,
+                AccessTools.Method(typeof(OrbitalBeacon), nameof(LabResearchInc))));
+
+            matcher.LogInstructionEnumeration();
+            return matcher.InstructionEnumeration();
         }
     }
 }

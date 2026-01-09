@@ -225,6 +225,10 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                 if (result.stationType != StationType.GlobalSupportBase) {
                                     flag = true;
                                 }
+                            } else if (previewItem == ProtoID.I突触凝练机) {
+                                if (result.stationType != StationType.GlobalSupportBase) {
+                                    flag = true;
+                                }
                             }
                             if (flag) {
                                 buildPreview.condition = (EBuildCondition)98;
@@ -384,6 +388,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                     __result = false;
                                     return false;
                                 }
+                            } else if (previewItem == ProtoID.I突触凝练机) {
+                                if (result.stationType != StationType.GlobalSupportBase) {
+                                    buildPreview.condition = (EBuildCondition)98;
+                                    __result = false;
+                                    return false;
+                                }
                             }
                         }
 
@@ -420,8 +430,9 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 case ProtoID.I重型电磁弹射器: // 重型电磁弹射器
                 case ProtoID.I星环护盾组件: // 重型电磁弹射器
                 case ProtoID.I伺服天穹组件: // 伺服天穹组件
-                case ProtoID.I智能方尖碑: // 伺服天穹组件
-                case ProtoID.I亿万械国: // 伺服天穹组件
+                case ProtoID.I智能方尖碑:
+                case ProtoID.I亿万械国:
+                case ProtoID.I突触凝练机:
                     return true;
                 default:
                     return false;
@@ -594,8 +605,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             }
 
             if (objId <= 0) {
-                if (protoId == ProtoID.I星环对撞机) // 星环对撞机，拆除，放开再建
-                {
+                if (protoId == ProtoID.I星环对撞机) { // 星环对撞机，拆除，放开再建
                     PrebuildData preBuildData = __instance.prebuildPool[-objId];
                     int preBuildringIndex = isBuildingPosYCorrect(preBuildData.pos, __instance.planet.radius == 100f);
                     var data = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(__instance.planet.id);
@@ -620,8 +630,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                     return;
                 planetOrbitalRingData.Rings[ringIndex].RemoveOrbitalCore(position);
             }
-            if (protoId == ProtoID.I星环对撞机) // 星环对撞机，拆除，放开再建
-            {
+            if (protoId == ProtoID.I突触凝练机) {
+                if (OrbitalBeacon.SynapticLathePlanet.ContainsKey(__instance.factorySystem)) {
+                    OrbitalBeacon.SynapticLathePlanet.Remove(__instance.factorySystem);
+                }
+            }
+            if (protoId == ProtoID.I星环对撞机) { // 星环对撞机，拆除，放开再建
                 if (planetOrbitalRingData == null)
                     return;
                 planetOrbitalRingData.Rings[ringIndex].isParticleCollider = false;
