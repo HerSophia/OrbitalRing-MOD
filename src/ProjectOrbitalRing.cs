@@ -20,7 +20,6 @@ using ProjectOrbitalRing.Patches.Logic.AddVein;
 using ProjectOrbitalRing.Patches.Logic.MegaAssembler;
 using ProjectOrbitalRing.Patches.Logic.PlanetFocus;
 using ProjectOrbitalRing.Patches.Logic.QuantumStorage;
-using ProjectOrbitalRing.Patches.Logic.BattleRelated;
 using ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech;
 using ProjectOrbitalRing.Patches.UI;
 using ProjectOrbitalRing.Patches.UI.PlanetFocus;
@@ -65,7 +64,7 @@ namespace ProjectOrbitalRing
     {
         public const string MODGUID = "org.ProfessorCat305.OrbitalRing";
         public const string MODNAME = "OrbitalRing";
-        public const string VERSION = "0.8.32";
+        public const string VERSION = "0.9.0";
         public const string DEBUGVERSION = "";
 
 
@@ -129,10 +128,6 @@ namespace ProjectOrbitalRing
             var executingAssembly = Assembly.GetExecutingAssembly();
 
             ModPath = Path.GetDirectoryName(executingAssembly.Location);
-
-            var resources = new ResourceData("org.ProfessorCat305.OrbitalRing", "texpack", ModPath);
-            resources.LoadAssetBundle("texpack");
-            ProtoRegistry.AddResource(resources);
 
             var resources_models = new ResourceData("org.ProfessorCat305.OrbitalRing", "genesis-models", ModPath);
             resources_models.LoadAssetBundle("genesis-models");
@@ -330,6 +325,7 @@ namespace ProjectOrbitalRing
             ItemProto.InitItemIndices();
             ItemProto.InitMechaMaterials();
             ItemProto.InitFighterIndices();
+            ItemProto.InitPowerFacilityIndices();
             ModelProto.InitMaxModelIndex();
             ModelProto.InitModelIndices();
             ModelProto.InitModelOrders();
@@ -374,9 +370,10 @@ namespace ProjectOrbitalRing
 
             for (var i = 0; i < LDB.items.dataArray.Length; ++i)
             {
-                LDB.items.dataArray[i].recipes = null;
-                LDB.items.dataArray[i].rawMats = null;
-                LDB.items.dataArray[i].Preload(i);
+                ItemProto itemProto = LDB.items.dataArray[i];
+                itemProto.recipes = null;
+                itemProto.rawMats = null;
+                itemProto.Preload(i);
             }
 
             for (var i = 0; i < LDB.recipes.dataArray.Length; ++i) LDB.recipes.dataArray[i].Preload(i);

@@ -27,9 +27,10 @@ namespace ProjectOrbitalRing.Utils
                            I氘核燃料棒 = 1802,
                            I反物质燃料棒 = 1803,
                            I奇异燃料棒 = 1804,
+                           I物流立交 = 2103,
                            I太空物流港 = 2104,
                            I轨道采集器 = 2105,
-                           I满蓄电器 = 2207,
+                           I满蓄电器mk2 = 2207,
                            I量子化工厂 = 2317,
                            I物质重组工厂 = 2318,
                            I负熵熔炉 = 2319,
@@ -55,6 +56,7 @@ namespace ProjectOrbitalRing.Utils
                            I高速生长菌群 = 6212,
                            I化学燃料罐 = 6217,
                            I蓄电器mk1 = 6218,
+                           I满蓄电器mk1 = 6218,
                            I氮 = 6220,
                            I放射性矿物 = 6222,
                            I量子储物仓 = 6231,
@@ -106,6 +108,8 @@ namespace ProjectOrbitalRing.Utils
                            I钨块 = 7705,
                            I石墨矿 = 7706,
                            I突触凝练机 = 7803,
+                           I乾坤 = 7806,
+                           I乾坤铁 = 7807,
                            I组装厂交互塔 = 9512;
 
         internal const int R等离子精炼 = 16,

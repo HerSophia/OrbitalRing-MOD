@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using static ProjectOrbitalRing.Patches.Logic.TheMountainMovingProject;
 using static ProjectOrbitalRing.ProjectOrbitalRing;
 
 namespace ProjectOrbitalRing.Patches.Logic
@@ -59,7 +60,8 @@ namespace ProjectOrbitalRing.Patches.Logic
                 }
 
                 if (eObjectType == EObjectType.Vein) {
-                    return;
+                    MineAllVein(ref __instance, factory, num7, energyGet, num6);
+                    
                 }
 
                 if (__instance.miningType != eObjectType || __instance.miningId != num8) {

@@ -4838,7 +4838,7 @@
             1011
         ],
         "InCounts": [
-            4
+            2
         ],
         "Output": [
             6205,
@@ -4846,7 +4846,7 @@
         ],
         "OutCounts": [
             1,
-            2
+            1
         ],
         "Explicit": true,
         "Handcraft": true,
@@ -5466,7 +5466,7 @@
             1031
         ],
         "OutCounts": [
-            5
+            9
         ],
         "Explicit": true,
         "Handcraft": false,
@@ -6019,12 +6019,8 @@
             1,
             1
         ],
-        "Output": [
-            6228
-        ],
-        "OutCounts": [
-            1
-        ],
+        "Output": [],
+        "OutCounts": [],
         "Explicit": false,
         "Handcraft": true,
         "NonProductive": true
@@ -7687,15 +7683,15 @@
             1301
         ],
         "InCounts": [
-            5,
             2,
+            1,
             1
         ],
         "Output": [
             6235
         ],
         "OutCounts": [
-            5
+            10
         ],
         "Explicit": false,
         "Handcraft": false,
@@ -8667,6 +8663,38 @@
         ],
         "Output": [
             7621
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 841,
+        "Name": "乾坤",
+        "Description": "",
+        "IconPath": "",
+        "Type": 9,
+        "GridIndex": 1313,
+        "Time": 720,
+        "Input": [
+            1125,
+            6271,
+            6523,
+            9480,
+            6227
+        ],
+        "InCounts": [
+            75,
+            6,
+            12,
+            4,
+            1
+        ],
+        "Output": [
+            7806
         ],
         "OutCounts": [
             1

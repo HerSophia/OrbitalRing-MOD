@@ -409,7 +409,7 @@
             40
         ],
         "FuelType": 1,
-        "HeatValue": 4800000,
+        "HeatValue": 9600000,
         "ReactorInc": 0.2,
         "IsFluid": false,
         "Productive": true,
@@ -791,7 +791,7 @@
     "Description": "I沙土",
     "IconPath": "Icons/ItemRecipe/soil-pile",
     "GridIndex": 1814,
-    "StackSize": 1000000,
+    "StackSize": 50,
     "Type": 1,
     "PreTechOverride": 0,
     "DescFields": [

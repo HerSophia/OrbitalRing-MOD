@@ -892,6 +892,12 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
         [HarmonyPostfix]
         public static void GameData_Import_Patch(GameData __instance)
         {
+            if (DSPGame.IsMenuDemo || GameMain.mainPlayer == null) {
+                return;
+            }
+            if (StarLuminosity == null) {
+                return;
+            }
             if (StarLuminosity.Length == GameMain.galaxy.starCount) {
                 for (int i = 0; i < GameMain.galaxy.starCount; i++) {
                     GameMain.galaxy.stars[i].luminosity = StarLuminosity[i];

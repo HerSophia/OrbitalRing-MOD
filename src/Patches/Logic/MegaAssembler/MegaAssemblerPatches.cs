@@ -136,9 +136,6 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             // 水世界星球特质处理入口
             SetAssmeblerWaterFull(ref __instance, factory);
 
-            // 插件处理入口
-            AssemblerModulePatches.AssemblerModuleProcess(factory, ref __instance);
-
             bool b = power >= 0.1f;
 
             // MegaBuildings

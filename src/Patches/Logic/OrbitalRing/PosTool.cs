@@ -81,7 +81,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
 
         public static Vector3 ShouldBeXZAdsorb(Vector3 vector, bool isFullRing, bool isMoon)
         {
-            float length = vector.magnitude - 0.4f; // 别问，问就不知道为什么用原长度电梯吸附后比地面高0.3层，导致过近的带子无法连接
+            float num = isMoon ? 0.15f : 0.4f;
+            float length = vector.magnitude - num; // 别问，问就不知道为什么用原长度电梯吸附后比地面高0.3层，导致过近的带子无法连接
             // 计算向量角度（0°~360°）
             double angle = (Math.Atan2(vector.z, vector.x) * 180.0 / Math.PI + 360.0) % 360.0;
             double minDiff = double.MaxValue;

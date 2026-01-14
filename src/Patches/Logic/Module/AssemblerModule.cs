@@ -3,11 +3,14 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Reflection.Emit;
 using HarmonyLib;
 using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
-using ProjectOrbitalRing.Utils;
+using static ProjectOrbitalRing.ProjectOrbitalRing;
 using static ProjectOrbitalRing.Patches.UI.UIAssemblerWindowPatch;
+using static UIPlayerDeliveryPanel;
+using static UnityEngine.PostProcessing.MotionBlurComponent.FrameBlendingFilter;
+using System.Collections;
 
 namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
 {
@@ -58,17 +61,26 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
             return result;
         }
 
+        private static Dictionary<ValueTuple<int, int>, AssemblerModuleData> ImportAssemblerModuleData = new Dictionary<ValueTuple<int, int>, AssemblerModuleData>();
+        private static ConcurrentDictionary<FactorySystem, ConcurrentDictionary<int, AssemblerModuleData>> AssemblerModuleData = new ConcurrentDictionary<FactorySystem, ConcurrentDictionary<int, AssemblerModuleData>>();
+
         // Token: 0x0600015C RID: 348 RVA: 0x0000FE60 File Offset: 0x0000E060
         public static void Export(BinaryWriter w)
         {
-            w.Write(AssemblerModulePatches._AssemblerModuleData.Count);
-            foreach (KeyValuePair<ValueTuple<int, int>, AssemblerModuleData> keyValuePair in AssemblerModulePatches._AssemblerModuleData) {
-                w.Write(keyValuePair.Key.Item1);
-                w.Write(keyValuePair.Key.Item2);
-                w.Write(keyValuePair.Value.ItemId);
-                w.Write(keyValuePair.Value.ItemCount);
-                w.Write(keyValuePair.Value.ItemInc);
-                w.Write(keyValuePair.Value.NeedCount);
+            int count = 0;
+            foreach (var factoryPair in AssemblerModulePatches.AssemblerModuleData) {
+                count += factoryPair.Value.Count;
+            }
+            w.Write(count);
+            foreach (var factoryPair in AssemblerModulePatches.AssemblerModuleData) {
+                foreach (var assemblerPair in factoryPair.Value) {
+                    w.Write(factoryPair.Key.planet.id);
+                    w.Write(assemblerPair.Key);
+                    w.Write(assemblerPair.Value.ItemId);
+                    w.Write(assemblerPair.Value.ItemCount);
+                    w.Write(assemblerPair.Value.ItemInc);
+                    w.Write(assemblerPair.Value.NeedCount);
+                }
             }
         }
 
@@ -81,7 +93,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                 for (int i = 0; i < num; i++) {
                     int item = r.ReadInt32();
                     int item2 = r.ReadInt32();
-                    AssemblerModulePatches._AssemblerModuleData.TryAdd(new ValueTuple<int, int>(item, item2), new AssemblerModuleData {
+                    AssemblerModulePatches.ImportAssemblerModuleData.TryAdd(new ValueTuple<int, int>(item, item2), new AssemblerModuleData {
                         ItemId = r.ReadInt32(),
                         ItemCount = r.ReadInt32(),
                         ItemInc = r.ReadInt32(),
@@ -101,7 +113,31 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
         // Token: 0x0600015F RID: 351 RVA: 0x0000FFDC File Offset: 0x0000E1DC
         private static void ReInitAll()
         {
-            AssemblerModulePatches._AssemblerModuleData = new ConcurrentDictionary<ValueTuple<int, int>, AssemblerModuleData>();
+            AssemblerModulePatches.ImportAssemblerModuleData = new Dictionary<ValueTuple<int, int>, AssemblerModuleData>();
+            AssemblerModulePatches.AssemblerModuleData = new ConcurrentDictionary<FactorySystem, ConcurrentDictionary<int, AssemblerModuleData>>();
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(GameData), nameof(GameData.Import))]
+        public static void GameData_Import_AssemblerModulePatch(GameData __instance)
+        {
+            List<int> planetId = new List<int>();
+            FactorySystem factorySystem = null;
+            foreach (var pair in AssemblerModulePatches.ImportAssemblerModuleData) {
+                factorySystem = __instance.galaxy.PlanetById(pair.Key.Item1).factory.factorySystem;
+                if (!planetId.Contains(pair.Key.Item1)) {
+                    planetId.Add(pair.Key.Item1);
+                    AssemblerModuleData[factorySystem] = new ConcurrentDictionary<int, AssemblerModuleData>();
+                }
+                AssemblerModuleData[factorySystem][pair.Key.Item2] = new AssemblerModuleData {
+                    ItemId = pair.Value.ItemId,
+                    ItemCount = pair.Value.ItemCount,
+                    ItemInc = pair.Value.ItemInc,
+                    NeedCount = pair.Value.NeedCount
+                };
+                
+            }
+            AssemblerModulePatches.ImportAssemblerModuleData = null;
         }
 
         // Token: 0x06000160 RID: 352 RVA: 0x0000FFE8 File Offset: 0x0000E1E8
@@ -109,7 +145,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
         [HarmonyPatch(typeof(FactorySystem), "TakeBackItems_Assembler")]
         public static void FactorySystem_TakeBackItems_Assembler(ref FactorySystem __instance, Player player, int asmId)
         {
-            AssemblerModulePatches.SetEmpty(__instance.planet.id, asmId, true);
+            AssemblerModulePatches.SetEmpty(__instance, asmId, true);
         }
 
         // Token: 0x06000161 RID: 353 RVA: 0x00010000 File Offset: 0x0000E200
@@ -127,7 +163,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                     if (!flag3) {
                         bool flag4 = ShouldModuleButtonActive(ptr.recipeType, ptr.recipeId, ptr.speed);
                         if (flag4) {
-                            AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(__instance.factorySystem.planet.id, entityData.assemblerId);
+                            AssemblerModuleData AssemblerModuleData = GetAssemblerModuleData(__instance.factorySystem, entityData.assemblerId);
                             AssemblerModuleData.NeedCount = 1;
                             int moduleId = AssemblerModulePatches.GetModuleId(ptr.recipeId);
                             if (AssemblerModuleData.ItemCount == 0) {
@@ -143,38 +179,13 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                                             AssemblerModuleData.ItemId = mainPlayer.inhandItemId;
                                             AssemblerModuleData.ItemCount += itemCount;
                                             AssemblerModuleData.ItemInc = itemInc;
-                                            AssemblerModulePatches.SetAssemblerModuleData(__instance.factorySystem.planet.id, entityData.assemblerId, AssemblerModuleData);
+                                            SetAssemblerModuleData(__instance.factorySystem, entityData.assemblerId, AssemblerModuleData);
                                         }
                                     }
                                 } else {
 
                                 }
                             }
-
-
-                            //bool flag5 = false;
-                            //if (!flag5) {
-                            //    Player mainPlayer = GameMain.mainPlayer;
-                            //    bool flag6 = (moduleId == 7616 && moduleId != AssemblerModuleData.ItemId) || (moduleId == 7617 && AssemblerModuleData.ItemId != 7617 && AssemblerModuleData.ItemId != 7618);
-                            //    if (flag6) {
-                            //        int upCount = mainPlayer.TryAddItemToPackage(AssemblerModuleData.ItemId, AssemblerModuleData.ItemCount, AssemblerModuleData.ItemInc, true, 0);
-                            //        AssemblerModuleData.ItemCount = 0;
-                            //        UIItemup.Up(AssemblerModuleData.ItemId, upCount);
-                            //    }
-                            //    int num = AssemblerModuleData.NeedCount - AssemblerModuleData.ItemCount;
-                            //    int itemInc = 0;
-                            //    if (num > 0 && (mainPlayer.inhandItemId == moduleId || moduleId == 7617 && mainPlayer.inhandItemId == 7618)) {
-                            //        int itemId = mainPlayer.inhandItemId;
-                            //        mainPlayer.TakeItemFromPlayer(ref itemId, ref num, out itemInc, fromPackage, itemBundle);
-                            //    }
-                            //    bool flag8 = num > 0;
-                            //    if (flag8) {
-                            //        AssemblerModuleData.ItemId = mainPlayer.inhandItemId;
-                            //        AssemblerModuleData.ItemCount += num;
-                            //        AssemblerModuleData.ItemInc = itemInc;
-                            //        AssemblerModulePatches.SetAssemblerModuleData(__instance.factorySystem.planet.id, entityData.assemblerId, AssemblerModuleData);
-                            //    }
-                            //}
                         }
                     }
                 }
@@ -182,40 +193,46 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
         }
 
         // Token: 0x06000162 RID: 354 RVA: 0x000101A7 File Offset: 0x0000E3A7
-        internal static void SyncLithography(ValueTuple<int, int> id, AssemblerModuleData AssemblerModuleData)
-        {
-            AssemblerModulePatches._AssemblerModuleData[id] = AssemblerModuleData;
-        }
+        //internal static void SyncLithography(ValueTuple<int, int> id, AssemblerModuleData AssemblerModuleData)
+        //{
+        //    AssemblerModulePatches.AssemblerModuleData[id] = AssemblerModuleData;
+        //}
 
         // Token: 0x06000163 RID: 355 RVA: 0x000101B8 File Offset: 0x0000E3B8
-        internal static AssemblerModuleData GetAssemblerModuleData(int planetId, int assemblerId)
+        internal static AssemblerModuleData GetAssemblerModuleData(FactorySystem factorySystem, int assemblerId)
         {
-            ValueTuple<int, int> key = new ValueTuple<int, int>(planetId, assemblerId);
-            bool flag = !AssemblerModulePatches._AssemblerModuleData.ContainsKey(key);
-            if (flag) {
-                AssemblerModulePatches._AssemblerModuleData[key] = new AssemblerModuleData();
-            }
-            return AssemblerModulePatches._AssemblerModuleData[key];
+            // 原子操作：获取或创建 factorySystem 对应的字典
+            var assemblerDict = AssemblerModuleData.GetOrAdd(
+                factorySystem,
+                _ => new ConcurrentDictionary<int, AssemblerModuleData>()
+            );
+
+            // 原子操作：获取或创建 assemblerId 对应的数据
+            return assemblerDict.GetOrAdd(
+                assemblerId,
+                _ => new AssemblerModuleData()
+            );
         }
 
         // Token: 0x06000164 RID: 356 RVA: 0x00010204 File Offset: 0x0000E404
-        internal static void SetAssemblerModuleData(int planetId, int assemblerId, AssemblerModuleData data)
+        internal static void SetAssemblerModuleData(FactorySystem factorySystem, int assemblerId, AssemblerModuleData data)
         {
-            ValueTuple<int, int> key = new ValueTuple<int, int>(planetId, assemblerId);
-            bool flag = !AssemblerModulePatches._AssemblerModuleData.ContainsKey(key);
-            if (!flag) {
-                AssemblerModulePatches._AssemblerModuleData[key] = data;
-                //SyncAssemblerModuleData.Sync(planetId, assemblerId, AssemblerModulePatches._AssemblerModuleData[key]);
+            if (AssemblerModuleData.ContainsKey(factorySystem)) {
+                if (AssemblerModuleData[factorySystem].ContainsKey(assemblerId)) {
+                    AssemblerModuleData[factorySystem][assemblerId] = data;
+                }
+                //SyncAssemblerModuleData.Sync(planetId, assemblerId, AssemblerModulePatches.AssemblerModuleData[key]);
             }
         }
 
         // Token: 0x06000165 RID: 357 RVA: 0x00010250 File Offset: 0x0000E450
-        internal static void SetEmpty(int planetId, int assemblerId, bool pop = true)
+        internal static void SetEmpty(FactorySystem factorySystem, int assemblerId, bool pop = true)
         {
-            ValueTuple<int, int> key = new ValueTuple<int, int>(planetId, assemblerId);
-            bool flag = !AssemblerModulePatches._AssemblerModuleData.ContainsKey(key);
-            if (!flag) {
-                AssemblerModuleData AssemblerModuleData = AssemblerModulePatches._AssemblerModuleData[key];
+            if (AssemblerModuleData.ContainsKey(factorySystem)) {
+                if (!AssemblerModulePatches.AssemblerModuleData[factorySystem].ContainsKey(assemblerId)) {
+                    return;
+                }
+                AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.AssemblerModuleData[factorySystem][assemblerId];
                 bool flag2 = AssemblerModuleData.ItemId == 0 || AssemblerModuleData.ItemCount == 0;
                 if (!flag2) {
                     Player mainPlayer = GameMain.mainPlayer;
@@ -227,7 +244,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                         mainPlayer.SetHandItemCount_Unsafe(AssemblerModuleData.ItemCount);
                         mainPlayer.SetHandItemInc_Unsafe(AssemblerModuleData.ItemInc);
                     }
-                    AssemblerModulePatches._AssemblerModuleData[key] = new AssemblerModuleData {
+                    AssemblerModulePatches.AssemblerModuleData[factorySystem][assemblerId] = new AssemblerModuleData {
                         NeedCount = AssemblerModuleData.NeedCount
                     };
                     //SyncAssemblerModuleData.Sync(planetId, assemblerId, AssemblerModuleData);
@@ -235,48 +252,47 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
             }
         }
 
-        // Token: 0x06000166 RID: 358 RVA: 0x00010334 File Offset: 0x0000E534
-        public static void ExportPlanetData(int planetId, BinaryWriter w)
-        {
-            KeyValuePair<ValueTuple<int, int>, AssemblerModuleData>[] array = (from pair in AssemblerModulePatches._AssemblerModuleData
-                                                                           where pair.Key.Item1 == planetId
-                                                                           select pair).ToArray<KeyValuePair<ValueTuple<int, int>, AssemblerModuleData>>();
-            w.Write(array.Length);
-            w.Write(planetId);
-            foreach (KeyValuePair<ValueTuple<int, int>, AssemblerModuleData> keyValuePair in array) {
-                w.Write(keyValuePair.Key.Item2);
-                w.Write(keyValuePair.Value.ItemId);
-                w.Write(keyValuePair.Value.ItemCount);
-                w.Write(keyValuePair.Value.ItemInc);
-                w.Write(keyValuePair.Value.NeedCount);
-            }
-        }
+        //// Token: 0x06000166 RID: 358 RVA: 0x00010334 File Offset: 0x0000E534
+        //public static void ExportPlanetData(int planetId, BinaryWriter w)
+        //{
+        //    KeyValuePair<ValueTuple<int, int>, AssemblerModuleData>[] array = (from pair in AssemblerModulePatches.AssemblerModuleData
+        //                                                                   where pair.Key.Item1 == planetId
+        //                                                                   select pair).ToArray<KeyValuePair<ValueTuple<int, int>, AssemblerModuleData>>();
+        //    w.Write(array.Length);
+        //    w.Write(planetId);
+        //    foreach (KeyValuePair<ValueTuple<int, int>, AssemblerModuleData> keyValuePair in array) {
+        //        w.Write(keyValuePair.Key.Item2);
+        //        w.Write(keyValuePair.Value.ItemId);
+        //        w.Write(keyValuePair.Value.ItemCount);
+        //        w.Write(keyValuePair.Value.ItemInc);
+        //        w.Write(keyValuePair.Value.NeedCount);
+        //    }
+        //}
 
-        // Token: 0x06000167 RID: 359 RVA: 0x00010400 File Offset: 0x0000E600
-        public static void ImportPlanetData(BinaryReader r)
-        {
-            int num = r.ReadInt32();
-            int item = r.ReadInt32();
-            for (int i = 0; i < num; i++) {
-                int item2 = r.ReadInt32();
-                AssemblerModulePatches._AssemblerModuleData[new ValueTuple<int, int>(item, item2)] = new AssemblerModuleData {
-                    ItemId = r.ReadInt32(),
-                    ItemCount = r.ReadInt32(),
-                    ItemInc = r.ReadInt32(),
-                    NeedCount = r.ReadInt32()
-                };
-            }
-        }
+        //// Token: 0x06000167 RID: 359 RVA: 0x00010400 File Offset: 0x0000E600
+        //public static void ImportPlanetData(BinaryReader r)
+        //{
+        //    int num = r.ReadInt32();
+        //    int item = r.ReadInt32();
+        //    for (int i = 0; i < num; i++) {
+        //        int item2 = r.ReadInt32();
+        //        AssemblerModulePatches.AssemblerModuleData[new ValueTuple<int, int>(item, item2)] = new AssemblerModuleData {
+        //            ItemId = r.ReadInt32(),
+        //            ItemCount = r.ReadInt32(),
+        //            ItemInc = r.ReadInt32(),
+        //            NeedCount = r.ReadInt32()
+        //        };
+        //    }
+        //}
 
         // Token: 0x040000D2 RID: 210
-        private static ConcurrentDictionary<ValueTuple<int, int>, AssemblerModuleData> _AssemblerModuleData = new ConcurrentDictionary<ValueTuple<int, int>, AssemblerModuleData>();
-
+        
         public static void AssemblerFilterModuleProcess(FactorySystem factorySystem, int poolId, ref float power)
         {
             if (factorySystem.assemblerPool[poolId].speed == 40000) {
                 return;
             }
-            AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(factorySystem.planet.id, poolId);
+            AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(factorySystem, poolId);
             if (GetModuleId(factorySystem.assemblerPool[poolId].recipeId) == 7616) {
                 if (AssemblerModuleData.ItemCount == 0) {
                     power = 0.0f;
@@ -297,10 +313,33 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
             }
         }
 
-        public static void AssemblerModuleProcess(PlanetFactory factory, ref AssemblerComponent __instance)
+        [HarmonyPatch(typeof(AssemblerComponent), nameof(AssemblerComponent.InternalUpdate))]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> AssemblerComponent_InternalUpdate_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            BioChemicalProcess(factory.planet.theme, ref __instance);
-            AssemblerExtraProcess(factory, ref __instance);
+            var matcher = new CodeMatcher(instructions);
+
+            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldc_I4_1),
+                new CodeMatch(OpCodes.Stfld, AccessTools.Field(typeof(AssemblerComponent), nameof(AssemblerComponent.replicating))));
+
+            //matcher.Advance(10).InsertAndAdvance(new CodeInstruction(OpCodes.Ldarga, (byte)0));
+            matcher.Advance(1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0));
+            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Call,
+                AccessTools.Method(typeof(AssemblerModulePatches), nameof(AssemblerModuleProcess))));
+
+            //matcher.LogInstructionEnumeration();
+            return matcher.InstructionEnumeration();
+        }
+
+        public static void AssemblerModuleProcess(ref AssemblerComponent __instance)
+        {
+            foreach (var planetValuePair in AssemblerModulePatches.AssemblerModuleData) {
+                if (!planetValuePair.Value.ContainsKey(__instance.id)) return;
+                if (planetValuePair.Key.assemblerPool[__instance.id].Equals(__instance)) {
+                    BioChemicalProcess(planetValuePair.Key.factory.planet.theme, ref __instance);
+                    AssemblerExtraProcess(planetValuePair.Key.factory, ref __instance);
+                }
+            }
         }
 
         private static void BioChemicalProcess(int theme, ref AssemblerComponent __instance)
@@ -329,7 +368,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                 }
                 var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(factory.planetId);
                 int orbitalRingIncLevel = planetOrbitalRingData.planetIncLevel;
-                AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(factory.planet.id, __instance.id);
+                AssemblerModuleData AssemblerModuleData = GetAssemblerModuleData(factory.factorySystem, __instance.id);
                 if ((AssemblerModuleData.ItemId == 0 || AssemblerModuleData.ItemCount == 0) && orbitalRingIncLevel == 0) {
                     return;
                 }

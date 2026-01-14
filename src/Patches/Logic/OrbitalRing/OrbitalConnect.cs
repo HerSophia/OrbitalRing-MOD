@@ -100,6 +100,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 case ProtoID.I轨道连接组件:
                 case ProtoID.I粒子加速轨道:
                 case ProtoID.I星环电网组件:
+                case ProtoID.I空轨:
                     return true;
             }
             return false;

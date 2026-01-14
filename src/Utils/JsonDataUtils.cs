@@ -27,69 +27,66 @@ namespace ProjectOrbitalRing.Utils
             ref Dictionary<int, IconToolNew.IconDesc> itemIconDescs =
                 ref AccessTools.StaticFieldRefAccess<Dictionary<int, IconToolNew.IconDesc>>(typeof(ProtoRegistry), "itemIconDescs");
 
-        #region TechProto
+            #region TechProto
 
-            foreach (TechProtoJson techjson in TechProtos())
-            {
-                if (LDB.techs.Exist(techjson.ID)) { techjson.ToProto(LDB.techs.Select(techjson.ID)); }
-                else { LDBTool.PreAddProto(techjson.ToProto()); }
+            foreach (TechProtoJson protoJson in GetJsonContent<TechProtoJson>("techs")) {
+                if (LDB.techs.Exist(protoJson.ID)) {
+                    protoJson.ToProto(LDB.techs.Select(protoJson.ID));
+                } else {
+                    LDBTool.PreAddProto(protoJson.ToProto());
+                }
             }
 
             #endregion
 
             #region Mod ItemProto
 
-            foreach (ItemProtoJson itemjson in ItemModProtos())
-            {
-                if (!ProjectOrbitalRing.MoreMegaStructureCompatibility || !IsMoreMegaStructureItem(itemjson.ID)) {
-                    itemjson.GridIndex = GetTableID(itemjson.GridIndex);
-                    itemIconDescs.Add(itemjson.ID, IconDescUtils.GetIconDesc(itemjson.ID));
-                    LDBTool.PreAddProto(itemjson.ToProto());
+            foreach (ItemProtoJson protoJson in GetJsonContent<ItemProtoJson>("items_mod")) {
+                if (!ProjectOrbitalRing.MoreMegaStructureCompatibility || !IsMoreMegaStructureItem(protoJson.ID)) {
+                    protoJson.GridIndex = GetTableID(protoJson.GridIndex);
+                    itemIconDescs.Add(protoJson.ID, IconDescUtils.GetIconDesc(protoJson.ID));
+                    LDBTool.PreAddProto(protoJson.ToProto());
                 }
             }
 
-        #endregion
+            #endregion
 
-        #region Vanilla ItemProto
+            #region Vanilla ItemProto
 
-            foreach (ItemProtoJson itemjson in ItemVanillaProtos())
-            {
-                itemjson.GridIndex = GetTableID(itemjson.GridIndex);
-                ItemProto proto = LDB.items.Select(itemjson.ID);
+            foreach (ItemProtoJson protoJson in GetJsonContent<ItemProtoJson>("items_vanilla")) {
+                protoJson.GridIndex = GetTableID(protoJson.GridIndex);
+                ItemProto proto = LDB.items.Select(protoJson.ID);
 
-                if (proto.IconPath != itemjson.IconPath) { itemIconDescs.Add(itemjson.ID, IconDescUtils.GetIconDesc(itemjson.ID)); }
+                if (proto.IconPath != protoJson.IconPath) {
+                    itemIconDescs.Add(protoJson.ID, IconDescUtils.GetIconDesc(protoJson.ID));
+                }
 
-                itemjson.ToProto(proto);
+                protoJson.ToProto(proto);
             }
 
-        #endregion
+            #endregion
 
-        #region RecipeProto
+            #region RecipeProto
 
-            foreach (RecipeProtoJson recipeJson in RecipeProtos())
-            {
-                if (!ProjectOrbitalRing.MoreMegaStructureCompatibility || !(recipeJson.ID >= 530 && recipeJson.ID <= 536))
-                {
-                    recipeJson.GridIndex = GetTableID(recipeJson.GridIndex);
+            foreach (RecipeProtoJson protoJson in GetJsonContent<RecipeProtoJson>("recipes")) {
+                if (!ProjectOrbitalRing.MoreMegaStructureCompatibility || !(protoJson.ID >= 530 && protoJson.ID <= 536)) {
+                    protoJson.GridIndex = GetTableID(protoJson.GridIndex);
 
-                    if (LDB.recipes.Exist(recipeJson.ID))
-                    {
-                        recipeJson.ToProto(LDB.recipes.Select(recipeJson.ID));
-                    }
-                    else
-                    {
-                        LDBTool.PreAddProto(recipeJson.ToProto());
+                    if (LDB.recipes.Exist(protoJson.ID)) {
+                        protoJson.ToProto(LDB.recipes.Select(protoJson.ID));
+                    } else {
+                        LDBTool.PreAddProto(protoJson.ToProto());
                     }
                 }
             }
 
-        #endregion
+            #endregion
 
-        #region TutorialProto
+            #region TutorialProto
 
-            TutorialProtoJson[] tutorialProtos = TutorialProtos();
-
-            foreach (TutorialProtoJson json in tutorialProtos) { LDBTool.PreAddProto(json.ToProto()); }
+            foreach (TutorialProtoJson protoJson in GetJsonContent<TutorialProtoJson>("tutorials")) {
+                LDBTool.PreAddProto(protoJson.ToProto());
+            }
 
             #endregion
 
@@ -107,9 +104,11 @@ namespace ProjectOrbitalRing.Utils
 
         internal static void PrefabDescPostFix()
         {
-            PrefabDescJson[] prefabDescs = PrefabDescs();
+            PrefabDescJson[] prefabDescs = GetJsonContent<PrefabDescJson>("prefabDescs");
 
-            foreach (PrefabDescJson json in prefabDescs) { json.ToPrefabDesc(LDB.models.Select(json.ModelID).prefabDesc); }
+            foreach (PrefabDescJson json in prefabDescs) {
+                json.ToPrefabDesc(LDB.models.Select(json.ModelID).prefabDesc);
+            }
 
             PrefabDesc megaPumper = LDB.models.Select(ProtoID.M伺服天穹组件).prefabDesc;
             megaPumper.beaconSignalRadius = 0f;

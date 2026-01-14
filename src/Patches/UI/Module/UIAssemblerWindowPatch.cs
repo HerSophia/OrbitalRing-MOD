@@ -140,19 +140,19 @@ namespace ProjectOrbitalRing.Patches.UI
         // Token: 0x06000095 RID: 149 RVA: 0x00006604 File Offset: 0x00004804
         public static void ChangeAssemblerModuleData(UIAssemblerWindow __instance, AssemblerComponent assemblerComponent)
         {
-            AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(__instance.factorySystem.planet.id, __instance.assemblerId);
+            AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(__instance.factorySystem, __instance.assemblerId);
             int moduleId = AssemblerModulePatches.GetModuleId(assemblerComponent.recipeId);
             bool flag = (AssemblerModuleData.ItemId == moduleId || moduleId == 7617 && AssemblerModuleData.ItemId == 7618);
             if (!flag) {
                 bool flag2 = AssemblerModuleData.ItemCount != 0;
                 if (flag2) {
-                    AssemblerModulePatches.SetEmpty(__instance.factorySystem.planet.id, __instance.assemblerId, true);
+                    AssemblerModulePatches.SetEmpty(__instance.factorySystem, __instance.assemblerId, true);
                 }
                 AssemblerModuleData.ItemId = 0;
                 AssemblerModuleData.ItemCount = 0;
                 AssemblerModuleData.ItemInc = 0;
                 AssemblerModuleData.NeedCount = 1;
-                AssemblerModulePatches.SetAssemblerModuleData(__instance.factorySystem.planet.id, __instance.assemblerId, AssemblerModuleData);
+                AssemblerModulePatches.SetAssemblerModuleData(__instance.factorySystem, __instance.assemblerId, AssemblerModuleData);
             }
             ItemProto itemProto = LDB.items.Select(moduleId);
             UIAssemblerWindowPatch._icon.sprite = (AssemblerModuleData.ItemCount > 0) ? itemProto._iconSprite : _tagNotSelectedSprite;
@@ -175,7 +175,7 @@ namespace ProjectOrbitalRing.Patches.UI
                     ref AssemblerComponent ptr = ref __instance.factorySystem.assemblerPool[__instance.assemblerId];
                     bool flag2 = ptr.id != __instance.assemblerId;
                     if (!flag2) {
-                        AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(__instance.factorySystem.planet.id, __instance.assemblerId);
+                        AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(__instance.factorySystem, __instance.assemblerId);
                         ref AssemblerComponent Assembler = ref __instance.factorySystem.assemblerPool[__instance.assemblerId];
                         int moduleId = AssemblerModulePatches.GetModuleId(Assembler.recipeId);
                         bool flag3 = (moduleId == 7616) && (AssemblerModuleData.ItemCount < AssemblerModuleData.NeedCount);
@@ -207,7 +207,7 @@ namespace ProjectOrbitalRing.Patches.UI
                     if (flag3) {
                         player.SetHandItems(0, 0, 0);
                     } else {
-                        AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(assemblerWindow.factorySystem.planet.id, assemblerWindow.assemblerId);
+                        AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(assemblerWindow.factorySystem, assemblerWindow.assemblerId);
                         bool flag4 = player.inhandItemId == 0 || player.inhandItemCount <= 0;
                         if (!flag4) {
                             int moduleId = AssemblerModulePatches.GetModuleId(ptr.recipeId);
@@ -234,7 +234,7 @@ namespace ProjectOrbitalRing.Patches.UI
                                     AssemblerModuleData.ItemInc = num2;
                                     //UIAssemblerWindowPatch._count.text = AssemblerModuleData.ItemCount.ToString();
                                     //UIAssemblerWindowPatch._count.color = ((AssemblerModuleData.NeedCount == AssemblerModuleData.ItemCount) ? assemblerWindow.workNormalColor : assemblerWindow.workStoppedColor);
-                                    AssemblerModulePatches.SetAssemblerModuleData(assemblerWindow.factorySystem.planet.id, assemblerWindow.assemblerId, AssemblerModuleData);
+                                    AssemblerModulePatches.SetAssemblerModuleData(assemblerWindow.factorySystem, assemblerWindow.assemblerId, AssemblerModuleData);
                                     player.AddHandItemCount_Unsafe(-num);
                                     player.SetHandItemInc_Unsafe(player.inhandItemInc - num2);
                                     bool flag9 = player.inhandItemCount <= 0;

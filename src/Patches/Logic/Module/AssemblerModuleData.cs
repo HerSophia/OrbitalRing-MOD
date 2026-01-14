@@ -11,7 +11,5 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
         public int ItemInc { get; set; }
 
         public int NeedCount { get; set; }
-
-        public int GlobalIncLevel { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using HarmonyLib;
 using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
+using ProjectOrbitalRing.Patches.UI.PlanetFocus;
 using ProjectOrbitalRing.Patches.UI.Utils;
 using ProjectOrbitalRing.Utils;
+using System;
 using System.Security.Cryptography;
 using Unity.Jobs.LowLevel.Unsafe;
 using static ProjectOrbitalRing.ProjectOrbitalRing;
@@ -39,16 +41,22 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
                 __instance.ShutAllFunctionWindow();
                 __instance.ShutPlayerInventory();
 
-                ProjectOrbitalRing.OrbitalRingStorageWindow.OpenWindow();
+                //ProjectOrbitalRing.OrbitalRingStorageWindow.OpenWindow();
 
                 var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(factory.planetId);
                 if (planetOrbitalRingData == null) return;
                 for (int ringId = 0; ringId < planetOrbitalRingData.Rings.Count; ringId++) {
-                    //if (!planetOrbitalRingData.Rings[ringId].IsOneFull()) continue;
+                    if (!planetOrbitalRingData.Rings[ringId].IsOneFull()) continue;
                     for (int i = 0; i < planetOrbitalRingData.Rings[ringId].Capacity; i++) {
                         var pair = planetOrbitalRingData.Rings[ringId].GetPair(i);
                         if (pair.OrbitalStationPoolId == objId) {
+                            ProjectOrbitalRing.OrbitalRingStorageWindow.OpenWindow();
                             ProjectOrbitalRing.OrbitalRingStorageWindow.SetStorageData(planetOrbitalRingData.Rings[ringId].orbitalRingStorage.storageItem);
+                            if (UIOrbitalRingStorageWindow.CurPlanetId != factory.planetId || UIOrbitalRingStorageWindow.CurStorageIndex != ringId) {
+                                UIOrbitalRingStorageWindow.CurPlanetId = factory.planetId;
+                                UIOrbitalRingStorageWindow.CurStorageIndex = ringId;
+                                //ProjectOrbitalRing.CurPlanetIdAndStorageIndex.OnPlanetChanged(UIOrbitalRingStorageWindow.CurPlanetIdAndStorageIndex);
+                            }
                             return;
                         }
                     }

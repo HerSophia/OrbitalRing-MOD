@@ -246,9 +246,9 @@ namespace ProjectOrbitalRing.Patches.UI {
 
         [HarmonyPatch(typeof(LabComponent), nameof(LabComponent.InternalUpdateResearch))]
         [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> LabComponent_InternalUpdateResearch_Transpiler(
-            IEnumerable<CodeInstruction> instructions,
-            ILGenerator ilGenerator) {
+        public static IEnumerable<CodeInstruction> LabComponent_InternalUpdateResearch_Transpiler(IEnumerable<CodeInstruction> instructions,
+            ILGenerator ilGenerator)
+        {
             var matcher = new CodeMatcher(instructions, ilGenerator);
 
             matcher.MatchForward(false, new CodeMatch(OpCodes.Ldarg_0),
@@ -265,6 +265,7 @@ namespace ProjectOrbitalRing.Patches.UI {
             var label = matcher2.Advance(5).Operand;
 
             matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldarg_2),
                 new CodeInstruction(OpCodes.Call,
                     AccessTools.Method(typeof(ResearchLabPatches),
                         nameof(LabComponent_InternalUpdateResearch_Patch_Method))),
@@ -319,8 +320,9 @@ namespace ProjectOrbitalRing.Patches.UI {
             return false;
         }
 
-        public static int LabComponent_InternalUpdateResearch_Patch_Method(ref LabComponent labComponent) {
-            int speed = (int)(GameMain.history.techSpeed + 2.0);
+        public static int LabComponent_InternalUpdateResearch_Patch_Method(ref LabComponent labComponent, float techSpeed)
+        {
+            var speed = (int)(techSpeed + 2.0);
 
             for (var i = 0; i < LabComponent.matrixIds.Length; i++) {
                 if (labComponent.matrixPoints[i] <= 0) continue;

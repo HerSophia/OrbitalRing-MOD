@@ -47,6 +47,6 @@ namespace ProjectOrbitalRing
         public string Description { get; set; } = "构建星环，探索宇宙。Constructing the Orbital Ring, Exploring the Universe.";
 
         [JsonProperty("dependencies")]
-        public string[] Dependencies { get; set; } = { "CommonAPI-CommonAPI-1.6.5", "nebula-NebulaMultiplayerModApi-2.0.0", };
+        public string[] Dependencies { get; set; } = { "CommonAPI-CommonAPI-1.6.5", "nebula-NebulaMultiplayerModApi-2.1.0", };
     }
 }

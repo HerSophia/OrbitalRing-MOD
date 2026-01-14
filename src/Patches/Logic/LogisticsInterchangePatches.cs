@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using System.Security.Cryptography;
 using HarmonyLib;
 using UnityEngine;
 using ProjectOrbitalRing.Utils;
-using GalacticScale;
-using UnityEngine.Playables;
-using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
 using static ProjectOrbitalRing.ProjectOrbitalRing;
 using static System.Reflection.Emit.OpCodes;
-using System.Text.RegularExpressions;
 using System.IO;
-using System.Reflection;
 
 namespace ProjectOrbitalRing.Patches.Logic
 {
@@ -62,8 +56,22 @@ namespace ProjectOrbitalRing.Patches.Logic
             };
             for (int i = 12; i < newPortPoses.Length; i++)
             {
-                newPortPoses[i].position.y = 17 * 1.3333333f;
+                newPortPoses[i].position.y = 17 * 1.3333333f - 0.01f;
             }
+
+            //newPortPoses[12].position.z += 0.4f;
+            //newPortPoses[13].position.z += 0.4f;
+            //newPortPoses[14].position.z += 0.4f;
+            //newPortPoses[15].position.x += -0.4f;
+            //newPortPoses[16].position.x += -0.4f;
+            //newPortPoses[17].position.x += -0.4f;
+            //newPortPoses[18].position.z += -0.4f;
+            //newPortPoses[19].position.z += -0.4f;
+            //newPortPoses[20].position.z += -0.4f;
+            //newPortPoses[21].position.x += 0.4f;
+            //newPortPoses[22].position.x += 0.4f;
+            //newPortPoses[23].position.x += 0.4f;
+
             megaPumper.portPoses = newPortPoses;
 
             DelStationPose(50); // 太空物流港
@@ -102,6 +110,19 @@ namespace ProjectOrbitalRing.Patches.Logic
             {
                 newPortPoses[i].position.y = 17 * 1.3333333f;
             }
+//[Error: OrbitalRing] portPoses x 1.256 y - 0.01 z 2.7
+//[Error: OrbitalRing] portPoses x 0 y - 0.01 z 2.7
+//[Error: OrbitalRing] portPoses x -1.256 y - 0.01 z 2.7
+//[Error: OrbitalRing] portPoses x -2.7 y - 0.01 z 1.256
+//[Error: OrbitalRing] portPoses x -2.7 y - 0.01 z 0
+//[Error: OrbitalRing] portPoses x -2.7 y - 0.01 z - 1.256
+//[Error: OrbitalRing] portPoses x -1.256 y - 0.01 z - 2.7
+//[Error: OrbitalRing] portPoses x 0 y - 0.01 z - 2.7
+//[Error: OrbitalRing] portPoses x 1.256 y - 0.01 z - 2.7
+//[Error: OrbitalRing] portPoses x 2.7 y - 0.01 z - 1.256
+//[Error: OrbitalRing] portPoses x 2.7 y - 0.01 z 0
+//[Error: OrbitalRing] portPoses x 2.7 y - 0.01 z 1.256
+
             megaPumper.portPoses = newPortPoses;
 
             megaPumper = LDB.models.Select(ProtoID.M轨道空投站).prefabDesc;
@@ -311,258 +332,328 @@ namespace ProjectOrbitalRing.Patches.Logic
             return false;
         }
 
-        /*
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.SetEntityCapacity))]
-        [HarmonyPrefix]
-        public static bool SetEntityCapacityPatch(PlanetFactory __instance, int newCapacity)
+        public static bool IsBeltCanTooFar(int itemId)
         {
-            EntityData[] array = __instance.entityPool;
-            __instance.entityPool = new EntityData[newCapacity];
-            __instance.entityRecycle = new int[newCapacity];
-            if (array != null)
-            {
-                Array.Copy(array, __instance.entityPool, (newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity);
+            if (itemId == ProtoID.I物流立交 || itemId == ProtoID.I太空电梯 || itemId == ProtoID.I轨道空投引导站) {
+                return true;
             }
-
-            AnimData[] array2 = __instance.entityAnimPool;
-            __instance.entityAnimPool = new AnimData[newCapacity];
-            if (array2 != null)
-            {
-                Array.Copy(array2, __instance.entityAnimPool, (newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity);
-            }
-
-            SignData[] array3 = __instance.entitySignPool;
-            __instance.entitySignPool = new SignData[newCapacity];
-            if (array3 != null)
-            {
-                Array.Copy(array3, __instance.entitySignPool, (newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity);
-            }
-
-            int[] array4 = __instance.entityConnPool;
-            __instance.entityConnPool = new int[newCapacity * 24];
-            if (array4 != null)
-            {
-                Array.Copy(array4, __instance.entityConnPool, ((newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity) * 24);
-            }
-
-            Mutex[] array5 = __instance.entityMutexs;
-            __instance.entityMutexs = new Mutex[newCapacity];
-            if (array5 != null)
-            {
-                Array.Copy(array5, __instance.entityMutexs, __instance.entityCapacity);
-            }
-
-            int[][] array6 = __instance.entityNeeds;
-            __instance.entityNeeds = new int[newCapacity][];
-            if (array6 != null)
-            {
-                Array.Copy(array6, __instance.entityNeeds, (newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity);
-            }
-
-            __instance.entityCapacity = newCapacity;
-
             return false;
         }
-        // BuildTool_Path的DeterminePreviews，EBuildCondition.Occupied时提示接口占用，由PlanetFactory entityConnPool 数组决定，起码是决定一半
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.RemoveEntityWithComponents))]
-        [HarmonyPostfix]
-        public static void RemoveEntityWithComponentsPatch(PlanetFactory __instance, int id)
+        // 修复17层接口在蓝图粘贴时报距离太远无法建造的问题
+        [HarmonyPatch(typeof(BuildTool_BlueprintPaste), nameof(BuildTool_BlueprintPaste.CheckBuildConditions))]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> BuildTool_BlueprintPaste_CheckBuildConditions_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            if (id != 0 && __instance.entityPool[id].id != 0)
-            {
-                Array.Clear(__instance.entityConnPool, id * 24, 24);
-            }
+            var matcher = new CodeMatcher(instructions);
+
+            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldc_I4, 2307));
+            object V_9 = matcher.Advance(-4).Operand;
+            object IL_0C59 = matcher.Advance(-1).Operand;
+
+            matcher.Advance(1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc, V_9),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(BuildPreview), nameof(BuildPreview.output))),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(BuildPreview), nameof(BuildPreview.item))),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Proto), nameof(Proto.ID))),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(LogisticsInterchangePatches), nameof(IsBeltCanTooFar))),
+                new CodeInstruction(OpCodes.Brtrue, IL_0C59)
+            );
+
+            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldc_I4, 2307));
+            matcher.Advance(1);
+
+            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldc_I4, 2307));
+            object IL_0D1D = matcher.Advance(-5).Operand;
+
+            matcher.Advance(1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc, V_9),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(BuildPreview), nameof(BuildPreview.input))),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(BuildPreview), nameof(BuildPreview.item))),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Proto), nameof(Proto.ID))),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(LogisticsInterchangePatches), nameof(IsBeltCanTooFar))),
+                new CodeInstruction(OpCodes.Brtrue, IL_0D1D)
+            );
+
+            //matcher.LogInstructionEnumeration();
+            return matcher.InstructionEnumeration();
         }
 
-        
-
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.WriteObjectConnDirect))]
+        // 修复空轨可以用蓝图粘贴建造在16层以下的问题
         [HarmonyPrefix]
-        public static bool WriteObjectConnDirectPatch(PlanetFactory __instance, int objId, int slot, bool isOutput, int otherObjId, int otherSlot)
+        [HarmonyPatch(typeof(BuildTool_BlueprintPaste), "CheckBuildConditions")]
+        public static bool BlueprintPaste_CheckBuildConditionsPrePatch(BuildTool_BlueprintPaste __instance, ref bool __result)
         {
-            if (objId == 0)
-            {
-                return false;
-            }
+            int count = __instance.bpPool.Length;
+            BuildPreview buildPreview;
+            int previewItem;
+            for (int i = 0; i < count; i++) {
+                buildPreview = __instance.bpPool[i];
+                if (buildPreview == null || buildPreview.item == null) continue;
+                previewItem = buildPreview.item.ID;
 
-            int num = 0;
-            if (otherObjId != 0)
-            {
-                bool num2 = otherObjId > 0;
-                otherObjId = (num2 ? otherObjId : (-otherObjId));
-                num = otherObjId | (otherSlot << 24) | (((!isOutput) ? 1 : 0) << 29);
-                if (!num2)
-                {
-                    num = -num;
+                if (previewItem == ProtoID.I空轨) {
+                    float num11 = 16 * 1.3333333f + __instance.planet.realRadius;
+                    if (buildPreview.lpos.sqrMagnitude < num11 * num11) {
+                        buildPreview.condition = (EBuildCondition)95;
+                        __instance.AddErrorMessage((EBuildCondition)95, buildPreview);
+                        continue;
+                    }
                 }
             }
-            if (objId > 0)
-            {
-                __instance.entityConnPool[objId * 24 + slot] = num;
-            }
-            else if (objId < 0)
-            {
-                __instance.prebuildConnPool[-objId * 24 + slot] = num;
-            }
-            return false;
+            return true;
         }
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ClearObjectConnDirect))]
-        [HarmonyPrefix]
-        public static bool ClearObjectConnDirectPatch(PlanetFactory __instance, int objId, int slot)
-        {
-            if (objId != 0)
+            /*
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.SetEntityCapacity))]
+            [HarmonyPrefix]
+            public static bool SetEntityCapacityPatch(PlanetFactory __instance, int newCapacity)
             {
+                EntityData[] array = __instance.entityPool;
+                __instance.entityPool = new EntityData[newCapacity];
+                __instance.entityRecycle = new int[newCapacity];
+                if (array != null)
+                {
+                    Array.Copy(array, __instance.entityPool, (newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity);
+                }
+
+                AnimData[] array2 = __instance.entityAnimPool;
+                __instance.entityAnimPool = new AnimData[newCapacity];
+                if (array2 != null)
+                {
+                    Array.Copy(array2, __instance.entityAnimPool, (newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity);
+                }
+
+                SignData[] array3 = __instance.entitySignPool;
+                __instance.entitySignPool = new SignData[newCapacity];
+                if (array3 != null)
+                {
+                    Array.Copy(array3, __instance.entitySignPool, (newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity);
+                }
+
+                int[] array4 = __instance.entityConnPool;
+                __instance.entityConnPool = new int[newCapacity * 24];
+                if (array4 != null)
+                {
+                    Array.Copy(array4, __instance.entityConnPool, ((newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity) * 24);
+                }
+
+                Mutex[] array5 = __instance.entityMutexs;
+                __instance.entityMutexs = new Mutex[newCapacity];
+                if (array5 != null)
+                {
+                    Array.Copy(array5, __instance.entityMutexs, __instance.entityCapacity);
+                }
+
+                int[][] array6 = __instance.entityNeeds;
+                __instance.entityNeeds = new int[newCapacity][];
+                if (array6 != null)
+                {
+                    Array.Copy(array6, __instance.entityNeeds, (newCapacity > __instance.entityCapacity) ? __instance.entityCapacity : newCapacity);
+                }
+
+                __instance.entityCapacity = newCapacity;
+
+                return false;
+            }
+            // BuildTool_Path的DeterminePreviews，EBuildCondition.Occupied时提示接口占用，由PlanetFactory entityConnPool 数组决定，起码是决定一半
+
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.RemoveEntityWithComponents))]
+            [HarmonyPostfix]
+            public static void RemoveEntityWithComponentsPatch(PlanetFactory __instance, int id)
+            {
+                if (id != 0 && __instance.entityPool[id].id != 0)
+                {
+                    Array.Clear(__instance.entityConnPool, id * 24, 24);
+                }
+            }
+
+
+
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.WriteObjectConnDirect))]
+            [HarmonyPrefix]
+            public static bool WriteObjectConnDirectPatch(PlanetFactory __instance, int objId, int slot, bool isOutput, int otherObjId, int otherSlot)
+            {
+                if (objId == 0)
+                {
+                    return false;
+                }
+
+                int num = 0;
+                if (otherObjId != 0)
+                {
+                    bool num2 = otherObjId > 0;
+                    otherObjId = (num2 ? otherObjId : (-otherObjId));
+                    num = otherObjId | (otherSlot << 24) | (((!isOutput) ? 1 : 0) << 29);
+                    if (!num2)
+                    {
+                        num = -num;
+                    }
+                }
                 if (objId > 0)
                 {
-                    __instance.entityConnPool[objId * 24 + slot] = 0;
+                    __instance.entityConnPool[objId * 24 + slot] = num;
                 }
                 else if (objId < 0)
                 {
-                    __instance.prebuildConnPool[-objId * 24 + slot] = 0;
+                    __instance.prebuildConnPool[-objId * 24 + slot] = num;
                 }
+                return false;
             }
-            return false;
-        }
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ClearObjectConn), new Type[] { typeof(int) })]
-        [HarmonyPrefix]
-        public static bool ClearObjectConnPatch(PlanetFactory __instance, int objId)
-        {
-            if (objId > 0) {
-                int num = objId * 24;
-                for (int i = 0; i < 24; i++) {
-                    if (__instance.entityConnPool[num + i] != 0) {
-                        __instance.ClearObjectConn(objId, i);
-                    }
-                }
-            } else {
-                if (objId >= 0) {
-                    return false;
-                }
-
-                int num2 = -objId * 24;
-                for (int j = 0; j < 24; j++) {
-                    if (__instance.prebuildConnPool[num2 + j] != 0) {
-                        __instance.ClearObjectConn(objId, j);
-                    }
-                }
-            }
-            return false;
-        }
-
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.WriteObjectConn))]
-        [HarmonyPrefix]
-        public static bool WriteObjectConnPatch(PlanetFactory __instance, int objId, int slot, bool isOutput, int otherObjId, int otherSlot)
-        {
-            if (otherSlot == -1)
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ClearObjectConnDirect))]
+            [HarmonyPrefix]
+            public static bool ClearObjectConnDirectPatch(PlanetFactory __instance, int objId, int slot)
             {
-                if (otherObjId > 0)
+                if (objId != 0)
                 {
-                    for (int i = 4; i < 12; i++)
+                    if (objId > 0)
                     {
-                        if (__instance.entityConnPool[otherObjId * 24 + i] == 0)
-                        {
-                            otherSlot = i;
-                            break;
+                        __instance.entityConnPool[objId * 24 + slot] = 0;
+                    }
+                    else if (objId < 0)
+                    {
+                        __instance.prebuildConnPool[-objId * 24 + slot] = 0;
+                    }
+                }
+                return false;
+            }
+
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ClearObjectConn), new Type[] { typeof(int) })]
+            [HarmonyPrefix]
+            public static bool ClearObjectConnPatch(PlanetFactory __instance, int objId)
+            {
+                if (objId > 0) {
+                    int num = objId * 24;
+                    for (int i = 0; i < 24; i++) {
+                        if (__instance.entityConnPool[num + i] != 0) {
+                            __instance.ClearObjectConn(objId, i);
+                        }
+                    }
+                } else {
+                    if (objId >= 0) {
+                        return false;
+                    }
+
+                    int num2 = -objId * 24;
+                    for (int j = 0; j < 24; j++) {
+                        if (__instance.prebuildConnPool[num2 + j] != 0) {
+                            __instance.ClearObjectConn(objId, j);
                         }
                     }
                 }
-                else if (otherObjId < 0)
+                return false;
+            }
+
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.WriteObjectConn))]
+            [HarmonyPrefix]
+            public static bool WriteObjectConnPatch(PlanetFactory __instance, int objId, int slot, bool isOutput, int otherObjId, int otherSlot)
+            {
+                if (otherSlot == -1)
                 {
-                    for (int j = 4; j < 12; j++)
+                    if (otherObjId > 0)
                     {
-                        if (__instance.prebuildConnPool[-otherObjId * 24 + j] == 0)
+                        for (int i = 4; i < 12; i++)
                         {
-                            otherSlot = j;
-                            break;
+                            if (__instance.entityConnPool[otherObjId * 24 + i] == 0)
+                            {
+                                otherSlot = i;
+                                break;
+                            }
+                        }
+                    }
+                    else if (otherObjId < 0)
+                    {
+                        for (int j = 4; j < 12; j++)
+                        {
+                            if (__instance.prebuildConnPool[-otherObjId * 24 + j] == 0)
+                            {
+                                otherSlot = j;
+                                break;
+                            }
                         }
                     }
                 }
-            }
 
-            if (otherSlot >= 0)
-            {
-                __instance.ClearObjectConn(objId, slot);
-                __instance.ClearObjectConn(otherObjId, otherSlot);
-                __instance.WriteObjectConnDirect(objId, slot, isOutput, otherObjId, otherSlot);
-                __instance.WriteObjectConnDirect(otherObjId, otherSlot, !isOutput, objId, slot);
-            }
-            return false;
-        }
-
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.HandleObjectConnChangeWhenBuild))]
-        [HarmonyPrefix]
-        public static bool HandleObjectConnChangeWhenBuildPatch(PlanetFactory __instance, int oldId, int newId)
-        {
-            for (int i = 0; i < 24; i++)
-            {
-                __instance.ReadObjectConn(oldId, i, out var isOutput, out var otherObjId, out var otherSlot);
-                if (otherObjId != 0)
+                if (otherSlot >= 0)
                 {
-                    __instance.WriteObjectConn(newId, i, isOutput, otherObjId, otherSlot);
+                    __instance.ClearObjectConn(objId, slot);
+                    __instance.ClearObjectConn(otherObjId, otherSlot);
+                    __instance.WriteObjectConnDirect(objId, slot, isOutput, otherObjId, otherSlot);
+                    __instance.WriteObjectConnDirect(otherObjId, otherSlot, !isOutput, objId, slot);
                 }
+                return false;
             }
 
-            if (oldId > 0)
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.HandleObjectConnChangeWhenBuild))]
+            [HarmonyPrefix]
+            public static bool HandleObjectConnChangeWhenBuildPatch(PlanetFactory __instance, int oldId, int newId)
             {
-                Array.Clear(__instance.entityConnPool, oldId * 24, 24);
+                for (int i = 0; i < 24; i++)
+                {
+                    __instance.ReadObjectConn(oldId, i, out var isOutput, out var otherObjId, out var otherSlot);
+                    if (otherObjId != 0)
+                    {
+                        __instance.WriteObjectConn(newId, i, isOutput, otherObjId, otherSlot);
+                    }
+                }
+
+                if (oldId > 0)
+                {
+                    Array.Clear(__instance.entityConnPool, oldId * 24, 24);
+                }
+                else
+                {
+                    Array.Clear(__instance.prebuildConnPool, -oldId * 24, 24);
+                }
+                return false;
             }
-            else
+
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ReadObjectConn))]
+            [HarmonyPrefix]
+            public static bool ReadObjectConnPatch(PlanetFactory __instance, int objId, int slot, out bool isOutput, out int otherObjId, out int otherSlot)
             {
-                Array.Clear(__instance.prebuildConnPool, -oldId * 24, 24);
+                isOutput = false;
+                otherObjId = 0;
+                otherSlot = 0;
+                if (DSPGame.IsMenuDemo || GameMain.mainPlayer == null) {
+                    return true;
+                }
+                if (objId > 0) {
+                    if (objId >= __instance.entityCapacity) {
+                        __instance.SetEntityCapacity(__instance.entityCapacity * 2);
+                    }
+                    int num = __instance.entityConnPool[objId * 24 + slot];
+                    if (num == 0) {
+                        return false;
+                    }
+                    bool flag = num > 0;
+                    num = (flag ? num : (-num));
+                    isOutput = ((num & 536870912) == 0);
+                    otherObjId = (num & 16777215);
+                    otherSlot = (num & 536870911) >> 24;
+                    if (!flag) {
+                        otherObjId = -otherObjId;
+                        return false;
+                    }
+                } else if (objId < 0) {
+                    int num2 = __instance.prebuildConnPool[-objId * 24 + slot];
+                    if (num2 == 0) {
+                        return false;
+                    }
+                    bool flag2 = num2 > 0;
+                    num2 = (flag2 ? num2 : (-num2));
+                    isOutput = ((num2 & 536870912) == 0);
+                    otherObjId = (num2 & 16777215);
+                    otherSlot = (num2 & 536870911) >> 24;
+                    if (!flag2) {
+                        otherObjId = -otherObjId;
+                    }
+                }
+                return false;
             }
-            return false;
-        }
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ReadObjectConn))]
-        [HarmonyPrefix]
-        public static bool ReadObjectConnPatch(PlanetFactory __instance, int objId, int slot, out bool isOutput, out int otherObjId, out int otherSlot)
-        {
-            isOutput = false;
-            otherObjId = 0;
-            otherSlot = 0;
-            if (DSPGame.IsMenuDemo || GameMain.mainPlayer == null) {
-                return true;
-            }
-            if (objId > 0) {
-                if (objId >= __instance.entityCapacity) {
-                    __instance.SetEntityCapacity(__instance.entityCapacity * 2);
-                }
-                int num = __instance.entityConnPool[objId * 24 + slot];
-                if (num == 0) {
-                    return false;
-                }
-                bool flag = num > 0;
-                num = (flag ? num : (-num));
-                isOutput = ((num & 536870912) == 0);
-                otherObjId = (num & 16777215);
-                otherSlot = (num & 536870911) >> 24;
-                if (!flag) {
-                    otherObjId = -otherObjId;
-                    return false;
-                }
-            } else if (objId < 0) {
-                int num2 = __instance.prebuildConnPool[-objId * 24 + slot];
-                if (num2 == 0) {
-                    return false;
-                }
-                bool flag2 = num2 > 0;
-                num2 = (flag2 ? num2 : (-num2));
-                isOutput = ((num2 & 536870912) == 0);
-                otherObjId = (num2 & 16777215);
-                otherSlot = (num2 & 536870911) >> 24;
-                if (!flag2) {
-                    otherObjId = -otherObjId;
-                }
-            }
-            return false;
-        }
+            */
 
-        */
-
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.Import))]
+            [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.Import))]
         [HarmonyPrefix]
         public static bool ImportPatch(PlanetFactory __instance, int _index, GameData _gameData, Stream s, BinaryReader r)
         {

@@ -27,7 +27,7 @@ namespace ProjectOrbitalRing.Patches.Logic
             ProtoID.I铀燃料棒, //ProtoID.I钚燃料棒, ProtoID.IMOX燃料棒,      //
             ProtoID.I氘核燃料棒, //ProtoID.I氦三燃料棒, ProtoID.I氘氦混合聚变燃料棒, //
             ProtoID.I反物质燃料棒, ProtoID.I奇异燃料棒,                    //
-            ProtoID.I满蓄电器, 6219,
+            ProtoID.I满蓄电器mk2, ProtoID.I满蓄电器mk1, ProtoID.I能量碎片,
         };
         
         [HarmonyPatch(typeof(Mecha), nameof(Mecha.GenerateEnergy))]

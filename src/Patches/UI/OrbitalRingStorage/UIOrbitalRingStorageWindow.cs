@@ -1,4 +1,6 @@
-﻿using ProjectOrbitalRing.Patches.UI.Utils;
+﻿using ProjectOrbitalRing.Patches.Logic;
+using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
+using ProjectOrbitalRing.Patches.UI.Utils;
 using ProjectOrbitalRing.Utils;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using static ProjectOrbitalRing.Patches.Logic.TheMountainMovingMappings;
 using static ProjectOrbitalRing.Patches.UI.Utils.MyWindowCtl;
 using static ProjectOrbitalRing.Patches.UI.Utils.Util;
 
@@ -23,6 +26,9 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
         private RectTransform _tab1;
 
         private static Sprite _tagNotSelectedSprite;
+
+        internal static int CurPlanetId;
+        internal static int CurStorageIndex;
 
         internal static UIOrbitalRingStorageWindow CreateWindow() =>
             CreateWindow<UIOrbitalRingStorageWindow>("UIOrbitalRingStorageWindow", "星环共享空间".TranslateFromJson());
@@ -53,9 +59,36 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
 
                     NormalizeRectWithTopLeft(iconBtn.transform, 0 + j * 110, 60 + i * 60, _tab1);
                     NormalizeRectWithTopLeft(_iconTexts[i * 10 + j].transform, 55 + j * 110, 72 + i * 60, _tab1);
+
+                    int id = i * 10 + j;
+                    iconBtn.onClick += _ => OnIconBtnClick(id);
                 }
             }
             _tagNotSelectedSprite = _iconImgs[0].sprite;
+        }
+
+        private void OnIconBtnClick(int i)
+        {
+            Player player = GameMain.mainPlayer;
+            if (_iconBtns[i].tips.itemId != 0) return;
+            if (player.inhandItemCount == 0) return;
+            int itemId = TheMountainMovingMappings.GetOreId(player.inhandItemId);
+            if (player.inhandItemId != itemId) {
+                var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(CurPlanetId);
+                if (planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem.ContainsKey(itemId)) {
+                    if (CheckOrbitalStorageHasVeinMountain(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem, itemId)) {
+                        planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem[itemId][0] += player.inhandItemCount;
+                        planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem[itemId][1] += player.inhandItemInc;
+                    } else {
+                        planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem.Add(itemId, new int[] { player.inhandItemCount, player.inhandItemInc });
+                    }
+                    player.SetHandItemId_Unsafe(0);
+                    player.SetHandItemCount_Unsafe(0);
+                    player.SetHandItemInc_Unsafe(0);
+
+                    SetStorageData(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem);
+                }
+            }
         }
 
         public void SetStorageData(Dictionary<int, int[]> storageItem)
@@ -79,6 +112,22 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
                 _iconTexts[i].text = "";
                 _iconBtns[i].tips.itemId = 0;
             }
+        }
+
+        public bool CheckOrbitalStorageHasVeinMountain(Dictionary<int, int[]> storageItem, int oreItemId)
+        {
+            if (storageItem.ContainsKey(oreItemId)) {
+                return true;
+            }
+            for (int i = 0; i < TheMountainMovingMappings.OreIdList.Length; i++) {
+                int oreId = TheMountainMovingMappings.OreIdList[i];
+                if (storageItem.ContainsKey(oreId)) {
+                    if (storageItem[oreId][0] > 201000) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }

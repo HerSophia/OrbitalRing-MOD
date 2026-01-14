@@ -14,25 +14,24 @@ namespace ProjectOrbitalRing.Utils
             { 6220, new FluidIconDesc(new Color32(137, 242, 178, 255)) }, // N2
             { 6234, new FluidIconDesc(new Color32(244, 255, 183, 255)) }, // He4
             { 6235, new FluidIconDesc(new Color32(210, 222, 142, 255)) }, // He3
+            { 6205, new FluidIconDesc(new Color32(90, 248, 244, 255)) },  // 甲烷
+            { 6208, new FluidIconDesc(new Color32(255, 0, 251, 255)) },    // 激素生长菌群
+            { 6212, new FluidIconDesc(new Color32(255, 0, 0, 255)) },  // 共生菌核
+            { 6202, new FluidIconDesc(new Color32(255, 86, 0, 255)) }, // 深层熔岩
 
             { 1114, new NoIconFluidIconDesc(new Color32(138, 83, 43, 255)) },   // Coal Oil
             { 6251, new NoIconFluidIconDesc(new Color32(255, 165, 0, 255)) }, // 岩浆
             { 7018, new NoIconFluidIconDesc(new Color32(97, 132, 186, 255)) },  // Ocean
-            { 7006, new NoIconFluidIconDesc(new Color32(218, 56, 70, 255)) },   // 苯
-            { 6212, new NoIconFluidIconDesc(new Color32(167, 255, 39, 255)) },  // 丙烯
-            { 6206, new NoIconFluidIconDesc(new Color32(191, 227, 255, 255)) }, // CO2
-            { 6205, new NoIconFluidIconDesc(new Color32(255, 128, 52, 255)) },  // SO2
             { 7009, new NoIconFluidIconDesc(new Color32(188, 182, 5, 255)) },   // JP10
-            { 7014, new NoIconFluidIconDesc(new Color32(104, 187, 154, 255)) }, // HCl
-            { 7015, new NoIconFluidIconDesc(new Color32(42, 97, 32, 255)) },    // FeCl3
-            { 7002, new NoIconFluidIconDesc(new Color32(195, 198, 234, 255)) }, // NH3
-            { 7017, new NoIconFluidIconDesc(new Color32(157, 56, 157, 255)) },  // HNO3
+            //{ 7014, new NoIconFluidIconDesc(new Color32(104, 187, 154, 255)) }, // HCl
+            { 6225, new NoIconFluidIconDesc(new Color32(42, 97, 32, 255)) },    // U238
+            { 7014, new NoIconFluidIconDesc(new Color32(195, 198, 234, 255)) }, // 导电银浆
+            //{ 7017, new NoIconFluidIconDesc(new Color32(157, 56, 157, 255)) },  // HNO3
+            { 6226, new NoIconFluidIconDesc(new Color32(167, 255, 39, 255)) },  // U235
 
-            { 6202, new FluidIconDesc(new Color32(210, 184, 147, 255)) }, // 深层熔岩
             { 6207, new OreIconDesc(new Color32(230, 239, 137, 255)) }, // S
             { 6222, new OreIconDesc(new Color32(106, 175, 78, 255)) },  // Rads
-            { 6225, new OreIconDesc(new Color32(130, 235, 139, 255)) }, // U
-            { 6226, new NoIconFluidIconDesc(new Color32(167, 255, 39, 255)) },  // U235
+            //{ 6225, new OreIconDesc(new Color32(130, 235, 139, 255)) }, // U
             { 6201, new OreIconDesc(new Color32(30, 29, 30, 255)) },    // Tungsten
 
             { 7803, new ComponentIconDesc(new Color32(228, 153, 255, 255)) }, // 光学芯片
@@ -77,12 +76,15 @@ namespace ProjectOrbitalRing.Utils
             { 6281, new FullIconDesc(new Color32(32, 33, 36, 255)) },    // 钨粉
             { 6256, new FullIconDesc(new Color32(56, 57, 62, 255)) },    // 煤粉
             { 6277, new FullIconDesc(new Color32(255, 255, 142, 255)) }, // 硫粉
+            { 7002, new FullIconDesc(new Color32(167, 255, 221, 255)) }, // 增生组织
+            { 7017, new FullIconDesc(new Color32(251, 251, 251, 255)) },  // 工业糖
 
             { 6203, new NoIconMetalIconDesc(new Color32(186, 176, 144, 255)) }, // 铝块
             { 7705, new NoIconMetalIconDesc(new Color32(43, 44, 48, 255)) },    // 钨块
             { 6227, new NoIconMetalIconDesc(new Color32(66, 222, 87, 255)) },   // 铀块
             { 6228, new NoIconMetalIconDesc(new Color32(239, 83, 90, 255)) },   // 钚块
-            { 6208, new NoIconMetalIconDesc(new Color32(93, 91, 83, 255)) },    // 混凝土
+            { 7006, new NoIconMetalIconDesc(new Color32(255, 177, 0, 255)) },   // 润滑油
+            { 7015, new NoIconMetalIconDesc(new Color32(0, 255, 157, 255)) },    // 工业醇
 
             { 6217, new RodIconDesc(new Color32(163, 145, 85, 255)) },  // 煤油棒
             { 6216, new RodIconDesc(new Color32(198, 207, 111, 255)) }, // JP10棒
@@ -91,6 +93,7 @@ namespace ProjectOrbitalRing.Utils
             { 6243, new RodIconDesc(new Color32(153, 157, 169, 255)) }, // MOX棒
             { 6244, new RodIconDesc(new Color32(245, 250, 105, 255)) }, // He3棒
             { 6245, new RodIconDesc(new Color32(147, 77, 255, 255)) },  // 混合棒
+            { 6206, new RodIconDesc(new Color32(255, 0, 251, 255)) }, // 激素营养液
 
             { 6278, new MartixIconDesc(new Color(1f, 0.4117f, 0.3137f, 0.1961f), new Color(1f, 0.2706f, 0f, 0f)) },
             { 6279, new MartixIconDesc(new Color(1f, 0.7530f, 0.7961f, 0.1961f), new Color(0.7804f, 0.0824f, 0.5216f, 0f)) },

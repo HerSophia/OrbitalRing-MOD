@@ -4833,17 +4833,19 @@
         "LevelCoef2": 0,
         "IsLabTech": false,
         "PreTechsMax": false,
-        "AddItems": [ // 4采矿机，6满蓄电器MK1，4电力感应塔，4熔炉
+        "AddItems": [ // 4采矿机，6满蓄电器MK1，4电力感应塔，4熔炉，1飞行舱说明书
             2301,
             6219,
             2201,
-            2302
+            2302,
+            7712
         ],
         "AddItemCounts": [
             4,
             6,
             4,
-            4
+            4,
+            1
         ],
         "PropertyOverrideItems": [],
         "PropertyItemCounts": []
@@ -8320,6 +8322,46 @@
         "Published": true,
         "Level": 1,
         "MaxLevel": 10000,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
+        "ID": 1990,
+        "Name": "移山计划",
+        "IconPath": "Icons/Tech/6006",
+        "Desc": "T移山计划",
+        "Conclusion": "T移山计划",
+        "IsHiddenTech": false,
+        "PreItem": [],
+        "Position": [
+            80.0,
+            20.0
+        ],
+        "PreTechs": [
+            1978
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6006
+        ],
+        "ItemPoints": [
+            10
+        ],
+        "HashNeeded": 2880000,
+        "UnlockRecipes": [
+            841
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
         "LevelCoef1": 0,
         "LevelCoef2": 0,
         "IsLabTech": true,

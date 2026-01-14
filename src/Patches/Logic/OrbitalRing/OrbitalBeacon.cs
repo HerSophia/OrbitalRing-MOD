@@ -16,8 +16,6 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
     internal class OrbitalBeacon
     {
         public static Dictionary<FactorySystem, int> SynapticLathePlanet = new Dictionary<FactorySystem, int>();
-        //private static Dictionary<LabComponent, int> SynapticLatheLabPool = new Dictionary<LabComponent, int>();
-        //private static bool UpdateSynapticLatheSpeed = false;
 
         [HarmonyPatch(typeof(BeaconComponent), nameof(BeaconComponent.GameTick))]
         [HarmonyPrefix]
@@ -64,21 +62,9 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                                 LogError($"Planet speed {SynapticLathePlanet[factory.factorySystem]}");
                                                 SynapticLathePlanet[factory.factorySystem] = SynapticLatheSpeed;
                                             }
-                                            //foreach (var planet in SynapticLathePlanet) {
-                                            //    LogError($"planet {planet.Key} speed {planet.Value}");
-                                            //    foreach (var lab in SynapticLatheLabPool) {
-                                            //        LogError($"lab {lab.Key.id} speed {lab.Value}");
-                                            //    }
-                                            //}
                                             storage[k].count -= (int)(storage[k].count * 0.03);
-                                            //UpdateSynapticLatheSpeed = true;
                                         } else if (storage[k].count <= 33 && SynapticLathePlanet.ContainsKey(factory.factorySystem)) {
                                             SynapticLathePlanet.Remove(factory.factorySystem);
-                                            //for (int l = 0; l < factory.factorySystem.labPool.Length; l++) {
-                                            //    if (SynapticLatheLabPool.ContainsKey(factory.factorySystem.labPool[l])) {
-                                            //        SynapticLatheLabPool.Remove(factory.factorySystem.labPool[l]);
-                                            //    }
-                                            //}
                                         }
                                         return false;
                                     }
@@ -89,11 +75,6 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 }
                 if (SynapticLathePlanet.ContainsKey(factory.factorySystem)) {
                     SynapticLathePlanet.Remove(factory.factorySystem);
-                    //for (int l = 0; l < factory.factorySystem.labPool.Length; l++) {
-                    //    if (SynapticLatheLabPool.ContainsKey(factory.factorySystem.labPool[l])) {
-                    //        SynapticLatheLabPool.Remove(factory.factorySystem.labPool[l]);
-                    //    }
-                    //}
                 }
                 return false;
             }
@@ -116,43 +97,6 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             planetOrbitalRingData.planetIncLevel = incLevel;
         }
 
-        //[HarmonyPatch(typeof(FactorySystem), nameof(FactorySystem.GameTickLabResearchMode))]
-        //[HarmonyPrefix]
-        //public static void FactorySystem_GameTickLabResearchMode_Patch(FactorySystem __instance, long time)
-        //{
-        //    //LogError($"planet.id {factorySystem.planet.id}");
-        //    //LogError($"ContainsKey {SynapticLathePlanet.ContainsKey(factorySystem.planet.id)}");
-        //    //LogError($"scpppppppppppppppphhhhhhhhhh");
-        //    int num = (int)(time % 60);
-        //    if (num != 0) {
-        //        return;
-        //    }
-        //    if (SynapticLathePlanet.ContainsKey(__instance)) {
-        //        if (UpdateSynapticLatheSpeed) {
-        //            //LogError($"scpppppppppppppppp123");
-        //            for (int i = 0; i < __instance.labPool.Length; i++) {
-        //                if (__instance.labPool[i].speed == 0) { continue; }
-        //                if (!SynapticLatheLabPool.ContainsKey(__instance.labPool[i])) {
-        //                    LogError($"scppppppppppppppppp lab id {__instance.labPool[i].id}");
-        //                    //LogError($"notContainsKey speed {SynapticLathePlanet[factorySystem.planet.id]}");
-        //                    SynapticLatheLabPool.Add(__instance.labPool[i], SynapticLathePlanet[__instance]);
-        //                } else {
-        //                    //LogError($"ContainsKey speed {SynapticLathePlanet[factorySystem.planet.id]}");
-        //                    SynapticLatheLabPool[__instance.labPool[i]] = SynapticLathePlanet[__instance];
-        //                }
-        //            }
-        //            //LogError($"labPool.Length {factorySystem.labPool.Length}");
-        //            foreach (var planet in SynapticLathePlanet) {
-        //                LogError($"scppppp planet {planet.Key} speed {planet.Value}");
-        //                foreach (var lab in SynapticLatheLabPool) {
-        //                    LogError($"lab {lab.Key.id} labspeed {lab.Key.speed} speed {lab.Value}");
-        //                }
-        //            }
-        //            UpdateSynapticLatheSpeed = false;
-        //        }
-        //    }
-        //}
-
         public static void LabResearchInc(ref LabComponent labComponent)
         {
             foreach (var planet in SynapticLathePlanet) {
@@ -161,10 +105,6 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                     //LogError($"planet {planet.Key} speed {planet.Value}");
                 }
             }
-            //if (SynapticLatheLabPool.ContainsKey(labComponent)) {
-            //    //LogError($"speed {SynapticLatheLabPool[labComponent]}");
-            //    labComponent.extraSpeed += SynapticLatheLabPool[labComponent];
-            //}
         }
 
         [HarmonyPatch(typeof(LabComponent), nameof(LabComponent.InternalUpdateResearch))]
@@ -181,7 +121,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Call,
                 AccessTools.Method(typeof(OrbitalBeacon), nameof(LabResearchInc))));
 
-            matcher.LogInstructionEnumeration();
+            //matcher.LogInstructionEnumeration();
             return matcher.InstructionEnumeration();
         }
     }

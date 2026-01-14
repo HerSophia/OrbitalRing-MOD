@@ -53,7 +53,7 @@
         "workEnergyPerTick": 50000,
         "stationMaxEnergyAcc": 90000000,
         "stationMaxItemCount": 5000,
-        //"stationMaxItemKinds": 4,
+        "stationMaxItemKinds": 5,
         "stationMaxDroneCount": 30
     },
     {

@@ -21,6 +21,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 __result = "一个星环只能建造一座星环对撞机总控站".Translate();
             } else if (_condition == (EBuildCondition)96) {
                 __result = "电磁轨道弹射器只能建造在无大气星球".Translate();
+            } else if (_condition == (EBuildCondition)95) {
+                __result = "不能低于16层".Translate();
             }
         }
     }

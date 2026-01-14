@@ -54,8 +54,8 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
             AddVeinProtos(
                 NewVein(15, "辉银矿脉", "I辉银矿", "Assets/texpack/铝矿脉", ProtoID.I石墨矿, 34, 3, 60),
                 NewVein(16, "深层熔岩", "I深层熔岩", "Icons/Vein/oil-vein", ProtoID.I深层熔岩, 0, 6, 60),
-                NewVein(17, "铀矿脉", "I铀矿", "Assets/texpack/放射晶体矿脉_新新", ProtoID.I放射性矿物, 35, 2, 90),
-                NewVein(18, "黄铁矿脉", "I黄铁矿", "Assets/texpack/硫矿脉_新", ProtoID.I黄铁矿, 36, 1, 90),
+                NewVein(17, "铀矿脉", "I铀矿", "Assets/texpack/V铀矿脉", ProtoID.I放射性矿物, 35, 2, 90),
+                NewVein(18, "黄铁矿脉", "I黄铁矿", "Assets/texpack/V黄铁矿脉", ProtoID.I黄铁矿, 36, 1, 90),
                 NewVein(19, "地下冰层", "I地下冰层", "Icons/Vein/oil-vein", ProtoID.I水, 0, 6, 60));
             return;
 
@@ -116,7 +116,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
 
         internal static void SetMinerMk2Color()
         {
-            Texture texture = Resources.Load<Texture>("Assets/texpack/矿机渲染索引");
+            Texture texture = TextureHelper.GetTexture("矿机渲染索引");
             int veinColorTex = Shader.PropertyToID("_VeinColorTex");
 
             ref PrefabDesc prefabDesc = ref LDB.models.Select(256).prefabDesc;
@@ -131,13 +131,6 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
             prefabDescLODMaterial[1].SetTexture(veinColorTex, texture);
             prefabDescLODMaterial[2].SetTexture(veinColorTex, texture);
             prefabDescLODMaterial[3].SetTexture(veinColorTex, texture);
-        }
-
-        [HarmonyPatch(typeof(VeinProto), nameof(VeinProto.Preload))]
-        [HarmonyPostfix]
-        public static void VeinProto_Preload_Postfix(VeinProto __instance)
-        {
-            if (__instance._iconSprite80px == null) __instance._iconSprite80px = __instance._iconSprite;
         }
 
         [HarmonyPatch(typeof(UISandboxMenu), nameof(UISandboxMenu.StaticLoad))]
@@ -447,6 +440,57 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
             return matcher.InstructionEnumeration();
         }
 
+        public static void EliminateMoonTitaniumFloating(PlanetAlgorithm algorithm, ref int floating)
+        {
+            if (algorithm.planet.star.id == 1) {
+                if (algorithm.planet.index == 2) {
+                    floating = 0;
+                }
+            }
+        }
+
+        public static bool EliminateMoonTitaniumSpotFloating(PlanetAlgorithm algorithm, int eVeinType)
+        {
+            if (algorithm.planet.star.id == 1) {
+                if (algorithm.planet.index == 2) {
+                    if ((EVeinType)eVeinType == EVeinType.Titanium) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        [HarmonyPatch(typeof(PlanetAlgorithm), nameof(PlanetAlgorithm.GenerateVeins))]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> PlanetAlgorithm_GenerateVeins_ForMoon_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var matcher = new CodeMatcher(instructions);
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Conv_U1));
+            object V_36 = matcher.Advance(3).Operand;
+            object IL_06EA = matcher.Advance(5).Operand;
+            matcher.Advance(1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldloc_S, V_36),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(AddVeinPatches), nameof(EliminateMoonTitaniumSpotFloating))),
+                new CodeInstruction(OpCodes.Brtrue, IL_06EA)
+            );
+
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldc_I4, 15000));
+
+            object V_59 = matcher.Advance(7).Operand; // 变量索引
+
+            //matcher.MatchForward(false, new CodeMatch(OpCodes.Stloc_S), new CodeMatch(OpCodes.Ldc_I4_0));
+            matcher.Advance(1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldloca_S, V_59),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(AddVeinPatches), nameof(EliminateMoonTitaniumFloating),
+                new System.Type[] {
+                    typeof(PlanetAlgorithm),
+                    typeof(int).MakeByRefType(),
+                }
+            )));
+            return matcher.InstructionEnumeration();
+        }
+
         public static void AddBirthGalaxyRareVein(PlanetAlgorithm algorithm, ref int[] array, ref float[] array2, ref float[] array3)
         {
             // 月球的矿物削减
@@ -470,7 +514,9 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
                     array3[17] = 0.5f;
                 }
                 if (algorithm.planet.index == 2) {
-                    array3[4] = 0.03f;
+                    array[4] = 3;
+                    //array2[4] = 0.6f;
+                    array3[4] = 0.04f;
                     array[19] = 12;
                     array2[19] = 1.0f;
                     array3[19] = 1.0f;

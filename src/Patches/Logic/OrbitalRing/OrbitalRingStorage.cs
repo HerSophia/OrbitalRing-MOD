@@ -9,10 +9,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
 {
     public class OrbitalRingStorage
     {
-
         public Dictionary<int, int[]> storageItem = new Dictionary<int, int[]>();
-
-        
     }
 
     internal class OrbitalRingStorageCalculate

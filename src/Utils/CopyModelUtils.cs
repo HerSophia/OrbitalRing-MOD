@@ -212,7 +212,7 @@ namespace ProjectOrbitalRing.Utils
             //prefabDescLODMaterial[2].SetColor("_TintColor", new Color(1.0000f, 0.6800f, 0.2267f));
 
             prefabDesc = LDB.models.Select(ProtoID.M轨道反物质堆核心).prefabDesc;
-            Texture texture = Resources.Load<Texture>("Assets/texpack/人造恒星MK2材质");
+            Texture texture = TextureHelper.GetTexture("人造恒星MK2材质");
             prefabDescLODMaterial = ref prefabDesc.lodMaterials[0];
             prefabDescLODMaterial[0].SetTexture("_EmissionTex", texture);
             prefabDescLODMaterial[1].SetColor("_TintColor", new Color(0.1804f, 0.4953f, 1.3584f));  // 亮部
