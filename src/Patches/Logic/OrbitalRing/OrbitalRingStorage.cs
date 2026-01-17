@@ -60,33 +60,37 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                         continue;
                     }
                     if (storage.count < storage.max / 2) {
-                        if (storageItem.ContainsKey(storage.itemId)) {
-                            int count = (storage.max / 2) - storage.count;
-                            //int[] countAndInc = storageItem.GetValueOrDefault(storage.itemId);
-                            if (storageItem[storage.itemId][0] > count) {
-                                //storageItem[storage.itemId][0] -= count;
-                                int inc = split_inc(ref storageItem[storage.itemId][0], ref storageItem[storage.itemId][1], count);
-                                stationComponent.storage[j].count += count;
-                                stationComponent.storage[j].inc += (short)inc;
-                            } else {
-                                stationComponent.storage[j].count += storageItem[storage.itemId][0];
-                                storageItem[storage.itemId][0] = 0;
-                                stationComponent.storage[j].inc += (short)storageItem[storage.itemId][1];
-                                storageItem[storage.itemId][1] = 0;
-                                storageItem.Remove(storage.itemId);
+                        lock (storageItem) {
+                            if (storageItem.ContainsKey(storage.itemId)) {
+                                int count = (storage.max / 2) - storage.count;
+                                //int[] countAndInc = storageItem.GetValueOrDefault(storage.itemId);
+                                if (storageItem[storage.itemId][0] > count) {
+                                    //storageItem[storage.itemId][0] -= count;
+                                    int inc = split_inc(ref storageItem[storage.itemId][0], ref storageItem[storage.itemId][1], count);
+                                    stationComponent.storage[j].count += count;
+                                    stationComponent.storage[j].inc += (short)inc;
+                                } else {
+                                    stationComponent.storage[j].count += storageItem[storage.itemId][0];
+                                    storageItem[storage.itemId][0] = 0;
+                                    stationComponent.storage[j].inc += (short)storageItem[storage.itemId][1];
+                                    storageItem[storage.itemId][1] = 0;
+                                    storageItem.Remove(storage.itemId);
+                                }
                             }
                         }
                     } else if (storage.count > storage.max / 2) {
-                        if (!storageItem.ContainsKey(storage.itemId)) {
-                            storageItem[storage.itemId] = new int[] { 0, 0 };
-                        }
-                        int count = storage.count - (storage.max / 2);
-                        if (storageItem[storage.itemId][0] < OrbitalRingStorageMax) {
-                            storageItem[storage.itemId][0] += count;
-                            //storage.count -= count;
-                            int inc = split_inc(ref stationComponent.storage[j].count, ref stationComponent.storage[j].inc, count);
-                            storageItem[storage.itemId][1] += inc;
-                            //LogError($"add count {stationComponent.storage[j].count} storageItem {storageItem[storage.itemId][0]}");
+                        lock (storageItem) {
+                            if (!storageItem.ContainsKey(storage.itemId)) {
+                                storageItem[storage.itemId] = new int[] { 0, 0 };
+                            }
+                            int count = storage.count - (storage.max / 2);
+                            if (storageItem[storage.itemId][0] < OrbitalRingStorageMax) {
+                                storageItem[storage.itemId][0] += count;
+                                //storage.count -= count;
+                                int inc = split_inc(ref stationComponent.storage[j].count, ref stationComponent.storage[j].inc, count);
+                                storageItem[storage.itemId][1] += inc;
+                                //LogError($"add count {stationComponent.storage[j].count} storageItem {storageItem[storage.itemId][0]}");
+                            }
                         }
                     }
                 }
@@ -139,18 +143,20 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                             }
                             for (int i = 0; i < assemblerComponent.needs.Length; i++) {
                                 itemId = assemblerComponent.needs[i];
-                                if (storageItem.ContainsKey(itemId)) {
-                                    count = assemblerComponent.requireCounts[i] * num;
-                                    if (storageItem[itemId][0] >= count) {
-                                        assemblerComponent.served[i] += count;
-                                        inc = split_inc(ref storageItem[itemId][0], ref storageItem[itemId][1], count);
-                                        assemblerComponent.incServed[i] += inc;
-                                    } else {
-                                        assemblerComponent.served[i] += storageItem[itemId][0];
-                                        assemblerComponent.incServed[i] += storageItem[itemId][1];
-                                        storageItem[itemId][0] = 0;
-                                        storageItem[itemId][1] = 0;
-                                        storageItem.Remove(itemId);
+                                lock (storageItem) {
+                                    if (storageItem.ContainsKey(itemId)) {
+                                        count = assemblerComponent.requireCounts[i] * num;
+                                        if (storageItem[itemId][0] >= count) {
+                                            assemblerComponent.served[i] += count;
+                                            inc = split_inc(ref storageItem[itemId][0], ref storageItem[itemId][1], count);
+                                            assemblerComponent.incServed[i] += inc;
+                                        } else {
+                                            assemblerComponent.served[i] += storageItem[itemId][0];
+                                            assemblerComponent.incServed[i] += storageItem[itemId][1];
+                                            storageItem[itemId][0] = 0;
+                                            storageItem[itemId][1] = 0;
+                                            storageItem.Remove(itemId);
+                                        }
                                     }
                                 }
                             }
@@ -159,15 +165,17 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                     continue;
                                 }
                                 itemId = assemblerComponent.products[i];
-                                if (!storageItem.ContainsKey(itemId)) {
-                                    storageItem[itemId] = new int[] { 0, 0 };
-                                }
-                                if (storageItem[itemId][0] < OrbitalRingStorageMax) {
-                                    count = assemblerComponent.produced[i];
-                                    storageItem[itemId][0] += count;
-                                    assemblerComponent.produced[i] = 0;
-                                    if (assemblerComponent.recipeType == ERecipeType.Smelt) {
-                                        storageItem[itemId][1] += 4 * count;
+                                lock (storageItem) {
+                                    if (!storageItem.ContainsKey(itemId)) {
+                                        storageItem[itemId] = new int[] { 0, 0 };
+                                    }
+                                    if (storageItem[itemId][0] < OrbitalRingStorageMax) {
+                                        count = assemblerComponent.produced[i];
+                                        storageItem[itemId][0] += count;
+                                        assemblerComponent.produced[i] = 0;
+                                        if (assemblerComponent.recipeType == ERecipeType.Smelt) {
+                                            storageItem[itemId][1] += 4 * count;
+                                        }
                                     }
                                 }
                             }
@@ -197,13 +205,15 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                         if (pair.OrbitalCorePoolId == __instance.id) {
                             if (__instance.bulletCount == 0) {
                                 ref Dictionary<int, int[]> storageItem = ref planetOrbitalRingData.Rings[ringId].orbitalRingStorage.storageItem;
-                                if (storageItem.ContainsKey(__instance.bulletId)) {
-                                    int count = (storageItem[__instance.bulletId][0] >= 40) ? 40 : storageItem[__instance.bulletId][0];
-                                    __instance.bulletCount += count;
-                                    int inc = split_inc(ref storageItem[__instance.bulletId][0], ref storageItem[__instance.bulletId][1], count);
-                                    __instance.bulletInc += inc;
-                                    if (storageItem[__instance.bulletId][0] == 0) {
-                                        storageItem.Remove(__instance.bulletId);
+                                lock (storageItem) {
+                                    if (storageItem.ContainsKey(__instance.bulletId)) {
+                                        int count = (storageItem[__instance.bulletId][0] >= 40) ? 40 : storageItem[__instance.bulletId][0];
+                                        __instance.bulletCount += count;
+                                        int inc = split_inc(ref storageItem[__instance.bulletId][0], ref storageItem[__instance.bulletId][1], count);
+                                        __instance.bulletInc += inc;
+                                        if (storageItem[__instance.bulletId][0] == 0) {
+                                            storageItem.Remove(__instance.bulletId);
+                                        }
                                     }
                                 }
                             }
@@ -235,13 +245,15 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                             if (__instance.itemCount <= 5) {
                                 ref Dictionary<int, int[]> storageItem = ref planetOrbitalRingData.Rings[ringId].orbitalRingStorage.storageItem;
                                 if (__instance.itemId != 0) {
-                                    if (storageItem.ContainsKey(__instance.itemId)) {
-                                        int count = (storageItem[__instance.itemId][0] >= 5) ? 5 : storageItem[__instance.itemId][0];
-                                        __instance.itemCount += (short)count;
-                                        int inc = split_inc(ref storageItem[__instance.itemId][0], ref storageItem[__instance.itemId][1], count);
-                                        __instance.itemInc += (short)inc;
-                                        if (storageItem[__instance.itemId][0] == 0) {
-                                            storageItem.Remove(__instance.itemId);
+                                    lock (storageItem) {
+                                        if (storageItem.ContainsKey(__instance.itemId)) {
+                                            int count = (storageItem[__instance.itemId][0] >= 5) ? 5 : storageItem[__instance.itemId][0];
+                                            __instance.itemCount += (short)count;
+                                            int inc = split_inc(ref storageItem[__instance.itemId][0], ref storageItem[__instance.itemId][1], count);
+                                            __instance.itemInc += (short)inc;
+                                            if (storageItem[__instance.itemId][0] == 0) {
+                                                storageItem.Remove(__instance.itemId);
+                                            }
                                         }
                                     }
                                 } else {
@@ -250,11 +262,13 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                         return;
                                     }
                                     for (int z = 0; z < array.Length; z++) {
-                                        if (storageItem.ContainsKey(array[z]) && storageItem[array[z]][0] >= 1) {
-                                            int inc = split_inc(ref storageItem[array[z]][0], ref storageItem[array[z]][1], 1);
-                                            __instance.SetNewItem(array[z], 1, (short)inc);
-                                            if (storageItem[array[z]][0] == 0) {
-                                                storageItem.Remove(array[z]);
+                                        lock (storageItem) {
+                                            if (storageItem.ContainsKey(array[z]) && storageItem[array[z]][0] >= 1) {
+                                                int inc = split_inc(ref storageItem[array[z]][0], ref storageItem[array[z]][1], 1);
+                                                __instance.SetNewItem(array[z], 1, (short)inc);
+                                                if (storageItem[array[z]][0] == 0) {
+                                                    storageItem.Remove(array[z]);
+                                                }
                                             }
                                         }
                                     }
@@ -289,13 +303,15 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                 ref Dictionary<int, int[]> storageItem = ref planetOrbitalRingData.Rings[ringId].orbitalRingStorage.storageItem;
                                 if (__instance.genPool[j].fuelId != 0) {
                                     int fuelId = __instance.genPool[j].fuelId;
-                                    if (storageItem.ContainsKey(fuelId)) {
-                                        int count = (storageItem[fuelId][0] >= 10) ? 10 : storageItem[fuelId][0];
-                                        __instance.genPool[j].fuelCount += (short)count;
-                                        int inc = split_inc(ref storageItem[fuelId][0], ref storageItem[fuelId][1], count);
-                                        __instance.genPool[j].fuelInc += (short)inc;
-                                        if (storageItem[fuelId][0] == 0) {
-                                            storageItem.Remove(fuelId);
+                                    lock (storageItem) {
+                                        if (storageItem.ContainsKey(fuelId)) {
+                                            int count = (storageItem[fuelId][0] >= 10) ? 10 : storageItem[fuelId][0];
+                                            __instance.genPool[j].fuelCount += (short)count;
+                                            int inc = split_inc(ref storageItem[fuelId][0], ref storageItem[fuelId][1], count);
+                                            __instance.genPool[j].fuelInc += (short)inc;
+                                            if (storageItem[fuelId][0] == 0) {
+                                                storageItem.Remove(fuelId);
+                                            }
                                         }
                                     }
                                 } else {
@@ -304,11 +320,13 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                         return;
                                     }
                                     for (int z = 0; z < array.Length; z++) {
-                                        if (storageItem.ContainsKey(array[z]) && storageItem[array[z]][0] >= 1) {
-                                            int inc = split_inc(ref storageItem[array[z]][0], ref storageItem[array[z]][1], 1);
-                                            __instance.genPool[j].SetNewFuel(array[z], 1, (short)inc);
-                                            if (storageItem[array[z]][0] == 0) {
-                                                storageItem.Remove(array[z]);
+                                        lock (storageItem) {
+                                            if (storageItem.ContainsKey(array[z]) && storageItem[array[z]][0] >= 1) {
+                                                int inc = split_inc(ref storageItem[array[z]][0], ref storageItem[array[z]][1], 1);
+                                                __instance.genPool[j].SetNewFuel(array[z], 1, (short)inc);
+                                                if (storageItem[array[z]][0] == 0) {
+                                                    storageItem.Remove(array[z]);
+                                                }
                                             }
                                         }
                                     }

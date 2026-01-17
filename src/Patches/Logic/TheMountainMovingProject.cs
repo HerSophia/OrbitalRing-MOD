@@ -77,6 +77,9 @@ namespace ProjectOrbitalRing.Patches.Logic
     {
         public static void MineAllVein(ref PlayerAction_Mine __instance, PlanetFactory factory, int miningTick, double energyGet, double energyChange)
         {
+            if (__instance.player.package.GetItemCount(ProtoID.I乾坤) <= 0) {
+                return;
+            }
             bool isInfiniteResource = GameMain.data.gameDesc.isInfiniteResource;
             VeinData veinData = factory.GetVeinData(__instance.miningId);
             __instance.miningProtoId = (int)veinData.type;
@@ -91,18 +94,14 @@ namespace ProjectOrbitalRing.Patches.Logic
                     if (factory.veinPool[__instance.miningId].amount > 0) {
                         int mineCount = 1;
                         int addToPackageItem = veinProto.MiningItem;
-                        if (__instance.player.package.GetItemCount(ProtoID.I乾坤) > 0) {
-                            int itemId = ProtoID.I乾坤;
-                            int count = 1;
-                            int mountainMoveItem = TheMountainMovingMappings.GetQianKunItemId(veinProto.MiningItem);
-                            if (mountainMoveItem != veinProto.MiningItem) {
-                                __instance.player.TakeItemFromPlayer(ref itemId, ref count, out _, true, null);
-                                if (itemId == ProtoID.I乾坤 && count == 1) {
-                                    mineCount = (int)(factory.veinPool[__instance.miningId].amount / GameMain.history.miningCostRate);
-                                    addToPackageItem = mountainMoveItem;
-                                }
-                            } else {
-                                return;
+                        int itemId = ProtoID.I乾坤;
+                        int count = 1;
+                        int mountainMoveItem = TheMountainMovingMappings.GetQianKunItemId(veinProto.MiningItem);
+                        if (mountainMoveItem != veinProto.MiningItem) {
+                            __instance.player.TakeItemFromPlayer(ref itemId, ref count, out _, true, null);
+                            if (itemId == ProtoID.I乾坤 && count == 1) {
+                                mineCount = (int)(factory.veinPool[__instance.miningId].amount / GameMain.history.miningCostRate);
+                                addToPackageItem = mountainMoveItem;
                             }
                         } else {
                             return;

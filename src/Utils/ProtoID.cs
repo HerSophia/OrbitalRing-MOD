@@ -56,7 +56,7 @@ namespace ProjectOrbitalRing.Utils
                            I高速生长菌群 = 6212,
                            I化学燃料罐 = 6217,
                            I蓄电器mk1 = 6218,
-                           I满蓄电器mk1 = 6218,
+                           I满蓄电器mk1 = 6219,
                            I氮 = 6220,
                            I放射性矿物 = 6222,
                            I量子储物仓 = 6231,

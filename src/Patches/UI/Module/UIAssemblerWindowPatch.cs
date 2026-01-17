@@ -9,6 +9,7 @@ using ProjectOrbitalRing.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static ProjectOrbitalRing.ProjectOrbitalRing;
 
 namespace ProjectOrbitalRing.Patches.UI
 {
@@ -140,6 +141,7 @@ namespace ProjectOrbitalRing.Patches.UI
         // Token: 0x06000095 RID: 149 RVA: 0x00006604 File Offset: 0x00004804
         public static void ChangeAssemblerModuleData(UIAssemblerWindow __instance, AssemblerComponent assemblerComponent)
         {
+            LogError($"planet {__instance.factorySystem.planet.id} assemblerId {__instance.assemblerId}");
             AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(__instance.factorySystem, __instance.assemblerId);
             int moduleId = AssemblerModulePatches.GetModuleId(assemblerComponent.recipeId);
             bool flag = (AssemblerModuleData.ItemId == moduleId || moduleId == 7617 && AssemblerModuleData.ItemId == 7618);

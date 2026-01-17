@@ -6,6 +6,8 @@ using HarmonyLib;
 using UnityEngine;
 using xiaoye97;
 using static ProjectOrbitalRing.Utils.JsonHelper;
+using static ProjectOrbitalRing.ProjectOrbitalRing;
+using GalacticScale;
 
 // ReSharper disable RemoveRedundantBraces
 
@@ -31,6 +33,9 @@ namespace ProjectOrbitalRing.Utils
 
             foreach (TechProtoJson protoJson in GetJsonContent<TechProtoJson>("techs")) {
                 if (LDB.techs.Exist(protoJson.ID)) {
+                    if (LDB.techs.Select(protoJson.ID).name == "氢燃料棒") {
+                        LogError($"氢燃料棒 {LDB.techs.Select(protoJson.ID).IconPath}");
+                    }
                     protoJson.ToProto(LDB.techs.Select(protoJson.ID));
                 } else {
                     LDBTool.PreAddProto(protoJson.ToProto());

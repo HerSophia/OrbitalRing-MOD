@@ -92,7 +92,7 @@
     {
         "ID": 1002,
         "Name": "电气矩阵",
-        "IconPath": "Icons/Tech/1002",
+        "IconPath": "Assets/texpack/T电气矩阵",
         "Desc": "T电气矩阵描述",
         "Conclusion": "电磁矩阵结果",
         "IsHiddenTech": false,
@@ -778,9 +778,9 @@
     },
     {
         "ID": 1131,
-        "Name": "T应用型超导体",
+        "Name": "石墨烯",
         "IconPath": "Icons/Tech/1131",
-        "Desc": "应用型超导体描述",
+        "Desc": "T石墨烯",
         "Conclusion": "应用型超导体结果",
         "IsHiddenTech": false,
         "PreItem": null,
@@ -909,35 +909,31 @@
     },
     {
         "ID": 1134,
-        "Name": "T强相互作用力材料",
-        "IconPath": "Icons/Tech/1414",
-        "Desc": "T强相互作用力材料描述",
-        "Conclusion": "T强相互作用力材料描述",
+        "Name": "T重核分馏",
+        "IconPath": "Icons/Tech/1134",
+        "Desc": "T重核分馏描述",
+        "Conclusion": "T重核分馏描述",
         "IsHiddenTech": false,
         "PreItem": null,
         "Position": [
-            72.0,
-            -24.0
+            36.0,
+            -40.0
         ],
-        "PreTechs": [
-            1143
-        ],
+        "PreTechs": [],
         "PreTechsImplicit": [
-            1133
+            1120
         ],
         "Items": [
-            6279,
-            6004,
-            6005
+            6003
         ],
         "ItemPoints": [
-            10,
-            10,
             10
         ],
-        "HashNeeded": 720000,
+        "HashNeeded": 72000,
         "UnlockRecipes": [
-            57
+            106,
+            115,
+            418
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -1220,7 +1216,7 @@
     {
         "ID": 1152,
         "Name": "回收式一体化卫星火箭",
-        "IconPath": "Assets/texpack/虫洞航行",
+        "IconPath": "Assets/texpack/T一体化回收火箭",
         "Desc": "T回收式一体化卫星火箭",
         "Conclusion": "T回收式一体化卫星火箭",
         "IsHiddenTech": false,
@@ -1437,7 +1433,7 @@
     {
         "ID": 1302,
         "Name": "T电子计算机",
-        "IconPath": "Icons/Tech/1302",
+        "IconPath": "Assets/texpack/T主板",
         "Desc": "T电子计算机描述",
         "Conclusion": "处理器结果",
         "IsHiddenTech": false,
@@ -1481,7 +1477,7 @@
     {
         "ID": 1303,
         "Name": "T超级量子计算机",
-        "IconPath": "Icons/Tech/1303",
+        "IconPath": "Assets/texpack/T量子计算机",
         "Desc": "T超级量子计算机描述",
         "Conclusion": "T超级量子计算机描述",
         "IsHiddenTech": false,
@@ -1614,7 +1610,7 @@
     {
         "ID": 1311,
         "Name": "T第三代半导体",
-        "IconPath": "Icons/Tech/1311",
+        "IconPath": "Icons/Tech/1302",
         "Desc": "T第三代半导体描述",
         "Conclusion": "半导体材料结果",
         "IsHiddenTech": false,
@@ -1839,7 +1835,7 @@
     {
         "ID": 1404,
         "Name": "T光量子比特",
-        "IconPath": "Icons/Tech/1303",
+        "IconPath": "Assets/texpack/T光量子",
         "Desc": "T光量子比特描述",
         "Conclusion": "T光量子比特描述",
         "IsHiddenTech": false,
@@ -1881,7 +1877,7 @@
     {
         "ID": 1405,
         "Name": "曲率引擎",
-        "IconPath": "Icons/Tech/1303",
+        "IconPath": "Assets/texpack/T曲率引擎",
         "Desc": "T曲率引擎",
         "Conclusion": "T曲率引擎",
         "IsHiddenTech": false,
@@ -2145,7 +2141,7 @@
     {
         "ID": 1416,
         "Name": "T裂变重水堆",
-        "IconPath": "Icons/Tech/1416",
+        "IconPath": "Assets/texpack/T裂变重水堆",
         "Desc": "T裂变重水堆描述",
         "Conclusion": "T裂变重水堆描述",
         "IsHiddenTech": false,
@@ -2227,7 +2223,7 @@
     {
         "ID": 1418,
         "Name": "粒子矩阵",
-        "IconPath": "Icons/Tech/1312",
+        "IconPath": "Assets/texpack/T粒子矩阵",
         "Desc": "T粒子矩阵描述",
         "Conclusion": "T粒子矩阵描述",
         "IsHiddenTech": false,
@@ -3535,7 +3531,7 @@
     {
         "ID": 1706,
         "Name": "深层熔岩处理",
-        "IconPath": "Icons/Tech/1705",
+        "IconPath": "Assets/texpack/T深层熔岩处理",
         "Desc": "T深层熔岩处理描述",
         "Conclusion": "T深层熔岩处理描述",
         "IsHiddenTech": false,
@@ -4392,7 +4388,7 @@
     {
         "ID": 1817,
         "Name": "T任务一：璀璨的放射",
-        "IconPath": "Icons/Tech/1817",
+        "IconPath": "Assets/texpack/T战术核导弹",
         "Desc": "T战术核导弹描述",
         "Conclusion": "战术核导弹结果",
         "IsHiddenTech": false,
@@ -5033,7 +5029,7 @@
     {
         "ID": 1911,
         "Name": "T激光武器",
-        "IconPath": "Assets/texpack/玻璃科技",
+        "IconPath": "Assets/texpack/T激光武器",
         "Desc": "T激光武器描述",
         "Conclusion": "T激光武器描述",
         "IsHiddenTech": false,
@@ -5075,7 +5071,7 @@
     {
         "ID": 1912,
         "Name": "轨道熔炼站",
-        "IconPath": "Assets/texpack/玻璃科技",
+        "IconPath": "Assets/texpack/T轨道熔炼站",
         "Desc": "T轨道熔炼站",
         "Conclusion": "T轨道熔炼站",
         "IsHiddenTech": false,
@@ -5117,7 +5113,7 @@
     {
         "ID": 1913,
         "Name": "半导体晶体管",
-        "IconPath": "Assets/texpack/玻璃科技",
+        "IconPath": "Icons/Tech/1311",
         "Desc": "T半导体晶体管",
         "Conclusion": "T半导体晶体管",
         "IsHiddenTech": false,
@@ -5157,7 +5153,7 @@
     {
         "ID": 1914,
         "Name": "电路板",
-        "IconPath": "Assets/texpack/玻璃科技",
+        "IconPath": "Assets/texpack/T电路板",
         "Desc": "T电路板",
         "Conclusion": "T电路板",
         "IsHiddenTech": false,
@@ -5197,7 +5193,7 @@
     {
         "ID": 1915,
         "Name": "T航空物流",
-        "IconPath": "Icons/Tech/1102",
+        "IconPath": "Assets/texpack/T航空物流",
         "Desc": "T航空物流描述",
         "Conclusion": "T航空物流描述",
         "IsHiddenTech": false,
@@ -5239,7 +5235,7 @@
     {
         "ID": 1916,
         "Name": "T任务二：太阳的距离",
-        "IconPath": "Assets/texpack/反物质飞弹",
+        "IconPath": "Assets/texpack/T启示录聚变弹",
         "Desc": "T启示录聚变弹描述",
         "Conclusion": "启示录聚变弹结果",
         "IsHiddenTech": false,
@@ -5281,7 +5277,7 @@
     {
         "ID": 1917,
         "Name": "速生林",
-        "IconPath": "Assets/texpack/反物质飞弹",
+        "IconPath": "Assets/texpack/T速生林",
         "Desc": "T速生林",
         "Conclusion": "T速生林",
         "IsHiddenTech": false,
@@ -5323,7 +5319,7 @@
     {
         "ID": 1919,
         "Name": "T铀燃料处理",
-        "IconPath": "Icons/Tech/1416",
+        "IconPath": "Assets/texpack/T铀燃料处理",
         "Desc": "T铀燃料处理描述",
         "Conclusion": "T铀燃料处理描述",
         "IsHiddenTech": false,
@@ -5333,7 +5329,7 @@
             -40.0
         ],
         "PreTechs": [
-            1923
+            1134
         ],
         "PreTechsImplicit": [],
         "Items": [
@@ -5365,7 +5361,7 @@
     {
         "ID": 1920,
         "Name": "T同位素温差发电",
-        "IconPath": "Icons/Tech/1416",
+        "IconPath": "Assets/texpack/T同位素电池",
         "Desc": "T同位素温差发电描述",
         "Conclusion": "T同位素温差发电描述",
         "IsHiddenTech": false,
@@ -5488,31 +5484,35 @@
     },
     {
         "ID": 1923,
-        "Name": "T重核分馏",
-        "IconPath": "Icons/Tech/1604",
-        "Desc": "T重核分馏描述",
-        "Conclusion": "T重核分馏描述",
+        "Name": "T强相互作用力材料",
+        "IconPath": "Icons/Tech/1414",
+        "Desc": "T强相互作用力材料描述",
+        "Conclusion": "T强相互作用力材料描述",
         "IsHiddenTech": false,
         "PreItem": null,
         "Position": [
-            36.0,
-            -40.0
+            72.0,
+            -24.0
         ],
-        "PreTechs": [],
+        "PreTechs": [
+            1143
+        ],
         "PreTechsImplicit": [
-            1120
+            1133
         ],
         "Items": [
-            6003
+            6279,
+            6004,
+            6005
         ],
         "ItemPoints": [
+            10,
+            10,
             10
         ],
-        "HashNeeded": 72000,
+        "HashNeeded": 720000,
         "UnlockRecipes": [
-            106,
-            107,
-            418
+            57
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -5573,7 +5573,7 @@
     {
         "ID": 1925,
         "Name": "T岩浆冶炼处理",
-        "IconPath": "Icons/Tech/1604",
+        "IconPath": "Assets/texpack/T岩浆冶炼",
         "Desc": "T岩浆冶炼处理描述",
         "Conclusion": "T岩浆冶炼处理描述",
         "IsHiddenTech": false,
@@ -5619,7 +5619,7 @@
     {
         "ID": 1926,
         "Name": "多板架构",
-        "IconPath": "Icons/Tech/1302",
+        "IconPath": "Icons/Tech/1303",
         "Desc": "T多板架构",
         "Conclusion": "T多板架构",
         "IsHiddenTech": false,
@@ -5662,7 +5662,7 @@
     {
         "ID": 1927,
         "Name": "T磁流体",
-        "IconPath": "Icons/Tech/1604",
+        "IconPath": "Assets/texpack/T磁流体",
         "Desc": "T磁流体描述",
         "Conclusion": "T磁流体描述",
         "IsHiddenTech": false,
@@ -5744,7 +5744,7 @@
     {
         "ID": 1929,
         "Name": "T电推进技术",
-        "IconPath": "Icons/Tech/1113",
+        "IconPath": "Assets/texpack/T离子推进器",
         "Desc": "T电推进技术描述",
         "Conclusion": "T电推进技术描述",
         "IsHiddenTech": false,
@@ -5831,7 +5831,7 @@
     {
         "ID": 1931,
         "Name": "T人造生态圈",
-        "IconPath": "Assets/texpack/回收科技",
+        "IconPath": "Assets/texpack/T人造生态圈",
         "Desc": "T人造生态圈描述",
         "Conclusion": "T人造生态圈描述",
         "IsHiddenTech": false,
@@ -5917,7 +5917,7 @@
     {
         "ID": 1933,
         "Name": "太空损管系统",
-        "IconPath": "Icons/Tech/1121",
+        "IconPath": "Assets/texpack/T太空损管包",
         "Desc": "T太空损管系统描述",
         "Conclusion": "I太空损管系统描述",
         "IsHiddenTech": false,
@@ -5940,7 +5940,7 @@
         ],
         "HashNeeded": 288000,
         "UnlockRecipes": [
-            115
+            107
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -6041,7 +6041,7 @@
     {
         "ID": 1936,
         "Name": "太空船坞",
-        "IconPath": "Assets/texpack/行星协调中心",
+        "IconPath": "Assets/texpack/T太空船坞",
         "Desc": "T太空船坞",
         "Conclusion": "T太空船坞",
         "IsHiddenTech": false,
@@ -6081,7 +6081,7 @@
     {
         "ID": 1937,
         "Name": "润滑油",
-        "IconPath": "Assets/texpack/护盾载波调制",
+        "IconPath": "Assets/texpack/T润滑油",
         "Desc": "T润滑油",
         "Conclusion": "T润滑油",
         "IsHiddenTech": false,
@@ -6210,7 +6210,7 @@
     {
         "ID": 1940,
         "Name": "太空电梯",
-        "IconPath": "Icons/Tech/1817",
+        "IconPath": "Assets/texpack/T太空电梯",
         "Desc": "T太空电梯",
         "Conclusion": "T太空电梯",
         "IsHiddenTech": false,
@@ -6254,7 +6254,7 @@
     {
         "ID": 1941,
         "Name": "储氢钢罐",
-        "IconPath": "Icons/Tech/1817",
+        "IconPath": "Icons/Tech/1112",
         "Desc": "T储氢钢罐",
         "Conclusion": "T储氢钢罐",
         "IsHiddenTech": false,
@@ -6333,7 +6333,7 @@
     {
         "ID": 1943,
         "Name": "T伴生菌种培育",
-        "IconPath": "Icons/Tech/1122",
+        "IconPath": "Assets/texpack/T激素菌群",
         "Desc": "T伴生菌种培育描述",
         "Conclusion": "T伴生菌种培育描述",
         "IsHiddenTech": false,
@@ -6347,10 +6347,12 @@
         ],
         "PreTechsImplicit": [],
         "Items": [
-            6208
+            6208,
+            7020
         ],
         "ItemPoints": [
-            5
+            5,
+            10
         ],
         "HashNeeded": 7200,
         "UnlockRecipes": [
@@ -6377,7 +6379,7 @@
     {
         "ID": 1944,
         "Name": "T高速菌种研究",
-        "IconPath": "Icons/Tech/1122",
+        "IconPath": "Assets/texpack/T共生菌核",
         "Desc": "T高速菌种研究描述",
         "Conclusion": "T高速菌种研究描述",
         "IsHiddenTech": true,
@@ -6393,12 +6395,16 @@
             1943
         ],
         "Items": [
-            6212
+            6212,
+            7020,
+            7611
         ],
         "ItemPoints": [
-            1
+            1,
+            50,
+            10
         ],
-        "HashNeeded": 36000,
+        "HashNeeded": 3600,
         "UnlockRecipes": [
             784,
             775,
@@ -6809,7 +6815,7 @@
     {
         "ID": 1954,
         "Name": "银矿冶炼",
-        "IconPath": "Icons/Tech/1816",
+        "IconPath": "Assets/texpack/T银矿冶炼",
         "Desc": "T银矿冶炼",
         "Conclusion": "T银矿冶炼",
         "IsHiddenTech": false,
@@ -6906,7 +6912,7 @@
             1813
         ],
         "PreTechsImplicit": [
-            1134
+            1923
         ],
         "Items": [
             6279,
@@ -7275,7 +7281,7 @@
     {
         "ID": 1965,
         "Name": "模块化星舰建造",
-        "IconPath": "Icons/Tech/1607",
+        "IconPath": "Assets/texpack/T模块化星舰建造",
         "Desc": "T模块化星舰建造",
         "Conclusion": "T模块化星舰建造",
         "IsHiddenTech": false,
@@ -7443,7 +7449,7 @@
     {
         "ID": 1969,
         "Name": "高级原油处理",
-        "IconPath": "Icons/Tech/1811",
+        "IconPath": "Assets/texpack/T高级原油处理",
         "Desc": "T高级原油处理",
         "Conclusion": "T高级原油处理",
         "IsHiddenTech": false,
@@ -7530,7 +7536,7 @@
     {
         "ID": 1971,
         "Name": "高速连接器",
-        "IconPath": "Icons/Tech/1811",
+        "IconPath": "Assets/texpack/T高速连接器",
         "Desc": "T高速连接器",
         "Conclusion": "T高速连接器",
         "IsHiddenTech": false,
@@ -7571,7 +7577,7 @@
     {
         "ID": 1972,
         "Name": "高级钛矿冶炼",
-        "IconPath": "Icons/Tech/1811",
+        "IconPath": "Assets/texpack/T钛矿冶炼",
         "Desc": "T高级钛矿冶炼",
         "Conclusion": "T高级钛矿冶炼",
         "IsHiddenTech": false,
@@ -7656,7 +7662,7 @@
     {
         "ID": 1974,
         "Name": "糖料作物研究",
-        "IconPath": "Icons/Tech/1811",
+        "IconPath": "Assets/texpack/T糖料作物研究",
         "Desc": "T糖料作物研究",
         "Conclusion": "T糖料作物研究",
         "IsHiddenTech": false,
@@ -7701,7 +7707,7 @@
     {
         "ID": 1975,
         "Name": "工业作物应用",
-        "IconPath": "Icons/Tech/1811",
+        "IconPath": "Assets/texpack/T工业作物应用",
         "Desc": "T工业作物应用",
         "Conclusion": "T工业作物应用",
         "IsHiddenTech": false,

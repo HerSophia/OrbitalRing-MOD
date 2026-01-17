@@ -2860,25 +2860,29 @@
     },
     {
         "ID": 107,
-        "Name": "重氢分馏",
-        "Description": "R重氢分馏",
+        "Name": "太空损管包",
+        "Description": "",
         "IconPath": "",
-        "Type": 8,
-        "GridIndex": 4305,
-        "Time": 60,
+        "Type": 10,
+        "GridIndex": 1711,
+        "Time": 240,
         "Input": [
-            1120
+            1123,
+            6201,
+            1301
         ],
         "InCounts": [
-            100
+            2,
+            2,
+            1
         ],
         "Output": [
-            1121
+            6263
         ],
         "OutCounts": [
             1
         ],
-        "Explicit": true,
+        "Explicit": false,
         "Handcraft": false,
         "NonProductive": false
     },
@@ -3078,29 +3082,25 @@
     },
     {
         "ID": 115,
-        "Name": "太空损管包",
-        "Description": "",
-        "IconPath": "",
-        "Type": 10,
-        "GridIndex": 1711,
-        "Time": 240,
+        "Name": "重氢分馏",
+        "Description": "R重氢分馏",
+        "IconPath": "Icons/ItemRecipe/deuterium-formula",
+        "Type": 8,
+        "GridIndex": 4305,
+        "Time": 60,
         "Input": [
-            1123,
-            6201,
-            1301
+            1120
         ],
         "InCounts": [
-            2,
-            2,
-            1
+            100
         ],
         "Output": [
-            6263
+            1121
         ],
         "OutCounts": [
             1
         ],
-        "Explicit": false,
+        "Explicit": true,
         "Handcraft": false,
         "NonProductive": false
     },

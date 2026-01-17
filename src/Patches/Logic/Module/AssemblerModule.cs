@@ -11,6 +11,7 @@ using static ProjectOrbitalRing.Patches.UI.UIAssemblerWindowPatch;
 using static UIPlayerDeliveryPanel;
 using static UnityEngine.PostProcessing.MotionBlurComponent.FrameBlendingFilter;
 using System.Collections;
+using System.Threading;
 
 namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
 {
@@ -63,6 +64,15 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
 
         private static Dictionary<ValueTuple<int, int>, AssemblerModuleData> ImportAssemblerModuleData = new Dictionary<ValueTuple<int, int>, AssemblerModuleData>();
         private static ConcurrentDictionary<FactorySystem, ConcurrentDictionary<int, AssemblerModuleData>> AssemblerModuleData = new ConcurrentDictionary<FactorySystem, ConcurrentDictionary<int, AssemblerModuleData>>();
+
+        public static readonly ReaderWriterLockSlim AssemblerDataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+        private static readonly ConcurrentDictionary<int, object> _instanceLocks = new ConcurrentDictionary<int, object>();
+
+        // 辅助方法：获取/创建__instance的专属锁（原子操作，确保锁唯一）
+        private static object GetInstanceLock(int assemblerId)
+        {
+            return _instanceLocks.GetOrAdd(assemblerId, id => new object());
+        }
 
         // Token: 0x0600015C RID: 348 RVA: 0x0000FE60 File Offset: 0x0000E060
         public static void Export(BinaryWriter w)
@@ -333,14 +343,70 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
 
         public static void AssemblerModuleProcess(ref AssemblerComponent __instance)
         {
-            foreach (var planetValuePair in AssemblerModulePatches.AssemblerModuleData) {
-                if (!planetValuePair.Value.ContainsKey(__instance.id)) return;
-                if (planetValuePair.Key.assemblerPool[__instance.id].Equals(__instance)) {
-                    BioChemicalProcess(planetValuePair.Key.factory.planet.theme, ref __instance);
-                    AssemblerExtraProcess(planetValuePair.Key.factory, ref __instance);
+            //if (__instance == null) return;
+
+            // ========== 关键1：锁内获取实例锁，避免id变化导致锁不匹配 ==========
+            object instanceLock = null;
+            int stableAssemblerId = -1;
+            // 临时锁保护id读取和锁创建
+            lock (typeof(AssemblerModulePatches)) {
+                stableAssemblerId = __instance.id;
+                instanceLock = AssemblerModulePatches.GetInstanceLock(stableAssemblerId);
+            }
+
+            // ========== 关键2：实例锁包裹所有__instance操作，且先校验基础条件 ==========
+            lock (instanceLock) {
+                // 再次校验id是否一致（防止中途被改）
+                if (__instance.id != stableAssemblerId) {
+                    LogError($"assemblerId已变化，旧：{stableAssemblerId} → 新：{__instance.id}，放弃处理");
+                    return;
+                }
+
+                // 基础条件校验（锁内执行，确保原子性）
+                if (__instance.recipeType != ERecipeType.Assemble &&
+                    __instance.recipeType != (ERecipeType)10 &&
+                    __instance.recipeType != (ERecipeType)12 &&
+                    __instance.recipeType != (ERecipeType)14) {
+                    return;
+                }
+
+                // ========== 关键3：共享资源加读锁，避免遍历异常 ==========
+                try {
+                    AssemblerModulePatches.AssemblerDataLock.EnterReadLock();
+                    try {
+                        // ========== 关键4：替换return为continue，保留遍历逻辑 ==========
+                        foreach (var planetValuePair in AssemblerModulePatches.AssemblerModuleData) {
+                            // 再次校验id（遍历过程中可能被改）
+                            if (__instance.id != stableAssemblerId) break;
+
+                            // 关键5：消除ContainsKey和索引访问的竞态
+                            if (!planetValuePair.Value.TryGetValue(__instance.id, out _)) {
+                                continue; // 不再return，仅跳过当前项
+                            }
+
+                            // 关键6：先校验assemblerPool是否存在该id，再访问
+                            //if (!planetValuePair.Key.assemblerPool.ContainsKey(__instance.id)) {
+                            //    continue;
+                            //}
+
+                            if (planetValuePair.Key.assemblerPool[__instance.id].Equals(__instance)) {
+                                // 所有修改__instance的逻辑都在锁内，确保原子性
+                                BioChemicalProcess(planetValuePair.Key.factory.planet.theme, ref __instance);
+                                AssemblerExtraProcess(planetValuePair.Key.factory, ref __instance);
+                            }
+                        }
+                    } finally {
+                        if (AssemblerModulePatches.AssemblerDataLock.IsReadLockHeld) {
+                            AssemblerModulePatches.AssemblerDataLock.ExitReadLock();
+                        }
+                    }
+                } catch (Exception ex) {
+                    LogError($"处理assemblerId {stableAssemblerId} 异常：{ex.Message}\n{ex.StackTrace}");
                 }
             }
         }
+
+        // 102 653   102 232
 
         private static void BioChemicalProcess(int theme, ref AssemblerComponent __instance)
         {
