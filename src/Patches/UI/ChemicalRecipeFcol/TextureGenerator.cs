@@ -10,7 +10,7 @@ namespace ProjectOrbitalRing.Patches.UI
     {
         private static readonly Dictionary<int, int> RecipeIdPos = new Dictionary<int, int>
         {
-            { ProtoID.R二氧化碳, 431 },
+            //{ ProtoID.R二氧化碳, 431 },
             { ProtoID.R催化重整, 432 },
             { ProtoID.R四氢双环戊二烯, 433 },
             { ProtoID.R有机晶体重组, 434 },
@@ -20,7 +20,7 @@ namespace ProjectOrbitalRing.Patches.UI
             { ProtoID.R三氯化铁, 438 },
             { ProtoID.R氨氧化, 439 },
             { ProtoID.R羰基合成, 440 },
-            { ProtoID.R聚苯硫醚, 441 },
+            { ProtoID.R纳米塑料纤维, 441 },
             { ProtoID.R聚酰亚胺, 442 },
             { ProtoID.R钨矿筛选, 443 },
             { ProtoID.R海水淡化, 444 },

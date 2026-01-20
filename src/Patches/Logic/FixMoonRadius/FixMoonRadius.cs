@@ -14,7 +14,7 @@ using GalacticScale;
 using System.Reflection;
 using static System.Reflection.Emit.OpCodes;
 
-namespace ProjectOrbitalRing.Patches.Logic
+namespace ProjectOrbitalRing.Patches.Logic.FixMoonRadius
 {
     internal class FixMoonRadius
     {
@@ -41,28 +41,28 @@ namespace ProjectOrbitalRing.Patches.Logic
             realRadius += diff;
             return realRadius;
         }
-        private static float GetRadiusFromFactory(float t, PlanetFactory factory)
+        public static float GetRadiusFromFactory(float t, PlanetFactory factory)
         {
             float realRadius = ModifyRadius(t, factory?.planet?.realRadius ?? 200.0f);
             return realRadius;
         }
 
-        private static float GetRadiusFromAstroId(float t, int id)
+        public static float GetRadiusFromAstroId(float t, int id)
         {
             float realRadius = ModifyRadius(t, GameMain.data.galaxy?.astrosFactory[id]?.planet?.realRadius ?? 200.0f);
             return realRadius;
         }
-        private static float GetRadiusFromEnemyData(float t, ref EnemyData enemyData)
+        public static float GetRadiusFromEnemyData(float t, ref EnemyData enemyData)
         {
             var realRadius = ModifyRadius(t, GameMain.galaxy.PlanetById(enemyData.astroId)?.realRadius ?? 200.0f);
             return realRadius;
         }
-        private static float GetRadiusFromMecha(float t, Mecha mecha)
+        public static float GetRadiusFromMecha(float t, Mecha mecha)
         {
             var realRadius = ModifyRadius(t, mecha?.player?.planetData?.realRadius ?? 200.0f);
             return realRadius;
         }
-        private static float GetRadiusFromAltitude(float t, float alt) //Original / Altitude
+        public static float GetRadiusFromAltitude(float t, float alt) //Original / Altitude
         {
             var realRadius = ModifyRadius(t, alt);
             return realRadius;
@@ -176,7 +176,7 @@ namespace ProjectOrbitalRing.Patches.Logic
 
         [HarmonyTranspiler]
         [HarmonyPatch(typeof(EnemyUnitComponent), nameof(EnemyUnitComponent.RunBehavior_Defense_Ground))] //225
-        public static IEnumerable<CodeInstruction> Fix225(IEnumerable<CodeInstruction> instructions)
+        public static IEnumerable<CodeInstruction> RunBehavior_Defense_Ground_Patch(IEnumerable<CodeInstruction> instructions)
         {
             // Bootstrap.DumpInstructions(instructions, nameof(EnemyUnitComponent.RunBehavior_Defense_Ground),290, 20);
             instructions = new CodeMatcher(instructions)
@@ -195,10 +195,39 @@ namespace ProjectOrbitalRing.Patches.Logic
             return instructions;
         }
 
+        //[HarmonyTranspiler]
+        //[HarmonyPatch(typeof(EnemyUnitComponent), nameof(EnemyUnitComponent.RunBehavior_Engage_GGuardian))] //200 206 202
+        //public static IEnumerable<CodeInstruction> RunBehavior_Engage_GGuardian_Patch(IEnumerable<CodeInstruction> instructions)
+        //{
+        //    // var methodInfo = AccessTools.Method(typeof(EnemyUnitComponentTranspiler), nameof(Utils.GetRadiusFromFactory));
+
+        //    instructions = new CodeMatcher(instructions)
+        //        .MatchForward(
+        //            true,
+        //            new CodeMatch(i => {
+        //                return (i.opcode == Ldc_R4 || i.opcode == Ldc_R8 || i.opcode == Ldc_I4) &&
+        //                       (
+        //                            Convert.ToDouble(i.operand ?? 0.0) == 255.0 ||
+        //                            Convert.ToDouble(i.operand ?? 0.0) == 228.0
+
+        //                    );
+        //            })
+        //        )
+        //        .Repeat(matcher => {
+        //            //var mi = matcher.GetRadiusFromFactory();
+        //            matcher.Advance(1);
+        //            matcher.InsertAndAdvance(new CodeInstruction(Ldarg_1));
+        //            matcher.Insert(new CodeInstruction(Call, AccessTools.Method(typeof(FixMoonRadius), nameof(GetRadiusFromFactory))));
+        //        }).InstructionEnumeration();
+
+        //    return instructions;
+        //}
+
         [HarmonyTranspiler]
         [HarmonyPatch(typeof(EnemyUnitComponent), nameof(EnemyUnitComponent.RunBehavior_Engage_GRaider))] //200 206 202
         [HarmonyPatch(typeof(EnemyUnitComponent), nameof(EnemyUnitComponent.RunBehavior_Engage_GRanger))] //200 212 225
-        public static IEnumerable<CodeInstruction> Fix200_225(IEnumerable<CodeInstruction> instructions)
+        [HarmonyPatch(typeof(EnemyUnitComponent), nameof(EnemyUnitComponent.RunBehavior_Engage_GGuardian))]
+        public static IEnumerable<CodeInstruction> RunBehavior_Engage_EnemyUnit_Patch(IEnumerable<CodeInstruction> instructions)
         {
             // var methodInfo = AccessTools.Method(typeof(EnemyUnitComponentTranspiler), nameof(Utils.GetRadiusFromFactory));
 
@@ -212,7 +241,9 @@ namespace ProjectOrbitalRing.Patches.Logic
                                     Convert.ToDouble(i.operand ?? 0.0) == 202.0 ||
                                     Convert.ToDouble(i.operand ?? 0.0) == 206.0 ||
                                     Convert.ToDouble(i.operand ?? 0.0) == 212.0 ||
-                                    Convert.ToDouble(i.operand ?? 0.0) == 225.0
+                                    Convert.ToDouble(i.operand ?? 0.0) == 225.0 ||
+                                    Convert.ToDouble(i.operand ?? 0.0) == 255.0 ||
+                                    Convert.ToDouble(i.operand ?? 0.0) == 228.0
 
                             );
                     })
@@ -226,6 +257,7 @@ namespace ProjectOrbitalRing.Patches.Logic
 
             return instructions;
         }
+
         [HarmonyTranspiler]
         [HarmonyPatch(typeof(EnemyUnitComponent), nameof(EnemyUnitComponent.RunBehavior_Engage_SHumpback))] //200 but need to find the planet...
         // [HarmonyPatch(typeof(EnemyUnitComponent),  nameof(EnemyUnitComponent.RunBehavior_OrbitTarget_SLancer))] //200 but need to find the planet...

@@ -75,8 +75,8 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
             int itemId = TheMountainMovingMappings.GetOreId(player.inhandItemId);
             if (player.inhandItemId != itemId) {
                 var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(CurPlanetId);
-                if (planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem.ContainsKey(itemId)) {
-                    if (CheckOrbitalStorageHasVeinMountain(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem, itemId)) {
+                if (CheckOrbitalStorageHasVeinMountain(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem, itemId)) {
+                    if (planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem.ContainsKey(itemId)) {
                         planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem[itemId][0] += player.inhandItemCount;
                         planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem[itemId][1] += player.inhandItemInc;
                     } else {
@@ -87,6 +87,8 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
                     player.SetHandItemInc_Unsafe(0);
 
                     SetStorageData(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem);
+                } else {
+                    return;
                 }
             }
         }

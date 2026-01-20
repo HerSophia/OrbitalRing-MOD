@@ -970,8 +970,8 @@
     },
     {
         "Name": "I火力发电厂",
-        "ZHCN": "使用燃料（例如煤）作为原料，在碳化硅内衬的燃烧室中进行完全燃烧反应，把水转化为蒸汽后由蒸汽轮机转换成电能，作为原始的多级能量转化发电手段，80%能量转化率已经是工程师们的极限。",
-        "ENUS": "Using fuel (such as coal) as raw material, complete combustion reaction is carried out in a combustion chamber lined with silicon carbide, converting water into steam and then converting it into electrical energy by a steam turbine. As the original multi-stage energy conversion power generation method, an 80% energy conversion rate is already the limit of engineers."
+        "ZHCN": "使用燃料（例如煤）作为原料，在碳化硅内衬的燃烧室中进行完全燃烧反应，把水转化为蒸汽后由蒸汽轮机转换成电能，作为原始的多级能量转化发电手段，80%能量转化率已经是工程师们的极限。\n<color=\"#FD965ECC\">在无氧大气环境只能燃烧化学燃料棒发电</color>",
+        "ENUS": "Using fuel (such as coal) as raw material, complete combustion reaction is carried out in a combustion chamber lined with silicon carbide, converting water into steam and then converting it into electrical energy by a steam turbine. As the original multi-stage energy conversion power generation method, an 80% energy conversion rate is already the limit of engineers.\n<color=\"#FD965ECC\">In an oxygen-free atmospheric environment, only chemical fuel rods can be burned to generate electricity</color>"
     },
     {
         "Name": "I能量枢纽",
@@ -3694,18 +3694,13 @@
     },
     {
         "Name": "T高级原油处理",
-        "ZHCN": "石油作为工业的“血液”，其产量直接决定了诸多工业的产能，每年依旧有数不清的经费用于如何提高石油的利用率，高级原油处理便是其中一个成果，更高的轻油产量，还能副产硫酸，当然，这也要求伊卡洛斯有更高级的产线布局能力。",
-        "ENUS": "As the \"blood\" of industry, the output of oil directly determines the production capacity of many industries. Every year, there are still countless funds used to improve the utilization rate of oil, and advanced crude oil processing is one of the achievements. Higher light oil production can also produce sulfuric acid as a byproduct. Of course, this also requires Icarus to have more advanced production line layout capabilities."
+        "ZHCN": "石油作为工业的“血液”，其产量直接决定了诸多工业的产能，每年依旧有数不清的经费用于如何提高石油的利用率，高级原油处理便是其中一个成果，更高的轻油产量。",
+        "ENUS": "Oil, as the \"blood\" of industry, directly determines the production capacity of many industries. Every year, countless funds are spent on improving the utilization rate of oil, and advanced crude oil processing is one of the achievements, resulting in higher light oil production."
     },
     {
         "Name": "R高级原油处理",
-        "ZHCN": "更加完善的原油精炼处理，通过催化裂化，加氢精制等反应，进一步提高轻质油收率。并将处理过程中的含硫废气回收，燃烧，转化与处理，最终得到硫酸作为副产物，进一步提高原料的利用率。",
-        "ENUS": "More comprehensive crude oil refining treatment, through reactions such as catalytic cracking and hydrorefining, further improves the yield of light oil. And the sulfur-containing waste gas during the treatment process will be recovered, burned, converted, and treated to obtain sulfuric acid as a by-product, further improving the utilization rate of raw materials."
-    },
-    {
-        "Name": "R煅烧石油焦",
-        "ZHCN": "石油炼制过程中产生的重质油进行预热煅烧，得到石油焦，并在高温中进一步石墨化，得到石墨。",
-        "ENUS": "The heavy oil produced during the petroleum refining process is preheated and calcined to obtain petroleum coke, which is further graphitized at high temperatures to obtain graphite."
+        "ZHCN": "更加完善的原油精炼处理，通过催化裂化，加氢精制等反应，进一步提高轻质油收率。",
+        "ENUS": "More comprehensive crude oil refining processes, through reactions such as catalytic cracking and hydrofining, further enhance the yield of light oil."
     },
     {
         "Name": "文明遗物",
@@ -3754,8 +3749,8 @@
     },
     {
         "Name": "R文明数据上传",
-        "ZHCN": "上传外星探索发现的文明遗物解析出来的数据，也可以获得上传矩阵得到的哈希值。",
-        "ENUS": "Uploading data parsed from civilization artifacts discovered during extraterrestrial exploration can also obtain hash values obtained from uploading matrices."
+        "ZHCN": "上传外星探索发现的文明遗物解析出来的数据，也可以获得上传矩阵得到的哈希值。\n<color=\"#FD965ECC\">只对可用研究站的科技生效</color>",
+        "ENUS": "Uploading data parsed from civilization artifacts discovered during extraterrestrial exploration can also obtain hash values obtained from uploading matrices.\n<color=\"#FD965ECC\">It only takes effect on the technology of available research stations</color>"
     },
     {
         "Name": "进一步数据解码",

@@ -117,7 +117,8 @@ namespace ProjectOrbitalRing.Patches.Logic.BattleRelated
             modelProto.prefabDesc.unitMarchMovementSpeed = 5;
             modelProto.prefabDesc.unitAttackDamage0 = 36000;
             modelProto.prefabDesc.unitAttackDamageInc0 = 2500;
-            modelProto.prefabDesc.unitAttackRange0 = 10;
+            modelProto.prefabDesc.unitAttackRange0 = 27;
+            modelProto.prefabDesc.unitEngageArriveRange = 5;
             modelProto.prefabDesc.enemySandCount = 0;
 
             modelProto = LDB.models.Select(284);

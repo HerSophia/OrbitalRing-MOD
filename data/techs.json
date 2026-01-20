@@ -4263,7 +4263,7 @@
     {
         "ID": 1814,
         "Name": "宇宙创生",
-        "IconPath": "Assets/texpack/虚拟技术革新",
+        "IconPath": "Assets/texpack/T宇宙创生",
         "Desc": "T宇宙创生",
         "Conclusion": "真任务完成",
         "IsHiddenTech": true,
@@ -5998,7 +5998,7 @@
     {
         "ID": 1935,
         "Name": "菌丝母株研究",
-        "IconPath": "Icons/Tech/1143",
+        "IconPath": "Assets/texpack/T湿件主机",
         "Desc": "T菌丝母株研究",
         "Conclusion": "T菌丝母株研究",
         "IsHiddenTech": true,
@@ -6125,7 +6125,7 @@
     {
         "ID": 1938,
         "Name": "可缩放储备池计算",
-        "IconPath": "Assets/texpack/虚拟技术革新",
+        "IconPath": "Assets/texpack/T突触凝练机",
         "Desc": "T突触凝练机",
         "Conclusion": "T突触凝练机",
         "IsHiddenTech": true,
@@ -6517,7 +6517,7 @@
     {
         "ID": 1947,
         "Name": "次级维度工厂",
-        "IconPath": "Assets/texpack/主机科技",
+        "IconPath": "Assets/texpack/T次级维度工厂",
         "Desc": "T次级维度工厂",
         "Conclusion": "T次级维度工厂",
         "IsHiddenTech": true,
@@ -6644,7 +6644,7 @@
     {
         "ID": 1950,
         "Name": "次级维度工厂",
-        "IconPath": "Assets/texpack/主机科技",
+        "IconPath": "Assets/texpack/T次级维度工厂",
         "Desc": "T次级维度工厂",
         "Conclusion": "T次级维度工厂",
         "IsHiddenTech": true,
@@ -7067,7 +7067,7 @@
     {
         "ID": 1960,
         "Name": "宇宙的齿轮",
-        "IconPath": "Assets/texpack/黑雾协调科技",
+        "IconPath": "Assets/texpack/T宇宙的齿轮",
         "Desc": "T宇宙的齿轮",
         "Conclusion": "T宇宙的齿轮完成",
         "IsHiddenTech": true,
@@ -7153,7 +7153,7 @@
     {
         "ID": 1962,
         "Name": "遗物解码",
-        "IconPath": "Assets/texpack/量子无距传输",
+        "IconPath": "Assets/texpack/T遗物解码",
         "Desc": "T遗物解码",
         "Conclusion": "T遗物解码",
         "IsHiddenTech": true,
@@ -7324,7 +7324,7 @@
     {
         "ID": 1966,
         "Name": "轨道空投",
-        "IconPath": "Icons/Tech/1607",
+        "IconPath": "Assets/texpack/T轨道空投2",
         "Desc": "T轨道空投",
         "Conclusion": "T轨道空投",
         "IsHiddenTech": false,
@@ -7923,7 +7923,7 @@
     {
         "ID": 1980,
         "Name": "纳米晶体管",
-        "IconPath": "Icons/Tech/1811",
+        "IconPath": "Icons/Tech/1302",
         "Desc": "T纳米晶体管",
         "Conclusion": "T纳米晶体管",
         "IsHiddenTech": true,
@@ -7966,7 +7966,7 @@
     {
         "ID": 1981,
         "Name": "永磁涡轮",
-        "IconPath": "Icons/Tech/1811",
+        "IconPath": "Icons/Tech/1702",
         "Desc": "T永磁涡轮",
         "Conclusion": "T永磁涡轮",
         "IsHiddenTech": true,
@@ -8008,7 +8008,7 @@
     {
         "ID": 1982,
         "Name": "磁胶粒子宽带",
-        "IconPath": "Icons/Tech/1811",
+        "IconPath": "Icons/Tech/1133",
         "Desc": "T磁胶粒子宽带",
         "Conclusion": "T磁胶粒子宽带",
         "IsHiddenTech": true,
@@ -8223,7 +8223,7 @@
     {
         "ID": 1987,
         "Name": "无限应用课题",
-        "IconPath": "Assets/texpack/尖端组件",
+        "IconPath": "Assets/texpack/T无限应用课题",
         "Desc": "T无限应用课题",
         "Conclusion": "无限应用课题完成",
         "IsHiddenTech": true,

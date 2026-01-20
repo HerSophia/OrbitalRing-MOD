@@ -475,7 +475,11 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                     return false;
                 }
             } else if (itemId == 6255 && count > 0) {
-                __instance.mecha.gameData.history.AddTechHash(count * 1200000);
+                if (__instance.mecha.gameData.history.currentTech > 0) {
+                    if (LDB.techs.Select(__instance.mecha.gameData.history.currentTech).IsLabTech) {
+                        __instance.mecha.gameData.history.AddTechHash(count * 1200000);
+                    }
+                }
                 return false;
             } else if (itemId == 1099 && count > 0) {
                 count *= 50; // 沙土加到背包里，一个沙土对应50个沙土
