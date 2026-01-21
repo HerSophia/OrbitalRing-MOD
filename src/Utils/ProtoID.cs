@@ -102,6 +102,7 @@ namespace ProjectOrbitalRing.Utils
                            I氧 = 7019,
                            I种子 = 7021,
                            I钢芯弹箱 = 7607,
+                           I零素矢 = 7609,
                            I伺服天穹组件 = 7619,
                            I智能方尖碑 = 7620,
                            I亿万械国 = 7621,

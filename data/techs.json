@@ -1836,7 +1836,7 @@
     {
         "ID": 1404,
         "Name": "T光量子比特",
-        "IconPath": "Assets/texpack/T光量子",
+        "IconPath": "Assets/texpack/T光量子2",
         "Desc": "T光量子比特描述",
         "Conclusion": "T光量子比特描述",
         "IsHiddenTech": false,

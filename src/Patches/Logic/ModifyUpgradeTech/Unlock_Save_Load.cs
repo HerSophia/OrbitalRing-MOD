@@ -8,6 +8,7 @@ using ProjectOrbitalRing.Utils;
 using static ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine.EnergyCalculate;
 using UnityEngine;
 using UnityEngine.Playables;
+using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
 
 namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
 {
@@ -934,6 +935,44 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
         public static int GetUniverseObserveBuilding(int index)
         {
             return UniverseObserveBuilding[index];
+        }
+
+        // 沙盒一键解锁科技不解锁真通关
+        [HarmonyPatch(typeof(UITechTree), nameof(UITechTree.Do1KeyUnlock))]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> UITechTree_Do1KeyUnlock_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var matcher = new CodeMatcher(instructions);
+
+            matcher.MatchForward(true,
+                new CodeMatch(OpCodes.Ldc_I4, 1508));
+            object V_5 = matcher.Advance(-2).Operand;
+            object IL_0135 = matcher.Advance(3).Operand;
+
+            matcher.Advance(1).InsertAndAdvance(
+                new CodeInstruction(OpCodes.Ldloc_S, V_5),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Proto), nameof(Proto.ID))),
+                new CodeInstruction(OpCodes.Ldc_I4, 1802),
+                new CodeInstruction(OpCodes.Beq, IL_0135),
+
+                new CodeInstruction(OpCodes.Ldloc_S, V_5),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Proto), nameof(Proto.ID))),
+                new CodeInstruction(OpCodes.Ldc_I4, 1952),
+                new CodeInstruction(OpCodes.Beq, IL_0135),
+
+                new CodeInstruction(OpCodes.Ldloc_S, V_5),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Proto), nameof(Proto.ID))),
+                new CodeInstruction(OpCodes.Ldc_I4, 1960),
+                new CodeInstruction(OpCodes.Beq, IL_0135),
+
+                new CodeInstruction(OpCodes.Ldloc_S, V_5),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Proto), nameof(Proto.ID))),
+                new CodeInstruction(OpCodes.Ldc_I4, 1814),
+                new CodeInstruction(OpCodes.Beq, IL_0135)
+            );
+
+            //matcher.LogInstructionEnumeration();
+            return matcher.InstructionEnumeration();
         }
     }
 }
