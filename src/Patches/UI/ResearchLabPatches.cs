@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using static ProjectOrbitalRing.ProjectOrbitalRing;
 using ProjectOrbitalRing.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
+using Newtonsoft.Json.Linq;
 
 // ReSharper disable InconsistentNaming
 
@@ -16,9 +20,20 @@ namespace ProjectOrbitalRing.Patches.UI {
         [HarmonyPostfix]
         public static void UILabWindow_OnCreate_Postfix(UILabWindow __instance) {
             __instance.GetComponent<RectTransform>().sizeDelta = new Vector2(640, 430);
-            __instance.transform.Find("matrix-group/lines").gameObject.SetActive(false);
+            __instance.transform.Find("matrix-group/circle-back").gameObject.SetActive(false);
 
-            const int len = 8;
+            for (int i = 0; i < __instance.transform.childCount; i++) {
+                Transform child = __instance.transform.GetChild(i);
+                LogError($"UILabWindow_OnCreate_Postfix child.name {child.name}  !!!!!!!!!");
+                //if (child.name == "matrix-group") {
+                    for (int j = 0; j < child.childCount; j++) {
+                        Transform child2 = child.GetChild(i);
+                        LogError($"UILabWindow_OnCreate_Postfix child.child.name {child2.name}  !!!!!!!!!!!!!!!!!!!!!!!!!");
+                    }
+                //}
+            }
+
+                const int len = 8;
 
             Array.Resize(ref __instance.itemButtons, len);
             Array.Resize(ref __instance.itemIcons, len);
@@ -117,13 +132,18 @@ namespace ProjectOrbitalRing.Patches.UI {
         [HarmonyPatch(typeof(UILabWindow), nameof(UILabWindow._OnUpdate))]
         [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> UILabWindow_OnUpdate_Transpiler(
-            IEnumerable<CodeInstruction> instructions) {
+            IEnumerable<CodeInstruction> instructions)
+        {
             var matcher = new CodeMatcher(instructions);
 
-            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0),
-                new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(LabComponent), nameof(LabComponent.timeSpend))));
+            //matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0),
+            //    new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(LabComponent), nameof(LabComponent.timeSpend))));
+            matcher.MatchForward(true,
+                new CodeMatch(OpCodes.Ldc_R8, 600000.0));
+            object timeSpend = matcher.Advance(-2).Operand;
 
-            matcher.Advance(1).InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_0),
+            matcher.Advance(1).InsertAndAdvance(
+                new CodeInstruction(OpCodes.Ldloc_0),
                 new CodeInstruction(OpCodes.Call,
                     AccessTools.Method(typeof(ResearchLabPatches), nameof(UILabWindow_OnUpdate_Patch_Method))));
 
@@ -140,12 +160,12 @@ namespace ProjectOrbitalRing.Patches.UI {
             return matcher.InstructionEnumeration();
         }
 
-        [HarmonyPatch(typeof(LabComponent), nameof(LabComponent.SetFunction))]
+        //[HarmonyPatch(typeof(LabComponent), nameof(LabComponent.SetFunction))]
         [HarmonyPatch(typeof(LabComponent), nameof(LabComponent.InternalUpdateAssemble))]
         [HarmonyPatch(typeof(FactorySystem), nameof(FactorySystem.GameTickLabResearchMode))]
         [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> LabComponent_SetFunction_Transpiler(
-            IEnumerable<CodeInstruction> instructions) {
+            IEnumerable<CodeInstruction> instructions, MethodBase __originalMethod) {
             var matcher = new CodeMatcher(instructions);
 
             matcher.MatchForward(false,
@@ -154,6 +174,15 @@ namespace ProjectOrbitalRing.Patches.UI {
 
             matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Call,
                 AccessTools.Method(typeof(ResearchLabPatches), nameof(ChangeMatrixIds))));
+
+            if (__originalMethod.Name == "GameTickLabResearchMode") {
+                matcher.MatchForward(false,
+                    new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(TechProto), nameof(TechProto.Items))),
+                    new CodeMatch(OpCodes.Ldloc_S));
+
+                matcher.Advance(3).InsertAndAdvance(new CodeInstruction(OpCodes.Call,
+                    AccessTools.Method(typeof(ResearchLabPatches), nameof(ChangeMatrixIds))));
+            }
 
             return matcher.InstructionEnumeration();
         }
@@ -251,18 +280,20 @@ namespace ProjectOrbitalRing.Patches.UI {
         {
             var matcher = new CodeMatcher(instructions, ilGenerator);
 
-            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldarg_0),
-                new CodeMatch(OpCodes.Ldfld,
+            matcher.MatchForward(false,
+                //new CodeMatch(OpCodes.Ldarg_0),
+                new CodeMatch(OpCodes.Ldsfld,
                     AccessTools.Field(typeof(LabComponent), nameof(LabComponent.matrixPoints))));
 
             CodeMatcher matcher2 = matcher.Clone();
 
-            matcher2.MatchForward(false, new CodeMatch(OpCodes.Ldarg_0),
-                new CodeMatch(OpCodes.Ldfld,
+            matcher2.MatchForward(false,
+                //new CodeMatch(OpCodes.Ldarg_0),
+                new CodeMatch(OpCodes.Ldsfld,
                     AccessTools.Field(typeof(LabComponent), nameof(LabComponent.matrixPoints))),
                 new CodeMatch(OpCodes.Ldc_I4_5));
 
-            var label = matcher2.Advance(5).Operand;
+            var label = matcher2.Advance(4).Operand;
 
             matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0),
                 new CodeInstruction(OpCodes.Ldarg_2),
@@ -276,8 +307,77 @@ namespace ProjectOrbitalRing.Patches.UI {
             return matcher.InstructionEnumeration();
         }
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto))]
-        [HarmonyTranspiler]
+        public static void ApplyPatch(Harmony harmonyInstance)
+        {
+            // 1. 定义目标方法的参数类型数组（包含out参数）
+            Type[] parameterTypes = new Type[]
+            {
+            typeof(int),
+            typeof(int),
+            typeof(int),
+            typeof(byte),
+            typeof(byte),
+            typeof(byte).MakeByRefType() // out byte 正确声明
+            };
+
+            Type[] parameterTypes2 = new Type[]
+            {
+            typeof(uint),
+            typeof(int),
+            typeof(int),
+            typeof(byte),
+            typeof(byte),
+            typeof(byte).MakeByRefType() // out byte 正确声明
+            };
+
+            // 2. 正确调用GetMethod重载（重点修正这里！）
+            // 重载格式：GetMethod(方法名, 绑定标志, 绑定器(传null), 参数类型数组, 参数修饰符(传null))
+            MethodInfo targetMethod = typeof(PlanetFactory).GetMethod(
+                nameof(PlanetFactory.InsertInto),                     // 第一个参数：方法名
+                BindingFlags.Public | BindingFlags.Instance,         // 第二个参数：BindingFlags（实例+公共方法）
+                null,                                                 // 第三个参数：Binder（通常为null）
+                parameterTypes,                                       // 第四个参数：参数类型数组
+                null                                                  // 第五个参数：ParameterModifier[]（通常为null）
+            );
+            MethodInfo targetMethod2 = typeof(PlanetFactory).GetMethod(
+                nameof(PlanetFactory.InsertInto),                     // 第一个参数：方法名
+                BindingFlags.Public | BindingFlags.Instance,         // 第二个参数：BindingFlags（实例+公共方法）
+                null,                                                 // 第三个参数：Binder（通常为null）
+                parameterTypes2,                                       // 第四个参数：参数类型数组
+                null                                                  // 第五个参数：ParameterModifier[]（通常为null）
+            );
+
+            // 3. 容错检查：确认方法是否找到
+            if (targetMethod == null || targetMethod2 == null) {
+                Debug.LogError($"未找到方法：PlanetFactory.InsertInto，检查参数类型是否匹配！");
+                return;
+            }
+
+            // 4. 获取Transpiler方法
+            MethodInfo transpilerMethod = typeof(ResearchLabPatches).GetMethod(
+                nameof(PlanetFactory_InsertInto_Transpiler),
+                BindingFlags.Public | BindingFlags.Static
+            );
+
+            if (transpilerMethod == null) {
+                Debug.LogError($"未找到Transpiler方法：PlanetFactory_InsertInto_Transpiler！");
+                return;
+            }
+
+            // 5. 手动打补丁
+            harmonyInstance.Patch(
+                original: targetMethod,
+                transpiler: new HarmonyMethod(transpilerMethod)
+            );
+            harmonyInstance.Patch(
+                original: targetMethod2,
+                transpiler: new HarmonyMethod(transpilerMethod)
+            );
+
+            Debug.Log("PlanetFactory.InsertInto 补丁加载成功！");
+        }
+
+        //[HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> PlanetFactory_InsertInto_Transpiler(
             IEnumerable<CodeInstruction> instructions) {
             var matcher = new CodeMatcher(instructions);
@@ -325,9 +425,9 @@ namespace ProjectOrbitalRing.Patches.UI {
             var speed = (int)(techSpeed + 2.0);
 
             for (var i = 0; i < LabComponent.matrixIds.Length; i++) {
-                if (labComponent.matrixPoints[i] <= 0) continue;
+                if (LabComponent.matrixPoints[i] <= 0) continue;
 
-                int point = labComponent.matrixServed[i] / labComponent.matrixPoints[i];
+                int point = labComponent.matrixServed[i] / LabComponent.matrixPoints[i];
 
                 if (point >= speed) continue;
 
@@ -372,7 +472,7 @@ namespace ProjectOrbitalRing.Patches.UI {
         }
 
         public static int UILabWindow_OnUpdate_Patch_Method(int timeSpend, LabComponent component) =>
-            timeSpend / component.productCounts[0];
+            timeSpend / component.recipeExecuteData.productCounts[0];
 
         public static int ChangeMatrixIds(int itemId) {
             switch (itemId) {

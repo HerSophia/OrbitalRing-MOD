@@ -62,6 +62,8 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
             return result;
         }
 
+
+
         private static Dictionary<ValueTuple<int, int>, AssemblerModuleData> ImportAssemblerModuleData = new Dictionary<ValueTuple<int, int>, AssemblerModuleData>();
         private static ConcurrentDictionary<FactorySystem, ConcurrentDictionary<int, AssemblerModuleData>> AssemblerModuleData = new ConcurrentDictionary<FactorySystem, ConcurrentDictionary<int, AssemblerModuleData>>();
 
@@ -261,41 +263,6 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                 }
             }
         }
-
-        //// Token: 0x06000166 RID: 358 RVA: 0x00010334 File Offset: 0x0000E534
-        //public static void ExportPlanetData(int planetId, BinaryWriter w)
-        //{
-        //    KeyValuePair<ValueTuple<int, int>, AssemblerModuleData>[] array = (from pair in AssemblerModulePatches.AssemblerModuleData
-        //                                                                   where pair.Key.Item1 == planetId
-        //                                                                   select pair).ToArray<KeyValuePair<ValueTuple<int, int>, AssemblerModuleData>>();
-        //    w.Write(array.Length);
-        //    w.Write(planetId);
-        //    foreach (KeyValuePair<ValueTuple<int, int>, AssemblerModuleData> keyValuePair in array) {
-        //        w.Write(keyValuePair.Key.Item2);
-        //        w.Write(keyValuePair.Value.ItemId);
-        //        w.Write(keyValuePair.Value.ItemCount);
-        //        w.Write(keyValuePair.Value.ItemInc);
-        //        w.Write(keyValuePair.Value.NeedCount);
-        //    }
-        //}
-
-        //// Token: 0x06000167 RID: 359 RVA: 0x00010400 File Offset: 0x0000E600
-        //public static void ImportPlanetData(BinaryReader r)
-        //{
-        //    int num = r.ReadInt32();
-        //    int item = r.ReadInt32();
-        //    for (int i = 0; i < num; i++) {
-        //        int item2 = r.ReadInt32();
-        //        AssemblerModulePatches.AssemblerModuleData[new ValueTuple<int, int>(item, item2)] = new AssemblerModuleData {
-        //            ItemId = r.ReadInt32(),
-        //            ItemCount = r.ReadInt32(),
-        //            ItemInc = r.ReadInt32(),
-        //            NeedCount = r.ReadInt32()
-        //        };
-        //    }
-        //}
-
-        // Token: 0x040000D2 RID: 210
         
         public static void AssemblerFilterModuleProcess(FactorySystem factorySystem, int poolId, ref float power)
         {
@@ -312,7 +279,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
 
         private static void MakeAssemblerExtra(ref AssemblerComponent __instance, int incLevel)
         {
-            if (__instance.productive && !__instance.forceAccMode) {
+            if (__instance.recipeExecuteData.productive && !__instance.forceAccMode) {
                 __instance.extraSpeed = (int)((double)__instance.speed * Cargo.incTableMilli[incLevel] * 10.0 + 0.1);
                 __instance.speedOverride = __instance.speed;
                 __instance.extraPowerRatio = Cargo.powerTable[incLevel];

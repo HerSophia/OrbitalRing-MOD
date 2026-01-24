@@ -163,10 +163,10 @@ namespace ProjectOrbitalRing.Patches.Logic.QuantumStorage
             if (package == null || package.size == QuantumStorageSize) __result = true;
         }
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto))]
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto))]
         [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertIntoStorage))]
         [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertCargoIntoStorage))]
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.PickFrom))]
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.PickFrom))]
         [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.PickFromStorage))]
         [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.PickFromStorageFiltered))]
         [HarmonyTranspiler]

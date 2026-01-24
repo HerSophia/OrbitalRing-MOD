@@ -69,6 +69,7 @@ namespace ProjectOrbitalRing.Utils
                            I菌丝母株 = 6245,
                            I大型神经网络 = 6252,
                            I湿件主机 = 6253,
+                           I生态温室 = 6254,
                            I太空船坞 = 6257,
                            I太空电梯 = 6258,
                            I天枢座 = 6259,
@@ -190,7 +191,8 @@ namespace ProjectOrbitalRing.Utils
                            M智能方尖碑 = 831,
                            M亿万械国 = 832,
                            MSCP310恒燃之火 = 833,
-                           M突触凝练机 = 834;
+                           M突触凝练机 = 834,
+                           M生态温室 = 835;
 
         internal const int T戴森球计划 = 1,
                            T电磁学 = 1001,

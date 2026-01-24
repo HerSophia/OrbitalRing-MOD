@@ -440,12 +440,12 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
         [HarmonyPrefix]
         public static bool TryAddItemToPackagePatch(ref Player __instance, int itemId, ref int count, ref int __result)
         {
-            if (itemId == 6254 && count > 0) {
+            if (itemId == 99999 && count > 0) {
                 RecipeProto recipeProto;
 
                 if (__instance.mecha.gameData.history.currentTech > 0) {
                     if (LDB.techs.Select(__instance.mecha.gameData.history.currentTech).IsLabTech == false) {
-                        recipeProto = LDB.recipes.Select(642);
+                        recipeProto = LDB.recipes.Select(9999);
                         if (recipeProto.ItemCounts[0] == 2) {
                             synapticLatheTechSpeed = 1;
                             vanillaTechSpeed = __instance.mecha.gameData.history.techSpeed;
@@ -456,7 +456,7 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                         __result = 0;
                         return false;
                     } else {
-                        recipeProto = LDB.recipes.Select(642);
+                        recipeProto = LDB.recipes.Select(9999);
                         recipeProto.ItemCounts[0] = 2;
                         synapticLatheTechSpeed = 1;
                         __instance.mecha.gameData.history.techSpeed = vanillaTechSpeed;
@@ -464,7 +464,7 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                         return false;
                     }
                 } else {
-                    recipeProto = LDB.recipes.Select(642);
+                    recipeProto = LDB.recipes.Select(9999);
                     if (recipeProto.ItemCounts[0] == 2) {
                         synapticLatheTechSpeed = 1;
                         vanillaTechSpeed = __instance.mecha.gameData.history.techSpeed;
@@ -505,7 +505,7 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                     __instance.package.grids[i].stackSize = 0;
                 }
             }
-            __instance.SetSandCount(__instance.sandCount + (long)num);
+            __instance.SetSandCount(__instance.sandCount + (long)num, ESandSource.Other);
             return false;
         }
 

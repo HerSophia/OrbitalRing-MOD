@@ -137,7 +137,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                     if (pair.stationType == StationType.Assembler) {
                         if (pair.OrbitalStationPoolId == assemblerComponent.id) {
                             ref Dictionary<int, int[]> storageItem = ref planetOrbitalRingData.Rings[ringId].orbitalRingStorage.storageItem;
-                            int num = assemblerComponent.speedOverride * 180 / assemblerComponent.timeSpend + 1;
+                            int num = assemblerComponent.speedOverride * 180 / assemblerComponent.recipeExecuteData.timeSpend + 1;
                             if (num < 2) {
                                 num = 2;
                             }
@@ -145,7 +145,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                 itemId = assemblerComponent.needs[i];
                                 lock (storageItem) {
                                     if (storageItem.ContainsKey(itemId)) {
-                                        count = assemblerComponent.requireCounts[i] * num;
+                                        count = assemblerComponent.recipeExecuteData.requireCounts[i] * num;
                                         if (storageItem[itemId][0] >= count) {
                                             assemblerComponent.served[i] += count;
                                             inc = split_inc(ref storageItem[itemId][0], ref storageItem[itemId][1], count);
@@ -160,11 +160,11 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                     }
                                 }
                             }
-                            for (int i = 0; i < assemblerComponent.products.Length; i++) {
+                            for (int i = 0; i < assemblerComponent.recipeExecuteData.products.Length; i++) {
                                 if (assemblerComponent.produced[i] == 0) {
                                     continue;
                                 }
-                                itemId = assemblerComponent.products[i];
+                                itemId = assemblerComponent.recipeExecuteData.products[i];
                                 lock (storageItem) {
                                     if (!storageItem.ContainsKey(itemId)) {
                                         storageItem[itemId] = new int[] { 0, 0 };

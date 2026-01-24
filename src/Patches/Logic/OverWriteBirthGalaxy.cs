@@ -550,7 +550,7 @@ namespace ProjectOrbitalRing.Patches.Logic
 
             //for (int i = 0; i < planet.star.planetCount; i++) {
             //List<int> orbitAroundPlanet = new List<int>();
-            DotNet35Random DotNet35Random = new DotNet35Random();
+            DotNet35Random DotNet35Random = new DotNet35Random(theme_seed);
             double Random = DotNet35Random.NextDouble();
             bool thisPlanetIsMoon = false;
             if (planet.orbitAroundPlanet != null) {

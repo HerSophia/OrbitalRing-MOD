@@ -135,6 +135,8 @@
     <Compile Include="src\Patches\Logic\DisableLDBToolCachePatches.cs" />
     <Compile Include="src\Patches\Logic\DysonSpherePatches.cs" />
     <Compile Include="src\Patches\Logic\EjectorPatches.cs" />
+    <Compile Include="src\Patches\Logic\Farm\FarmAssembler.cs" />
+    <Compile Include="src\Patches\Logic\Farm\SyncFarmAssemblerRecipes.cs" />
     <Compile Include="src\Patches\Logic\FastStartOptionPatches.cs" />
     <Compile Include="src\Patches\Logic\FastTravelPatches.cs" />
     <Compile Include="src\Patches\Logic\FelTreeObjects.cs" />

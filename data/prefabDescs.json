@@ -580,5 +580,19 @@
         "beaconSignalRadius": 0.0,
         "beaconSpaceSignalRange": 0.0,
         "powerConnectDistance": 0.5
+    },
+    {
+        "ModelID": 835,
+        "isAssembler": true,
+        "isLab": false,
+        //"isStation": false,
+        "assemblerRecipeType": 14,
+        "idleEnergyPerTick": 200,
+        "workEnergyPerTick": 12000,
+        "assemblerSpeed": 10000
+        //"stationMaxEnergyAcc": 0,
+        //"stationMaxItemCount": 0,
+        //"stationMaxItemKinds": 0,
+        //"stationMaxDroneCount": 0
     }
 ]

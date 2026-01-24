@@ -417,7 +417,7 @@ namespace ProjectOrbitalRing.Utils
             new TutorialProto {
                 ID = ID,
                 Name = Name,
-                PreText = PreText,
+                //PreText = PreText,
                 DeterminatorName = DeterminatorName,
                 DeterminatorParams = DeterminatorParams,
             };

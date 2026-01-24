@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using ProjectOrbitalRing.Utils;
@@ -173,86 +174,85 @@ namespace ProjectOrbitalRing.Patches.Logic
             }
         }
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.PickFrom))]
-        [HarmonyPostfix]
-        public static void PlanetFactory_PickFrom_Postfix(PlanetFactory __instance, int entityId, int offset, int filter, int[] needs,
-            ref byte stack, ref byte inc, ref int __result)
-        {
-            if (__result != 0) return;
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.PickFrom))]
+        //[HarmonyPostfix]
+        //public static void PlanetFactory_PickFrom_Postfix(PlanetFactory __instance, int entityId, int offset, int filter, int[] needs,
+        //    ref byte stack, ref byte inc, ref int __result)
+        //{
+        //    if (__result != 0) return;
 
-            if (filter != ProtoID.I空燃料棒 && filter != 0) return;
+        //    if (filter != ProtoID.I空燃料棒 && filter != 0) return;
 
-            EntityData entityData = __instance.entityPool[entityId];
-            int powerGenId = entityData.powerGenId;
+        //    EntityData entityData = __instance.entityPool[entityId];
+        //    int powerGenId = entityData.powerGenId;
 
-            if (powerGenId == 0) return;
+        //    if (powerGenId == 0) return;
 
-            PowerGeneratorComponent powerGeneratorComponent = __instance.powerSystem.genPool[offset];
+        //    PowerGeneratorComponent powerGeneratorComponent = __instance.powerSystem.genPool[offset];
 
-            if ((offset <= 0 || powerGeneratorComponent.id != offset) && filter == 0) return;
+        //    if ((offset <= 0 || powerGeneratorComponent.id != offset) && filter == 0) return;
 
-            lock (__instance.entityMutexs[entityId])
-            {
-                int num = __instance.powerSystem.genPool[powerGenId].PickFuelFrom(filter, out int inc3);
-                inc = (byte)inc3;
-                __result = num;
-            }
-        }
+        //    lock (__instance.entityMutexs[entityId])
+        //    {
+        //        int num = __instance.powerSystem.genPool[powerGenId].PickFuelFrom(filter, out int inc3);
+        //        inc = (byte)inc3;
+        //        __result = num;
+        //    }
+        //}
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto))]
-        [HarmonyPostfix]
-        public static void PlanetFactory_InsertInto_Postfix(PlanetFactory __instance, int entityId, int itemId, ref byte itemCount,
-            ref byte itemInc, ref byte remainInc, ref int __result)
-        {
-            if (__result != 0 || itemId != ProtoID.I空燃料棒) return;
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto),
+        //    new Type[] { typeof(int), typeof(int), typeof(int), typeof(byte), typeof(byte), typeof(byte) })]
+        //[HarmonyPostfix]
+        //public static void PlanetFactory_InsertInto_Postfix(PlanetFactory __instance, int entityId, int itemId, ref byte itemCount,
+        //    ref byte itemInc, ref byte remainInc, ref int __result)
+        //{
+        //    if (__result != 0 || itemId != ProtoID.I空燃料棒) return;
 
-            EntityData entityData = __instance.entityPool[entityId];
+        //    EntityData entityData = __instance.entityPool[entityId];
 
-            int powerGenId = entityData.powerGenId;
+        //    int powerGenId = entityData.powerGenId;
 
-            if (powerGenId == 0) return;
+        //    if (powerGenId == 0) return;
 
-            PowerGeneratorComponent[] genPool = __instance.powerSystem.genPool;
-            ref PowerGeneratorComponent component = ref genPool[powerGenId];
+        //    PowerGeneratorComponent[] genPool = __instance.powerSystem.genPool;
+        //    ref PowerGeneratorComponent component = ref genPool[powerGenId];
 
-            if (component.fuelMask == 0) return;
+        //    if (component.fuelMask == 0) return;
 
-            Mutex obj = __instance.entityMutexs[entityId];
+        //    Mutex obj = __instance.entityMutexs[entityId];
 
-            lock (obj)
-            {
-                component.productCount += itemCount;
-                component.catalystIncPoint += itemInc;
+        //    lock (obj) {
+        //        component.productCount += itemCount;
+        //        component.catalystIncPoint += itemInc;
 
-                if (component.productCount > 30)
-                {
-                    var instanceProductCount = (int)component.productCount;
-                    component.split_inc(ref instanceProductCount, ref component.catalystIncPoint, instanceProductCount - 30);
-                    component.productCount = instanceProductCount;
-                }
+        //        if (component.productCount > 30) {
+        //            var instanceProductCount = (int)component.productCount;
+        //            component.split_inc(ref instanceProductCount, ref component.catalystIncPoint, instanceProductCount - 30);
+        //            component.productCount = instanceProductCount;
+        //        }
 
-                remainInc = 0;
-                __result = itemCount;
-            }
-        }
+        //        remainInc = 0;
+        //        __result = itemCount;
+        //    }
+        //}
 
-        [HarmonyPatch(typeof(PowerGeneratorComponent), nameof(PowerGeneratorComponent.PickFuelFrom))]
-        [HarmonyPostfix]
-        public static void PowerGeneratorComponent_PickFuelFrom_Postfix(ref PowerGeneratorComponent __instance, int filter, ref int inc,
-            ref int __result)
-        {
-            if (__result != 0) return;
+        //[HarmonyPatch(typeof(PowerGeneratorComponent), nameof(PowerGeneratorComponent.PickFuelFrom))]
+        //[HarmonyPostfix]
+        //public static void PowerGeneratorComponent_PickFuelFrom_Postfix(ref PowerGeneratorComponent __instance, int filter, ref int inc,
+        //    ref int __result)
+        //{
+        //    if (__result != 0) return;
 
-            if (filter != ProtoID.I空燃料棒 && filter != 0) return;
+        //    if (filter != ProtoID.I空燃料棒 && filter != 0) return;
 
-            var instanceProductCount = (int)__instance.productCount;
+        //    var instanceProductCount = (int)__instance.productCount;
 
-            if (instanceProductCount <= 0) return;
+        //    if (instanceProductCount <= 0) return;
 
-            __result = ProtoID.I空燃料棒;
-            inc = __instance.split_inc(ref instanceProductCount, ref __instance.catalystIncPoint, 1);
-            __instance.productCount = instanceProductCount;
-        }
+        //    __result = ProtoID.I空燃料棒;
+        //    inc = __instance.split_inc(ref instanceProductCount, ref __instance.catalystIncPoint, 1);
+        //    __instance.productCount = instanceProductCount;
+        //}
 
         [HarmonyPatch(typeof(UIStorageGrid), nameof(UIStorageGrid.GetOtherStorageGrid), typeof(int))]
         [HarmonyTranspiler]
@@ -319,9 +319,79 @@ namespace ProjectOrbitalRing.Patches.Logic
             return matcher.InstructionEnumeration();
         }
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.EntityFastFillIn))]
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto))]
-        [HarmonyTranspiler]
+        // 统一的补丁安装入口：一次性给两个方法打补丁
+        public static void InstallAllPatches(Harmony harmony)
+        {
+            // 1. 给 EntityFastFillIn 打补丁（无out参数，也用手动方式）
+            InstallEntityFastFillInPatch(harmony);
+
+            // 2. 给 InsertInto 打补丁（处理out参数）
+            InstallInsertIntoPatch(harmony);
+        }
+
+        // 处理 EntityFastFillIn 的补丁安装
+        private static void InstallEntityFastFillInPatch(Harmony harmony)
+        {
+            try {
+                // 查找 EntityFastFillIn 方法（无参数或参数简单，直接查找）
+                MethodInfo targetMethod = typeof(PlanetFactory).GetMethod(
+                    nameof(PlanetFactory.EntityFastFillIn),
+                    BindingFlags.Public | BindingFlags.Instance // 实例+公共方法
+                );
+
+                if (targetMethod == null) {
+                    //Debug.LogError("找不到EntityFastFillIn方法！");
+                    return;
+                }
+
+                // 复用同一个Transpiler方法
+                harmony.Patch(
+                    original: targetMethod,
+                    transpiler: new HarmonyMethod(typeof(FuelRodPatches), nameof(PlanetFactory_InsertInto_Transpiler))
+                );
+                //Debug.Log("✅ EntityFastFillIn补丁安装成功");
+            } catch (Exception e) {
+                //Debug.LogError($"❌ EntityFastFillIn补丁安装失败：{e}");
+            }
+        }
+
+        // 处理 InsertInto 的补丁安装（兼容out参数）
+        private static void InstallInsertIntoPatch(Harmony harmony)
+        {
+            try {
+                Type[] paramTypes = new[]
+                {
+                typeof(int), typeof(int), typeof(int), typeof(byte), typeof(byte),
+                typeof(byte).MakeByRefType() // out参数
+            };
+
+                MethodInfo targetMethod = typeof(PlanetFactory).GetMethod(
+                    nameof(PlanetFactory.InsertInto),
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null, paramTypes, null
+                );
+
+                if (targetMethod == null) {
+                    //Debug.LogError("找不到InsertInto方法！");
+                    return;
+                }
+
+                // 复用同一个Transpiler方法
+                harmony.Patch(
+                    original: targetMethod,
+                    transpiler: new HarmonyMethod(typeof(FuelRodPatches), nameof(PlanetFactory_InsertInto_Transpiler))
+                );
+                //Debug.Log("✅ InsertInto补丁安装成功");
+            } catch (Exception e) {
+                //Debug.LogError($"❌ InsertInto补丁安装失败：{e}");
+            }
+        }
+
+
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.EntityFastFillIn))]
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto),
+        //    new Type[] { typeof(int), typeof(int), typeof(int), typeof(byte), typeof(byte), Type.GetType("System.Byte&") })]
+        //[HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> PlanetFactory_InsertInto_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             var matcher = new CodeMatcher(instructions);

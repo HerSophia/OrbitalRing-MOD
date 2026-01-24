@@ -13,7 +13,7 @@ namespace ProjectOrbitalRing.Patches.Logic
     {
         public static readonly int[] OreIdList = new int[]
         {
-            1001,1002,1003,1004,1005,1006,1011,1012,1013,1014,1015,1016,6207,7706,6222
+            1001,1002,1003,1004,1005,1006,1011,1012,1013,1014,1015,1016,1117,6207,7706,6222
         };
         // 第一步：定义基础的正向映射（编码阶段定死的核心数据）
         private static readonly Dictionary<int, int> _forwardMap = new Dictionary<int, int>()
@@ -30,6 +30,7 @@ namespace ProjectOrbitalRing.Patches.Logic
             {1014, 7818},
             {1015, 7821},
             {1016, 7819},
+            {1117, 7822},
             {6207, 7808},
             {7706, 7816},
             {6222, 7817},

@@ -8,6 +8,7 @@ using ProjectOrbitalRing.Utils;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalAssembler;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalRingStorageCalculate;
 using static ProjectOrbitalRing.Patches.Logic.PlanetFocus.WaterWorldPatch;
+using static ProjectOrbitalRing.Patches.Logic.Farm.FarmAssembler;
 using ProjectOrbitalRing.Patches.Logic.AssemblerModule;
 
 // ReSharper disable InconsistentNaming
@@ -136,6 +137,25 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             // 水世界星球特质处理入口
             SetAssmeblerWaterFull(ref __instance, factory);
 
+            // 如果产物和原料是同一种东西，产物会内部直接填回原料，不再需要在绿塔外拉个回环线
+            if (factory.entityPool[__instance.entityId].protoId == ProtoID.I生态温室) {
+                for (int i = 0; i < __instance.recipeExecuteData.products.Length; i++) {
+                    for (int j = 0; j < __instance.needs.Length; j++) {
+                        if (__instance.recipeExecuteData.products[i] == __instance.needs[j] && __instance.produced[i] > 0) {
+                            if (__instance.produced[i] >= __instance.recipeExecuteData.requireCounts[j] * 2) {
+                                __instance.produced[i] -= __instance.recipeExecuteData.requireCounts[j] * 2;
+                                __instance.served[j] += __instance.recipeExecuteData.requireCounts[j] * 2;
+                            } else {
+                                __instance.served[j] += __instance.produced[i];
+                                __instance.produced[i] = 0;
+                            }
+                        }
+                    }
+                }
+            }
+            // 生态温室上传原料下传产物处理，在产物填回原料后
+            GameTickAssemblerOutputToNext(ref __instance, factory);
+
             bool b = power >= 0.1f;
 
             // MegaBuildings
@@ -151,12 +171,12 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                 //{
 
                 // 如果产物和原料是同一种东西，产物会内部直接填回原料，不再需要在绿塔外拉个回环线
-                for (int i = 0; i < __instance.products.Length; i++) {
+                for (int i = 0; i < __instance.recipeExecuteData.products.Length; i++) {
                     for (int j = 0; j < __instance.needs.Length; j++) {
-                        if (__instance.products[i] == __instance.needs[j] && __instance.produced[i] > 0) {
-                            if (__instance.produced[i] >= __instance.requireCounts[j] * 2) {
-                                __instance.produced[i] -= __instance.requireCounts[j] * 2;
-                                __instance.served[j] += __instance.requireCounts[j] * 2;
+                        if (__instance.recipeExecuteData.products[i] == __instance.needs[j] && __instance.produced[i] > 0) {
+                            if (__instance.produced[i] >= __instance.recipeExecuteData.requireCounts[j] * 2) {
+                                __instance.produced[i] -= __instance.recipeExecuteData.requireCounts[j] * 2;
+                                __instance.served[j] += __instance.recipeExecuteData.requireCounts[j] * 2;
                             } else {
                                 __instance.served[j] += __instance.produced[i];
                                 __instance.produced[i] = 0;
@@ -196,7 +216,7 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             if (flag)
             {
                 __instance.extraTime += (int)(power * __instance.extraSpeed)
-                                      + (int)(power * __instance.speedOverride * __instance.extraTimeSpend / __instance.timeSpend);
+                                      + (int)(power * __instance.speedOverride * __instance.recipeExecuteData.extraTimeSpend / __instance.recipeExecuteData.timeSpend);
             }
 
             return b;
@@ -225,9 +245,9 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
 
                     if (index2 >= 0)
                     {
-                        if (index2 < __instance.products.Length)
+                        if (index2 < __instance.recipeExecuteData.products.Length)
                         {
-                            itemId = __instance.products[index2];
+                            itemId = __instance.recipeExecuteData.products[index2];
                             int produced = __instance.produced[index2];
 
                             if (itemId > 0 && produced > 0)
@@ -239,11 +259,11 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                         }
                         else
                         {
-                            int index3 = index2 - __instance.products.Length;
+                            int index3 = index2 - __instance.recipeExecuteData.products.Length;
 
-                            if (index3 < __instance.requires.Length)
+                            if (index3 < __instance.recipeExecuteData.requires.Length)
                             {
-                                itemId = __instance.requires[index3];
+                                itemId = __instance.recipeExecuteData.requires[index3];
                                 int served = __instance.served[index3];
 
                                 if (itemId > 0 && served > 0)
@@ -389,16 +409,16 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                     {
                         __instance.served[needIdx] += stack;
                         __instance.incServed[needIdx] += inc;
-                        slotdata[index].storageIdx = __instance.products.Length + needIdx + 1;
+                        slotdata[index].storageIdx = __instance.recipeExecuteData.products.Length + needIdx + 1;
                     }
 
-                    for (var i = 0; i < __instance.products.Length; i++)
+                    for (var i = 0; i < __instance.recipeExecuteData.products.Length; i++)
                     {
                         if (__instance.produced[i] >= 50) continue;
 
-                        itemId = traffic.TryPickItemAtRear(beltId, __instance.products[i], null, out stack, out _);
+                        itemId = traffic.TryPickItemAtRear(beltId, __instance.recipeExecuteData.products[i], null, out stack, out _);
 
-                        if (__instance.products[i] == itemId)
+                        if (__instance.recipeExecuteData.products[i] == itemId)
                         {
                             __instance.produced[i] += stack;
                             slotdata[index].storageIdx = i + 1;
@@ -428,15 +448,22 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
         {
             if (entityId == 0) return;
 
+            int itemId = __instance.entityPool[entityId].protoId;
+
+            if (itemId != ProtoID.I生态穹顶) return;
+
+            int beltId = -1;
+
             int assemblerId = __instance.entityPool[entityId].assemblerId;
 
-            if (assemblerId <= 0) return;
+            if (assemblerId > 0) {
 
-            AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
+                AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
 
-            if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
+                if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
 
-            int beltId = __instance.entityPool[insertTarget].beltId;
+                beltId = __instance.entityPool[insertTarget].beltId;
+            }
 
             if (beltId <= 0) return;
 
@@ -453,15 +480,21 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
         {
             if (entityId == 0) return;
 
+            int itemId = __instance.entityPool[entityId].protoId;
+
+            if (itemId != ProtoID.I生态穹顶) return;
+
             int assemblerId = __instance.entityPool[entityId].assemblerId;
 
-            if (assemblerId <= 0) return;
+            //if (assemblerId <= 0) return;
+            int beltId = -1;
+            if (assemblerId > 0) {
+                AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
 
-            AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
+                if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
 
-            if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
-
-            int beltId = __instance.entityPool[pickTarget].beltId;
+                beltId = __instance.entityPool[pickTarget].beltId;
+            }
 
             if (beltId <= 0) return;
 
@@ -480,16 +513,22 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
         {
             if (otherEntityId == 0) return;
 
+            int itemId = __instance.entityPool[otherEntityId].protoId;
+
+            if (itemId != ProtoID.I生态穹顶) return;
+
             int assemblerId = __instance.entityPool[otherEntityId].assemblerId;
 
-            if (assemblerId <= 0) return;
+            //if (assemblerId <= 0) return;
+            int beltId = -1;
+            if (assemblerId > 0) {
+                AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
 
-            AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
+                if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
 
-            if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
-
-            int beltId = __instance.entityPool[removingEntityId].beltId;
-
+                beltId = __instance.entityPool[removingEntityId].beltId;
+            }
+            
             if (beltId <= 0) return;
 
             SlotData[] slotdata = GetSlots(__instance.planetId, otherEntityId);

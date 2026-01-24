@@ -1779,14 +1779,14 @@
         "ENUS": "A giant logistics port consisting of several container cranes, a gravity well composed of exotic matter, serving as a gravity lighthouse for notifying spacecraft to exit curvature navigation, and a cross galaxy quantum communication dispatch tower. Only it can sustain the logistics needs of a cross galaxy civilization.\n<color=\"#FD965ECC\">The planetary transportation of supplies needs to be provided by the space elevator below</color>"
     },
     {
-        "Name": "生态穹顶",
-        "ZHCN": "生态穹顶",
-        "ENUS": "Ecological dome"
+        "Name": "生态温室",
+        "ZHCN": "生态温室",
+        "ENUS": "Ecological Greenhouse"
     },
     {
         "Name": "I生态穹顶",
-        "ZHCN": "旧时代广泛使用的外星殖民用生态穹顶，其经典设计在如今依旧毫不过时，垂直多层的强透光培养槽，使用成熟的气雾培技术，智能气候调节系统。哪怕在无大气的死寂星球，高度集成的生化反应室和实验室都可以完成绝大多数生物的培育和生化反应。\n<color=\"#FD965ECC\">产物和原料为同一种东西时将自动从产物回填到原料</color>",
-        "ENUS": "The ecological dome widely used in the old era for extraterrestrial colonization still retains its classic design today, featuring vertically multi-layered strong light transmission cultivation tanks, mature aerosol cultivation technology, and an intelligent climate control system. Even on a lifeless planet without an atmosphere, highly integrated biochemical reaction chambers and laboratories can complete the cultivation and biochemical reactions of the vast majority of organisms.\n<color=\"#FD965ECC\">When the product and the raw material are the same thing, the product will be automatically refilled into the raw material</color>"
+        "ZHCN": "旧时代广泛使用的外星殖民用生态温室，其经典设计在如今依旧毫不过时，可垂直多层的强透光培养槽，使用成熟的气雾培技术，智能气候调节系统。哪怕在无大气的死寂星球，高度集成的生化反应室和实验室都可以完成绝大多数生物的培育和生化反应。\n<color=\"#FD965ECC\">产物和原料为同一种东西时将自动从产物回填到原料</color>",
+        "ENUS": "The classic design of the ecological greenhouses widely used for extraterrestrial colonization in the old days remains timeless today. With vertically multi-layered, highly transparent cultivation tanks, mature aeroponic technology, and intelligent climate control systems, even on lifeless planets devoid of an atmosphere, highly integrated biochemical reaction chambers and laboratories can accomplish the cultivation and biochemical reactions of most organisms.\n<color=\"#FD965ECC\">When the product and the raw material are the same thing, the product will be automatically refilled into the raw material</color>"
     },
     {
         "Name": "零素装甲",
@@ -2617,6 +2617,11 @@
         "Name": "乾坤-刺笋结晶",
         "ZHCN": "乾坤-刺笋结晶",
         "ENUS": "Qian and Kun - Thorny Bamboo Shoot Crystal"
+    },
+    {
+        "Name": "乾坤-有机晶体",
+        "ZHCN": "乾坤-有机晶体",
+        "ENUS": "Qian and Kun - Organic Crystal"
     },
     {
         "Name": "I乾坤-原矿",

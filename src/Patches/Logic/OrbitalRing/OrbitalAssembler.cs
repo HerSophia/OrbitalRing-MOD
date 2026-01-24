@@ -176,8 +176,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                     //storage[k].inc -= inc;
                                 }
                             }
-                            for (int productIndex = 0; productIndex < __instance.products.Length; productIndex++) {
-                                if (storage[k].itemId == __instance.products[productIndex] && __instance.produced[productIndex] > 0 && storage[k].count <= storage[k].max) {
+                            for (int productIndex = 0; productIndex < __instance.recipeExecuteData.products.Length; productIndex++) {
+                                if (storage[k].itemId == __instance.recipeExecuteData.products[productIndex] && __instance.produced[productIndex] > 0 && storage[k].count <= storage[k].max) {
                                     __instance.produced[productIndex] -= 1;
                                     storage[k].count += 1;
                                     if (__instance.recipeType == ERecipeType.Smelt) {
@@ -235,12 +235,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             RecipeProto recipeProto = null;
             if (__instance.recipeId != 0) {
                 recipeProto = LDB.recipes.Select(__instance.recipeId);
-                if (__instance.requireCounts[0] == recipeProto.ItemCounts[0]) {
-                    for (int i = 0; i < __instance.requireCounts.Length; i++) {
-                        __instance.requireCounts[i] *= ProductionMultiplier;
+                if (__instance.recipeExecuteData.requireCounts[0] == recipeProto.ItemCounts[0]) {
+                    for (int i = 0; i < __instance.recipeExecuteData.requireCounts.Length; i++) {
+                        __instance.recipeExecuteData.requireCounts[i] *= ProductionMultiplier;
                     }
-                    for (int i = 0; i < __instance.productCounts.Length; i++) {
-                        __instance.productCounts[i] *= ProductionMultiplier;
+                    for (int i = 0; i < __instance.recipeExecuteData.productCounts.Length; i++) {
+                        __instance.recipeExecuteData.productCounts[i] *= ProductionMultiplier;
                     }
                 }
             }

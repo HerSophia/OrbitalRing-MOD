@@ -95,19 +95,6 @@ namespace ProjectOrbitalRing.Patches.Logic
 
         public static void OnMine(ref PlanetFactory __instance, int id)
         {
-            //if (__instance.gameData.history.TechUnlocked(2108) == false) {
-            //    if (GameMain.history.logisticShipWarpDrive == false)
-            //    {
-            //        __instance.gameData.history.UnlockTech(2108);
-            //        GameMain.mainPlayer.TryAddItemToPackage(6219, 2, 0, true);
-
-            //    } else if (__instance.gameData.history.TechUnlocked(2904) == true)
-            //    {
-            //        __instance.gameData.history.UnlockTech(2108);
-            //        GameMain.mainPlayer.TryAddItemToPackage(6219, 2, 0, true);
-            //    }
-            //}
-
             //参数合法性校验
             if (__instance.vegePool[id].id == 0) { return; }
             int itemProtoID = 0;
@@ -135,10 +122,10 @@ namespace ProjectOrbitalRing.Patches.Logic
                         itemCount = randomCount5;
                     }
                 } else if (__instance.planet.theme == 14) {
-                    if (random > 0.00001 && random <= 0.05001) {
+                    if (random > 0.00001 && random <= 0.30001) {
                         itemProtoID = ProtoID.I菌丝母株;
                         itemCount = 1;
-                    } else if (random > 0.05001 && random <= 0.65001) {
+                    } else if (random > 0.30001 && random <= 0.90001) {
                         itemProtoID = ProtoID.I大型神经网络;
                         itemCount = 2;
                     }

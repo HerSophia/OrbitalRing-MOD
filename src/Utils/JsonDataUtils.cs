@@ -8,6 +8,7 @@ using xiaoye97;
 using static ProjectOrbitalRing.Utils.JsonHelper;
 using static ProjectOrbitalRing.ProjectOrbitalRing;
 using GalacticScale;
+using Newtonsoft.Json.Linq;
 
 // ReSharper disable RemoveRedundantBraces
 
@@ -30,12 +31,8 @@ namespace ProjectOrbitalRing.Utils
                 ref AccessTools.StaticFieldRefAccess<Dictionary<int, IconToolNew.IconDesc>>(typeof(ProtoRegistry), "itemIconDescs");
 
             #region TechProto
-
             foreach (TechProtoJson protoJson in GetJsonContent<TechProtoJson>("techs")) {
                 if (LDB.techs.Exist(protoJson.ID)) {
-                    if (LDB.techs.Select(protoJson.ID).name == "氢燃料棒") {
-                        LogError($"氢燃料棒 {LDB.techs.Select(protoJson.ID).IconPath}");
-                    }
                     protoJson.ToProto(LDB.techs.Select(protoJson.ID));
                 } else {
                     LDBTool.PreAddProto(protoJson.ToProto());
@@ -73,17 +70,22 @@ namespace ProjectOrbitalRing.Utils
 
             #region RecipeProto
 
+            RecipeProto.recipeExecuteData = new Dictionary<int, RecipeExecuteData>();
             foreach (RecipeProtoJson protoJson in GetJsonContent<RecipeProtoJson>("recipes")) {
                 if (!ProjectOrbitalRing.MoreMegaStructureCompatibility || !(protoJson.ID >= 530 && protoJson.ID <= 536)) {
                     protoJson.GridIndex = GetTableID(protoJson.GridIndex);
-
                     if (LDB.recipes.Exist(protoJson.ID)) {
                         protoJson.ToProto(LDB.recipes.Select(protoJson.ID));
                     } else {
                         LDBTool.PreAddProto(protoJson.ToProto());
                     }
+                    RecipeExecuteData recipeExecuteData = new RecipeExecuteData(protoJson.Input, protoJson.InCounts, protoJson.Output, protoJson.OutCounts, protoJson.Time * 10000, protoJson.Time * 100000, !protoJson.NonProductive);
+                    RecipeProto.recipeExecuteData.Add(protoJson.ID, recipeExecuteData);
                 }
             }
+
+            LogError($"97  array.Length {LDB.recipes.Select(97).Items.Length} requires.Length {RecipeProto.recipeExecuteData[97].requires.Length} !!!!!!!!!!!!!!!!!!!!!!!!!");
+
 
             #endregion
 
@@ -123,6 +125,9 @@ namespace ProjectOrbitalRing.Utils
             megaPumper.beaconSignalRadius = 0f;
             megaPumper = LDB.models.Select(ProtoID.M突触凝练机).prefabDesc;
             megaPumper.beaconSignalRadius = 0f;
+
+            megaPumper = LDB.models.Select(ProtoID.M生态温室).prefabDesc;
+            megaPumper.isLab = false;
 
             //PrefabDesc megaPumper = LDB.models.Select(ProtoID.M大抽水机).prefabDesc;
             //megaPumper.waterPoints = new[] { Vector3.zero, };

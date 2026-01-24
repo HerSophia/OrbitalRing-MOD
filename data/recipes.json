@@ -4399,6 +4399,36 @@
         "NonProductive": false
     },
     {
+        "ID": 161,
+        "Name": "全息信标",
+        "Description": "",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2414,
+        "Time": 60,
+        "Input": [
+            1101,
+            1111,
+            1401,
+            1302
+        ],
+        "InCounts": [
+            3,
+            2,
+            1,
+            1
+        ],
+        "Output": [
+            2401
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
+        "Handcraft": true,
+        "NonProductive": false
+    },
+    {
         "ID": 401,
         "Name": "铀矿处理",
         "Description": "R铀矿处理",
@@ -4625,7 +4655,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4714,
-        "Time": 720,
+        "Time": 4320,
         "Input": [
             6245,
             1007,
@@ -4996,7 +5026,7 @@
         "Description": "",
         "IconPath": "",
         "Type": 4,
-        "GridIndex": 2409,
+        "GridIndex": 0,
         "Time": 600,
         "Input": [
             1108,
@@ -5029,7 +5059,7 @@
         "Input": [
             6215,
             2901,
-            6264,
+            6254,
             2318,
             1125,
             6227
@@ -5451,7 +5481,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4114,
-        "Time": 240,
+        "Time": 1440,
         "Input": [
             1031,
             1000,
@@ -5589,7 +5619,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4214,
-        "Time": 3600,
+        "Time": 5400,
         "Input": [
             7021,
             7020,
@@ -5621,7 +5651,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4314,
-        "Time": 480,
+        "Time": 2880,
         "Input": [
             7022,
             1000,
@@ -5735,7 +5765,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4814,
-        "Time": 720,
+        "Time": 4320,
         "Input": [
             6252,
             1104,
@@ -6032,7 +6062,7 @@
         "IconPath": "Icons/ItemRecipe/crystal-rubber-lv0",
         "Type": 14,
         "GridIndex": 4612,
-        "Time": 120,
+        "Time": 720,
         "Input": [
             7015,
             1030,
@@ -6064,7 +6094,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4411,
-        "Time": 240,
+        "Time": 1440,
         "Input": [
             6212,
             1030,
@@ -6284,7 +6314,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4414,
-        "Time": 960,
+        "Time": 5760,
         "Input": [
             7020,
             7021,
@@ -6316,7 +6346,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4514,
-        "Time": 960,
+        "Time": 5760,
         "Input": [
             7021,
             7611,
@@ -6343,10 +6373,10 @@
         "ID": 706,
         "Name": "糖料作物（满周期）",
         "Description": "R糖料作物（满周期）",
-        "IconPath": "",
+        "IconPath": "Assets/texpack/R甜菜满周期",
         "Type": 14,
         "GridIndex": 4413,
-        "Time": 960,
+        "Time": 5760,
         "Input": [
             7612,
             6206
@@ -6372,7 +6402,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4513,
-        "Time": 480,
+        "Time": 2880,
         "Input": [
             7612,
             6206
@@ -6398,7 +6428,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4412,
-        "Time": 240,
+        "Time": 1440,
         "Input": [
             7017,
             1000,
@@ -6556,7 +6586,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4113,
-        "Time": 180,
+        "Time": 1080,
         "Input": [
             1031,
             1000
@@ -6664,7 +6694,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4813,
-        "Time": 60,
+        "Time": 360,
         "Input": [
             6253,
             7017
@@ -6916,7 +6946,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4112,
-        "Time": 480,
+        "Time": 2880,
         "Input": [
             1031,
             7020,
@@ -6944,7 +6974,7 @@
         "IconPath": "Assets/texpack/R共生繁育",
         "Type": 14,
         "GridIndex": 4311,
-        "Time": 240,
+        "Time": 1440,
         "Input": [
             7002,
             6226,
@@ -6978,7 +7008,7 @@
         "IconPath": "Assets/texpack/R速生林扩张",
         "Type": 14,
         "GridIndex": 4213,
-        "Time": 960,
+        "Time": 5760,
         "Input": [
             7022,
             6206
@@ -7008,7 +7038,7 @@
         "IconPath": "Assets/texpack/R高效木头",
         "Type": 14,
         "GridIndex": 4313,
-        "Time": 480,
+        "Time": 2880,
         "Input": [
             7022,
             6206
@@ -7038,7 +7068,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4211,
-        "Time": 480,
+        "Time": 2880,
         "Input": [
             6212,
             7022
@@ -7065,7 +7095,7 @@
         "ID": 779,
         "Name": "醇润滑油",
         "Description": "R醇润滑油",
-        "IconPath": "",
+        "IconPath": "Assets/texpack/R醇润滑油",
         "Type": 3,
         "GridIndex": 4512,
         "Time": 240,
@@ -7204,7 +7234,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4111,
-        "Time": 1920,
+        "Time": 3600,
         "Input": [
             6212,
             6208,
@@ -7482,7 +7512,7 @@
         "IconPath": "Assets/texpack/R绿肥营养液",
         "Type": 14,
         "GridIndex": 4312,
-        "Time": 480,
+        "Time": 2880,
         "Input": [
             6208,
             1000,
@@ -7512,7 +7542,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4511,
-        "Time": 240,
+        "Time": 1440,
         "Input": [
             6212,
             1030,
@@ -7868,7 +7898,7 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4212,
-        "Time": 480,
+        "Time": 2880,
         "Input": [
             6208,
             1000,
@@ -8701,6 +8731,62 @@
         ],
         "Explicit": false,
         "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 842,
+        "Name": "生态温室",
+        "Description": "",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2409,
+        "Time": 300,
+        "Input": [
+            1108,
+            1302,
+            1110
+        ],
+        "InCounts": [
+            5,
+            2,
+            3
+        ],
+        "Output": [
+            6254
+        ],
+        "OutCounts": [
+            1
+        ],
+        "Explicit": false,
+        "Handcraft": false,
+        "NonProductive": false
+    },
+    {
+        "ID": 843,
+        "Name": "拆解生态穹顶",
+        "Description": "",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2509,
+        "Time": 30,
+        "Input": [
+            6264
+        ],
+        "InCounts": [
+            1
+        ],
+        "Output": [
+            1108,
+            1302,
+            1110
+        ],
+        "OutCounts": [
+            20,
+            5,
+            10
+        ],
+        "Explicit": false,
+        "Handcraft": true,
         "NonProductive": false
     }
 ]

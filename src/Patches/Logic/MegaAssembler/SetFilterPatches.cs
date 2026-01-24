@@ -89,16 +89,18 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
         {
             AssemblerComponent assemblerComponent = factory.factorySystem.assemblerPool[entityData.assemblerId];
 
-            if (assemblerComponent.speed < MegaAssemblerSpeed) return -1;
+            if (assemblerComponent.recipeType != (ERecipeType)14) return -1;
 
             if (assemblerComponent.recipeId > 0)
             {
-                filterItems.AddRange(assemblerComponent.products);
-                filterItems.AddRange(assemblerComponent.requires);
+                filterItems.AddRange(assemblerComponent.recipeExecuteData.products);
+                filterItems.AddRange(assemblerComponent.recipeExecuteData.requires);
             }
             else { filterItems.AddRange(Enumerable.Repeat(0, 6)); }
 
             entityData.stationId = 0;
+
+            //StationComponent stationComponent = factory.transport.stationPool[entityData.stationId];
 
             if (slot >= 0 && slot < 16) return GetSlots(factory.planetId, entityId)[slot].storageIdx;
 
@@ -158,9 +160,10 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
         public static void SetFilterToEntity_Patch(PlanetFactory factory, EntityData entityData, int outputEntityId, int outputSlotId,
             int selectedIndex)
         {
-            AssemblerComponent assemblerComponent = factory.factorySystem.assemblerPool[entityData.assemblerId];
-
-            if (assemblerComponent.speed < MegaAssemblerSpeed) return;
+            if (entityData.assemblerId > 0) {
+                AssemblerComponent assemblerComponent = factory.factorySystem.assemblerPool[entityData.assemblerId];
+                if (assemblerComponent.recipeType != (ERecipeType)14) return;
+            }
 
             SlotData[] slotDatas = GetSlots(factory.planetId, outputEntityId);
             slotDatas[outputSlotId].storageIdx = selectedIndex;

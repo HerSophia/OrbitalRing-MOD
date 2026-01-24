@@ -13,41 +13,41 @@ namespace ProjectOrbitalRing.Patches.Logic.QuantumStorage
     {
         private static UIOrbitPicker orbitPicker;
 
-        [HarmonyPatch(typeof(UIGame), nameof(UIGame._OnInit))]
-        [HarmonyPostfix]
-        public static void Init()
-        {
-            if (orbitPicker) return;
+        //[HarmonyPatch(typeof(UIGame), nameof(UIGame._OnInit))]
+        //[HarmonyPostfix]
+        //public static void Init()
+        //{
+        //    if (orbitPicker) return;
 
-            orbitPicker = Object.Instantiate(UIRoot.instance.uiGame.ejectorWindow.orbitPicker,
-                UIRoot.instance.uiGame.storageWindow.transform);
+        //    orbitPicker = Object.Instantiate(UIRoot.instance.uiGame.ejectorWindow.orbitPicker,
+        //        UIRoot.instance.uiGame.storageWindow.transform);
 
-            Transform orbitPickerTransform = orbitPicker.transform;
-            ((RectTransform)orbitPickerTransform).localPosition = new Vector3(90, -443, 0);
+        //    Transform orbitPickerTransform = orbitPicker.transform;
+        //    ((RectTransform)orbitPickerTransform).localPosition = new Vector3(90, -443, 0);
 
-            Transform titleTransform = orbitPickerTransform.GetChild(0).transform;
-            ((RectTransform)titleTransform).localPosition = new Vector3(-120, -33, 0);
+        //    Transform titleTransform = orbitPickerTransform.GetChild(0).transform;
+        //    ((RectTransform)titleTransform).localPosition = new Vector3(-120, -33, 0);
 
-            Object.DestroyImmediate(titleTransform.GetComponent<Localizer>());
-            Text component = titleTransform.GetComponent<Text>();
-            component.fontSize = 16;
-            component.text = "选择量子频道".TranslateFromJson();
+        //    Object.DestroyImmediate(titleTransform.GetComponent<Localizer>());
+        //    Text component = titleTransform.GetComponent<Text>();
+        //    component.fontSize = 16;
+        //    component.text = "选择量子频道".TranslateFromJson();
 
-            for (var i = 1; i < orbitPickerTransform.childCount; i++) orbitPickerTransform.GetChild(i).gameObject.SetActive(false);
+        //    for (var i = 1; i < orbitPickerTransform.childCount; i++) orbitPickerTransform.GetChild(i).gameObject.SetActive(false);
 
-            for (var i = 3; i < 13; i++)
-            {
-                Transform transform = orbitPickerTransform.GetChild(i);
-                transform.gameObject.SetActive(true);
-                transform.GetComponent<Button>().interactable = true;
-            }
+        //    for (var i = 3; i < 13; i++)
+        //    {
+        //        Transform transform = orbitPickerTransform.GetChild(i);
+        //        transform.gameObject.SetActive(true);
+        //        transform.GetComponent<Button>().interactable = true;
+        //    }
 
-            Array.Resize(ref orbitPicker.orbitButtons, 11);
+        //    Array.Resize(ref orbitPicker.orbitButtons, 11);
 
-            orbitPicker.UnregInnerEvents();
-            orbitPicker.RegInnerEvents();
-            orbitPicker.onOrbitButtonClick += OnOrbitPickerButtonClick;
-        }
+        //    orbitPicker.UnregInnerEvents();
+        //    orbitPicker.RegInnerEvents();
+        //    orbitPicker.onOrbitButtonClick += OnOrbitPickerButtonClick;
+        //}
 
         private static void OnOrbitPickerButtonClick(int orbitId)
         {

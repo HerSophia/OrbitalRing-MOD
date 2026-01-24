@@ -40,6 +40,7 @@ using ProjectOrbitalRing.Patches.Logic.AssemblerModule;
 using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
 using ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow;
 using ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine;
+using ProjectOrbitalRing.Patches.Logic.Farm;
 //ProjectGenesis
 
 // ReSharper disable UnusedVariable
@@ -64,7 +65,7 @@ namespace ProjectOrbitalRing
     {
         public const string MODGUID = "org.ProfessorCat305.OrbitalRing";
         public const string MODNAME = "OrbitalRing";
-        public const string VERSION = "0.9.9";
+        public const string VERSION = "0.9.10";
         public const string DEBUGVERSION = "";
 
 
@@ -166,6 +167,10 @@ namespace ProjectOrbitalRing
 
             Harmony = new Harmony(MODGUID);
 
+            ResearchLabPatches.ApplyPatch(Harmony);
+            MoonPatch.ApplyPatch(Harmony);
+            FuelRodPatches.InstallAllPatches(Harmony);
+
             foreach (Type type in executingAssembly.GetTypes())
             {
                 if (type.Namespace?.StartsWith("ProjectOrbitalRing.Patches", StringComparison.Ordinal) == true) { Harmony.PatchAll(type); }
@@ -208,6 +213,7 @@ namespace ProjectOrbitalRing
             AssemblerModulePatches.Export(w);
             MoonPatch.Export(w);
             EnergyCalculate.Export(w);
+            FarmAssembler.Export(w);
         }
 
         public void Import(BinaryReader r)
@@ -225,6 +231,7 @@ namespace ProjectOrbitalRing
             AssemblerModulePatches.Import(r);
             MoonPatch.Import(r);
             EnergyCalculate.Import(r);
+            FarmAssembler.Import(r);
         }
 
         public void IntoOtherSave()
@@ -240,6 +247,7 @@ namespace ProjectOrbitalRing
             AssemblerModulePatches.IntoOtherSave();
             MoonPatch.IntoOtherSave();
             EnergyCalculate.IntoOtherSave();
+            FarmAssembler.IntoOtherSave();
         }
 
         public string Version => VERSION;
@@ -269,6 +277,7 @@ namespace ProjectOrbitalRing
             vegeProto.MiningChance = new float[] { 1, 1, 1, 1, 1 };
             vegeProto.Preload();
 
+            LabComponent.matrixPoints = new int[8];
             LabComponent.matrixIds = new[]
             {
                 ProtoID.I电气矩阵, ProtoID.I能量矩阵, ProtoID.I结构矩阵, ProtoID.I粒子矩阵,

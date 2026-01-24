@@ -309,6 +309,47 @@
         "PropertyItemCounts": []
     },
     {
+        "ID": 1105,
+        "Name": "T电弧激光",
+        "IconPath": "Icons/Tech/1105",
+        "Desc": "电弧激光描述",
+        "Conclusion": "电弧激光结果",
+        "IsHiddenTech": false,
+        "PreItem": null,
+        "Position": [
+            12.0,
+            -24.0
+        ],
+        "PreTechs": [
+            1101,
+            1002
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6001
+        ],
+        "ItemPoints": [
+            50
+        ],
+        "HashNeeded": 3600,
+        "UnlockRecipes": [
+            161
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
         "ID": 1111,
         "Name": "化工矩阵",
         "IconPath": "Icons/Tech/1111",
@@ -5853,9 +5894,10 @@
         ],
         "HashNeeded": 36000,
         "UnlockRecipes": [
-            423,
+            842,
             512,
-            513
+            513,
+            843
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],

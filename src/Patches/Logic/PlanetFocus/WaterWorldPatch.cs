@@ -16,14 +16,14 @@ namespace ProjectOrbitalRing.Patches.Logic.PlanetFocus
             }
             for (int i = 0; i < UseWaterRecipes.Length; i++) {
                 if (__instance.recipeId == UseWaterRecipes[i]) {
-                    for (int j = 0; j < __instance.requires.Length; j++) {
+                    for (int j = 0; j < __instance.recipeExecuteData.requires.Length; j++) {
                         if (__instance.needs[j] == 1000) {
                             //int num2 = __instance.speedOverride * 180 / __instance.timeSpend + 1;
                             //if (num2 < 2) {
                             //    num2 = 2;
                             //}
                             int num2 = 2;
-                            __instance.served[j] = __instance.requireCounts[j] * num2;
+                            __instance.served[j] = __instance.recipeExecuteData.requireCounts[j] * num2;
                             return;
                         }
                     }
