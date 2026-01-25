@@ -1659,10 +1659,10 @@
         "EnemyDropMask": 0,
         "EnemyDropMaskRatio": 0.0
     },
-    { //预删除
+    {
         "ID": 6254,
         "Name": "生态温室",
-        "Description": "I生态穹顶",
+        "Description": "I生态温室",
         "IconPath": "Assets/texpack/I生态温室",
         "GridIndex": 2409,
         "StackSize": 30,
@@ -1694,7 +1694,7 @@
         "HpMax": 0,
         "Ability": 0,
         "Potential": 0,
-        "BuildIndex": 0,
+        "BuildIndex": 523,
         "BuildMode": 1,
         "UnlockKey": 0,
         "MechaMaterialID": 0,
@@ -2151,7 +2151,7 @@
         "HpMax": 0,
         "Ability": 0,
         "Potential": 0,
-        "BuildIndex": 523,
+        "BuildIndex": 0,
         "BuildMode": 1,
         "UnlockKey": 0,
         "MechaMaterialID": 0,

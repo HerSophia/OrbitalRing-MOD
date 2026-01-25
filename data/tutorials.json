@@ -1,8 +1,8 @@
 ﻿[
   {
     "ID": 31,
-    "Name": "创世之书介绍标题",
-    "PreText": "创世之书介绍前字",
+    "Name": "星环介绍标题",
+    "PreText": "星环介绍前字",
     "DeterminatorName": "TOR_GameSecond",
     "DeterminatorParams": [
       4

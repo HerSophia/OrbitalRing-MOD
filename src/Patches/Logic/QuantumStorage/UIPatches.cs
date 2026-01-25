@@ -49,30 +49,30 @@ namespace ProjectOrbitalRing.Patches.Logic.QuantumStorage
         //    orbitPicker.onOrbitButtonClick += OnOrbitPickerButtonClick;
         //}
 
-        private static void OnOrbitPickerButtonClick(int orbitId)
-        {
-            UIStorageWindow uiGameStorageWindow = UIRoot.instance.uiGame.storageWindow;
+        //private static void OnOrbitPickerButtonClick(int orbitId)
+        //{
+        //    UIStorageWindow uiGameStorageWindow = UIRoot.instance.uiGame.storageWindow;
 
-            if (!uiGameStorageWindow.active || uiGameStorageWindow.factory == null) return;
+        //    if (!uiGameStorageWindow.active || uiGameStorageWindow.factory == null) return;
 
-            QuantumStorageOrbitChange(uiGameStorageWindow.factory.planetId, uiGameStorageWindow.storageId, orbitId);
-            uiGameStorageWindow.OnStorageIdChange();
-        }
+        //    QuantumStorageOrbitChange(uiGameStorageWindow.factory.planetId, uiGameStorageWindow.storageId, orbitId);
+        //    uiGameStorageWindow.OnStorageIdChange();
+        //}
 
-        [HarmonyPatch(typeof(UIStorageWindow), nameof(UIStorageWindow.OnStorageIdChange))]
-        [HarmonyPostfix]
-        public static void UIStorageWindow_OnStorageIdChange_Postfix(UIStorageWindow __instance)
-        {
-            if (!__instance.active || __instance.factory == null) return;
+        //[HarmonyPatch(typeof(UIStorageWindow), nameof(UIStorageWindow.OnStorageIdChange))]
+        //[HarmonyPostfix]
+        //public static void UIStorageWindow_OnStorageIdChange_Postfix(UIStorageWindow __instance)
+        //{
+        //    if (!__instance.active || __instance.factory == null) return;
 
-            StorageComponent component = __instance.factoryStorage.storagePool[__instance.storageId];
+        //    StorageComponent component = __instance.factoryStorage.storagePool[__instance.storageId];
 
-            bool isQuantumStorage = component.size == QuantumStorageSize;
+        //    bool isQuantumStorage = component.size == QuantumStorageSize;
 
-            __instance.bansSlider.transform.parent.gameObject.SetActive(!isQuantumStorage);
-            orbitPicker.gameObject.SetActive(isQuantumStorage);
+        //    __instance.bansSlider.transform.parent.gameObject.SetActive(!isQuantumStorage);
+        //    orbitPicker.gameObject.SetActive(isQuantumStorage);
 
-            if (isQuantumStorage) orbitPicker.SetOrbitId(QueryOrbitId(__instance.factory.planetId, __instance.storageId));
-        }
+        //    if (isQuantumStorage) orbitPicker.SetOrbitId(QueryOrbitId(__instance.factory.planetId, __instance.storageId));
+        //}
     }
 }
