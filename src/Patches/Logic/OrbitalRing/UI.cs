@@ -23,6 +23,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 __result = "电磁轨道弹射器只能建造在无大气星球".Translate();
             } else if (_condition == (EBuildCondition)95) {
                 __result = "不能低于16层".Translate();
+            } else if (_condition == (EBuildCondition)94) {
+                __result = "低温工厂只能建造在极寒星球".Translate();
             }
         }
     }

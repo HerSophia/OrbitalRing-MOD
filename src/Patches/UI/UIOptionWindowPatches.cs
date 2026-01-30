@@ -99,14 +99,14 @@ namespace ProjectOrbitalRing.Patches.UI
             gameObjectTransform.anchoredPosition = new Vector2(680, 0);
         }
 
-        [HarmonyPatch(typeof(UIOptionWindow), nameof(UIOptionWindow._OnOpen))]
-        [HarmonyPostfix]
-        public static void UIOptionWindow_OnOpen_Postfix()
-        {
-            if (!LDBToolCacheToggle) Init();
+        //[HarmonyPatch(typeof(UIOptionWindow), nameof(UIOptionWindow._OnOpen))]
+        //[HarmonyPostfix]
+        //public static void UIOptionWindow_OnOpen_Postfix()
+        //{
+        //    if (!LDBToolCacheToggle) Init();
 
-            Reset();
-        }
+        //    Reset();
+        //}
 
         [HarmonyPatch(typeof(UIOptionWindow), nameof(UIOptionWindow.OnRevertButtonClick))]
         [HarmonyPostfix]

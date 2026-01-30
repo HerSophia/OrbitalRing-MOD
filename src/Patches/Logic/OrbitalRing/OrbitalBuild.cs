@@ -306,6 +306,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                         __instance.AddErrorMessage((EBuildCondition)96, buildPreview);
                     }
                 }
+                if (previewItem == ProtoID.I低温工厂) {
+                    if (__instance.planet.theme != 7 || __instance.planet.theme != 10 || __instance.planet.theme != 20 || __instance.planet.theme != 24 ) { // 冰星
+                        buildPreview.condition = (EBuildCondition)94;
+                        __instance.AddErrorMessage((EBuildCondition)94, buildPreview);
+                    }
+                }
             }
             return true;
         }
@@ -436,6 +442,13 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                     // 电磁轨道弹射器
                     if (__instance.planet.theme != 11) { // 贫瘠荒漠
                         buildPreview.condition = (EBuildCondition)96;
+                        __result = false;
+                        return false;
+                    }
+                }
+                if (previewItem == ProtoID.I低温工厂) {
+                    if (__instance.planet.theme != 7 || __instance.planet.theme != 10 || __instance.planet.theme != 20 || __instance.planet.theme != 24) { // 冰星
+                        buildPreview.condition = (EBuildCondition)94;
                         __result = false;
                         return false;
                     }

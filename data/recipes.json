@@ -327,7 +327,7 @@
         ],
         "InCounts": [
             1,
-            2
+            1
         ],
         "Output": [
             2202
@@ -694,20 +694,20 @@
         "IconPath": "",
         "Type": 15,
         "GridIndex": 1803,
-        "Time": 480,
+        "Time": 960,
         "Input": [
             1107,
-            1123
+            1124
         ],
         "InCounts": [
-            1,
-            2
+            2,
+            1
         ],
         "Output": [
             6003
         ],
         "OutCounts": [
-            1
+            2
         ],
         "Explicit": false,
         "Handcraft": false,
@@ -718,7 +718,7 @@
         "Name": "金属氢",
         "Description": "",
         "IconPath": "",
-        "Type": 4,
+        "Type": 16,
         "GridIndex": 1603,
         "Time": 720,
         "Input": [
@@ -828,7 +828,7 @@
         "IconPath": "Icons/ItemRecipe/graphene-lv2",
         "Type": 2,
         "GridIndex": 4402,
-        "Time": 180,
+        "Time": 120,
         "Input": [
             6205
         ],
@@ -854,7 +854,7 @@
         "IconPath": "",
         "Type": 2,
         "GridIndex": 4303,
-        "Time": 240,
+        "Time": 120,
         "Input": [
             6205
         ],
@@ -1042,18 +1042,18 @@
         "IconPath": "",
         "Type": 5,
         "GridIndex": 4701,
-        "Time": 60,
+        "Time": 150,
         "Input": [
             1120
         ],
         "InCounts": [
-            2
+            10
         ],
         "Output": [
             1121
         ],
         "OutCounts": [
-            1
+            5
         ],
         "Explicit": false,
         "Handcraft": false,
@@ -1064,7 +1064,7 @@
         "Name": "氘核燃料棒",
         "Description": "",
         "IconPath": "",
-        "Type": 4,
+        "Type": 16,
         "GridIndex": 1414,
         "Time": 360,
         "Input": [
@@ -1267,7 +1267,7 @@
         "Description": "",
         "IconPath": "",
         "Type": 4,
-        "GridIndex": 2412,
+        "GridIndex": 2413,
         "Time": 180,
         "Input": [
             1101,
@@ -2486,7 +2486,7 @@
         "Time": 900,
         "Input": [
             1108,
-            1301
+            1302
         ],
         "InCounts": [
             40,
@@ -3198,7 +3198,7 @@
         "Description": "",
         "IconPath": "",
         "Type": 10,
-        "GridIndex": 2413,
+        "GridIndex": 2414,
         "Time": 1200,
         "Input": [
             1125,
@@ -3340,10 +3340,10 @@
         "Description": "",
         "IconPath": "",
         "Type": 10,
-        "GridIndex": 2411,
+        "GridIndex": 2412,
         "Time": 600,
         "Input": [
-            2309,
+            7823,
             1119,
             1127,
             7805
@@ -4404,7 +4404,7 @@
         "Description": "",
         "IconPath": "",
         "Type": 4,
-        "GridIndex": 2414,
+        "GridIndex": 2314,
         "Time": 60,
         "Input": [
             1101,
@@ -5489,7 +5489,7 @@
         ],
         "InCounts": [
             1,
-            2,
+            6,
             1
         ],
         "Output": [
@@ -5658,7 +5658,7 @@
             1099
         ],
         "InCounts": [
-            3,
+            2,
             8,
             9
         ],
@@ -5670,7 +5670,7 @@
         "OutCounts": [
             12,
             8,
-            3
+            2
         ],
         "Explicit": true,
         "Handcraft": false,
@@ -6126,7 +6126,7 @@
         "IconPath": "Assets/texpack/R闪速炼钢",
         "Type": 1,
         "GridIndex": 3301,
-        "Time": 30,
+        "Time": 60,
         "Input": [
             1001,
             1120
@@ -6312,7 +6312,7 @@
         "Name": "转基因工具",
         "Description": "",
         "IconPath": "",
-        "Type": 14,
+        "Type": 16,
         "GridIndex": 4414,
         "Time": 5760,
         "Input": [
@@ -6344,7 +6344,7 @@
         "Name": "糖料作物种",
         "Description": "",
         "IconPath": "",
-        "Type": 14,
+        "Type": 16,
         "GridIndex": 4514,
         "Time": 5760,
         "Input": [
@@ -7014,7 +7014,7 @@
             6206
         ],
         "InCounts": [
-            3,
+            2,
             4
         ],
         "Output": [
@@ -7023,7 +7023,7 @@
             1031
         ],
         "OutCounts": [
-            5,
+            4,
             12,
             8
         ],
@@ -7044,7 +7044,7 @@
             6206
         ],
         "InCounts": [
-            3,
+            2,
             2
         ],
         "Output": [
@@ -7055,7 +7055,7 @@
         "OutCounts": [
             24,
             16,
-            3
+            2
         ],
         "Explicit": true,
         "Handcraft": false,
@@ -7519,8 +7519,8 @@
             1031
         ],
         "InCounts": [
-            12,
-            5,
+            4,
+            32,
             16
         ],
         "Output": [
@@ -7529,7 +7529,7 @@
         ],
         "OutCounts": [
             8,
-            12
+            4
         ],
         "Explicit": true,
         "Handcraft": false,
@@ -7898,15 +7898,15 @@
         "IconPath": "",
         "Type": 14,
         "GridIndex": 4212,
-        "Time": 2880,
+        "Time": 1440,
         "Input": [
             6208,
             1000,
             1099
         ],
         "InCounts": [
-            18,
-            5,
+            4,
+            16,
             9
         ],
         "Output": [
@@ -7915,7 +7915,7 @@
         ],
         "OutCounts": [
             4,
-            18
+            4
         ],
         "Explicit": true,
         "Handcraft": false,
@@ -7954,7 +7954,7 @@
         "Name": "化学燃料棒（液氢）",
         "Description": "R化学燃料棒（液氢）",
         "IconPath": "Assets/texpack/R液氢燃料棒",
-        "Type": 4,
+        "Type": 16,
         "GridIndex": 1114,
         "Time": 360,
         "Input": [
@@ -8784,6 +8784,34 @@
             20,
             5,
             10
+        ],
+        "Explicit": false,
+        "Handcraft": true,
+        "NonProductive": false
+    },
+    {
+        "ID": 844,
+        "Name": "低温工厂",
+        "Description": "",
+        "IconPath": "",
+        "Type": 4,
+        "GridIndex": 2411,
+        "Time": 360,
+        "Input": [
+            1106,
+            1301,
+            2309
+        ],
+        "InCounts": [
+            20,
+            5,
+            1
+        ],
+        "Output": [
+            7823
+        ],
+        "OutCounts": [
+            1
         ],
         "Explicit": false,
         "Handcraft": true,

@@ -206,7 +206,7 @@
         "ItemPoints": [
             10
         ],
-        "HashNeeded": 36000,
+        "HashNeeded": 72000,
         "UnlockRecipes": [
             14,
             15,
@@ -248,7 +248,7 @@
         "ItemPoints": [
             10
         ],
-        "HashNeeded": 144000,
+        "HashNeeded": 36000,
         "UnlockRecipes": [
             58
         ],
@@ -3193,7 +3193,7 @@
             1602
         ],
         "PreTechsImplicit": [
-            1602
+            1914
         ],
         "Items": [
             6001
@@ -3448,7 +3448,7 @@
         "IsHiddenTech": false,
         "PreItem": null,
         "Position": [
-            24.0,
+            20.0,
             8.0
         ],
         "PreTechs": [
@@ -3456,12 +3456,10 @@
         ],
         "PreTechsImplicit": [],
         "Items": [
-            6001,
-            6002
+            6001
         ],
         "ItemPoints": [
-            40,
-            10
+            40
         ],
         "HashNeeded": 72000,
         "UnlockRecipes": [
@@ -5207,7 +5205,9 @@
         "PreTechs": [
             1201
         ],
-        "PreTechsImplicit": [],
+        "PreTechsImplicit": [
+            1932
+        ],
         "Items": [
             6001
         ],
@@ -6296,28 +6296,29 @@
     },
     {
         "ID": 1941,
-        "Name": "储氢钢罐",
-        "IconPath": "Icons/Tech/1112",
-        "Desc": "T储氢钢罐",
-        "Conclusion": "T储氢钢罐",
+        "Name": "低温工厂",
+        "IconPath": "Assets/texpack/T低温工厂",
+        "Desc": "T低温工厂",
+        "Conclusion": "T低温工厂",
         "IsHiddenTech": false,
         "PreItem": null,
         "Position": [
             36.0,
-            -36.0
+            8.0
         ],
-        "PreTechs": [
-            1928
+        "PreTechs": [],
+        "PreTechsImplicit": [
+            1914
         ],
-        "PreTechsImplicit": [],
         "Items": [
             6003
         ],
         "ItemPoints": [
             10
         ],
-        "HashNeeded": 108000,
+        "HashNeeded": 36000,
         "UnlockRecipes": [
+            844,
             815
         ],
         "UnlockFunctions": [],

@@ -20,18 +20,7 @@ namespace ProjectOrbitalRing.Patches.UI {
         [HarmonyPostfix]
         public static void UILabWindow_OnCreate_Postfix(UILabWindow __instance) {
             __instance.GetComponent<RectTransform>().sizeDelta = new Vector2(640, 430);
-            __instance.transform.Find("matrix-group/circle-back").gameObject.SetActive(false);
-
-            for (int i = 0; i < __instance.transform.childCount; i++) {
-                Transform child = __instance.transform.GetChild(i);
-                LogError($"UILabWindow_OnCreate_Postfix child.name {child.name}  !!!!!!!!!");
-                //if (child.name == "matrix-group") {
-                    for (int j = 0; j < child.childCount; j++) {
-                        Transform child2 = child.GetChild(i);
-                        LogError($"UILabWindow_OnCreate_Postfix child.child.name {child2.name}  !!!!!!!!!!!!!!!!!!!!!!!!!");
-                    }
-                //}
-            }
+            __instance.transform.Find("matrix-group/matrix/lines").gameObject.SetActive(false);
 
                 const int len = 8;
 
@@ -306,7 +295,7 @@ namespace ProjectOrbitalRing.Patches.UI {
 
             return matcher.InstructionEnumeration();
         }
-
+        
         public static void ApplyPatch(Harmony harmonyInstance)
         {
             // 1. 定义目标方法的参数类型数组（包含out参数）

@@ -68,8 +68,8 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
 
             switch ((Utils.ERecipeType)filter)
             {
-                case Utils.ERecipeType.所有化工:
-                    return type == Utils.ERecipeType.Chemical || type == Utils.ERecipeType.Refine || type == Utils.ERecipeType.高分子化工;
+                case Utils.ERecipeType.低温工厂:
+                    return type == Utils.ERecipeType.Chemical || type == Utils.ERecipeType.低温工厂;
 
                 case Utils.ERecipeType.等离子熔炼: return type == Utils.ERecipeType.Smelt || type == Utils.ERecipeType.等离子熔炼;
 

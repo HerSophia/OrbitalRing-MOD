@@ -214,8 +214,14 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         public static void NewAssemblerComponentPostPatch(ref FactorySystem __instance, int __result, int entityId)
         {
             var itemId = __instance.factory.entityPool[__instance.assemblerPool[__result].entityId].protoId;
-            if (itemId == 6257 || itemId == 6501 || itemId == 6265) {
+            if (itemId == ProtoID.I太空船坞 || itemId == ProtoID.I轨道熔炼站 || itemId == ProtoID.I星环对撞机) {
                 BuildOrbitalAssembler(__instance, __result, entityId, itemId);
+            }
+
+            if (itemId == ProtoID.I星环对撞机) {
+                if (__instance.planet.radius == 100f) {
+                    __instance.assemblerPool[__result].speed = 250000;
+                }
             }
         }
 
@@ -224,7 +230,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         public static void NewEjectorComponentPostPatch(ref FactorySystem __instance, int __result, int entityId)
         {
             var itemId = __instance.factory.entityPool[__instance.ejectorPool[__result].entityId].protoId;
-            if (itemId == 6513) {
+            if (itemId == ProtoID.I重型电磁弹射器) {
                 BuildOrbitalAssembler(__instance, __result, entityId, itemId);
             }
         }

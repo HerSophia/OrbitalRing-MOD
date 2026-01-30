@@ -300,6 +300,11 @@
         "ENUS": "Electromagnetic orbital catapults can only be built on planets without atmospheres"
     },
     {
+        "Name": "低温工厂只能建造在极寒星球",
+        "ZHCN": "低温工厂只能建造在极寒星球",
+        "ENUS": "Cryogenic Plant can only be built on extremely cold planets"
+    },
+    {
         "Name": "不能低于16层",
         "ZHCN": "空轨不可建造于16层以下的高度",
         "ENUS": "The skytrain cannot be constructed at a height below the 16th floor"
@@ -2292,6 +2297,21 @@
         "Name": "I终末螺旋",
         "ZHCN": "通过对样本进行逆向工程，得到的残缺版的碳基裂解射线发生器，射程很短，激发一次后就会损毁，或许可以用于工业生产用途，将碳基有机质快速裂解为烷烃质。",
         "ENUS": "The incomplete version of the carbon based cracking radiation generator obtained by reverse engineering the sample has a short range and will be damaged after one excitation. It may be used for industrial production to rapidly crack carbon based organic matter into alkane."
+    },
+    {
+        "Name": "低温工厂",
+        "ZHCN": "低温工厂",
+        "ENUS": "Cryogenic Plant"
+    },
+    {
+        "Name": "I低温工厂",
+        "ZHCN": "专为极寒星球设计的化工厂，只能建造于极寒星球上，它能完成在极寒环境下完成的化工反应，同时使用更好的材料制造的反应釜能内部反应更加充分。\n<color=\"#FD965ECC\">自带25%产能加成</color>\n只能建造在<color=\"#FD965ECC\">极寒星球</color>",
+        "ENUS": "The chemical plant, specifically designed for extremely cold planets, can only be constructed on such planets. It is capable of carrying out chemical reactions in extremely cold environments, and the use of better materials for the reaction vessels ensures more thorough internal reactions.\n<color=\"#FD965ECC\">Comes with a 25% production capacity bonus</color>\nIt can only be built on <color=\"#FD965ECC\">extremely cold planets</color>"
+    },
+    {
+        "Name": "T低温工厂",
+        "ZHCN": "在探索冰封星球的过程中，工程师发现极端低温环境能显著提升某些反应的分子稳定性，从而实现一些产物的制造，为了解锁这些独特的低温催化工艺，设计了专为极寒星球设计的低温工厂。",
+        "ENUS": "During the exploration of the icy planet, engineers discovered that extreme low-temperature environments can significantly enhance the molecular stability of certain reactions, enabling the production of certain products. To unlock these unique low-temperature catalytic processes, a low-temperature factory specifically designed for extremely cold planets was created."
     },
     {
         "Name": "量子化工厂",
@@ -4420,8 +4440,8 @@
     },
     {
         "Name": "I轨道熔炼站",
-        "ZHCN": "巨大的同步轨道熔炉车间，覆有大面积的铜箔散热鳍，熔炼太空电梯输入的原料，同步轨道的真空环境是天然的无尘车间，无重力环境可以避免熔炼中的金属因重力而分层，由此同步轨道熔炉车间可以产出高质量熔炼金属。\n此建筑<color=\"#FD965ECC\">30倍</color>堆叠生产\n此建筑产出无条件获得<color=\"#FD965ECC\">三级增产</color>效果\n<color=\"#FD965ECC\">需要由底下的太空电梯提供物品的输入输出。</color>",
-        "ENUS": "The huge synchronous orbit furnace workshop is covered with large areas of copper foil heat dissipation fins, which melt the raw materials input by the space elevator. The vacuum environment of the synchronous orbit is a natural dust-free workshop, and the gravity free environment can avoid the layering of metals during melting due to gravity. Therefore, the synchronous orbit furnace workshop can produce high-quality melted metals.\nThis building guarantees an unconditional <color=\"#FD965ECC\">Level 3 Production Boost</color> effect in its output.\nThis building is <color=\"#FD965ECC\">30 times</color> stacked for production\n<color=\"#FD965ECC\">The input and output of items need to be provided by the space elevator below</color>"
+        "ZHCN": "巨大的同步轨道熔炉车间，覆有大面积的铜箔散热鳍，熔炼太空电梯输入的原料，同步轨道的真空环境是天然的无尘车间，无重力环境可以避免熔炼中的金属因重力而分层，由此同步轨道熔炉车间可以产出高质量熔炼金属。\n此建筑<color=\"#FD965ECC\">30倍</color>速度生产\n此建筑产出无条件获得<color=\"#FD965ECC\">三级增产</color>效果\n<color=\"#FD965ECC\">需要由底下的太空电梯提供物品的输入输出。</color>",
+        "ENUS": "The huge synchronous orbit furnace workshop is covered with large areas of copper foil heat dissipation fins, which melt the raw materials input by the space elevator. The vacuum environment of the synchronous orbit is a natural dust-free workshop, and the gravity free environment can avoid the layering of metals during melting due to gravity. Therefore, the synchronous orbit furnace workshop can produce high-quality melted metals.\nThis building guarantees an unconditional <color=\"#FD965ECC\">Level 3 Production Boost</color> effect in its output.\nThis building is <color=\"#FD965ECC\">30 times</color> speed for production\n<color=\"#FD965ECC\">The input and output of items need to be provided by the space elevator below</color>"
     },
     {
         "Name": "T轨道熔炼站",
@@ -4475,8 +4495,8 @@
     },
     {
         "Name": "I星环对撞机总控站",
-        "ZHCN": "星环对撞机在轨总控设施，建造时会将各节加速轨道加装到星环上的各轨道设施上。星环对撞机总控站负责控制整个星环的加速轨道，以及目标粒子的输入输出。\n因为以整个星环为加速轨道，因此<color=\"#FD965ECC\">一个星环只能建造一个星环对撞机总控站。</color>\n此建筑<color=\"#FD965ECC\">50倍</color>堆叠生产（在卫星为<color=\"#FD965ECC\">25倍</color>）\n且需要<color=\"#FD965ECC\">星环完整</color>才能运作\n<color=\"#FD965ECC\">需要由底下的太空电梯提供物品的输入输出。</color>",
-        "ENUS": "The in orbit control facility of the Star Ring Collider will be constructed by installing each section of the acceleration orbit onto the various orbital facilities on the Orbital Ring. The main control station of the Star Ring Collider is responsible for controlling the acceleration orbit of the entire Orbital Ring and the input and output of target particles.\n Because the entire ring is used as the acceleration orbit, only <color=\"#FD965ECC\">one ring collider control station can be built for each ring.</color>\nThis building is <color=\"#FD965ECC\">50 times</color> stacked for production (<color=\"#FD965ECC\">25 times</color> on satellite)\n And it requires the <color=\"#FD965ECC\">complete orbital ring</color> to operate \n<color=\"#FD965ECC\">The input and output of items need to be provided by the space elevator below</color>"
+        "ZHCN": "星环对撞机在轨总控设施，建造时会将各节加速轨道加装到星环上的各轨道设施上。星环对撞机总控站负责控制整个星环的加速轨道，以及目标粒子的输入输出。\n因为以整个星环为加速轨道，因此<color=\"#FD965ECC\">一个星环只能建造一个星环对撞机总控站。</color>\n此建筑<color=\"#FD965ECC\">50倍</color>速度生产（在卫星为<color=\"#FD965ECC\">25倍</color>）\n且需要<color=\"#FD965ECC\">星环完整</color>才能运作\n<color=\"#FD965ECC\">需要由底下的太空电梯提供物品的输入输出。</color>",
+        "ENUS": "The in orbit control facility of the Star Ring Collider will be constructed by installing each section of the acceleration orbit onto the various orbital facilities on the Orbital Ring. The main control station of the Star Ring Collider is responsible for controlling the acceleration orbit of the entire Orbital Ring and the input and output of target particles.\n Because the entire ring is used as the acceleration orbit, only <color=\"#FD965ECC\">one ring collider control station can be built for each ring.</color>\nThis building is <color=\"#FD965ECC\">50 times</color> speed for production (<color=\"#FD965ECC\">25 times</color> on satellite)\n And it requires the <color=\"#FD965ECC\">complete orbital ring</color> to operate \n<color=\"#FD965ECC\">The input and output of items need to be provided by the space elevator below</color>"
     },
     {
         "Name": "粒子加速轨道",

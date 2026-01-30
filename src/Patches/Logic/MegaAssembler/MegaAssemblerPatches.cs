@@ -127,12 +127,13 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                 OrbitalAssemblerInternalUpdate(ref __instance, factory.planetId);
                 ShareStorageForOrbitalAssembler(ref __instance, factory.factorySystem);
             }
-            if (buildIngItemId == ProtoID.I轨道熔炼站) {
-                CheckRecipeCount(ref __instance, 30, false);
-            }
-            if (buildIngItemId == ProtoID.I星环对撞机) {
-                CheckRecipeCount(ref __instance, 50, factory.planet.radius == 100f);
-            }
+            // 更新后配方数据不再每个建筑一份，改数据会改所有使用这个配方的建筑，导致全部30堆叠生产
+            //if (buildIngItemId == ProtoID.I轨道熔炼站) {
+            //    CheckRecipeCount(ref __instance, 30, false);
+            //}
+            //if (buildIngItemId == ProtoID.I星环对撞机) {
+            //    CheckRecipeCount(ref __instance, 50, factory.planet.radius == 100f);
+            //}
 
             // 水世界星球特质处理入口
             SetAssmeblerWaterFull(ref __instance, factory);
@@ -202,10 +203,10 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                 //}
             }
 
-            bool flag = false;
             if (factory.entityPool[__instance.entityId].protoId == ProtoID.I量子化工厂 && __instance.replicating)
             {
-                flag = true;
+                __instance.extraTime += (int)(power * __instance.extraSpeed)
+                                      + (int)(power * __instance.speedOverride * __instance.recipeExecuteData.extraTimeSpend / __instance.recipeExecuteData.timeSpend);
             }
             //if (factory.entityPool[__instance.entityId].protoId == 6501 && __instance.replicating)
             //{
@@ -213,10 +214,9 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             //        flag = true;
             //}
 
-            if (flag)
-            {
+            if (factory.entityPool[__instance.entityId].protoId == ProtoID.I低温工厂 && __instance.replicating) {
                 __instance.extraTime += (int)(power * __instance.extraSpeed)
-                                      + (int)(power * __instance.speedOverride * __instance.recipeExecuteData.extraTimeSpend / __instance.recipeExecuteData.timeSpend);
+                                      + (int)(power * __instance.speedOverride * __instance.recipeExecuteData.extraTimeSpend / (__instance.recipeExecuteData.timeSpend * 4));
             }
 
             return b;

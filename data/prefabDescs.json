@@ -179,7 +179,7 @@
     },
     {
         "ModelID": 71,
-        "powerConnectDistance": 90.5,
+        "powerConnectDistance": 70.5,
         "powerCoverRadius": 10.5,
         "workEnergyPerTick": 160000
     },
@@ -312,7 +312,7 @@
         "assemblerRecipeType": 1,
         "idleEnergyPerTick": 100000,
         "workEnergyPerTick": 700000,
-        "assemblerSpeed": 10000,
+        "assemblerSpeed": 300000,
         "stationMaxEnergyAcc": 0,
         "stationMaxItemCount": 0,
         "stationMaxItemKinds": 0,
@@ -434,7 +434,7 @@
         "assemblerRecipeType": 5,
         "idleEnergyPerTick": 1200000,
         "workEnergyPerTick": 12500000,
-        "assemblerSpeed": 10000,
+        "assemblerSpeed": 500000,
         "stationMaxEnergyAcc": 0,
         "stationMaxItemCount": 0,
         "stationMaxItemKinds": 0,
@@ -594,5 +594,11 @@
         //"stationMaxItemCount": 0,
         //"stationMaxItemKinds": 0,
         //"stationMaxDroneCount": 0
+    },
+    {
+        "ModelID": 836,
+        "assemblerRecipeType": 16,
+        "idleEnergyPerTick": 5000,
+        "workEnergyPerTick": 50000
     }
 ]

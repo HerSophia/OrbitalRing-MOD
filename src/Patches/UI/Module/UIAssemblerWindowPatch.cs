@@ -393,8 +393,8 @@ namespace ProjectOrbitalRing.Patches.UI
                 bool flag = __instance.assemblerId == 0 || __instance.factorySystem == null;
                 if (!flag) {
                     ref AssemblerComponent ptr = ref __instance.factorySystem.assemblerPool[__instance.assemblerId];
-                    bool flag2 = ptr.id != __instance.assemblerId;
-                    if (!flag2) {
+                    bool flag2 = ptr.id == __instance.assemblerId;
+                    if (flag2) {
                         AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(__instance.factorySystem, __instance.assemblerId);
                         ref AssemblerComponent Assembler = ref __instance.factorySystem.assemblerPool[__instance.assemblerId];
                         int moduleId = AssemblerModulePatches.GetModuleId(Assembler.recipeId);

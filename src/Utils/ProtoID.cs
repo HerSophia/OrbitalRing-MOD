@@ -112,6 +112,7 @@ namespace ProjectOrbitalRing.Utils
                            I突触凝练机 = 7803,
                            I乾坤 = 7806,
                            I乾坤铁 = 7807,
+                           I低温工厂 = 7823,
                            I组装厂交互塔 = 9512;
 
         internal const int R等离子精炼 = 16,
@@ -192,7 +193,8 @@ namespace ProjectOrbitalRing.Utils
                            M亿万械国 = 832,
                            MSCP310恒燃之火 = 833,
                            M突触凝练机 = 834,
-                           M生态温室 = 835;
+                           M生态温室 = 835,
+                           M低温工厂 = 836;
 
         internal const int T戴森球计划 = 1,
                            T电磁学 = 1001,

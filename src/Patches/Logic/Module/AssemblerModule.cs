@@ -181,14 +181,13 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                             if (AssemblerModuleData.ItemCount == 0) {
                                 Player mainPlayer = GameMain.mainPlayer;
                                 int handItemId = mainPlayer.inhandItemId;
-                                if (handItemId != 0) {
+                                if (handItemId != 0 && mainPlayer.inhandItemCount > 0) {
                                     int itemCount = 1;
                                     int itemInc = 0;
                                     if ((handItemId == moduleId || moduleId == 7617 && handItemId == 7618)) {
                                         mainPlayer.TakeItemFromPlayer(ref handItemId, ref itemCount, out itemInc, fromPackage, itemBundle);
-
                                         if (itemCount > 0) {
-                                            AssemblerModuleData.ItemId = mainPlayer.inhandItemId;
+                                            AssemblerModuleData.ItemId = handItemId;
                                             AssemblerModuleData.ItemCount += itemCount;
                                             AssemblerModuleData.ItemInc = itemInc;
                                             SetAssemblerModuleData(__instance.factorySystem, entityData.assemblerId, AssemblerModuleData);
@@ -217,7 +216,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
             var assemblerDict = AssemblerModuleData.GetOrAdd(
                 factorySystem,
                 _ => new ConcurrentDictionary<int, AssemblerModuleData>()
-            );
+            ); 
 
             // 原子操作：获取或创建 assemblerId 对应的数据
             return assemblerDict.GetOrAdd(

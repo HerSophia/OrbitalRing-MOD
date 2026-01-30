@@ -53,12 +53,12 @@ namespace ProjectOrbitalRing.Patches.UI.DisplayText
                     break;
 
                 case Utils_ERecipeType.生物化工:
-                    __result = "生态穹顶".TranslateFromJson();
+                    __result = "生态温室".TranslateFromJson();
 
                     break;
 
-                case Utils_ERecipeType.高分子化工:
-                    __result = "先进化学反应釜".TranslateFromJson();
+                case Utils_ERecipeType.低温工厂:
+                    __result = "低温工厂".TranslateFromJson();
 
                     break;
 
@@ -132,8 +132,8 @@ namespace ProjectOrbitalRing.Patches.UI.DisplayText
                     __result = "T人造生态圈".TranslateFromJson();
                     return;
 
-                case Utils_ERecipeType.高分子化工:
-                    __result = "T先进化工".TranslateFromJson();
+                case Utils_ERecipeType.低温工厂:
+                    __result = "低温工厂".TranslateFromJson();
                     return;
 
                 case Utils_ERecipeType.所有化工:
