@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using ProjectOrbitalRing.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +36,9 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
                     return false;
                 }
             }
-            else if (stationComponent.isStellar && (_itemId == 5002 || _itemId == 6230))
+            else if (stationComponent.isStellar && (_itemId == ProtoID.I太空运输船 || _itemId == ProtoID.I深空货舰))
             {
-                Debug.LogFormat("scppppppp114514 _itemId {0}", _itemId);
+                //Debug.LogFormat("scppppppp114514 _itemId {0}", _itemId);
                 if (__instance.shipIconButton.button.interactable)
                 {
                     __instance.OnShipIconClick(_itemId);
@@ -79,11 +80,11 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
             }
             if (__instance.player.inhandItemId > 0 && __instance.player.inhandItemCount > 0)
             {
-                Debug.LogFormat("scppppppppppp112 inhandItemId {0}", __instance.player.inhandItemId);
-                int num = 5002;
+                //Debug.LogFormat("scppppppppppp112 inhandItemId {0}", __instance.player.inhandItemId);
+                int num = ProtoID.I太空运输船;
                 if (__instance.station.energyMax == 12000000000)
                 {
-                    num = 6230;
+                    num = ProtoID.I深空货舰;
                 }
 
                 ItemProto itemProto = LDB.items.Select(num);
@@ -137,24 +138,24 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
                 {
                     if (__instance.station.energyMax == 12000000000)
                     {
-                        int upCount = __instance.player.TryAddItemToPackage(6230, idleShipCount, 0, false, 0, false);
-                        UIItemup.Up(6230, upCount);
+                        int upCount = __instance.player.TryAddItemToPackage(ProtoID.I深空货舰, idleShipCount, 0, false, 0, false);
+                        UIItemup.Up(ProtoID.I深空货舰, upCount);
                     }
                     else
                     {
-                        int upCount = __instance.player.TryAddItemToPackage(5002, idleShipCount, 0, false, 0, false);
-                        UIItemup.Up(5002, upCount);
+                        int upCount = __instance.player.TryAddItemToPackage(ProtoID.I太空运输船, idleShipCount, 0, false, 0, false);
+                        UIItemup.Up(ProtoID.I太空运输船, upCount);
                     }
                 }
                 else
                 {
                     if (__instance.station.energyMax == 12000000000)
                     {
-                        __instance.player.SetHandItemId_Unsafe(6230);
+                        __instance.player.SetHandItemId_Unsafe(ProtoID.I深空货舰);
                     }
                     else
                     {
-                        __instance.player.SetHandItemId_Unsafe(5002);
+                        __instance.player.SetHandItemId_Unsafe(ProtoID.I太空运输船);
                     }
                     __instance.player.SetHandItemCount_Unsafe(idleShipCount);
                     __instance.player.SetHandItemInc_Unsafe(0);
@@ -188,12 +189,12 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
                     __instance.OnDroneIconClick(_itemId);
                 }
             }
-            else if (stationComponent.isStellar && (_itemId == 5002 || _itemId == 6230))
+            else if (stationComponent.isStellar && (_itemId == ProtoID.I太空运输船 || _itemId == ProtoID.I深空货舰))
             {
                 
                 if (__instance.shipIconButton.button.interactable)
                 {
-                    Debug.LogFormat("scppppppp1145141919 _itemId {0}", _itemId);
+                    //Debug.LogFormat("scppppppp1145141919 _itemId {0}", _itemId);
                     __instance.OnShipIconClick(_itemId);
                 }
             }
@@ -225,10 +226,10 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
             }
             else if (__instance.player.inhandItemId > 0 && __instance.player.inhandItemCount > 0)
             {
-                int num = 5002;
+                int num = ProtoID.I太空运输船;
                 if (stationComponent.energyMax == 12000000000)
                 {
-                    num = 6230;
+                    num = ProtoID.I深空货舰;
                 }
                 ItemProto itemProto = LDB.items.Select(num);
                 if (__instance.player.inhandItemId != num)
@@ -280,24 +281,24 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
                     {
                         if (stationComponent.energyMax == 12000000000)
                         {
-                            int upCount = __instance.player.TryAddItemToPackage(6230, idleShipCount, 0, throwTrash: false);
-                            UIItemup.Up(6230, upCount);
+                            int upCount = __instance.player.TryAddItemToPackage(ProtoID.I深空货舰, idleShipCount, 0, throwTrash: false);
+                            UIItemup.Up(ProtoID.I深空货舰, upCount);
                         }
                         else
                         {
-                            int upCount = __instance.player.TryAddItemToPackage(5002, idleShipCount, 0, throwTrash: false);
-                            UIItemup.Up(5002, upCount);
+                            int upCount = __instance.player.TryAddItemToPackage(ProtoID.I太空运输船, idleShipCount, 0, throwTrash: false);
+                            UIItemup.Up(ProtoID.I太空运输船, upCount);
                         }
                     }
                     else
                     {
                         if (stationComponent.energyMax == 12000000000)
                         {
-                            __instance.player.SetHandItemId_Unsafe(6230);
+                            __instance.player.SetHandItemId_Unsafe(ProtoID.I深空货舰);
                         }
                         else
                         {
-                            __instance.player.SetHandItemId_Unsafe(5002);
+                            __instance.player.SetHandItemId_Unsafe(ProtoID.I太空运输船);
                         }
                         __instance.player.SetHandItemCount_Unsafe(idleShipCount);
                         __instance.player.SetHandItemInc_Unsafe(0);
@@ -328,14 +329,14 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
                     if (stationComponent.energyMax == 12000000000)
                     {
                         
-                        __instance.shipIconButton.tips.itemId = 6230;
-                        ItemProto itemProto2 = LDB.items.Select(6230);
+                        __instance.shipIconButton.tips.itemId = ProtoID.I深空货舰;
+                        ItemProto itemProto2 = LDB.items.Select(ProtoID.I深空货舰);
                         __instance.shipIconImage.sprite = itemProto2.iconSprite;
                     }
                     else
                     {
-                        __instance.shipIconButton.tips.itemId = 5002;
-                        ItemProto itemProto2 = LDB.items.Select(5002);
+                        __instance.shipIconButton.tips.itemId = ProtoID.I太空运输船;
+                        ItemProto itemProto2 = LDB.items.Select(ProtoID.I太空运输船);
                         __instance.shipIconImage.sprite = itemProto2.iconSprite;
                         __instance.warperIconButton.gameObject.SetActive(false);
                         __instance.powerGroupRect.sizeDelta = new Vector2(380, 40f);
@@ -393,14 +394,14 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
                 {
                     if (stationComponent.energyMax == 12000000000)
                     {
-                        __instance.shipIconButton.tips.itemId = 6230;
-                        ItemProto itemProto2 = LDB.items.Select(6230);
+                        __instance.shipIconButton.tips.itemId = ProtoID.I深空货舰;
+                        ItemProto itemProto2 = LDB.items.Select(ProtoID.I深空货舰);
                         __instance.shipIconImage.sprite = itemProto2.iconSprite;
                     }
                     else
                     {
-                        __instance.shipIconButton.tips.itemId = 5002;
-                        ItemProto itemProto2 = LDB.items.Select(5002);
+                        __instance.shipIconButton.tips.itemId = ProtoID.I太空运输船;
+                        ItemProto itemProto2 = LDB.items.Select(ProtoID.I太空运输船);
                         __instance.shipIconImage.sprite = itemProto2.iconSprite;
                         __instance.warperIconButton.gameObject.SetActive(false);
                         __instance.powerGroupRect.sizeDelta = new Vector2(380, 40f);
@@ -436,17 +437,103 @@ namespace ProjectOrbitalRing.Patches.Logic.CurvatureLogistics
         {
             if (__instance.factory.entityPool[__instance.station.entityId].protoId == 2104)
             {
-                __instance.shipIconButton.tips.itemId = 5002;
-                ItemProto itemProto2 = LDB.items.Select(5002);
+                __instance.shipIconButton.tips.itemId = ProtoID.I太空运输船;
+                ItemProto itemProto2 = LDB.items.Select(ProtoID.I太空运输船);
                 __instance.shipIconImage.sprite = itemProto2.iconSprite;
                 __instance.warperIconButton.gameObject.SetActive(false);
             }
             else if (__instance.factory.entityPool[__instance.station.entityId].protoId == 6267)
             {
-                __instance.shipIconButton.tips.itemId = 6230;
-                ItemProto itemProto2 = LDB.items.Select(6230);
+                __instance.shipIconButton.tips.itemId = ProtoID.I深空货舰;
+                ItemProto itemProto2 = LDB.items.Select(ProtoID.I深空货舰);
                 __instance.shipIconImage.sprite = itemProto2.iconSprite;
             }
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.StationAutoReplenishIfNeeded))]
+        public static bool PlanetFactory_StationAutoReplenishIfNeeded_Patch(PlanetFactory __instance, int entityId, Vector2 tipUiPos, bool isDrone, bool tipOnMouse = false)
+        {
+            if (__instance.gameData.guideRunning) {
+                return false;
+            }
+            Player mainPlayer = __instance.gameData.mainPlayer;
+            string text = "";
+            bool flag = false;
+            ref EntityData ptr = ref __instance.entityPool[entityId];
+            Vector3 vector = ptr.pos;
+            if (ptr.stationId > 0) {
+                StationComponent stationComponent = __instance.transport.stationPool[ptr.stationId];
+                if (stationComponent == null || stationComponent.isCollector || stationComponent.isVeinCollector) {
+                    return false;
+                }
+                vector += vector.normalized * 13f;
+                if (isDrone && stationComponent.droneAutoReplenish) {
+                    int num = stationComponent.workDroneDatas.Length - (stationComponent.idleDroneCount + stationComponent.workDroneCount);
+                    if (num > 0) {
+                        int itemCount = mainPlayer.package.GetItemCount(5001);
+                        if (itemCount > 0) {
+                            int num2 = (itemCount < num) ? itemCount : num;
+                            int num3 = 5001;
+                            int num4 = num2;
+                            int num5 = 0;
+                            mainPlayer.package.TakeTailItems(ref num3, ref num4, out num5, false);
+                            if (num3 > 0 && num4 > 0) {
+                                stationComponent.idleDroneCount += num4;
+                                text += string.Format("已自动补充提示".Translate(), num4, LDB.items.Select(num3).name);
+                                if (num4 < num) {
+                                    text += "自动补充物品不足0".Translate();
+                                }
+                                text += "\r\n";
+                                flag = true;
+                            }
+                        } else {
+                            text = text + string.Format("自动补充物品不足1".Translate(), LDB.items.Select(5001).name) + "\r\n";
+                        }
+                    }
+                }
+                if (!isDrone && stationComponent.isStellar && stationComponent.shipAutoReplenish) {
+                    int num6 = stationComponent.workShipDatas.Length - (stationComponent.idleShipCount + stationComponent.workShipCount);
+                    if (num6 > 0) {
+                        int shipItemId = ProtoID.I太空运输船;
+                        if (__instance.entityPool[entityId].protoId == ProtoID.I深空物流港) {
+                            shipItemId = ProtoID.I深空货舰;
+                        }
+                        int itemCount2 = mainPlayer.package.GetItemCount(shipItemId);
+                        if (itemCount2 > 0) {
+                            int num7 = (itemCount2 < num6) ? itemCount2 : num6;
+                            int num8 = shipItemId;
+                            int num9 = num7;
+                            int num10 = 0;
+                            mainPlayer.package.TakeTailItems(ref num8, ref num9, out num10, false);
+                            if (num8 > 0 && num9 > 0) {
+                                stationComponent.idleShipCount += num9;
+                                text += string.Format("已自动补充提示".Translate(), num9, LDB.items.Select(num8).name);
+                                if (num9 < num6) {
+                                    text += "自动补充物品不足0".Translate();
+                                }
+                                text += "\r\n";
+                                flag = true;
+                            }
+                        } else {
+                            text = text + string.Format("自动补充物品不足1".Translate(), LDB.items.Select(shipItemId).name) + "\r\n";
+                        }
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(text)) {
+                if (tipOnMouse) {
+                    UIRealtimeTip.Popup(text, false, 0);
+                } else if (tipUiPos.sqrMagnitude < 0.1f) {
+                    UIRealtimeTip.Popup(text, vector, false, 0);
+                } else {
+                    UIRealtimeTip.Popup(text, tipUiPos, false);
+                }
+                if (flag) {
+                    VFAudio.Create("equip-1", mainPlayer.transform, Vector3.zero, true, 4, -1, -1L);
+                }
+            }
+            return false;
         }
 
     }

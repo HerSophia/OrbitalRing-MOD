@@ -65,7 +65,7 @@ namespace ProjectOrbitalRing
     {
         public const string MODGUID = "org.ProfessorCat305.OrbitalRing";
         public const string MODNAME = "OrbitalRing";
-        public const string VERSION = "0.9.23";
+        public const string VERSION = "0.9.27";
         public const string DEBUGVERSION = "";
 
 
@@ -169,7 +169,6 @@ namespace ProjectOrbitalRing
 
             ResearchLabPatches.ApplyPatch(Harmony);
             MoonPatch.ApplyPatch(Harmony);
-            FuelRodPatches.InstallAllPatches(Harmony);
 
             foreach (Type type in executingAssembly.GetTypes())
             {

@@ -6339,7 +6339,7 @@
     "SubID": 0,
     "MiningFrom": "",
     "ProduceFrom": "",
-    "Grade": 1,
+    "Grade": 2,
     "Upgrades": [
         2303,
         2304,
@@ -6922,7 +6922,7 @@
     "SubID": 0,
     "MiningFrom": "",
     "ProduceFrom": "",
-    "Grade": 2,
+    "Grade": 1,
     "Upgrades": [
       2315,
       2319
@@ -7030,7 +7030,7 @@
         "SubID": 0,
         "MiningFrom": "",
         "ProduceFrom": "",
-        "Grade": 2,
+        "Grade": 3,
         "Upgrades": [
             2309,
             2317
@@ -7085,7 +7085,7 @@
     "SubID": 0,
     "MiningFrom": "",
     "ProduceFrom": "",
-    "Grade": 2,
+    "Grade": 4,
     "Upgrades": [],
     "IsEntity": true,
     "CanBuild": true,
@@ -7137,8 +7137,11 @@
     "SubID": 0,
     "MiningFrom": "",
     "ProduceFrom": "",
-    "Grade": 3,
-    "Upgrades": [],
+    "Grade": 2,
+    "Upgrades": [
+        2315,
+        2319
+    ],
     "IsEntity": true,
     "CanBuild": true,
     "BuildInGas": false,

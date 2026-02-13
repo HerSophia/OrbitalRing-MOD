@@ -4919,7 +4919,7 @@
         "IconPath": "Assets/texpack/R岩浆磁铁",
         "Type": 1,
         "GridIndex": 3509,
-        "Time": 60,
+        "Time": 120,
         "Input": [
             6203,
             6251
@@ -4932,7 +4932,7 @@
             1102
         ],
         "OutCounts": [
-            6
+            8
         ],
         "Explicit": true,
         "Handcraft": false,

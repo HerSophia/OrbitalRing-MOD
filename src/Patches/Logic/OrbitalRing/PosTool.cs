@@ -255,10 +255,10 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 if (-border <= latitudeDeg && latitudeDeg <= border) {
                     if (latitudeDeg >= 0) {
                         ringIndex = 0;
-                        ringBeltIndex = 1;
+                        ringBeltIndex = 2;
                     } else {
                         ringIndex = 0;
-                        ringBeltIndex = 2;
+                        ringBeltIndex = 1;
                     }
                 }
             } else {

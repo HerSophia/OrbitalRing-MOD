@@ -319,92 +319,50 @@ namespace ProjectOrbitalRing.Patches.Logic
             return matcher.InstructionEnumeration();
         }
 
-        // 统一的补丁安装入口：一次性给两个方法打补丁
-        public static void InstallAllPatches(Harmony harmony)
+        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.EntityFastFillIn))]
+        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto), new[]
         {
-            // 1. 给 EntityFastFillIn 打补丁（无out参数，也用手动方式）
-            InstallEntityFastFillInPatch(harmony);
-
-            // 2. 给 InsertInto 打补丁（处理out参数）
-            InstallInsertIntoPatch(harmony);
-        }
-
-        // 处理 EntityFastFillIn 的补丁安装
-        private static void InstallEntityFastFillInPatch(Harmony harmony)
+            typeof(int), typeof(int), typeof(int), typeof(byte),
+            typeof(byte), typeof(byte),
+        }, new[]
         {
-            try {
-                // 查找 EntityFastFillIn 方法（无参数或参数简单，直接查找）
-                MethodInfo targetMethod = typeof(PlanetFactory).GetMethod(
-                    nameof(PlanetFactory.EntityFastFillIn),
-                    BindingFlags.Public | BindingFlags.Instance // 实例+公共方法
-                );
-
-                if (targetMethod == null) {
-                    //Debug.LogError("找不到EntityFastFillIn方法！");
-                    return;
-                }
-
-                // 复用同一个Transpiler方法
-                harmony.Patch(
-                    original: targetMethod,
-                    transpiler: new HarmonyMethod(typeof(FuelRodPatches), nameof(PlanetFactory_InsertInto_Transpiler))
-                );
-                //Debug.Log("✅ EntityFastFillIn补丁安装成功");
-            } catch (Exception e) {
-                //Debug.LogError($"❌ EntityFastFillIn补丁安装失败：{e}");
-            }
-        }
-
-        // 处理 InsertInto 的补丁安装（兼容out参数）
-        private static void InstallInsertIntoPatch(Harmony harmony)
+            ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal,
+            ArgumentType.Normal, ArgumentType.Out,
+        })]
+        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto), new[]
         {
-            try {
-                Type[] paramTypes = new[]
-                {
-                typeof(int), typeof(int), typeof(int), typeof(byte), typeof(byte),
-                typeof(byte).MakeByRefType() // out参数
-            };
-
-                MethodInfo targetMethod = typeof(PlanetFactory).GetMethod(
-                    nameof(PlanetFactory.InsertInto),
-                    BindingFlags.Public | BindingFlags.Instance,
-                    null, paramTypes, null
-                );
-
-                if (targetMethod == null) {
-                    //Debug.LogError("找不到InsertInto方法！");
-                    return;
-                }
-
-                // 复用同一个Transpiler方法
-                harmony.Patch(
-                    original: targetMethod,
-                    transpiler: new HarmonyMethod(typeof(FuelRodPatches), nameof(PlanetFactory_InsertInto_Transpiler))
-                );
-                //Debug.Log("✅ InsertInto补丁安装成功");
-            } catch (Exception e) {
-                //Debug.LogError($"❌ InsertInto补丁安装失败：{e}");
-            }
-        }
-
-
-        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.EntityFastFillIn))]
-        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto),
-        //    new Type[] { typeof(int), typeof(int), typeof(int), typeof(byte), typeof(byte), Type.GetType("System.Byte&") })]
-        //[HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> PlanetFactory_InsertInto_Transpiler(IEnumerable<CodeInstruction> instructions)
+            typeof(uint), typeof(int), typeof(int), typeof(byte),
+            typeof(byte), typeof(byte),
+        }, new[]
         {
+            ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal,
+            ArgumentType.Normal, ArgumentType.Out,
+        })]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> PlanetFactory_OxygenMask_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            /*
+                int[] fuelNeed = ItemProto.fuelNeeds[(int) local5.fuelMask];
+
+                IL_07e6: ldsfld       int32[][] ItemProto::fuelNeeds
+
+                ... // powerGeneratorComponent
+
+                IL_07ed: ldfld        int16 PowerGeneratorComponent::fuelMask
+                IL_07f2: ldelem.ref
+                IL_07f3: stloc.s      // fuelNeed
+            */
+
             var matcher = new CodeMatcher(instructions);
 
-            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldsfld, AccessTools.Field(typeof(ItemProto), nameof(ItemProto.fuelNeeds))),
-                new CodeMatch(OpCodes.Ldloc_S), new CodeMatch(OpCodes.Ldloc_S), new CodeMatch(OpCodes.Ldelema),
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Ldsfld, AccessTools.Field(typeof(ItemProto), nameof(ItemProto.fuelNeeds))));
+            matcher.SetAndAdvance(OpCodes.Nop, null);
+
+            matcher.MatchForward(false,
                 new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(PowerGeneratorComponent), nameof(PowerGeneratorComponent.fuelMask))),
                 new CodeMatch(OpCodes.Ldelem_Ref));
 
-            matcher.SetAndAdvance(OpCodes.Nop, null);
-
-            matcher.Advance(3).SetAndAdvance(OpCodes.Ldarg_0, null);
-
+            matcher.SetAndAdvance(OpCodes.Ldarg_0, null);
             matcher.SetAndAdvance(OpCodes.Call, AccessTools.Method(typeof(FuelRodPatches), nameof(ThermalPowerGen_InsertMethod)));
 
             return matcher.InstructionEnumeration();

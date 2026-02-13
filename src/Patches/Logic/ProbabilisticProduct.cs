@@ -73,11 +73,10 @@ namespace ProjectOrbitalRing.Patches.Logic
             );
 
             matcher.MatchForward(false,
-                new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(AssemblerComponent), nameof(AssemblerComponent.recipeExecuteData))),
-                new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(RecipeExecuteData), nameof(RecipeExecuteData.productCounts)))
+                new CodeMatch(OpCodes.Stfld, AccessTools.Field(typeof(AssemblerComponent), nameof(AssemblerComponent.extraSpeed)))
                 );
 
-            matcher.Advance(1).InsertAndAdvance(
+            matcher.Advance(-2).InsertAndAdvance(
                 new CodeInstruction(OpCodes.Ldarg_0),
                 new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(AssemblerComponent), nameof(AssemblerComponent.recipeId))),
                 new CodeInstruction(OpCodes.Ldarg_0),
