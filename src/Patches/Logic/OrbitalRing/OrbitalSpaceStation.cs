@@ -97,16 +97,14 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             return matcher.InstructionEnumeration();
         }
 
-        public static bool ShouldRemoteLogicBeNull(StationComponent station)
+        public static bool ShouldRemoteLogicBeNull(StationComponent station, PlanetTransport planetTransport)
         {
             if (station.isStellar) {
                 return true;
             }
-            // 太空电梯是唯一一个不是isStellar但是仓储量从15000起跳的设施，用仓储量来判断不清空星际供需逻辑
-            for (int i = 0; i < station.storage.Length; i++) {
-                if (station.storage[i].max >= 15000) {
-                    return true;
-                }
+            ItemProto itemProto2 = LDB.items.Select((int)planetTransport.factory.entityPool[station.entityId].protoId);
+            if (itemProto2.ID == ProtoID.I太空电梯) {
+                return true;
             }
             return false;
         }
@@ -118,10 +116,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             var matcher = new CodeMatcher(instructions);
 
             matcher.MatchForward(true, new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(StationComponent), nameof(StationComponent.isStellar))));
-            object IL_0030 = matcher.Advance(1).Operand;
 
-            matcher.Advance(-1).SetAndAdvance(
-                OpCodes.Call, AccessTools.Method(typeof(OrbitalSpaceStation), nameof(ShouldRemoteLogicBeNull))
+            matcher.SetAndAdvance(
+                OpCodes.Ldarg_0, null
+            );
+            matcher.InsertAndAdvance(
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(OrbitalSpaceStation), nameof(ShouldRemoteLogicBeNull)))
             );
 
             //matcher.LogInstructionEnumeration();

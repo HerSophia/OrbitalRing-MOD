@@ -133,6 +133,7 @@
     <Compile Include="src\Patches\Logic\BattleRelated\StopCircleAround.cs" />
     <Compile Include="src\Patches\Logic\Build\BuildingModelIndexRecord.cs" />
     <Compile Include="src\Patches\Logic\CurvatureLogistics\CurvatureLogistics.cs" />
+    <Compile Include="src\Patches\Logic\DamageDefinitionShield.cs" />
     <Compile Include="src\Patches\Logic\DisableLDBToolCachePatches.cs" />
     <Compile Include="src\Patches\Logic\DysonSpherePatches.cs" />
     <Compile Include="src\Patches\Logic\EjectorPatches.cs" />

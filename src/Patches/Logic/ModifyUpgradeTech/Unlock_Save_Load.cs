@@ -67,12 +67,14 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
         private static readonly gachaData[] gachaDatas = {
            new gachaData { item = ProtoID.I氢, count = 114 },
            new gachaData { item = ProtoID.I单极磁石, count = 1000 },
-           new gachaData { item =  ProtoID.I反物质, count = 514 },
+           new gachaData { item = ProtoID.I反物质, count = 514 },
            new gachaData { item = ProtoID.I负熵奇点, count = 173 },
            new gachaData { item = ProtoID.I奇夸克样本, count = 16 },
            new gachaData { item = ProtoID.I量子虚拟生命, count = 1 },
            new gachaData { item = ProtoID.ISCP310恒燃之火, count = 1 },
            new gachaData { item = ProtoID.I黑萝卜, count = 1 },
+           new gachaData { item = ProtoID.I朗基努斯之枪, count = 1 },
+           new gachaData { item = ProtoID.I损伤定义护盾, count = 500 },
         };
         private static int gachaIndex = 0;
 

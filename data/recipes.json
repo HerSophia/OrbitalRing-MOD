@@ -7083,7 +7083,7 @@
             7002
         ],
         "OutCounts": [
-            48,
+            42,
             32,
             6
         ],
@@ -7980,7 +7980,7 @@
         "Name": "星环电网组件",
         "Description": "",
         "IconPath": "",
-        "Type": 9,
+        "Type": 10,
         "GridIndex": 2710,
         "Time": 1800,
         "Input": [
@@ -8310,9 +8310,9 @@
         "Name": "粒子加速轨道",
         "Description": "I粒子加速轨道",
         "IconPath": "",
-        "Type": 4,
+        "Type": 10,
         "GridIndex": 2609,
-        "Time": 1500,
+        "Time": 2700,
         "Input": [
             1107,
             6523,

@@ -626,7 +626,7 @@
         "ID": 1122,
         "Name": "T粒子加速器",
         "IconPath": "Assets/texpack/T粒子加速器",
-        "IconTag": "",
+        "IconTag": "tlzjsq",
         "Desc": "T粒子加速器描述",
         "Conclusion": "T粒子加速器描述",
         "IsHiddenTech": false,

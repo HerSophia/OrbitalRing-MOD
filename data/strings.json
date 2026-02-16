@@ -4821,6 +4821,26 @@
         "ENUS": "Third is Planetary fortress, Fourth is planetary fortress, Natural has been destroyed and rebuilt the Planetary Fortress, Main? Of course still a planetary fortress"
     },
     {
+        "Name": "朗基努斯之枪",
+        "ZHCN": "朗基努斯之枪",
+        "ENUS": "Lance of Longinus"
+    },
+    {
+        "Name": "I朗基努斯之枪",
+        "ZHCN": "从宇宙底层打捞出来的以认知为驱动的物品，以攻击目标为目的掷出后，将以完全违反物理规则的方式移动，无视任何防护手段，完全粉碎命中的目标。\n<color=\"#FD965ECC\">装到弹药室发射时，一击必杀指定的任何敌人</color>",
+        "ENUS": "The items retrieved from the depths of the universe, driven by cognition, will move in a manner that completely violates the laws of physics after being thrown with the intention of attacking a target. They will ignore any protective measures and completely shatter the target they hit.\n<color=\"#FD965ECC\">When loaded into the ammunition chamber and fired, it will instantly kill any designated enemy</color>"
+    },
+    {
+        "Name": "损伤定义护盾",
+        "ZHCN": "损伤定义护盾",
+        "ENUS": "Damage Definition Shield"
+    },
+    {
+        "Name": "I损伤定义护盾",
+        "ZHCN": "在规则修改实验中被异化了的护盾发生器，其容量变得异常的小，并且极易过载烧毁，然而在烧毁前却能接下任意威力的伤害，在规则的至高伟力前，规则以下的攻击都将无能为力。\n处于背包中时，护盾每接下一次攻击，都<color=\"#FD965ECC\">消耗</color>一个损伤定义护盾，并将本次攻击伤害<color=\"#FD965ECC\">强制定义为10点</color>",
+        "ENUS": "In the experiment of rule modification, the shield generator, which had been alienated, had its capacity reduced to an abnormally small level and became extremely prone to overload and burnout. However, before it burned out, it could withstand damage of any power. In the face of the supreme power of the rules, attacks below the rules were powerless.\nWhen in the backpack, every time the shield receives an attack, it will <color=\"#FD965ECC\">consume</color> one damage-defining shield, and forcefully <color=\"#FD965ECC\">define the damage of this attack as 10 points</color>"
+    },
+    {
         "Name": "光速修改",
         "ZHCN": "光速修改",
         "ENUS": "Speed-of-Light Modification"

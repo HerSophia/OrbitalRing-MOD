@@ -605,5 +605,11 @@
         "assemblerRecipeType": 16,
         "idleEnergyPerTick": 5000,
         "workEnergyPerTick": 50000
+    },
+    {
+        "ModelID": 837,
+        "AmmoBlastRadius1": 1,
+        "AmmoMoveAcc": 10,
+        "AmmoTurnAcc": 10
     }
 ]
