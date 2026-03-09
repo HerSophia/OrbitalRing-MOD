@@ -190,11 +190,10 @@ namespace ProjectOrbitalRing.Patches.UI {
 
             var local = matcher.Advance(-2).Operand;
 
-            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldloc_S, local),
-                new CodeInstruction(OpCodes.Ldloc_S, techSpeed),
+            matcher.Advance(3).InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldloc_S, local),
                 new CodeInstruction(OpCodes.Call,
-                    AccessTools.Method(typeof(ResearchLabPatches), nameof(SetResearchSpeed))),
-                new CodeInstruction(OpCodes.Stloc_S, techSpeed));
+                    AccessTools.Method(typeof(ResearchLabPatches), nameof(SetResearchSpeed)))
+                );
 
             return matcher.InstructionEnumeration();
         }
@@ -206,7 +205,7 @@ namespace ProjectOrbitalRing.Patches.UI {
             return techSpeed * labResearchSpeed;
         }
 
-        public static float SetResearchSpeed(FactorySystem system, ref LabComponent component, float techSpeed) {
+        public static float SetResearchSpeed(float techSpeed, FactorySystem system, ref LabComponent component) {
             short modelIndex = system.factory.entityPool[component.entityId].modelIndex;
             var labResearchSpeed = PlanetFactory.PrefabDescByModelIndex[modelIndex].labResearchSpeed;
             return techSpeed * labResearchSpeed;

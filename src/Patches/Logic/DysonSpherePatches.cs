@@ -43,7 +43,7 @@ namespace ProjectOrbitalRing.Patches
         {
             var matcher = new CodeMatcher(instructions);
 
-            // energyGenPerSail * 2
+            // energyGenPerSail * 10
             matcher.MatchForward(false,
                 new CodeMatch(OpCodes.Stfld, AccessTools.Field(typeof(DysonSphere), nameof(DysonSphere.energyGenPerSail))));
 
@@ -64,7 +64,7 @@ namespace ProjectOrbitalRing.Patches
             matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldc_I4_2), new CodeInstruction(OpCodes.Conv_I8),
                 new CodeInstruction(OpCodes.Mul));
 
-            // energyGenPerShell * 2
+            // energyGenPerShell * 10
             matcher.MatchForward(false,
                 new CodeMatch(OpCodes.Stfld, AccessTools.Field(typeof(DysonSphere), nameof(DysonSphere.energyGenPerShell))));
 

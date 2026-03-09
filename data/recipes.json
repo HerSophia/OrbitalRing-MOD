@@ -1824,22 +1824,22 @@
         "IconPath": "Icons/ItemRecipe/photo-shifter-lv2",
         "Type": 4,
         "GridIndex": 1609,
-        "Time": 180,
+        "Time": 720,
         "Input": [
             1111,
             1301,
             7101
         ],
         "InCounts": [
-            4,
-            3,
+            16,
+            12,
             1
         ],
         "Output": [
             1404
         ],
         "OutCounts": [
-            3
+            12
         ],
         "Explicit": true,
         "Handcraft": true,
@@ -6836,7 +6836,7 @@
         "IconPath": "Assets/texpack/R高效宽带",
         "Type": 10,
         "GridIndex": 1410,
-        "Time": 120,
+        "Time": 240,
         "Input": [
             6523,
             7804
@@ -6849,7 +6849,7 @@
             1402
         ],
         "OutCounts": [
-            2
+            4
         ],
         "Explicit": true,
         "Handcraft": false,
@@ -8136,7 +8136,7 @@
         "GridIndex": 2604,
         "Time": 720,
         "Input": [
-            1108,
+            1109,
             1401,
             7501,
             5001

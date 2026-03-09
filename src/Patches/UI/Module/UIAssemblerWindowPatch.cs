@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
+using GalacticScale;
 using HarmonyLib;
 using ProjectOrbitalRing.Patches.Logic.AssemblerModule;
 using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
@@ -500,5 +501,6 @@ namespace ProjectOrbitalRing.Patches.UI
 
             return matcher.InstructionEnumeration();
         }
+        
     }
 }

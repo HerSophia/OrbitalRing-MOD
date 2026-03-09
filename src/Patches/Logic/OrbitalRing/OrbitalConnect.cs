@@ -367,25 +367,26 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             }
         }
 
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.DismantleFinally))]
-        [HarmonyPrefix]
-        public static void DismantleFinallyPatch(PlanetFactory __instance, int objId, ref int protoId)
-        {
-            if (objId > 0) {
-                if (protoId == ProtoID.I轨道连接组件 || protoId == ProtoID.I粒子加速轨道) {
-                    Vector3 thisPos = __instance.entityPool[objId].pos;
-                    (int positionIndex, int ringBeltIndex, int ringIndex) = CalculateRingPosMark(thisPos, __instance.planet.radius == 100f);
-                    var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(__instance.planet.id);
-                    if (protoId == ProtoID.I轨道连接组件) {
-                        planetOrbitalRingData.Rings[ringIndex].DelRing(positionIndex, ringBeltIndex, false);
-                    } else if (protoId == ProtoID.I粒子加速轨道) {
-                        planetOrbitalRingData.Rings[ringIndex].DelRing(positionIndex, ringBeltIndex, true);
-                    }
-                }
-            }
-        }
+        // 拆除/击毁函数移动到OrbitalBuild里，待删除
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.DismantleFinally))]
+        //[HarmonyPrefix]
+        //public static void DismantleFinallyPatch(PlanetFactory __instance, int objId, ref int protoId)
+        //{
+        //    if (objId > 0) {
+        //        if (protoId == ProtoID.I轨道连接组件 || protoId == ProtoID.I粒子加速轨道) {
+        //            Vector3 thisPos = __instance.entityPool[objId].pos;
+        //            (int positionIndex, int ringBeltIndex, int ringIndex) = CalculateRingPosMark(thisPos, __instance.planet.radius == 100f);
+        //            var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(__instance.planet.id);
+        //            if (protoId == ProtoID.I轨道连接组件) {
+        //                planetOrbitalRingData.Rings[ringIndex].DelRing(positionIndex, ringBeltIndex, false);
+        //            } else if (protoId == ProtoID.I粒子加速轨道) {
+        //                planetOrbitalRingData.Rings[ringIndex].DelRing(positionIndex, ringBeltIndex, true);
+        //            }
+        //        }
+        //    }
+        //}
 
-        // 范围拆除时过滤轨道连接组件，粒子加速轨道，星环电网组件
+        // 范围拆除时过滤轨道连接组件，粒子加速轨道，星环电网组件，空轨
         [HarmonyPatch(typeof(BuildTool_Dismantle), nameof(BuildTool_Dismantle.DeterminePreviews))]
         [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> BuildTool_Dismantle_DeterminePreviews_Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -410,6 +411,10 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 new CodeInstruction(OpCodes.Ldloc_S, V_14),
                 new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ItemProto), nameof(ItemProto.ID))),
                 new CodeInstruction(OpCodes.Ldc_I4, 6517),
+                new CodeInstruction(OpCodes.Beq, IL_06C2),
+                new CodeInstruction(OpCodes.Ldloc_S, V_14),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ItemProto), nameof(ItemProto.ID))),
+                new CodeInstruction(OpCodes.Ldc_I4, 6235),
                 new CodeInstruction(OpCodes.Beq, IL_06C2)
             );
             //matcher.LogInstructionEnumeration();

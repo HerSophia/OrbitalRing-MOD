@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using ProjectOrbitalRing.Utils;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.EquatorRing;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.PosTool;
@@ -518,14 +519,8 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
 
         [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.DismantleFinally))]
         [HarmonyPrefix]
-        public static void DismantleFinallyPatch(PlanetFactory __instance, int objId, ref int protoId)
+        public static void PlanetFactory_DismantleFinally_Patch(PlanetFactory __instance, int objId, ref int protoId)
         {
-            bool flag1 = IsBuildingItemIdisOrbitalStation(protoId, true);
-            bool flag2 = IsBuildingItemIdisOrbitalCore(protoId);
-            if (!(flag1 || flag2)) {
-                return;
-            }
-
             if (objId <= 0) {
                 if (protoId == ProtoID.I星环对撞机) { // 星环对撞机，拆除，放开再建
                     PrebuildData preBuildData = __instance.prebuildPool[-objId];
@@ -535,7 +530,19 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 }
                 return;
             }
-            Vector3 thisPos = __instance.entityPool[objId].pos;
+        }
+
+        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.RemoveEntityWithComponents))]
+        [HarmonyPrefix]
+        public static void PlanetFactory_RemoveEntityWithComponents_Patch(PlanetFactory __instance, int id)
+        {
+            int protoId = __instance.entityPool[id].protoId;
+            bool flag1 = IsBuildingItemIdisOrbitalStation(protoId, true);
+            bool flag2 = IsBuildingItemIdisOrbitalCore(protoId);
+            if (!(flag1 || flag2)) {
+                return;
+            }
+            Vector3 thisPos = __instance.entityPool[id].pos;
             int position = IsBuildingPosXZCorrect(thisPos.x, thisPos.z, true, __instance.planet.radius == 100f);
             int ringIndex = isBuildingPosYCorrect(thisPos, __instance.planet.radius == 100f);
             var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(__instance.planet.id);
@@ -562,6 +569,18 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 if (planetOrbitalRingData == null)
                     return;
                 planetOrbitalRingData.Rings[ringIndex].isParticleCollider = false;
+            }
+            if (protoId == ProtoID.I轨道连接组件 || protoId == ProtoID.I粒子加速轨道 || protoId == ProtoID.I星环电网组件) {
+                if (planetOrbitalRingData == null)
+                    return;
+                //Vector3 thisPos = __instance.entityPool[id].pos;
+                (int positionIndex, int ringBeltIndex, int beltRingIndex) = CalculateRingPosMark(thisPos, __instance.planet.radius == 100f);
+                //var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(__instance.planet.id);
+                if (protoId == ProtoID.I轨道连接组件) {
+                    planetOrbitalRingData.Rings[beltRingIndex].DelRing(positionIndex, ringBeltIndex, false);
+                } else if (protoId == ProtoID.I粒子加速轨道 || protoId == ProtoID.I星环电网组件) {
+                    planetOrbitalRingData.Rings[beltRingIndex].DelRing(positionIndex, ringBeltIndex, true);
+                }
             }
         }
 

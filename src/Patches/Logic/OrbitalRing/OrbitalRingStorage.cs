@@ -52,7 +52,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
 
     internal class OrbitalRingStorageCalculate
     {
-        private static int OrbitalRingStorageMax = 200000;
+        private static readonly int OrbitalRingStorageMax = 200000;
 
         [HarmonyPatch(typeof(PlanetTransport), nameof(PlanetTransport.GameTick))]
         [HarmonyPostfix]
@@ -122,13 +122,12 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                     orbitalRingStorage.storageItem[storage.itemId] = new int[] { 0, 0 };
                                 }
                                 int count = storage.count - (storage.max / 2);
+                                int StorageMax = OrbitalRingStorageMax;
                                 if (storage.itemId == 1210) {
-                                    OrbitalRingStorageMax = 200;
-                                } else {
-                                    OrbitalRingStorageMax = 200000;
+                                    StorageMax = 200;
                                 }
-                                if (orbitalRingStorage.storageItem[storage.itemId][0] < OrbitalRingStorageMax) {
-                                    count = (OrbitalRingStorageMax - orbitalRingStorage.storageItem[storage.itemId][0]) > count ? count : (OrbitalRingStorageMax - orbitalRingStorage.storageItem[storage.itemId][0]);
+                                if (orbitalRingStorage.storageItem[storage.itemId][0] < StorageMax) {
+                                    count = (StorageMax - orbitalRingStorage.storageItem[storage.itemId][0]) > count ? count : (StorageMax - orbitalRingStorage.storageItem[storage.itemId][0]);
                                     orbitalRingStorage.storageItem[storage.itemId][0] += count;
                                     //storage.count -= count;
                                     int inc = split_inc(ref stationComponent.storage[j].count, ref stationComponent.storage[j].inc, count);

@@ -11,6 +11,7 @@ namespace ProjectOrbitalRing.Patches.Logic.QuantumStorage
 {
     public static partial class QuantumStoragePatches
     {
+        /*
         private static readonly Mutex QuantumStorageMutex = new Mutex(-1);
 
         [HarmonyPatch(typeof(StorageComponent), nameof(StorageComponent.TakeTailItems),
@@ -254,5 +255,6 @@ namespace ProjectOrbitalRing.Patches.Logic.QuantumStorage
 
             return matcher.InstructionEnumeration();
         }
+        */
     }
 }

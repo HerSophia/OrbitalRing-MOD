@@ -153,6 +153,7 @@
     <Compile Include="src\Patches\Logic\FixMoonRadius\UIBuildingGrid.cs" />
     <Compile Include="src\Patches\Logic\FixOpeningAnimationError.cs" />
     <Compile Include="src\Patches\Logic\FuelRodPatches.cs" />
+    <Compile Include="src\Patches\Logic\GammaPowerSavingPatch.cs" />
     <Compile Include="src\Patches\Logic\GeothermalStrengthPatches.cs" />
     <Compile Include="src\Patches\Logic\GlobalPowerSupplyPatches.cs" />
     <Compile Include="src\Patches\Logic\InfiniteTank.cs" />
