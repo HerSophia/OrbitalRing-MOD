@@ -265,7 +265,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
         
         public static void AssemblerFilterModuleProcess(FactorySystem factorySystem, int poolId, ref float power)
         {
-            if (factorySystem.assemblerPool[poolId].speed == 40000) {
+            if (factorySystem.assemblerPool[poolId].speed >= 40000) {
                 return;
             }
             AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(factorySystem, poolId);

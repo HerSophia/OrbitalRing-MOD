@@ -29,7 +29,7 @@ namespace ProjectOrbitalRing.Utils
             CopyModelProto(56, ProtoID.M超空间中继器核心);
             CopyModelProto(68, ProtoID.M勘察卫星, Color.HSVToRGB(0.0833f, 0.8f, 1.0f));
             CopyModelProto(46, ProtoID.M同位素温差发电机, Color.HSVToRGB(0.4174f, 0.742f, 0.9686f));
-            CopyModelProto(49, ProtoID.M生态穹顶, new Color(0.3216F, 0.8157F, 0.09020F));
+            CopyModelProto(50, ProtoID.M轨道水培舱, new Color(0.3216F, 0.8157F, 0.09020F));
             CopyModelProto(50, ProtoID.M星环对撞机, new Color(0.3059F, 0.2196F, 0.4941F));
             CopyModelProto(50, ProtoID.M轨道反物质堆基座);
             CopyModelProto(432, ProtoID.M启示录聚变弹, new Color(0.3059F, 0.2196F, 0.4941F));

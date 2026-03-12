@@ -2264,11 +2264,11 @@
     },
     {
         "ID": 6264,
-        "Name": "生态穹顶",
-        "Description": "1.0.0删除",
-        "IconPath": "Assets/texpack/回收塔",
-        "GridIndex": 2509,
-        "StackSize": 30,
+        "Name": "轨道水培舱",
+        "Description": "I轨道水培舱",
+        "IconPath": "Assets/texpack/I轨道水培舱2",
+        "GridIndex": 2712,
+        "StackSize": 20,
         "Type": 6,
         "PreTechOverride": 0,
         "DescFields": [

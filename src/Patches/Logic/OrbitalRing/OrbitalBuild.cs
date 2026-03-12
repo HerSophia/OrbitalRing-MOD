@@ -41,6 +41,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 case ProtoID.I星环对撞机:
                 case ProtoID.I轨道观测站:
                 case ProtoID.I组装厂交互塔:
+                case ProtoID.I轨道水培舱:
                     return true;
                 case ProtoID.I太空电梯:
                     return isContainElevator;
@@ -545,13 +546,16 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
             Vector3 thisPos = __instance.entityPool[id].pos;
             int position = IsBuildingPosXZCorrect(thisPos.x, thisPos.z, true, __instance.planet.radius == 100f);
             int ringIndex = isBuildingPosYCorrect(thisPos, __instance.planet.radius == 100f);
+            if (ringIndex == -1 || position == -1) {
+                return;
+            }
             var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(__instance.planet.id);
             if (protoId == ProtoID.I太空电梯) {
                 if (planetOrbitalRingData == null)
                     return;
                 planetOrbitalRingData.Rings[ringIndex].RemoveElevator(position);
             } else if (flag1) {
-                if (planetOrbitalRingData == null)
+                if (planetOrbitalRingData == null || planetOrbitalRingData.Rings.Count == 0)
                     return;
                 planetOrbitalRingData.Rings[ringIndex].RemoveOrbitalStation(position);
             } else if (flag2) {

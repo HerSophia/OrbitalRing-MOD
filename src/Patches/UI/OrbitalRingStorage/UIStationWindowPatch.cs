@@ -103,7 +103,7 @@ namespace ProjectOrbitalRing.Patches.UI.OrbitalRingStorage
                     __instance.event_lock = false;
                     return;
                 }
-                EventSystem.current.SetSelectedGameObject(null);
+                //EventSystem.current.SetSelectedGameObject(null);
                 ItemProto itemProto = LDB.items.Select((int)__instance.factory.entityPool[stationComponent.entityId].protoId);
                 if (itemProto == null) {
                     __instance._Close();

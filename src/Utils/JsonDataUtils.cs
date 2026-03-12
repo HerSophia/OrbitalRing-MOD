@@ -134,7 +134,6 @@ namespace ProjectOrbitalRing.Utils
 
             megaPumper = LDB.models.Select(ProtoID.M射线接收站).prefabDesc;
             megaPumper.powerProductHeat = 12000000000;
-            //LogError($"scpppppppppppppppppppppppppppppp powerProductHeat {megaPumper.powerProductHeat}"); 
 
             //PrefabDesc megaPumper = LDB.models.Select(ProtoID.M大抽水机).prefabDesc;
             //megaPumper.waterPoints = new[] { Vector3.zero, };

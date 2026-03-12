@@ -122,11 +122,6 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             
             int buildIngItemId = factory.entityPool[__instance.entityId].protoId;
 
-            if (buildIngItemId == ProtoID.I太空船坞 || buildIngItemId == ProtoID.I轨道熔炼站 || buildIngItemId == ProtoID.I星环对撞机)
-            {
-                OrbitalAssemblerInternalUpdate(ref __instance, factory.planetId);
-                ShareStorageForOrbitalAssembler(ref __instance, factory.factorySystem);
-            }
             // 更新后配方数据不再每个建筑一份，改数据会改所有使用这个配方的建筑，导致全部30堆叠生产
             //if (buildIngItemId == ProtoID.I轨道熔炼站) {
             //    CheckRecipeCount(ref __instance, 30, false);
@@ -139,7 +134,7 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             SetAssmeblerWaterFull(ref __instance, factory);
 
             // 如果产物和原料是同一种东西，产物会内部直接填回原料，不再需要在绿塔外拉个回环线
-            if (factory.entityPool[__instance.entityId].protoId == ProtoID.I生态温室) {
+            if (buildIngItemId == ProtoID.I生态温室 || buildIngItemId == ProtoID.I轨道水培舱) {
                 for (int i = 0; i < __instance.recipeExecuteData.products.Length; i++) {
                     for (int j = 0; j < __instance.needs.Length; j++) {
                         if (__instance.recipeExecuteData.products[i] == __instance.needs[j] && __instance.produced[i] > 0) {
@@ -157,51 +152,55 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             // 生态温室上传原料下传产物处理，在产物填回原料后
             GameTickAssemblerOutputToNext(ref __instance, factory);
 
+            if (buildIngItemId == ProtoID.I太空船坞 || buildIngItemId == ProtoID.I轨道熔炼站 || buildIngItemId == ProtoID.I星环对撞机 || buildIngItemId == ProtoID.I轨道水培舱)
+            {
+                OrbitalAssemblerInternalUpdate(ref __instance, factory.planetId);
+                ShareStorageForOrbitalAssembler(ref __instance, factory.factorySystem);
+            }
             bool b = power >= 0.1f;
 
-            // MegaBuildings
-            if (factory.entityPool[__instance.entityId].protoId == ProtoID.I生态穹顶)
-            {
-                SlotData[] slotdata = GetSlots(factory.planetId, __instance.entityId);
-                CargoTraffic cargoTraffic = factory.cargoTraffic;
-                SignData[] entitySignPool = factory.entitySignPool;
+            //// MegaBuildings
+            //if (factory.entityPool[__instance.entityId].protoId == ProtoID.I生态穹顶) {
+            //    SlotData[] slotdata = GetSlots(factory.planetId, __instance.entityId);
+            //    CargoTraffic cargoTraffic = factory.cargoTraffic;
+            //    SignData[] entitySignPool = factory.entitySignPool;
 
-                int stationPilerLevel = GameMain.history.stationPilerLevel;
+            //    int stationPilerLevel = GameMain.history.stationPilerLevel;
 
-                //if (__instance.recipeId != ProtoID.R物质分解)
-                //{
+            //    //if (__instance.recipeId != ProtoID.R物质分解)
+            //    //{
 
-                // 如果产物和原料是同一种东西，产物会内部直接填回原料，不再需要在绿塔外拉个回环线
-                for (int i = 0; i < __instance.recipeExecuteData.products.Length; i++) {
-                    for (int j = 0; j < __instance.needs.Length; j++) {
-                        if (__instance.recipeExecuteData.products[i] == __instance.needs[j] && __instance.produced[i] > 0) {
-                            if (__instance.produced[i] >= __instance.recipeExecuteData.requireCounts[j] * 2) {
-                                __instance.produced[i] -= __instance.recipeExecuteData.requireCounts[j] * 2;
-                                __instance.served[j] += __instance.recipeExecuteData.requireCounts[j] * 2;
-                            } else {
-                                __instance.served[j] += __instance.produced[i];
-                                __instance.produced[i] = 0;
-                            }
-                        }
-                    }
-                }
+            //    // 如果产物和原料是同一种东西，产物会内部直接填回原料，不再需要在绿塔外拉个回环线
+            //    for (int i = 0; i < __instance.recipeExecuteData.products.Length; i++) {
+            //        for (int j = 0; j < __instance.needs.Length; j++) {
+            //            if (__instance.recipeExecuteData.products[i] == __instance.needs[j] && __instance.produced[i] > 0) {
+            //                if (__instance.produced[i] >= __instance.recipeExecuteData.requireCounts[j] * 2) {
+            //                    __instance.produced[i] -= __instance.recipeExecuteData.requireCounts[j] * 2;
+            //                    __instance.served[j] += __instance.recipeExecuteData.requireCounts[j] * 2;
+            //                } else {
+            //                    __instance.served[j] += __instance.produced[i];
+            //                    __instance.produced[i] = 0;
+            //                }
+            //            }
+            //        }
+            //    }
 
-                UpdateOutputSlots(ref __instance, cargoTraffic, slotdata, entitySignPool, stationPilerLevel);
-                UpdateInputSlots(ref __instance, cargoTraffic, slotdata, entitySignPool);
-                //}
-                //else if (b)
-                //{
-                //    UpdateTrashInputSlots(ref __instance, power, factory, cargoTraffic, slotdata);
+            //    UpdateOutputSlots(ref __instance, cargoTraffic, slotdata, entitySignPool, stationPilerLevel);
+            //    UpdateInputSlots(ref __instance, cargoTraffic, slotdata, entitySignPool);
+            //    //}
+            //    //else if (b)
+            //    //{
+            //    //    UpdateTrashInputSlots(ref __instance, power, factory, cargoTraffic, slotdata);
 
-                //    int sandCount = __instance.produced[0];
+            //    //    int sandCount = __instance.produced[0];
 
-                //    if (sandCount >= 800 && GameMain.mainPlayer != null)
-                //    {
-                //        GameMain.mainPlayer.sandCount += sandCount;
-                //        __instance.produced[0] = 0;
-                //    }
-                //}
-            }
+            //    //    if (sandCount >= 800 && GameMain.mainPlayer != null)
+            //    //    {
+            //    //        GameMain.mainPlayer.sandCount += sandCount;
+            //    //        __instance.produced[0] = 0;
+            //    //    }
+            //    //}
+            //}
 
             if (factory.entityPool[__instance.entityId].protoId == ProtoID.I量子化工厂 && __instance.replicating)
             {
@@ -441,104 +440,104 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
             }
         }
 
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ApplyInsertTarget))]
-        public static void PlanetFactory_ApplyInsertTarget(ref PlanetFactory __instance, int entityId, int insertTarget, int slotId,
-            int offset)
-        {
-            if (entityId == 0) return;
+        //[HarmonyPostfix]
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ApplyInsertTarget))]
+        //public static void PlanetFactory_ApplyInsertTarget(ref PlanetFactory __instance, int entityId, int insertTarget, int slotId,
+        //    int offset)
+        //{
+        //    if (entityId == 0) return;
 
-            int itemId = __instance.entityPool[entityId].protoId;
+        //    int itemId = __instance.entityPool[entityId].protoId;
 
-            if (itemId != ProtoID.I生态穹顶) return;
+        //    if (itemId != ProtoID.I生态穹顶) return;
 
-            int beltId = -1;
+        //    int beltId = -1;
 
-            int assemblerId = __instance.entityPool[entityId].assemblerId;
+        //    int assemblerId = __instance.entityPool[entityId].assemblerId;
 
-            if (assemblerId > 0) {
+        //    if (assemblerId > 0) {
 
-                AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
+        //        AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
 
-                if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
+        //        if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
 
-                beltId = __instance.entityPool[insertTarget].beltId;
-            }
+        //        beltId = __instance.entityPool[insertTarget].beltId;
+        //    }
 
-            if (beltId <= 0) return;
+        //    if (beltId <= 0) return;
 
-            SlotData[] slotdata = GetSlots(__instance.planetId, entityId);
-            slotdata[slotId].dir = IODir.Output;
-            slotdata[slotId].beltId = beltId;
-            slotdata[slotId].counter = 0;
-            SyncSlotData.Sync(__instance.planetId, slotId, entityId, slotdata[slotId]);
-        }
+        //    SlotData[] slotdata = GetSlots(__instance.planetId, entityId);
+        //    slotdata[slotId].dir = IODir.Output;
+        //    slotdata[slotId].beltId = beltId;
+        //    slotdata[slotId].counter = 0;
+        //    SyncSlotData.Sync(__instance.planetId, slotId, entityId, slotdata[slotId]);
+        //}
 
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ApplyPickTarget))]
-        public static void PlanetFactory_ApplyPickTarget(ref PlanetFactory __instance, int entityId, int pickTarget, int slotId, int offset)
-        {
-            if (entityId == 0) return;
+        //[HarmonyPostfix]
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ApplyPickTarget))]
+        //public static void PlanetFactory_ApplyPickTarget(ref PlanetFactory __instance, int entityId, int pickTarget, int slotId, int offset)
+        //{
+        //    if (entityId == 0) return;
 
-            int itemId = __instance.entityPool[entityId].protoId;
+        //    int itemId = __instance.entityPool[entityId].protoId;
 
-            if (itemId != ProtoID.I生态穹顶) return;
+        //    if (itemId != ProtoID.I生态穹顶) return;
 
-            int assemblerId = __instance.entityPool[entityId].assemblerId;
+        //    int assemblerId = __instance.entityPool[entityId].assemblerId;
 
-            //if (assemblerId <= 0) return;
-            int beltId = -1;
-            if (assemblerId > 0) {
-                AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
+        //    //if (assemblerId <= 0) return;
+        //    int beltId = -1;
+        //    if (assemblerId > 0) {
+        //        AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
 
-                if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
+        //        if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
 
-                beltId = __instance.entityPool[pickTarget].beltId;
-            }
+        //        beltId = __instance.entityPool[pickTarget].beltId;
+        //    }
 
-            if (beltId <= 0) return;
+        //    if (beltId <= 0) return;
 
-            SlotData[] slotdata = GetSlots(__instance.planetId, entityId);
-            slotdata[slotId].dir = IODir.Input;
-            slotdata[slotId].beltId = beltId;
-            slotdata[slotId].storageIdx = 0;
-            slotdata[slotId].counter = 0;
-            SyncSlotData.Sync(__instance.planetId, slotId, entityId, slotdata[slotId]);
-        }
+        //    SlotData[] slotdata = GetSlots(__instance.planetId, entityId);
+        //    slotdata[slotId].dir = IODir.Input;
+        //    slotdata[slotId].beltId = beltId;
+        //    slotdata[slotId].storageIdx = 0;
+        //    slotdata[slotId].counter = 0;
+        //    SyncSlotData.Sync(__instance.planetId, slotId, entityId, slotdata[slotId]);
+        //}
 
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ApplyEntityDisconnection))]
-        public static void PlanetFactory_ApplyEntityDisconnection(ref PlanetFactory __instance, int otherEntityId, int removingEntityId,
-            int otherSlotId, int removingSlotId)
-        {
-            if (otherEntityId == 0) return;
+        //[HarmonyPostfix]
+        //[HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.ApplyEntityDisconnection))]
+        //public static void PlanetFactory_ApplyEntityDisconnection(ref PlanetFactory __instance, int otherEntityId, int removingEntityId,
+        //    int otherSlotId, int removingSlotId)
+        //{
+        //    if (otherEntityId == 0) return;
 
-            int itemId = __instance.entityPool[otherEntityId].protoId;
+        //    int itemId = __instance.entityPool[otherEntityId].protoId;
 
-            if (itemId != ProtoID.I生态穹顶) return;
+        //    if (itemId != ProtoID.I生态穹顶) return;
 
-            int assemblerId = __instance.entityPool[otherEntityId].assemblerId;
+        //    int assemblerId = __instance.entityPool[otherEntityId].assemblerId;
 
-            //if (assemblerId <= 0) return;
-            int beltId = -1;
-            if (assemblerId > 0) {
-                AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
+        //    //if (assemblerId <= 0) return;
+        //    int beltId = -1;
+        //    if (assemblerId > 0) {
+        //        AssemblerComponent assembler = __instance.factorySystem.assemblerPool[assemblerId];
 
-                if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
+        //        if (assembler.id != assemblerId || assembler.speed < MegaAssemblerSpeed) return;
 
-                beltId = __instance.entityPool[removingEntityId].beltId;
-            }
+        //        beltId = __instance.entityPool[removingEntityId].beltId;
+        //    }
             
-            if (beltId <= 0) return;
+        //    if (beltId <= 0) return;
 
-            SlotData[] slotdata = GetSlots(__instance.planetId, otherEntityId);
+        //    SlotData[] slotdata = GetSlots(__instance.planetId, otherEntityId);
 
-            slotdata[otherSlotId].dir = IODir.None;
-            slotdata[otherSlotId].beltId = 0;
-            slotdata[otherSlotId].counter = 0;
+        //    slotdata[otherSlotId].dir = IODir.None;
+        //    slotdata[otherSlotId].beltId = 0;
+        //    slotdata[otherSlotId].counter = 0;
 
-            SyncSlotData.Sync(__instance.planetId, otherSlotId, otherEntityId, slotdata[otherSlotId]);
-        }
+        //    SyncSlotData.Sync(__instance.planetId, otherSlotId, otherEntityId, slotdata[otherSlotId]);
+        //}
 
         [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.RemoveEntityWithComponents))]
         [HarmonyPrefix]

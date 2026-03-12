@@ -231,7 +231,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         public static void NewAssemblerComponentPostPatch(ref FactorySystem __instance, int __result, int entityId)
         {
             var itemId = __instance.factory.entityPool[__instance.assemblerPool[__result].entityId].protoId;
-            if (itemId == ProtoID.I太空船坞 || itemId == ProtoID.I轨道熔炼站 || itemId == ProtoID.I星环对撞机) {
+            if (itemId == ProtoID.I太空船坞 || itemId == ProtoID.I轨道熔炼站 || itemId == ProtoID.I星环对撞机 || itemId == ProtoID.I轨道水培舱) {
                 BuildOrbitalAssembler(__instance, __result, entityId, itemId);
             }
 

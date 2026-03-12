@@ -2484,6 +2484,16 @@
         "ENUS": "Under the high temperature and high pressure of plasma, heavy oil undergoes hydrogenation, cracking, and isomerization reactions, converting into light oil."
     },
     {
+        "Name": "延迟焦化",
+        "ZHCN": "延迟焦化",
+        "ENUS": "delayed coking"
+    },
+    {
+        "Name": "R延迟焦化",
+        "ZHCN": "石油焦是石油炼制的副产品，主流采用延迟焦化工艺生产，将减压渣油预处理后裂解缩合，焦化煅烧，最后得到石油焦和轻质汽油馏分等，石油焦再进一步石墨化为石墨。",
+        "ENUS": "Petroleum coke is a by-product of petroleum refining. The mainstream production process involves delayed coking, where vacuum residue is pretreated, cracked, condensed, coked, and calcined to obtain petroleum coke and light gasoline fractions. The petroleum coke is then further graphitized into graphite."
+    },
+    {
         "Name": "菌丝母株",
         "ZHCN": "菌丝母株",
         "ENUS": "Mycelium Mother Plant"
@@ -4592,6 +4602,21 @@
         "Name": "I轨道空投引导站",
         "ZHCN": "装备了激光信标，可以引导在轨的运输船将货物精准空投到引导站，完成物资的星际接收，而不需要建造昂贵的太空电梯和物流港。\n<color=\"#FD965ECC\">不可选择星际供应</color>",
         "ENUS": "Equipped with laser beacons, it can guide transport ships in orbit to accurately airdrop goods to the guidance station, completing interstellar material reception without the need to build expensive space elevators and logistics ports.\n<color=\"#FD965ECC\">Cannot choose interstellar supply</color>"
+    },
+    {
+        "Name": "轨道水培舱",
+        "ZHCN": "轨道水培舱",
+        "ENUS": "Orbital Hydroponic Bay"
+    },
+    {
+        "Name": "I轨道水培舱",
+        "ZHCN": "建造于同步轨道的大型雾化水培舱，曾经我们用它来完成空间站集群粮食的自给自足，如今，这种舱段则被用于经济作物的培养。太空级的气密循环系统将保证所有生化反应的安全。\n<color=\"#FD965ECC\">产物和原料为同一种东西时将自动从产物回填到原料</color>\n<color=\"#FD965ECC\">需要超高效过滤器的配方在本建筑无需过滤器</color>",
+        "ENUS": "The large-scale atomized hydroponic cabin, built in geosynchronous orbit, was once utilized to achieve self-sufficiency in food production for the space station cluster. Nowadays, this type of cabin is employed for cultivating economic crops.The space-grade airtight circulation system will ensure the safety of all biochemical reactions.\n<color=\"#FD965ECC\">When the product and the raw material are the same thing, the product will be automatically refilled into the raw material</color>\n<color=\"#FD965ECC\">The recipe requiring Ultra Low Penetration Air Filter is not necessary for this building</color>"
+    },
+    {
+        "Name": "T轨道水培舱",
+        "ZHCN": "在产量要求不高的时候，我们会尝试在地表建造垂直多层的生态温室，但是当作物的产量有了进一步的要求后，直接把种植集中到一座大型雾化水培舱或许是更有效的做法。",
+        "ENUS": "When the yield requirements are not high, we will attempt to construct vertical multi-layer ecological greenhouses on the surface. However, when there are further requirements for crop yield, it may be more effective to concentrate planting in a large-scale atomized Hydroponic Bay."
     },
     {
         "Name": "T接入共享储存",

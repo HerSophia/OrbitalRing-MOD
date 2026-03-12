@@ -6037,8 +6037,7 @@
         "UnlockRecipes": [
             842,
             512,
-            513,
-            843
+            513
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -6461,7 +6460,7 @@
             1914
         ],
         "PreTechsImplicit": [
-            
+
         ],
         "Items": [
             6001,
@@ -7698,7 +7697,8 @@
         ],
         "HashNeeded": 144000,
         "UnlockRecipes": [
-            701
+            701,
+            423
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
@@ -8607,6 +8607,49 @@
         "HashNeeded": 2880000,
         "UnlockRecipes": [
             841
+        ],
+        "UnlockFunctions": [],
+        "UnlockValues": [],
+        "Published": true,
+        "Level": 0,
+        "MaxLevel": 0,
+        "LevelCoef1": 0,
+        "LevelCoef2": 0,
+        "IsLabTech": true,
+        "PreTechsMax": false,
+        "AddItems": [],
+        "AddItemCounts": [],
+        "PropertyOverrideItems": [],
+        "PropertyItemCounts": []
+    },
+    {
+        "ID": 1991,
+        "Name": "轨道水培舱",
+        "IconPath": "Assets/texpack/T轨道水培舱",
+        "IconTag": "tgdspc",
+        "Desc": "T轨道水培舱",
+        "Conclusion": "T轨道水培舱",
+        "IsHiddenTech": false,
+        "PreItem": [],
+        "Position": [
+            52.0,
+            32.0
+        ],
+        "PreTechs": [
+            1936
+        ],
+        "PreTechsImplicit": [],
+        "Items": [
+            6003,
+            6278
+        ],
+        "ItemPoints": [
+            10,
+            10
+        ],
+        "HashNeeded": 2880000,
+        "UnlockRecipes": [
+            843
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],
