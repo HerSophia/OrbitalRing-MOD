@@ -6333,9 +6333,9 @@
             6253
         ],
         "ItemPoints": [
-            1
+            40
         ],
-        "HashNeeded": 720000,
+        "HashNeeded": 18000,
         "UnlockRecipes": [
             642
         ],
@@ -6645,7 +6645,9 @@
         "PreTechs": [
             1902
         ],
-        "PreTechsImplicit": [],
+        "PreTechsImplicit": [
+            1902
+        ],
         "Items": [
             6216
         ],
@@ -8179,9 +8181,9 @@
             6241
         ],
         "ItemPoints": [
-            1
+            10
         ],
-        "HashNeeded": 18000,
+        "HashNeeded": 1800,
         "UnlockRecipes": [
             507,
             508
@@ -8223,9 +8225,9 @@
             6241
         ],
         "ItemPoints": [
-            1
+            10
         ],
-        "HashNeeded": 18000,
+        "HashNeeded": 1800,
         "UnlockRecipes": [
             520
         ],
@@ -8266,9 +8268,9 @@
             6241
         ],
         "ItemPoints": [
-            1
+            10
         ],
-        "HashNeeded": 18000,
+        "HashNeeded": 1800,
         "UnlockRecipes": [
             755
         ],
@@ -8584,7 +8586,7 @@
     {
         "ID": 1990,
         "Name": "移山计划",
-        "IconPath": "Assets/texpack/T移山计划",
+        "IconPath": "Assets/texpack/T移山计划2",
         "IconTag": "tysjh",
         "Desc": "T移山计划",
         "Conclusion": "T移山计划",

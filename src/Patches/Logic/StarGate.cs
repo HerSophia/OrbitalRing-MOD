@@ -71,9 +71,9 @@ namespace ProjectOrbitalRing.Patches.Logic
             }
             for (int i = 0; i < count; i++) {
                 BuildPreview buildPreview = __instance.buildPreviews[i];
-                if (buildPreview.item.ID == 6511) {
+                if (buildPreview.item.ID == ProtoID.I超空间中继器核心) {
                     for (int j = 0; j < __instance.factory.prebuildPool.Length; j++) {
-                        if (__instance.factory.prebuildPool[j].protoId != 0 && __instance.factory.prebuildPool[j].protoId != 6281) {
+                        if (__instance.factory.prebuildPool[j].protoId != 0 && __instance.factory.prebuildPool[j].protoId != ProtoID.I超空间中继器基座) {
                             if (CheckBuildingPos(__instance.factory.prebuildPool[j].pos, buildPreview.lpos)) {
                                 buildPreview.condition = EBuildCondition.Collide;
                                 __result = false;
@@ -134,7 +134,7 @@ namespace ProjectOrbitalRing.Patches.Logic
             }
             for (int i = 0; i < __instance.buildPreviews.Count; i++) {
                 BuildPreview buildPreview = __instance.buildPreviews[i];
-                if (buildPreview.item.ID == 6511) {
+                if (buildPreview.item.ID == ProtoID.I超空间中继器核心) {
                     if (buildPreview.condition == EBuildCondition.OutOfReach || buildPreview.condition == EBuildCondition.OutOfVerticalConstructionHeight ||
                         buildPreview.condition == EBuildCondition.NeedGround) {
                         buildPreview.condition = EBuildCondition.Ok;
@@ -148,6 +148,12 @@ namespace ProjectOrbitalRing.Patches.Logic
                     if (buildPreview.lpos.y != 0) {
                         buildPreview.condition = EBuildCondition.BuildInEquator;
                         __result = false;
+                    }
+                    for (int j = 0; j < __instance.factory.entityPool.Length; j++) {
+                        if ((__instance.factory.entityPool[j].pos - buildPreview.lpos).sqrMagnitude < 14297f) {
+                            buildPreview.condition = EBuildCondition.TowerTooClose;
+                            __result = false;
+                        }
                     }
                 }
             }
@@ -165,7 +171,7 @@ namespace ProjectOrbitalRing.Patches.Logic
                     {
                         if (BuildTool_Dismantle.showDemolishContainerQuery)
                         {
-                            if (buildPreview.objId > 0 && buildPreview.item.ID == 6281)
+                            if (buildPreview.objId > 0 && buildPreview.item.ID == ProtoID.I超空间中继器基座)
                             {
                                 var entityPool = __instance.planet.factory.entityPool;
 
@@ -193,7 +199,7 @@ namespace ProjectOrbitalRing.Patches.Logic
         //StationComponent  DetermineDispatch
         public static void RecordStarGate(int itemId, int plantId)
         {
-            if (itemId == 6511)
+            if (itemId == ProtoID.I超空间中继器核心)
             {
                 int starIndex = plantId / 100;
                 starGateList.Add(starIndex);
@@ -202,7 +208,7 @@ namespace ProjectOrbitalRing.Patches.Logic
 
         public static void DismantleStarGate(int itemId, int plantId)
         {
-            if (itemId == 6511)
+            if (itemId == ProtoID.I超空间中继器核心)
             {
                 int starIndex = plantId / 100;
                 starGateList.Remove(starIndex);
@@ -418,6 +424,54 @@ namespace ProjectOrbitalRing.Patches.Logic
         internal static void IntoOtherSave()
         {
             starGateList.Clear();
+        }
+
+        [HarmonyPatch(typeof(UIStationWindow), nameof(UIStationWindow._OnOpen))]
+        [HarmonyPostfix]
+        public static void UIStationWindow_OnOpen_Patch(ref UIStationWindow __instance)
+        {
+            StationComponent stationComponent = __instance.transport.stationPool[__instance.stationId];
+            if (stationComponent == null || stationComponent.id != __instance.stationId) {
+                __instance._Close();
+                return;
+            }
+            if (__instance.factory.entityPool[stationComponent.entityId].protoId == ProtoID.I超空间中继器基座) {
+                __instance._Close();
+                return;
+            }
+            return;
+        }
+
+        [HarmonyPatch(typeof(UIStationWindow), nameof(UIStationWindow._OnUpdate))]
+        [HarmonyPostfix]
+        public static void UIStationWindow_OnUpdate_Patch(ref UIStationWindow __instance)
+        {
+            StationComponent stationComponent = __instance.transport.stationPool[__instance.stationId];
+            if (stationComponent == null || stationComponent.id != __instance.stationId) {
+                __instance._Close();
+                return;
+            }
+            if (__instance.factory.entityPool[stationComponent.entityId].protoId == ProtoID.I超空间中继器基座) {
+                __instance._Close();
+                return;
+            }
+            return;
+        }
+
+        [HarmonyPatch(typeof(UIPowerGeneratorWindow), nameof(UIPowerGeneratorWindow._OnOpen))]
+        [HarmonyPostfix]
+        public static void UIPowerGeneratorWindow_OnOpen_Patch(ref UIPowerGeneratorWindow __instance)
+        {
+            PowerGeneratorComponent powerGeneratorComponent = __instance.powerSystem.genPool[__instance.generatorId];
+            if (powerGeneratorComponent.id != __instance.generatorId) {
+                __instance._Close();
+                return;
+            }
+            if (__instance.factory.entityPool[powerGeneratorComponent.entityId].protoId == ProtoID.I超空间中继器核心) {
+                __instance._Close();
+                return;
+            }
+            return;
         }
     }
 }

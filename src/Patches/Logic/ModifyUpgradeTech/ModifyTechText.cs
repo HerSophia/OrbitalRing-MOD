@@ -9,7 +9,13 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech {
         public static void TechProto_UnlockFunctionText_Postfix(TechProto __instance, ref string __result,
             StringBuilder sb) {
             switch (__instance.ID) {
-                
+                case 2702:
+                case 2703:
+                case 2704:
+                case 2705:
+                    __result += "\r\n" + "下版本删除".TranslateFromJson();
+                    break;
+
                 case ProtoID.T驱动引擎2:
                     __result += "\r\n" + "离星燃料消耗描述".TranslateFromJson();
                     break;

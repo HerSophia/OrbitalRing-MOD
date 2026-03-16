@@ -94,10 +94,10 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
                     veins.dataArray[index].Name = "莫桑石矿";
                     veins.dataArray[index].Description = "I莫桑石";
                 }
-                Debug.LogFormat("veins id {0} {1}, MinerBaseModelIndex{2} MiningEffect{3}", index, veins.dataArray[index].Name, veins.dataArray[index].MinerBaseModelIndex, veins.dataArray[index].MiningEffect);
-                Debug.LogFormat("MinerCircleModelIndex {0} ModelIndex{1} MiningAudio {2} ModelCount{3}", veins.dataArray[index].MinerCircleModelIndex, veins.dataArray[index].ModelIndex, veins.dataArray[index].MiningAudio, veins.dataArray[index].ModelCount);
-                Debug.LogFormat("CircleRadius {0} MiningItem {1} MiningTime {2}", veins.dataArray[index].CircleRadius, veins.dataArray[index].MiningItem, veins.dataArray[index].MiningTime);
-                Debug.LogFormat("IconPath {0}", veins.dataArray[index].IconPath);
+                //Debug.LogFormat("veins id {0} {1}, MinerBaseModelIndex{2} MiningEffect{3}", index, veins.dataArray[index].Name, veins.dataArray[index].MinerBaseModelIndex, veins.dataArray[index].MiningEffect);
+                //Debug.LogFormat("MinerCircleModelIndex {0} ModelIndex{1} MiningAudio {2} ModelCount{3}", veins.dataArray[index].MinerCircleModelIndex, veins.dataArray[index].ModelIndex, veins.dataArray[index].MiningAudio, veins.dataArray[index].ModelCount);
+                //Debug.LogFormat("CircleRadius {0} MiningItem {1} MiningTime {2}", veins.dataArray[index].CircleRadius, veins.dataArray[index].MiningItem, veins.dataArray[index].MiningTime);
+                //Debug.LogFormat("IconPath {0}", veins.dataArray[index].IconPath);
             }
 
             for (var index = 0; index < protos.Length; ++index)

@@ -2297,7 +2297,7 @@
         "HpMax": 0,
         "Ability": 0,
         "Potential": 0,
-        "BuildIndex": 0,
+        "BuildIndex": 530,
         "BuildMode": 1,
         "UnlockKey": 0,
         "MechaMaterialID": 0,
@@ -3203,8 +3203,6 @@
         "Type": 7,
         "PreTechOverride": 1,
         "DescFields": [
-            2,
-            3,
             40
         ],
         "FuelType": 0,

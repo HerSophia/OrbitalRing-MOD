@@ -154,7 +154,7 @@ namespace ProjectOrbitalRing.Patches.Logic
                 }
                 if (__instance.planet.star.type == EStarType.NeutronStar) {
                     if (random > 0.00001 && random <= 0.1501) {
-                        itemProtoID = 6244;
+                        itemProtoID = ProtoID.I奇夸克样本;
                         itemCount = 1;
                     }
                 } else {
@@ -166,12 +166,12 @@ namespace ProjectOrbitalRing.Patches.Logic
                         }
                     } else if (__instance.planet.theme == 6) {
                         if (random > 0.00001 && random <= 0.3001) {
-                            itemProtoID = 6215;
+                            itemProtoID = ProtoID.I黑盒;
                             itemCount = 1;
                         }
                     } else if (__instance.planet.theme == 15 || __instance.planet.theme == 22) {
                         if (random > 0.00001 && random <= 0.4001) {
-                            itemProtoID = 6234;
+                            itemProtoID = ProtoID.I文明遗物;
                             itemCount = 1;
                         }
                     }

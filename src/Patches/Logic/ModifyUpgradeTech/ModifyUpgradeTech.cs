@@ -42,25 +42,27 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
             tech.UnlockValues = new[] { 1000100.0, 1000100.0, };
 
             tech = LDB.techs.Select(ProtoID.T批量建造2);
-            tech.IsHiddenTech = true;
+            //tech.IsHiddenTech = true;
             //tech.PreItem = new[] { 6228, };
-            //tech.UnlockValues = new[] { 0.0, 0.0, };
+            tech.UnlockValues = new[] { 1000100.0, 1000100.0, };
 
             tech = LDB.techs.Select(ProtoID.T批量建造3);
-            tech.IsHiddenTech = true;
-            tech.PreItem = new[] { 6228, };
-            tech.UnlockValues = new[] { 1800.0, 14400.0, };
+            //tech.IsHiddenTech = true;
+            //tech.PreItem = new[] { 6228, };
+            tech.UnlockValues = new[] { 1000100.0, 1000100.0, };
 
             tech = LDB.techs.Select(2704);
-            tech.IsHiddenTech = true;
+            //tech.IsHiddenTech = true;
             //tech.PreItem = new[] { 6228, };
+            tech.UnlockValues = new[] { 1000100.0, 1000100.0, };
 
             tech = LDB.techs.Select(2705);
-            tech.IsHiddenTech = true;
+            //tech.IsHiddenTech = true;
             //tech.PreItem = new[] { 6228, };
+            tech.UnlockValues = new[] { 1000100.0, 1000100.0, };
 
             tech = LDB.techs.Select(2706);
-            tech.IsHiddenTech = true;
+            //tech.IsHiddenTech = true;
             //tech.PreItem = new[] { 6228, };
 
             tech = LDB.techs.Select(ProtoID.T能量回路4);
@@ -518,47 +520,52 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
         internal static void ModifySpacecraftExpansionUpgradeTechs()
         {
             TechProto techProto = LDB.techs.Select(3501);
+            techProto.UnlockValues = new double[] { 1, 5 };
             techProto.HashNeeded = 18000;
             techProto.Items = new int[] { 6001, 6002 };
             techProto.ItemPoints = new int[] { 10, 10 };
 
             techProto = LDB.techs.Select(3502);
+            techProto.UnlockValues = new double[] { 2, 5 };
             techProto.HashNeeded = 54000;
             techProto.Items = new int[] { 6003 };
             techProto.ItemPoints = new int[] { 10 };
 
             techProto = LDB.techs.Select(3503);
-            techProto.UnlockValues = new double[] { 2, 5, 50 };
+            techProto.UnlockValues = new double[] { 3, 5, 50 };
             techProto.HashNeeded = 108000;
             techProto.Items = new int[] { 6003 };
             techProto.ItemPoints = new int[] { 10 };
 
             techProto = LDB.techs.Select(3504);
-            techProto.UnlockValues = new double[] { 2, 10, 50 };
+            techProto.UnlockValues = new double[] { 3, 10, 50 };
             techProto.HashNeeded = 216000;
             techProto.Items = new int[] { 6003 };
             techProto.ItemPoints = new int[] { 10 };
 
             techProto = LDB.techs.Select(3505);
+            techProto.UnlockValues = new double[] { 3, 10, 100 };
             techProto.HashNeeded = 360000;
             techProto.Items = new int[] { 6003, 6278 };
             techProto.ItemPoints = new int[] { 10, 8 };
 
             techProto = LDB.techs.Select(3506);
+            techProto.UnlockValues = new double[] { 4, 10, 100 };
             techProto.HashNeeded = 360000;
             techProto.Items = new int[] { 6003, 6278 };
             techProto.ItemPoints = new int[] { 10, 8 };
 
             techProto = LDB.techs.Select(3507);
-            techProto.UnlockValues = new double[] { 2, 10, 100 };
+            techProto.UnlockValues = new double[] { 4, 10, 100 };
 
             techProto = LDB.techs.Select(3508);
+            techProto.UnlockValues = new double[] { 10, 100 };
             techProto.HashNeeded = 1080000;
             techProto.Items = new int[] { 6279, 6004, 6005 };
             techProto.ItemPoints = new int[] { 10, 10, 8 };
 
             techProto = LDB.techs.Select(3509);
-            techProto.UnlockValues = new double[] { 20, 200, 1000, 1000 };
+            techProto.UnlockValues = new double[] { 20, 100, 1000, 1000 };
 
             techProto = LDB.techs.Select(3510);
             techProto.UnlockValues = new double[] { 20, 200, 1000, 1000 };
@@ -899,6 +906,7 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                 if (!GameMain.history.TechUnlocked(1952)) {
                     if (DysonEnergy > 8000000) {
                         GameMain.history.UnlockTech(1952); // 解锁穿透现实，2阶
+                        LDB.techs.Select(1960).IsHiddenTech = false; // 解除宇宙的齿轮的隐藏状态
                     }
                 } else if (LDB.techs.Select(1934).IsHiddenTech == true) {
                     if (DysonEnergy > 10000000) {

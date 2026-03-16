@@ -79,10 +79,11 @@ namespace ProjectOrbitalRing.Utils
             { 6277, new FullIconDesc(new Color32(255, 255, 142, 255)) }, // 硫粉
             { 7002, new FullIconDesc(new Color32(96, 255, 114, 255)) }, // 增生组织
             { 7017, new FullIconDesc(new Color32(251, 251, 251, 255)) },  // 工业糖
+            { 6227, new FullIconDesc(new Color32(255, 255, 255, 255)) },   // 铀块
 
             { 6203, new NoIconMetalIconDesc(new Color32(186, 176, 144, 255)) }, // 铝块
             { 7705, new NoIconMetalIconDesc(new Color32(43, 44, 48, 255)) },    // 钨块
-            { 6227, new NoIconMetalIconDesc(new Color32(66, 222, 87, 255)) },   // 铀块
+            //{ 6227, new NoIconMetalIconDesc(new Color32(66, 222, 87, 255)) },   // 铀块
             { 6228, new NoIconMetalIconDesc(new Color32(239, 83, 90, 255)) },   // 钚块
             { 7006, new NoIconMetalIconDesc(new Color32(255, 177, 0, 255)) },   // 润滑油
             { 7015, new NoIconMetalIconDesc(new Color32(0, 255, 157, 255)) },    // 工业醇

@@ -148,7 +148,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                     preview.lpos = normalized * (originalMagnitude + (IsBuildingItemIdisOrbitalCore(preview.item.ID) ? 72 : 40));
                 }
 
-                if (preview.item.ID == 6511) { // 超空间中继器核心
+                if (preview.item.ID == ProtoID.I超空间中继器核心) { // 超空间中继器核心
                     float originalMagnitude = preview.lpos.magnitude;
                     if (originalMagnitude == 0 || originalMagnitude - __instance.planet.realRadius > 30) {
                         continue; // 避免除以零

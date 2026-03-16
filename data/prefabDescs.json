@@ -509,7 +509,7 @@
         "useFuelPerTick": 0,
         //"powerCoverRadius": 10.5,
         //"windForcedPower": true,
-        "genEnergyPerTick": 1000
+        "genEnergyPerTick": 1100
     },
     {
         "ModelID": 822,
