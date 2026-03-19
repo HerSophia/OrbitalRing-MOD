@@ -568,7 +568,7 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
             techProto.UnlockValues = new double[] { 20, 100, 1000, 1000 };
 
             techProto = LDB.techs.Select(3510);
-            techProto.UnlockValues = new double[] { 20, 200, 1000, 1000 };
+            techProto.UnlockValues = new double[] { 20, 100, 1000, 1000 };
         }
 
         internal static void ModifyMinerUpgradeTechs()

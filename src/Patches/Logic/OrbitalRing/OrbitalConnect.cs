@@ -197,6 +197,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                 case ProtoID.M轨道反物质堆基座:
                 case ProtoID.M轨道观测站:
                 case ProtoID.M星环对撞机:
+                case ProtoID.M轨道水培舱:
                     return true;
             }
             return false;

@@ -191,7 +191,6 @@
     <Compile Include="src\Patches\Logic\OrbitalRing\PosTool.cs" />
     <Compile Include="src\Patches\Logic\OrbitalRing\UI.cs" />
     <Compile Include="src\Patches\Logic\OverWriteBirthGalaxy.cs" />
-    <Compile Include="src\Patches\Logic\PlanetFactory_Import_Patch.cs" />
     <Compile Include="src\Patches\Logic\PlanetFocus\DarkFrogPatches.cs" />
     <Compile Include="src\Patches\Logic\PlanetFocus\DronePatches.cs" />
     <Compile Include="src\Patches\Logic\PlanetFocus\FactoryPowerPatches.cs" />
@@ -203,7 +202,7 @@
     <Compile Include="src\Patches\Logic\PlanetFocus\PowerSystemPatches.cs" />
     <Compile Include="src\Patches\Logic\PlanetFocus\WaterWorldPatch.cs" />
     <Compile Include="src\Patches\Logic\PlanetGasPatches.cs" />
-    <Compile Include="src\Patches\Logic\PowerExchangerOutputInputPatch.cs" />
+    <Compile Include="src\Patches\Logic\PowerExchangerOutput\PowerExchangerOutputInputPatch.cs" />
     <Compile Include="src\Patches\Logic\PowerGeneratorEnergyCapPatches.cs" />
     <Compile Include="src\Patches\Logic\ProbabilisticProduct.cs" />
     <Compile Include="src\Patches\Logic\ProductOverflowPatches.cs" />

@@ -51,8 +51,9 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
                 case 521:
                 case 775:
                 case 778:
-                case 800:
-                case 624:
+                case 847:
+                case 848:
+                case 784:
                     result = 7616; // 超净室空气过滤器
                     break;
                 default:
@@ -266,10 +267,12 @@ namespace ProjectOrbitalRing.Patches.Logic.AssemblerModule
         public static void AssemblerFilterModuleProcess(FactorySystem factorySystem, int poolId, ref float power)
         {
             if (factorySystem.assemblerPool[poolId].speed >= 40000) {
-                return;
+                if (factorySystem.assemblerPool[poolId].recipeType != (ERecipeType)14) {
+                    return;
+                }
             }
             AssemblerModuleData AssemblerModuleData = AssemblerModulePatches.GetAssemblerModuleData(factorySystem, poolId);
-            if (GetModuleId(factorySystem.assemblerPool[poolId].recipeId) == 7616) {
+            if (GetModuleId(factorySystem.assemblerPool[poolId].recipeId) == 7616 && factorySystem.assemblerPool[poolId].speed < 40000) {
                 if (AssemblerModuleData.ItemCount == 0) {
                     power = 0.0f;
                 }

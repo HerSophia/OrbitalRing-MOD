@@ -8,15 +8,15 @@
       4
     ]
   },
-  {
-    "ID": 32,
-    "Name": "物质分解设施介绍标题",
-    "PreText": "物质分解设施介绍前字",
-    "DeterminatorName": "TOR_OnBuild",
-    "DeterminatorParams": [
-      6264
-    ]
-  },
+  //{
+  //  "ID": 32,
+  //  "Name": "物质分解设施介绍标题",
+  //  "PreText": "物质分解设施介绍前字",
+  //  "DeterminatorName": "TOR_OnBuild",
+  //  "DeterminatorParams": [
+  //    6264
+  //  ]
+  //},
   {
     "ID": 33,
     "Name": "巨型建筑介绍标题",

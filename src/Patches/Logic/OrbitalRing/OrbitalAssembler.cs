@@ -160,6 +160,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
         {
             var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(planetId);
             if (planetOrbitalRingData == null) return;
+            int produced = 0;
             for (int i = 0; i < planetOrbitalRingData.Rings.Count; i++) {
                 EquatorRing ring = planetOrbitalRingData.Rings[i];
                 for (int j = 0; j < ring.Capacity; j++) {
@@ -183,18 +184,25 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                             }
                             for (int productIndex = 0; productIndex < __instance.recipeExecuteData.products.Length; productIndex++) {
                                 if (storage[z].itemId == __instance.recipeExecuteData.products[productIndex] && __instance.produced[productIndex] > 0 && storage[z].count <= storage[z].max) {
-                                    __instance.produced[productIndex] -= 1;
-                                    storage[z].count += 1;
+                                    produced = __instance.produced[productIndex];
+                                    __instance.produced[productIndex] = 0;
+                                    storage[z].count += produced;
                                     if (__instance.recipeType == ERecipeType.Smelt) {
-                                        storage[z].inc += 4;
+                                        storage[z].inc += 4 * produced;
                                     }
                                     // 当星环对撞机执行起义物质配方时，按记录输入的电池增产的值赋给输出的空电池增产
                                     if (__instance.recipeId == 104 && storage[z].itemId == 2206) {
                                         ValueTuple<int, int> key = new ValueTuple<int, int>(planetId, __instance.id);
-                                        bool flag = MoonPatch.ColliderAccumulatorIncData.ContainsKey(key) && MoonPatch.ColliderAccumulatorIncData[key] >= 4;
+                                        bool flag = MoonPatch.ColliderAccumulatorIncData.ContainsKey(key);
                                         if (flag) {
-                                            MoonPatch.ColliderAccumulatorIncData[key] -= 4;
-                                            storage[z].inc += 4;
+                                            if (MoonPatch.ColliderAccumulatorIncData[key] >= 4 * produced) {
+                                                MoonPatch.ColliderAccumulatorIncData[key] -= 4 * produced;
+                                                storage[z].inc += 4 * produced;
+                                            } else {
+                                                storage[z].inc += MoonPatch.ColliderAccumulatorIncData[key];
+                                                MoonPatch.ColliderAccumulatorIncData[key] = 0;
+
+                                            }
                                             if (MoonPatch.ColliderAccumulatorIncData[key] < 0) {
                                                 MoonPatch.ColliderAccumulatorIncData[key] = 0;
                                             }

@@ -74,6 +74,10 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
                         break;
                 }
 
+                if (__instance.planet.star.type == EStarType.NeutronStar) {
+                    ProjectOrbitalRing.PlanetFocusWindow.FocusId = 6529;
+                }
+
 
                 if (UIPlanetFocusWindow.CurPlanetId != __instance.planet.id) {
                     UIPlanetFocusWindow.CurPlanetId = __instance.planet.id;

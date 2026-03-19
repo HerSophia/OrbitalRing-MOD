@@ -1,14 +1,16 @@
 ﻿using HarmonyLib;
 using ProjectOrbitalRing.Patches.Logic.OrbitalRing;
+using ProjectOrbitalRing.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Reflection.Emit;
+using UnityEngine;
+using UnityEngine.UI;
 
-namespace ProjectOrbitalRing.Patches.Logic
+namespace ProjectOrbitalRing.Patches.Logic.PowerExchangerOutput
 {
-    internal class PowerExchangerOutputInputPatch
+    internal partial class PowerExchangerOutputInputPatch
     {
 
         [HarmonyPrefix]
@@ -70,5 +72,7 @@ namespace ProjectOrbitalRing.Patches.Logic
             }
             return true;
         }
+
+        
     }
 }

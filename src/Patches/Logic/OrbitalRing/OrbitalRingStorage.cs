@@ -262,10 +262,15 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                         // 当星环对撞机执行起义物质配方时，按记录输入的电池增产的值赋给输出的空电池增产
                                         if (assemblerComponent.recipeId == 104 && itemId == 2206) {
                                             ValueTuple<int, int> key = new ValueTuple<int, int>(factory.planet.id, assemblerComponent.id);
-                                            bool flag = MoonPatch.ColliderAccumulatorIncData.ContainsKey(key) && MoonPatch.ColliderAccumulatorIncData[key] >= 4 * count;
+                                            bool flag = MoonPatch.ColliderAccumulatorIncData.ContainsKey(key);
                                             if (flag) {
-                                                MoonPatch.ColliderAccumulatorIncData[key] -= 4 * count;
-                                                storageItem[itemId][1] += 4 * count;
+                                                if (MoonPatch.ColliderAccumulatorIncData[key] >= 4 * count) {
+                                                    MoonPatch.ColliderAccumulatorIncData[key] -= 4 * count;
+                                                    storageItem[itemId][1] += 4 * count;
+                                                } else {
+                                                    storageItem[itemId][1] += MoonPatch.ColliderAccumulatorIncData[key];
+                                                    MoonPatch.ColliderAccumulatorIncData[key] = 0;
+                                                }
                                                 if (MoonPatch.ColliderAccumulatorIncData[key] < 0) {
                                                     MoonPatch.ColliderAccumulatorIncData[key] = 0;
                                                 }

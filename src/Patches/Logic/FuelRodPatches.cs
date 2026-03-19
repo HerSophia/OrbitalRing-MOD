@@ -60,20 +60,20 @@ namespace ProjectOrbitalRing.Patches.Logic
             }
         }
 
-        [HarmonyPatch(typeof(PowerGeneratorComponent), nameof(PowerGeneratorComponent.GenEnergyByFuel))]
-        [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> PowerGeneratorComponent_GenEnergyByFuel_Transpiler(
-            IEnumerable<CodeInstruction> instructions)
-        {
-            var matcher = new CodeMatcher(instructions);
+        //[HarmonyPatch(typeof(PowerGeneratorComponent), nameof(PowerGeneratorComponent.GenEnergyByFuel))]
+        //[HarmonyTranspiler]
+        //public static IEnumerable<CodeInstruction> PowerGeneratorComponent_GenEnergyByFuel_Transpiler(
+        //    IEnumerable<CodeInstruction> instructions)
+        //{
+        //    var matcher = new CodeMatcher(instructions);
 
-            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldarg_2));
+        //    matcher.MatchForward(true, new CodeMatch(OpCodes.Ldarg_2));
 
-            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldarg_2),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(FuelRodPatches), nameof(GenEnergyByFuel_Patch_Method))));
+        //    matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldarg_2),
+        //        new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(FuelRodPatches), nameof(GenEnergyByFuel_Patch_Method))));
 
-            return matcher.InstructionEnumeration();
-        }
+        //    return matcher.InstructionEnumeration();
+        //}
 
         public static void GenEnergyByFuel_Patch_Method(ref PowerGeneratorComponent component, int[] consumeRegister)
         {
@@ -133,30 +133,30 @@ namespace ProjectOrbitalRing.Patches.Logic
             return count;
         }
 
-        [HarmonyPatch(typeof(UIInserterBuildTip), nameof(UIInserterBuildTip.SetOutputEntity))]
-        [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> UIInserterBuildTip_SetOutputEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
-            ILGenerator generator)
-        {
-            var matcher = new CodeMatcher(instructions, generator);
+        //[HarmonyPatch(typeof(UIInserterBuildTip), nameof(UIInserterBuildTip.SetOutputEntity))]
+        //[HarmonyTranspiler]
+        //public static IEnumerable<CodeInstruction> UIInserterBuildTip_SetOutputEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
+        //    ILGenerator generator)
+        //{
+        //    var matcher = new CodeMatcher(instructions, generator);
 
-            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_3),
-                new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(EntityData), nameof(EntityData.beltId))),
-                new CodeMatch(OpCodes.Ldc_I4_0));
+        //    matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_3),
+        //        new CodeMatch(OpCodes.Ldfld, AccessTools.Field(typeof(EntityData), nameof(EntityData.beltId))),
+        //        new CodeMatch(OpCodes.Ldc_I4_0));
 
-            object label = matcher.Advance(1).Operand;
+        //    object label = matcher.Advance(1).Operand;
 
-            matcher.Advance(1).CreateLabel(out Label label2);
+        //    matcher.Advance(1).CreateLabel(out Label label2);
 
-            matcher.Advance(-1).SetInstructionAndAdvance(new CodeInstruction(OpCodes.Bgt, label2));
+        //    matcher.Advance(-1).SetInstructionAndAdvance(new CodeInstruction(OpCodes.Bgt, label2));
 
-            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldloc_0),
-                new CodeInstruction(OpCodes.Ldloc_3),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(FuelRodPatches), nameof(SetOutputEntity_Patch_Method))),
-                new CodeInstruction(OpCodes.Br, label));
+        //    matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_0), new CodeInstruction(OpCodes.Ldloc_0),
+        //        new CodeInstruction(OpCodes.Ldloc_3),
+        //        new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(FuelRodPatches), nameof(SetOutputEntity_Patch_Method))),
+        //        new CodeInstruction(OpCodes.Br, label));
 
-            return matcher.InstructionEnumeration();
-        }
+        //    return matcher.InstructionEnumeration();
+        //}
 
         public static void SetOutputEntity_Patch_Method(UIInserterBuildTip buildTip, PlanetFactory factory, EntityData entityData)
         {

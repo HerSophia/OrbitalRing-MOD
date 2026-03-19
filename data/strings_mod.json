@@ -305,9 +305,9 @@
     "ENUS": "Research Speed +10%"
   },
   {
-    "Name": "生态温室执行配方自动增产",
-    "ZHCN": "生态温室执行配方自动增产",
-    "ENUS": "Ecological greenhouses executes formula to automatically increase production"
+    "Name": "执行生物配方的建筑自动获得3级增产状态",
+    "ZHCN": "执行生物配方的建筑自动获得3级增产状态",
+    "ENUS": "Buildings executing biological recipes automatically obtain a level 3 production increase status"
   },
   {
     "Name": "可以从树木采集种子和本土菌种",

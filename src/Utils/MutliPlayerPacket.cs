@@ -7,6 +7,7 @@ using NebulaAPI.Packets;
 using ProjectOrbitalRing.Patches.Logic;
 using ProjectOrbitalRing.Patches.Logic.MegaAssembler;
 using ProjectOrbitalRing.Patches.Logic.PlanetFocus;
+using ProjectOrbitalRing.Patches.Logic.PowerExchangerOutput;
 using ProjectOrbitalRing.Patches.Logic.QuantumStorage;
 
 // ReSharper disable MemberCanBeInternal

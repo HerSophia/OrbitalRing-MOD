@@ -36,8 +36,8 @@
     },
     {
         "Name": "I信息素",
-        "ZHCN": "当地植物在花期分泌的某种信息素，对于生命的繁育有促进作用。\n<color=\"#FD965ECC\">生态温室执行配方自动增产</color>",
-        "ENUS": "A certain pheromone secreted by local plants during flowering promotes the reproduction of life.\n<color=\"#FD965ECC\">ecological greenhouses executes formula to automatically increase production</color>"
+        "ZHCN": "当地植物在花期分泌的某种信息素，对于生命的繁育有促进作用。\n<color=\"#FD965ECC\">执行生物配方的建筑自动获得3级增产状态</color>",
+        "ENUS": "A certain pheromone secreted by local plants during flowering promotes the reproduction of life.\n<color=\"#FD965ECC\">Buildings executing biological recipes automatically obtain a level 3 production increase status</color>"
     },
     {
         "Name": "真空冶炼",

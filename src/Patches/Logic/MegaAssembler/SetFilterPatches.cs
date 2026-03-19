@@ -28,10 +28,10 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
                                           UISlotPicker_OutputSlotId_Field =
                                               AccessTools.Field(typeof(UISlotPicker), nameof(UISlotPicker.outputSlotId));
 
-        private static readonly MethodInfo MegaAssembler_SetOutputEntity_Patch_Method =
-                                               AccessTools.Method(typeof(MegaAssemblerPatches), nameof(SetOutputEntity_Patch)),
-                                           MegaAssembler_SetFilterToEntity_Patch_Method = AccessTools.Method(typeof(MegaAssemblerPatches),
-                                               nameof(SetFilterToEntity_Patch));
+        //private static readonly MethodInfo MegaAssembler_SetOutputEntity_Patch_Method =
+        //                                       AccessTools.Method(typeof(MegaAssemblerPatches), nameof(SetOutputEntity_Patch)),
+        //                                   MegaAssembler_SetFilterToEntity_Patch_Method = AccessTools.Method(typeof(MegaAssemblerPatches),
+        //                                       nameof(SetFilterToEntity_Patch));
 
         // prevent a packet flood when the filter on a belt connecting.
         // special thanks for https://github.com/hubastard/nebula/tree/master/NebulaPatcher/Patches/Transpilers/UIBeltBuildTip_Transpiler.cs
@@ -40,150 +40,150 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
         private static int LastSlotId;
         private static int LastSelectedIndex;
 
-        [HarmonyPatch(typeof(UIBeltBuildTip), nameof(UIBeltBuildTip.SetOutputEntity))]
-        [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> UIBeltBuildTip_SetOutputEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
-            ILGenerator generator)
-        {
-            var matcher = new CodeMatcher(instructions, generator);
+        //[HarmonyPatch(typeof(UIBeltBuildTip), nameof(UIBeltBuildTip.SetOutputEntity))]
+        //[HarmonyTranspiler]
+        //public static IEnumerable<CodeInstruction> UIBeltBuildTip_SetOutputEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
+        //    ILGenerator generator)
+        //{
+        //    var matcher = new CodeMatcher(instructions, generator);
 
-            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0), new CodeMatch(OpCodes.Ldfld, PlanetFactory_EntityPool_Field),
-                new CodeMatch(OpCodes.Ldarg_1), new CodeMatch(OpCodes.Ldelem), new CodeMatch(OpCodes.Stloc_3));
+        //    matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0), new CodeMatch(OpCodes.Ldfld, PlanetFactory_EntityPool_Field),
+        //        new CodeMatch(OpCodes.Ldarg_1), new CodeMatch(OpCodes.Ldelem), new CodeMatch(OpCodes.Stloc_3));
 
-            matcher.Advance(1).CreateLabel(out Label label);
+        //    matcher.Advance(1).CreateLabel(out Label label);
 
-            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3), new CodeInstruction(OpCodes.Ldfld, EntityData_AssemblerId_Field),
-                new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ble, label), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldloc_0), new CodeInstruction(OpCodes.Ldloc_3), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldflda, UIBeltBuildTip_FilterItems_Field), new CodeInstruction(OpCodes.Ldarg_1),
-                new CodeInstruction(OpCodes.Ldarg_2), new CodeInstruction(OpCodes.Call, MegaAssembler_SetOutputEntity_Patch_Method),
-                new CodeInstruction(OpCodes.Stfld, UIBeltBuildTip_SelectedIndex_Field));
+        //    matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3), new CodeInstruction(OpCodes.Ldfld, EntityData_AssemblerId_Field),
+        //        new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ble, label), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldloc_0), new CodeInstruction(OpCodes.Ldloc_3), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldflda, UIBeltBuildTip_FilterItems_Field), new CodeInstruction(OpCodes.Ldarg_1),
+        //        new CodeInstruction(OpCodes.Ldarg_2), new CodeInstruction(OpCodes.Call, MegaAssembler_SetOutputEntity_Patch_Method),
+        //        new CodeInstruction(OpCodes.Stfld, UIBeltBuildTip_SelectedIndex_Field));
 
-            return matcher.InstructionEnumeration();
-        }
+        //    return matcher.InstructionEnumeration();
+        //}
 
-        [HarmonyPatch(typeof(UISlotPicker), nameof(UISlotPicker.SetOutputEntity))]
-        [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> UISlotPicker_SetOutputEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
-            ILGenerator generator)
-        {
-            var matcher = new CodeMatcher(instructions, generator);
+        //[HarmonyPatch(typeof(UISlotPicker), nameof(UISlotPicker.SetOutputEntity))]
+        //[HarmonyTranspiler]
+        //public static IEnumerable<CodeInstruction> UISlotPicker_SetOutputEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
+        //    ILGenerator generator)
+        //{
+        //    var matcher = new CodeMatcher(instructions, generator);
 
-            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0), new CodeMatch(OpCodes.Ldfld, PlanetFactory_EntityPool_Field),
-                new CodeMatch(OpCodes.Ldarg_1), new CodeMatch(OpCodes.Ldelem), new CodeMatch(OpCodes.Stloc_1));
+        //    matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0), new CodeMatch(OpCodes.Ldfld, PlanetFactory_EntityPool_Field),
+        //        new CodeMatch(OpCodes.Ldarg_1), new CodeMatch(OpCodes.Ldelem), new CodeMatch(OpCodes.Stloc_1));
 
-            matcher.Advance(1).CreateLabel(out Label label);
+        //    matcher.Advance(1).CreateLabel(out Label label);
 
-            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldfld, EntityData_AssemblerId_Field),
-                new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ble, label), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldloc_0), new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldflda, UISlotPicker_FilterItems_Field), new CodeInstruction(OpCodes.Ldarg_1),
-                new CodeInstruction(OpCodes.Ldarg_2), new CodeInstruction(OpCodes.Call, MegaAssembler_SetOutputEntity_Patch_Method),
-                new CodeInstruction(OpCodes.Stfld, UISlotPicker_SelectedIndex_Field));
+        //    matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldfld, EntityData_AssemblerId_Field),
+        //        new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ble, label), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldloc_0), new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldflda, UISlotPicker_FilterItems_Field), new CodeInstruction(OpCodes.Ldarg_1),
+        //        new CodeInstruction(OpCodes.Ldarg_2), new CodeInstruction(OpCodes.Call, MegaAssembler_SetOutputEntity_Patch_Method),
+        //        new CodeInstruction(OpCodes.Stfld, UISlotPicker_SelectedIndex_Field));
 
-            return matcher.InstructionEnumeration();
-        }
+        //    return matcher.InstructionEnumeration();
+        //}
 
-        public static int SetOutputEntity_Patch(PlanetFactory factory, EntityData entityData, ref List<int> filterItems, int entityId,
-            int slot)
-        {
-            AssemblerComponent assemblerComponent = factory.factorySystem.assemblerPool[entityData.assemblerId];
+        //public static int SetOutputEntity_Patch(PlanetFactory factory, EntityData entityData, ref List<int> filterItems, int entityId,
+        //    int slot)
+        //{
+        //    AssemblerComponent assemblerComponent = factory.factorySystem.assemblerPool[entityData.assemblerId];
 
-            if (assemblerComponent.recipeType != (ERecipeType)14) return -1;
+        //    if (assemblerComponent.recipeType != (ERecipeType)14) return -1;
 
-            if (assemblerComponent.recipeId > 0)
-            {
-                filterItems.AddRange(assemblerComponent.recipeExecuteData.products);
-                filterItems.AddRange(assemblerComponent.recipeExecuteData.requires);
-            }
-            else { filterItems.AddRange(Enumerable.Repeat(0, 6)); }
+        //    if (assemblerComponent.recipeId > 0)
+        //    {
+        //        filterItems.AddRange(assemblerComponent.recipeExecuteData.products);
+        //        filterItems.AddRange(assemblerComponent.recipeExecuteData.requires);
+        //    }
+        //    else { filterItems.AddRange(Enumerable.Repeat(0, 6)); }
 
-            entityData.stationId = 0;
+        //    entityData.stationId = 0;
 
-            //StationComponent stationComponent = factory.transport.stationPool[entityData.stationId];
+        //    //StationComponent stationComponent = factory.transport.stationPool[entityData.stationId];
 
-            if (slot >= 0 && slot < 16) return GetSlots(factory.planetId, entityId)[slot].storageIdx;
+        //    if (slot >= 0 && slot < 16) return GetSlots(factory.planetId, entityId)[slot].storageIdx;
 
-            Assert.CannotBeReached();
+        //    Assert.CannotBeReached();
 
-            return -1;
-        }
+        //    return -1;
+        //}
 
-        [HarmonyPatch(typeof(UIBeltBuildTip), nameof(UIBeltBuildTip.SetFilterToEntity))]
-        [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> UIBeltBuildTip_SetFilterToEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
-            ILGenerator generator)
-        {
-            var matcher = new CodeMatcher(instructions, generator);
+        //[HarmonyPatch(typeof(UIBeltBuildTip), nameof(UIBeltBuildTip.SetFilterToEntity))]
+        //[HarmonyTranspiler]
+        //public static IEnumerable<CodeInstruction> UIBeltBuildTip_SetFilterToEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
+        //    ILGenerator generator)
+        //{
+        //    var matcher = new CodeMatcher(instructions, generator);
 
-            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0), new CodeMatch(OpCodes.Ldfld, PlanetFactory_EntityPool_Field),
-                new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldfld, UIBeltBuildTip_OutputEntityId_Field),
-                new CodeMatch(OpCodes.Ldelem), new CodeMatch(OpCodes.Stloc_1));
+        //    matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0), new CodeMatch(OpCodes.Ldfld, PlanetFactory_EntityPool_Field),
+        //        new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldfld, UIBeltBuildTip_OutputEntityId_Field),
+        //        new CodeMatch(OpCodes.Ldelem), new CodeMatch(OpCodes.Stloc_1));
 
-            matcher.Advance(1).CreateLabel(out Label label);
+        //    matcher.Advance(1).CreateLabel(out Label label);
 
-            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldfld, EntityData_AssemblerId_Field),
-                new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ble, label), new CodeInstruction(OpCodes.Ldloc_0),
-                new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, UIBeltBuildTip_OutputEntityId_Field), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, UIBeltBuildTip_OutputSlotId_Field), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, UIBeltBuildTip_SelectedIndex_Field),
-                new CodeInstruction(OpCodes.Call, MegaAssembler_SetFilterToEntity_Patch_Method));
+        //    matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldfld, EntityData_AssemblerId_Field),
+        //        new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ble, label), new CodeInstruction(OpCodes.Ldloc_0),
+        //        new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldfld, UIBeltBuildTip_OutputEntityId_Field), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldfld, UIBeltBuildTip_OutputSlotId_Field), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldfld, UIBeltBuildTip_SelectedIndex_Field),
+        //        new CodeInstruction(OpCodes.Call, MegaAssembler_SetFilterToEntity_Patch_Method));
 
-            return matcher.InstructionEnumeration();
-        }
+        //    return matcher.InstructionEnumeration();
+        //}
 
-        [HarmonyPatch(typeof(UISlotPicker), nameof(UISlotPicker.SetFilterToEntity))]
-        [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> UISlotPicker_SetFilterToEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
-            ILGenerator generator)
-        {
-            var matcher = new CodeMatcher(instructions, generator);
+        //[HarmonyPatch(typeof(UISlotPicker), nameof(UISlotPicker.SetFilterToEntity))]
+        //[HarmonyTranspiler]
+        //public static IEnumerable<CodeInstruction> UISlotPicker_SetFilterToEntity_Transpiler(IEnumerable<CodeInstruction> instructions,
+        //    ILGenerator generator)
+        //{
+        //    var matcher = new CodeMatcher(instructions, generator);
 
-            matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0), new CodeMatch(OpCodes.Ldfld, PlanetFactory_EntityPool_Field),
-                new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldfld, UISlotPicker_OutputEntityId_Field),
-                new CodeMatch(OpCodes.Ldelem), new CodeMatch(OpCodes.Stloc_1));
+        //    matcher.MatchForward(true, new CodeMatch(OpCodes.Ldloc_0), new CodeMatch(OpCodes.Ldfld, PlanetFactory_EntityPool_Field),
+        //        new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldfld, UISlotPicker_OutputEntityId_Field),
+        //        new CodeMatch(OpCodes.Ldelem), new CodeMatch(OpCodes.Stloc_1));
 
-            matcher.Advance(1).CreateLabel(out Label label);
+        //    matcher.Advance(1).CreateLabel(out Label label);
 
-            matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldfld, EntityData_AssemblerId_Field),
-                new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ble, label), new CodeInstruction(OpCodes.Ldloc_0),
-                new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, UISlotPicker_OutputEntityId_Field), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, UISlotPicker_OutputSlotId_Field), new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, UISlotPicker_SelectedIndex_Field),
-                new CodeInstruction(OpCodes.Call, MegaAssembler_SetFilterToEntity_Patch_Method));
+        //    matcher.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldfld, EntityData_AssemblerId_Field),
+        //        new CodeInstruction(OpCodes.Ldc_I4_0), new CodeInstruction(OpCodes.Ble, label), new CodeInstruction(OpCodes.Ldloc_0),
+        //        new CodeInstruction(OpCodes.Ldloc_1), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldfld, UISlotPicker_OutputEntityId_Field), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldfld, UISlotPicker_OutputSlotId_Field), new CodeInstruction(OpCodes.Ldarg_0),
+        //        new CodeInstruction(OpCodes.Ldfld, UISlotPicker_SelectedIndex_Field),
+        //        new CodeInstruction(OpCodes.Call, MegaAssembler_SetFilterToEntity_Patch_Method));
 
-            return matcher.InstructionEnumeration();
-        }
+        //    return matcher.InstructionEnumeration();
+        //}
 
-        public static void SetFilterToEntity_Patch(PlanetFactory factory, EntityData entityData, int outputEntityId, int outputSlotId,
-            int selectedIndex)
-        {
-            if (entityData.assemblerId > 0) {
-                AssemblerComponent assemblerComponent = factory.factorySystem.assemblerPool[entityData.assemblerId];
-                if (assemblerComponent.recipeType != (ERecipeType)14) return;
-            }
+        //public static void SetFilterToEntity_Patch(PlanetFactory factory, EntityData entityData, int outputEntityId, int outputSlotId,
+        //    int selectedIndex)
+        //{
+        //    if (entityData.assemblerId > 0) {
+        //        AssemblerComponent assemblerComponent = factory.factorySystem.assemblerPool[entityData.assemblerId];
+        //        if (assemblerComponent.recipeType != (ERecipeType)14) return;
+        //    }
 
-            SlotData[] slotDatas = GetSlots(factory.planetId, outputEntityId);
-            slotDatas[outputSlotId].storageIdx = selectedIndex;
+        //    SlotData[] slotDatas = GetSlots(factory.planetId, outputEntityId);
+        //    slotDatas[outputSlotId].storageIdx = selectedIndex;
 
-            entityData.stationId = 0;
+        //    entityData.stationId = 0;
 
-            if (IsChangeCached((factory.planetId, outputEntityId), outputSlotId, selectedIndex)) return;
+        //    if (IsChangeCached((factory.planetId, outputEntityId), outputSlotId, selectedIndex)) return;
 
-            SyncSlotData.Sync(factory.planetId, outputSlotId, outputEntityId, slotDatas[outputSlotId]);
-            CacheChange((factory.planetId, outputEntityId), outputSlotId, selectedIndex);
-        }
+        //    SyncSlotData.Sync(factory.planetId, outputSlotId, outputEntityId, slotDatas[outputSlotId]);
+        //    CacheChange((factory.planetId, outputEntityId), outputSlotId, selectedIndex);
+        //}
 
-        private static bool IsChangeCached((int, int) id, int slotId, int selectedIndex) =>
-            LastSetId == id && LastSlotId == slotId && LastSelectedIndex == selectedIndex;
+        //private static bool IsChangeCached((int, int) id, int slotId, int selectedIndex) =>
+        //    LastSetId == id && LastSlotId == slotId && LastSelectedIndex == selectedIndex;
 
-        private static void CacheChange((int, int) id, int slotId, int selectedIndex)
-        {
-            LastSetId = id;
-            LastSlotId = slotId;
-            LastSelectedIndex = selectedIndex;
-        }
+        //private static void CacheChange((int, int) id, int slotId, int selectedIndex)
+        //{
+        //    LastSetId = id;
+        //    LastSlotId = slotId;
+        //    LastSelectedIndex = selectedIndex;
+        //}
     }
 }
