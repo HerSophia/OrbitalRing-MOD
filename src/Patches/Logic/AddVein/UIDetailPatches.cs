@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using CommonAPI;
 using HarmonyLib;
+using ProjectOrbitalRing.Utils;
 using UnityEngine;
 
 namespace ProjectOrbitalRing.Patches.Logic.AddVein
@@ -99,14 +100,14 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
             CodeInstruction refId = matcher.Advance(-2).Instruction;
             CodeInstruction entry = matcher.Advance(-1).Instruction;
 
-            matcher.InsertAndAdvance(new CodeInstruction(entry), new CodeInstruction(refId), new CodeInstruction(OpCodes.Ldc_I4, 15),
+            matcher.InsertAndAdvance(new CodeInstruction(entry), new CodeInstruction(refId), new CodeInstruction(OpCodes.Ldc_I4, 18),
                 new CodeInstruction(OpCodes.Beq, jmp));
 
             jmp = matcher.Advance(11).Operand;
 
             matcher.Advance(-3).InsertAndAdvance(new CodeInstruction(entry), new CodeInstruction(refId),
-                new CodeInstruction(OpCodes.Ldc_I4, 15), new CodeInstruction(OpCodes.Beq, jmp));
-
+                new CodeInstruction(OpCodes.Ldc_I4, 18), new CodeInstruction(OpCodes.Beq, jmp));
+            //matcher.LogInstructionEnumeration();
             return matcher.InstructionEnumeration();
         }
     }

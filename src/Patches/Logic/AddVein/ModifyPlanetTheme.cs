@@ -81,10 +81,10 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
             if (theme.GasItems[0] == ProtoID.I可燃冰 && theme.GasItems[1] == ProtoID.I氢)
             {
                 theme.GasItems = new[] { ProtoID.I氢, ProtoID.I甲烷, ProtoID.I气云, };
-                theme.GasSpeeds = new float[] { theme.GasSpeeds[0], theme.GasSpeeds[1], (theme.GasSpeeds[1] / 6) + (theme.GasSpeeds[0] / 18), };
+                theme.GasSpeeds = new float[] { theme.GasSpeeds[0], theme.GasSpeeds[1], (theme.GasSpeeds[1] / 18) + (theme.GasSpeeds[0] / 18), };
             } else if (theme.GasItems[0] == ProtoID.I氢 && theme.GasItems[1] == ProtoID.I重氢) {
                 theme.GasItems = new[] { ProtoID.I氢, ProtoID.I重氢, ProtoID.I气云, };
-                theme.GasSpeeds = new float[] { theme.GasSpeeds[0], theme.GasSpeeds[1], (theme.GasSpeeds[1] / 6) + (theme.GasSpeeds[0] / 18), };
+                theme.GasSpeeds = new float[] { theme.GasSpeeds[0], theme.GasSpeeds[1], (theme.GasSpeeds[1] / 18) + (theme.GasSpeeds[0] / 18), };
             }
         }
 

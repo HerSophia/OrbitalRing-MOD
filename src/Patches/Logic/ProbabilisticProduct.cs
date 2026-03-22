@@ -17,11 +17,11 @@ namespace ProjectOrbitalRing.Patches.Logic
             int[] products = RecipeProto.recipeExecuteData[recipeId].products;
             switch (recipeId) {
                 case 510:
-                    if (random > 0.00001 && random <= 0.80001) {
+                    if (random > 0.00001 && random <= 0.90001) {
                         produced[2]--;
                         productRegister[products[2]]--;
                     }
-                    if (random > 0.15001 && random <= 0.9501) {
+                    if (random > 0.05001 && random <= 0.9501) {
                         produced[3]--;
                         productRegister[products[3]]--;
                     }

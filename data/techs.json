@@ -2692,9 +2692,9 @@
             6006
         ],
         "ItemPoints": [
-            4
+            10
         ],
-        "HashNeeded": 3600000,
+        "HashNeeded": 1440000,
         "UnlockRecipes": [],
         "UnlockFunctions": [
             99

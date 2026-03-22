@@ -413,6 +413,7 @@ namespace ProjectOrbitalRing.Utils
         public int ID { get; set; }
         public string Name { get; set; }
         public string PreText { get; set; }
+        public string LayoutFileName { get; set; }
         public string DeterminatorName { get; set; }
         public long[] DeterminatorParams { get; set; }
 
@@ -421,6 +422,7 @@ namespace ProjectOrbitalRing.Utils
                 ID = ID,
                 Name = Name,
                 //PreText = PreText,
+                LayoutFileName = LayoutFileName,
                 DeterminatorName = DeterminatorName,
                 DeterminatorParams = DeterminatorParams,
             };

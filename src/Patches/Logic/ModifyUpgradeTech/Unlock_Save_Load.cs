@@ -663,11 +663,20 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
             techProto.Name = "为何攀登高峰".Translate();
             techProto.RefreshTranslation();
 
-            techProto = LDB.techs.Select(1952);
+            techProto = LDB.techs.Select(1952); // 穿透现实
             techProto.IsHiddenTech = true;
-            techProto = LDB.techs.Select(1960);
+            techProto = LDB.techs.Select(1960); // 宇宙的齿轮
             techProto.IsHiddenTech = true;
-            techProto = LDB.techs.Select(1814);
+            techProto = LDB.techs.Select(1814); // 宇宙创生
+            techProto.IsHiddenTech = true;
+
+            techProto = LDB.techs.Select(1934); // 坐标引擎
+            techProto.IsHiddenTech = true;
+            techProto = LDB.techs.Select(1959); // 开弦修正
+            techProto.IsHiddenTech = true;
+            techProto = LDB.techs.Select(1987); // 无限应用课题
+            techProto.IsHiddenTech = true;
+            techProto = LDB.techs.Select(1989); // 光速修改
             techProto.IsHiddenTech = true;
         }
 

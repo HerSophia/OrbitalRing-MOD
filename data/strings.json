@@ -226,18 +226,18 @@
     },
     {
         "Name": "星环介绍前字",
-        "ZHCN": "星球调整：\n    重设矿物，删除非有机星的煤，新增黄铁矿、辉银矿、地下水、深层熔岩四种矿物；\n    新增岩浆海洋、甲烷海洋、原油海洋；\n    星球特质，提示该星球的特殊加成/是否有隐藏。\n\n产线调整：\n    大面积配方重做；\n    对自动化生产属性进行提升，如供电范围、传送带、分拣器速度、制造台速度等；\n    燃料电池发电厂仅能在含氧大气环境下运行（燃料棒除外）；添加裂变电站、同位素温差发电机；\n    星环建筑：建筑在同步轨道的大型太空设施；\n    太空船坞，轨道熔炼站，物流港，星环对撞机等。\n\n科技调整：\n    添加多种复合矩阵及对应科研需求；\n\n武器调整：\n    生产贫铀弹头、核导弹；\n\n其他调整：\n    机甲燃料仓只能使用燃料棒或电池进行供电；",
+        "ZHCN": "星球调整：\n    母星系完全定制化，母星系只有巨星是气巨还是冰巨差别。\n    新增半径为行星一半的小卫星，小卫星必定为无大气的贫瘠荒漠。行星矿物储量也进行过普遍调整，原版种子已无参考价值。\n    重设矿物，删除非有机星的煤，新增黄铁矿、辉银矿、地下水、深层熔岩四种矿物。\n    新增岩浆海洋、甲烷海洋、原油海洋。\n    星球特质，提示该星球的特殊加成/是否有隐藏。\n\n产线调整：\n    大面积配方重做。\n    对自动化生产属性进行提升，如供电范围、制造台速度等。\n    火力发电厂仅能在含氧大气环境下运行（燃料棒除外）（仅有拥有植物生态圈的行星视为含氧大气）。\n    添加核裂变电站、同位素温差发电机、核弹等完整核裂变科技树。\n\n星环：\n    新增一条完整的从太空电梯到同步轨道设施，以及将轨道设施串联成环的科技树。\n    沿行星赤道一圈建造的太空电梯，同步轨道设施，连接组件，电网环路组成的大型太空人造结构。\n    拥有太空船坞，轨道熔炼站，物流港，轨道水培舱，星环对撞机等多种同步轨道设施。\n\n科技调整：\n    添加多种复合矩阵及对应科研需求。\n    部分科技改为通过达成某种条件解锁，请注意描述说明。\n\n其他调整：\n    机甲燃料仓只能使用燃料棒或电池进行供电。",
         "ENUS": "To be translated"
     },
     {
-        "Name": "巨型建筑介绍标题",
-        "ZHCN": "巨型建筑介绍",
-        "ENUS": "Mega Buildings Introduction"
+        "Name": "托钛介绍标题",
+        "ZHCN": "材料矩阵路线规划",
+        "ENUS": "Material matrix route planning"
     },
     {
-        "Name": "巨型建筑介绍前字",
-        "ZHCN": "巨型建筑是一类具有高集成度的生产设施。虽然它们看起来与物流站很相似，但并不能装载物流运输机。\n\n一个巨型建筑可将原料或产物通过传送带输出到下一个巨型建筑，从而高效利用占地。",
-        "ENUS": "Mega buildings are a class of production facilities with a high degree of integration. Although they look similar to a logistics station, they do not carry a logistics transporter. \n\nOne mega building can export raw materials or products to the next mega building via a conveyor belt, thus making efficient use of space."
+        "Name": "托钛介绍前字",
+        "ZHCN": "1.星环的材料矩阵阶段科技研究<color=\"#FD965ECC\">不需要</color>电气矩阵和化工矩阵。\n2.离星消耗的燃料棒会随着背包物品的增加<color=\"#FD965ECC\">快速上升</color>。\n3.生态温室产物可以满足<color=\"#FD965ECC\">煤</color>和<color=\"#FD965ECC\">原油</color>需求。\n\n请结合以上3点好好想想，你真的需要cos火箭不停烧燃料棒<color=\"#FD965ECC\">托钛</color>吗？",
+        "ENUS": "1. The technological research for the material matrix phase of the Orbital Ring does not require the electrical matrix and chemical matrix.\n2.The fuel rods consumed for leaving the planet will rapidly increase as the items in the backpack increase.\n3.The products from ecological greenhouses can meet the demand for coal and crude oil.\n\nPlease carefully consider the above three points. Do you really need to continuously burn fuel rods and transport titanium for the COS rocket?"
     },
     {
         "Name": "行星特质介绍标题",
@@ -248,26 +248,6 @@
         "Name": "行星特质介绍前字",
         "ZHCN": "一个行星可能会拥有某种全球性的加成特质或隐藏，可在行星视图中（默认快捷键为M键）点击行星特质打开查看。",
         "ENUS": "A planet may possess certain global bonus traits or hidden features, which can be accessed by clicking on the planet traits in the planet view (default shortcut key is M)."
-    },
-    {
-        "Name": "物质分解设施介绍标题",
-        "ZHCN": "物质分解设施",
-        "ENUS": "Recycling Factory Introduction"
-    },
-    {
-        "Name": "物质分解设施介绍前字",
-        "ZHCN": "在选择<color=\"#FD965ECC\">物质回收</color>配方后，物质分解设施可将输入到其中的所有物品按数量比例转换为沙土，并在达到一定数量后静默返还到机甲背包中。\n若背包未满，输入的建筑物品可返还75%的制造原料到背包中。",
-        "ENUS": "After selecting <color=\"#FD965ECC\">Matter recovery</color> recipe, the Recycling Factory converts all items entered into it into Sand in proportion to their quantity, and silently returns them to package after a certain amount has been reached.\nIncoming construction items return 75% of their own manufacturing materials to the package (if the package is not full)."
-    },
-    {
-        "Name": "制造类型调整介绍标题",
-        "ZHCN": "制造类型调整",
-        "ENUS": "Manufacturing Type Adjustment"
-    },
-    {
-        "Name": "制造类型调整介绍前字",
-        "ZHCN": "经过特化调整的制造台可以满足不同制造精度的需求，但除黑雾制造台外，不同制造台不能通用。",
-        "ENUS": "After specialization, the assemblers can meet the needs of different precision, but except for the dark fog assembler, different assembler can not be used universally."
     },
     {
         "Name": "离星燃料消耗描述",
@@ -4962,8 +4942,8 @@
     },
     {
         "Name": "T穿透现实",
-        "ZHCN": "随着大统一理论的秘密逐渐被揭开，我们确定，引力在塑造宇宙这个精密的数学率机器中起到了重要作用。就如黑洞是宇宙中最极端的天体，引力是穿透现实的最佳选择。\r\n\r\n<color=\"#FD965ECC\">共鸣阵列达到8Mg（g=9.8m/s）解锁此科技，黑洞巨构升级为 数学率引擎。</color>\n\n<color=\"#FD965ECC\">注意：数学率引擎将不再计算游离的弹射物的功率</color>",
-        "ENUS": "As the secrets of the grand unified theory are gradually revealed, we are certain that gravity plays an important role in shaping the precise mathematical rate machine of the universe. Just as black holes are the most extreme celestial bodies in the universe, gravity is the best choice for penetrating reality.\r\n\r\n<color=\"#FD965ECC\">The resonance array reaches 16.5Mg(g=9.8m/s) to unlock this technology, and the black hole structure is upgraded to a mathematical rate engine.</color> \n\n<color=\"#FD965ECC\">Note: The mathematical rate engine will no longer calculate the power of free-floating projectiles</color>"
+        "ZHCN": "随着大统一理论的秘密逐渐被揭开，我们确定，引力在塑造宇宙这个精密的数学率机器中起到了重要作用。就如黑洞是宇宙中最极端的天体，引力是穿透现实的最佳选择。\r\n\r\n<color=\"#FD965ECC\">共鸣阵列达到40Mg（g=9.8m/s）解锁此科技，黑洞巨构升级为 数学率引擎。</color>\n\n<color=\"#FD965ECC\">注意：数学率引擎将不再计算游离的弹射物的功率</color>",
+        "ENUS": "As the secrets of the grand unified theory are gradually revealed, we are certain that gravity plays an important role in shaping the precise mathematical rate machine of the universe. Just as black holes are the most extreme celestial bodies in the universe, gravity is the best choice for penetrating reality.\r\n\r\n<color=\"#FD965ECC\">The resonance array reaches 40Mg(g=9.8m/s) to unlock this technology, and the black hole structure is upgraded to a mathematical rate engine.</color> \n\n<color=\"#FD965ECC\">Note: The mathematical rate engine will no longer calculate the power of free-floating projectiles</color>"
     },
     {
         "Name": "T穿透现实完成",

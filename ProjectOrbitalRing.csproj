@@ -147,6 +147,7 @@
     <Compile Include="src\Patches\Logic\FixMoonRadius\CalcSegmentsAcross.cs" />
     <Compile Include="src\Patches\Logic\FixMoonRadius\DetermineLongitudeSegmentCount.cs" />
     <Compile Include="src\Patches\Logic\FixMoonRadius\FixMoonRadius.cs" />
+    <Compile Include="src\Patches\Logic\FixMoonRadius\InitCollectorMaterial.cs" />
     <Compile Include="src\Patches\Logic\FixMoonRadius\LUT Rework.cs" />
     <Compile Include="src\Patches\Logic\FixMoonRadius\RadiusFixTranspiler.cs" />
     <Compile Include="src\Patches\Logic\FixMoonRadius\TrashSystemFix.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="src\Patches\UI\UIPowerGeneratorWindowPatches.cs" />
     <Compile Include="src\Patches\UI\UISignalPickerPatches.cs" />
     <Compile Include="src\Patches\UI\UITechNodePatches.cs" />
+    <Compile Include="src\Patches\UI\UITutorialWindowPatches.cs" />
     <Compile Include="src\Patches\UI\UpdateLogoPatches.cs" />
     <Compile Include="src\Patches\UI\Utils\MyWindowCtl.cs" />
     <Compile Include="src\Patches\UI\Utils\Util.cs" />

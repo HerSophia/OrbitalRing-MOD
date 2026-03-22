@@ -157,16 +157,17 @@ namespace ProjectOrbitalRing.Patches.Logic
             }
             megaPumper.portPoses = newPortPoses;
 
-            DelStationPose(801); // 轨道熔炼站
-            DelStationPose(803); // 太空船坞
-            DelStationPose(804); // 轨道观测站
-            DelStationPose(806); // 深空物流港
-            DelSlotPose(807); // 轨道反物质堆核心
-            DelStationPose(811); // 星环对撞机总控站
-            DelStationPose(814); // 轨道反物质堆基座
-            DelStationPose(820); // 星环电网枢纽
-            DelStationPose(821); // 超空间中继器核心
-            DelSlotPose(822); // 重型电磁弹射器
+            DelStationPose(ProtoID.M轨道熔炼站);
+            DelStationPose(ProtoID.M太空船坞);
+            DelStationPose(ProtoID.M轨道观测站);
+            DelStationPose(ProtoID.M深空物流港);
+            DelSlotPose(ProtoID.M轨道反物质堆核心);
+            DelStationPose(ProtoID.M星环对撞机);
+            DelStationPose(ProtoID.M轨道反物质堆基座);
+            DelStationPose(ProtoID.M天枢座);
+            DelStationPose(ProtoID.M超空间中继器核心);
+            DelStationPose(ProtoID.M轨道水培舱);
+            DelSlotPose(ProtoID.M轨道弹射器);
 
             // 化工厂和量子化工厂新增前方两个爪子口
             megaPumper = LDB.models.Select(64).prefabDesc;
