@@ -60,6 +60,16 @@
         "ENUS": "This planet has hidden features.\n<color=\"#FD965ECC\">Manually cutting down trees or digging stones has a chance of falling and hiding to unlock hidden technology</color>"
     },
     {
+        "Name": "无星球特质",
+        "ZHCN": "无星球特质",
+        "ENUS": "No planet characteristics"
+    },
+    {
+        "Name": "I无星球特质",
+        "ZHCN": "该星球没有特质。",
+        "ENUS": "This planet has no unique characteristics."
+    },
+    {
         "Name": "热聚增效",
         "ZHCN": "热聚增效",
         "ENUS": "Artificial Star Efficiency"
@@ -4605,8 +4615,8 @@
     },
     {
         "Name": "共享储存",
-        "ZHCN": "该槽位是否接入<color=\"#FD965ECC\">共享空间</color>\n\n只有建成星环才可以勾选\n\n物品<color=\"#FD965ECC\">大于</color>上限一半时，大于一半的部分将<color=\"#FD965ECC\">存入</color>共享空间\n物品<color=\"#FD965ECC\">小于</color>上限一半时，尝试从共享空间<color=\"#FD965ECC\">补足</color>到一半\n\n上层同步轨道生产设施的产物在此设为不接入时，产物将不会输出到共享空间",
-        "ENUS": "Is this slot connected to the <color=\"#FD965ECC\">shared space</color>\n\n Only after the orbital ring is built can it be checked\n\n When the item <color=\"#FD965ECC\">exceeds</color> half of the upper limit, the portion exceeding half will <color=\"#FD965ECC\">be stored</color> in the shared space\n When the item is <color=\"#FD965ECC\">less</color> than half of the upper limit, try to <color=\"#FD965ECC\">replenish</color> it to half from the shared space\n\nWhen the output from the upper-level Orbital production facility is set to not be accessed, it will not be output to the shared space"
+        "ZHCN": "该槽位是否接入<color=\"#FD965ECC\">共享空间</color>\n\n只有建成星环才可以勾选\n\n物品<color=\"#FD965ECC\">大于</color>上限一半时，大于一半的部分将<color=\"#FD965ECC\">存入</color>共享空间\n物品<color=\"#FD965ECC\">小于</color>上限一半时，尝试从共享空间<color=\"#FD965ECC\">补足</color>到一半\n\n上层同步轨道生产设施的原料/产物在此设为不接入时，原料/产物将不会从共享空间存取",
+        "ENUS": "Is this slot connected to the <color=\"#FD965ECC\">shared space</color>\n\n Only after the orbital ring is built can it be checked\n\n When the item <color=\"#FD965ECC\">exceeds</color> half of the upper limit, the portion exceeding half will <color=\"#FD965ECC\">be stored</color> in the shared space\n When the item is <color=\"#FD965ECC\">less</color> than half of the upper limit, try to <color=\"#FD965ECC\">replenish</color> it to half from the shared space\n\nWhen the raw material or products of the upper-level synchronous orbit production facilities are set to not be accessed, they will not be retrieved from the shared space"
     },
     {
         "Name": "星环解锁",
@@ -4732,8 +4742,8 @@
     },
     {
         "Name": "数学率引擎三阶",
-        "ZHCN": "使数学率引擎达到400k休谟指数以完成科技",
-        "ENUS": "Achieve a mathematical rate engine of 40k Humes to complete technology"
+        "ZHCN": "使数学率引擎达到20k休谟指数以完成科技",
+        "ENUS": "Achieve a mathematical rate engine of 20k Humes to complete technology"
     },
     {
         "Name": "坐标引擎",
@@ -4762,8 +4772,8 @@
     },
     {
         "Name": "开弦修正描述",
-        "ZHCN": "{0:P0} 使产物数目永久修正为{1}\r\n{2:P0} 使产物数目永久修正为{3}",
-        "ENUS": "{0:P0} Permanently adjust the count of products to {1}\n{2:P0} Permanently adjust the count of products to {3}"
+        "ZHCN": "下次修改将 {0:P0} 使产物数目永久修正为{1}\r\n{2:P0} 使产物数目永久修正为{3}",
+        "ENUS": "The next revision will {0:P0} Permanently adjust the count of products to {1}\n{2:P0} Permanently adjust the count of products to {3}"
     },
     {
         "Name": "开弦修正结果",
@@ -4942,7 +4952,7 @@
     },
     {
         "Name": "T穿透现实",
-        "ZHCN": "随着大统一理论的秘密逐渐被揭开，我们确定，引力在塑造宇宙这个精密的数学率机器中起到了重要作用。就如黑洞是宇宙中最极端的天体，引力是穿透现实的最佳选择。\r\n\r\n<color=\"#FD965ECC\">共鸣阵列达到40Mg（g=9.8m/s）解锁此科技，黑洞巨构升级为 数学率引擎。</color>\n\n<color=\"#FD965ECC\">注意：数学率引擎将不再计算游离的弹射物的功率</color>",
+        "ZHCN": "随着大统一理论的秘密逐渐被揭开，我们确定，引力在塑造宇宙这个精密的数学率机器中起到了重要作用。就如黑洞是宇宙中最极端的天体，引力是穿透现实的最佳选择。\r\n\r\n<color=\"#FD965ECC\">共鸣阵列达到80Mg（g=9.8m/s）解锁此科技，黑洞巨构升级为 数学率引擎。</color>\n\n<color=\"#FD965ECC\">注意：数学率引擎将不再计算游离的弹射物的功率</color>",
         "ENUS": "As the secrets of the grand unified theory are gradually revealed, we are certain that gravity plays an important role in shaping the precise mathematical rate machine of the universe. Just as black holes are the most extreme celestial bodies in the universe, gravity is the best choice for penetrating reality.\r\n\r\n<color=\"#FD965ECC\">The resonance array reaches 40Mg(g=9.8m/s) to unlock this technology, and the black hole structure is upgraded to a mathematical rate engine.</color> \n\n<color=\"#FD965ECC\">Note: The mathematical rate engine will no longer calculate the power of free-floating projectiles</color>"
     },
     {
@@ -4972,8 +4982,8 @@
     },
     {
         "Name": "I数学率引擎建设说明书",
-        "ZHCN": "自二阶开始，数学率引擎将<color=\"#FD965ECC\">不再计算游离的弹射物的功率</color>，解锁了数学率引擎-深蓝之井-运载火箭，使用火箭建设节点以吸附游离的弹射物。\n同时<color=\"#FD965ECC\">解锁</color>了三阶科技的<color=\"#FD965ECC\">隐藏</color>，当三阶科技研究完成时，会<color=\"#FD965ECC\">立刻清空数学率引擎的游离弹射物</color>，请确保研究完成时所有的游离弹射物已经吸附完成。同时，会<color=\"#FD965ECC\">记录当前的休谟值</color>，三阶建造的节点和吸附的弹射物将不再直接增加休谟值，而是转化为<color=\"#FD965ECC\">系数</color>(系数为增加的休谟/2000)，<color=\"#FD965ECC\">系数乘以记录的休谟值才是最终的休谟值</color>，同时已存在的层数的节点将<color=\"#FD965ECC\">不再能吸附</color>，需要<color=\"#FD965ECC\">新建戴森层</color>，因此三阶科技请视情况自行决定研究完成的时机。",
-        "ENUS": "Starting from Tier 2, the Mathematical Rate Engine will <color=\"#FD965ECC\">no longer calculate the power of free-floating projectiles</color>, unlocking the Mathematical Rate Engine - Well of Dark Blue - Launch Vehicle. Use the rocket construction node to adsorb free-floating projectiles. At the same time, the <color=\"#FD965ECC\">hidden</color> feature of Tier 3 technology is <color=\"#FD965ECC\">unlocked</color>. When Tier 3 technology research is completed, the free-floating projectiles of the Mathematical Rate Engine will be <color=\"#FD965ECC\">immediately cleared</color>. Please ensure that all free-floating projectiles have been adsorbed by the time research is completed. Additionally, the <color=\"#FD965ECC\">current Hume value will be recorded</color>, and nodes constructed in Tier 3 and adsorbed projectiles will no longer directly increase the Hume value. Instead, they will be converted into a <color=\"#FD965ECC\">coefficient</color> (coefficient is the increased Hume/2000), and the final Hume value will be calculated by <color=\"#FD965ECC\">multiplying the recorded Hume value by the coefficient</color>. Meanwhile, existing layers of nodes will <color=\"#FD965ECC\">no longer be able to adsorb</color>, requiring the construction of new Dyson layers. Therefore, please decide on the timing of completing Tier 3 technology research based on your situation."
+        "ZHCN": "自二阶开始，数学率引擎将<color=\"#FD965ECC\">不再计算游离的弹射物的功率</color>，解锁了数学率引擎-深蓝之井-运载火箭，使用火箭建设节点以吸附游离的弹射物。\n同时<color=\"#FD965ECC\">解锁</color>了三阶科技的<color=\"#FD965ECC\">隐藏</color>，当三阶科技研究完成时，会<color=\"#FD965ECC\">立刻清空数学率引擎的游离弹射物</color>，请确保研究完成时所有的游离弹射物已经吸附完成。同时，会<color=\"#FD965ECC\">记录当前的休谟值</color>，三阶建造的节点和吸附的弹射物将不再直接增加休谟值，而是转化为<color=\"#FD965ECC\">系数</color>(系数为增加的休谟/10000)，<color=\"#FD965ECC\">系数乘以记录的休谟值才是最终的休谟值</color>，同时已存在的层数的节点将<color=\"#FD965ECC\">不再能吸附</color>，需要<color=\"#FD965ECC\">新建戴森层</color>，因此三阶科技请视情况自行决定研究完成的时机。",
+        "ENUS": "Starting from Tier 2, the Mathematical Rate Engine will <color=\"#FD965ECC\">no longer calculate the power of free-floating projectiles</color>, unlocking the Mathematical Rate Engine - Well of Dark Blue - Launch Vehicle. Use the rocket construction node to adsorb free-floating projectiles. At the same time, the <color=\"#FD965ECC\">hidden</color> feature of Tier 3 technology is <color=\"#FD965ECC\">unlocked</color>. When Tier 3 technology research is completed, the free-floating projectiles of the Mathematical Rate Engine will be <color=\"#FD965ECC\">immediately cleared</color>. Please ensure that all free-floating projectiles have been adsorbed by the time research is completed. Additionally, the <color=\"#FD965ECC\">current Hume value will be recorded</color>, and nodes constructed in Tier 3 and adsorbed projectiles will no longer directly increase the Hume value. Instead, they will be converted into a <color=\"#FD965ECC\">coefficient</color> (coefficient is the increased Hume/10000), and the final Hume value will be calculated by <color=\"#FD965ECC\">multiplying the recorded Hume value by the coefficient</color>. Meanwhile, existing layers of nodes will <color=\"#FD965ECC\">no longer be able to adsorb</color>, requiring the construction of new Dyson layers. Therefore, please decide on the timing of completing Tier 3 technology research based on your situation."
     },
     {
         "Name": "宇宙创生",

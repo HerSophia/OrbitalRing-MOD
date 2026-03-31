@@ -75,28 +75,39 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
             int itemId = TheMountainMovingMappings.GetOreId(player.inhandItemId);
             if (player.inhandItemId != itemId) {
                 var planetOrbitalRingData = OrbitalStationManager.Instance.GetPlanetOrbitalRingData(CurPlanetId);
-                if (CheckOrbitalStorageHasVeinMountain(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem, itemId)) {
-                    if (planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem.ContainsKey(itemId)) {
-                        int tempCount = 2147480000 - planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem[itemId][0];
-                        if (tempCount < player.inhandItemCount) {
-                            player.inhandItemCount = tempCount;
-                        }
-                        planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem[itemId][0] += player.inhandItemCount;
-                        planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem[itemId][1] += player.inhandItemInc;
-                    } else {
-                        if (2147480000 < player.inhandItemCount) {
-                            player.inhandItemCount = 2147480000;
-                        }
-                        planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem.Add(itemId, new int[] { player.inhandItemCount, player.inhandItemInc });
+                Dictionary<int, int[]> storageItem = planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem;
+                //if (CheckOrbitalStorageHasVeinMountain(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem, itemId)) {
+                if (storageItem.ContainsKey(itemId)) {
+                    int tempCount = 2147480000 - storageItem[itemId][0];
+                    if (tempCount < player.inhandItemCount) {
+                        player.inhandItemCount = tempCount;
                     }
-                    player.SetHandItemId_Unsafe(0);
-                    player.SetHandItemCount_Unsafe(0);
-                    player.SetHandItemInc_Unsafe(0);
-
-                    SetStorageData(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem);
+                    storageItem[itemId][0] += player.inhandItemCount;
+                    storageItem[itemId][1] += player.inhandItemInc;
                 } else {
-                    return;
+                    if (player.inhandItemCount > 200000) {
+                        for (int x = 0; x < TheMountainMovingMappings.OreIdList.Length; x++) {
+                            int oreId = TheMountainMovingMappings.OreIdList[x];
+                            if (storageItem.ContainsKey(oreId)) {
+                                if (storageItem[oreId][0] > 201000) {
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    if (2147480000 < player.inhandItemCount) {
+                        player.inhandItemCount = 2147480000;
+                    }
+                    storageItem.Add(itemId, new int[] { player.inhandItemCount, player.inhandItemInc });
                 }
+                player.SetHandItemId_Unsafe(0);
+                player.SetHandItemCount_Unsafe(0);
+                player.SetHandItemInc_Unsafe(0);
+
+                SetStorageData(planetOrbitalRingData.Rings[CurStorageIndex].orbitalRingStorage.storageItem);
+                //} else {
+                //    return;
+                //}
             }
         }
 
@@ -123,20 +134,20 @@ namespace ProjectOrbitalRing.Patches.UI.UIOrbitalRingStorageWindow
             }
         }
 
-        public bool CheckOrbitalStorageHasVeinMountain(Dictionary<int, int[]> storageItem, int oreItemId)
-        {
-            if (storageItem.ContainsKey(oreItemId)) {
-                return true;
-            }
-            for (int i = 0; i < TheMountainMovingMappings.OreIdList.Length; i++) {
-                int oreId = TheMountainMovingMappings.OreIdList[i];
-                if (storageItem.ContainsKey(oreId)) {
-                    if (storageItem[oreId][0] > 201000) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
+        //public bool CheckOrbitalStorageHasVeinMountain(Dictionary<int, int[]> storageItem, int oreItemId)
+        //{
+        //    if (storageItem.ContainsKey(oreItemId)) {
+        //        return true;
+        //    }
+        //    for (int i = 0; i < TheMountainMovingMappings.OreIdList.Length; i++) {
+        //        int oreId = TheMountainMovingMappings.OreIdList[i];
+        //        if (storageItem.ContainsKey(oreId)) {
+        //            if (storageItem[oreId][0] > 201000) {
+        //                return false;
+        //            }
+        //        }
+        //    }
+        //    return true;
+        //}
     }
 }

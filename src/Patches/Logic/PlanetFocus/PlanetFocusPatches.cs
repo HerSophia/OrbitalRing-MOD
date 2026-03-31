@@ -28,7 +28,7 @@ namespace ProjectOrbitalRing.Patches.Logic.PlanetFocus
             { 6531, "电力威胁增长 -20%" },
             { 6532, "太空威胁增长 -20%" },
             { 6533, "部队建造速度 -20%" },
-            { 6534, "基地扩张速度 -20%" },
+            { 6534, "无星球特质" },
         };
 
         internal static void SetPlanetFocus(int planetId, int index, int focusId)

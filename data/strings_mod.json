@@ -335,9 +335,9 @@
     "ENUS": "When the furnace product is taken out, it comes with a level 3 production increase"
   },
   {
-    "Name": "聚变发电效率 +10%",
-    "ZHCN": "聚变发电效率 +10%",
-    "ENUS": "Artificial Star Efficiency +10%"
+    "Name": "无星球特质",
+    "ZHCN": "无星球特质",
+    "ENUS": "This planet has no unique characteristics"
   },
   {
     "Name": "矿物采集速度 +25%",
@@ -448,6 +448,11 @@
     "Name": "质能转换",
     "ZHCN": "质能转换",
     "ENUS": "Mass-Energy Conversion"
+  },
+  {
+    "Name": "恒燃之火",
+    "ZHCN": "恒燃之火",
+    "ENUS": "Eternal Flame"
   },
   {
     "Name": "基础制造",

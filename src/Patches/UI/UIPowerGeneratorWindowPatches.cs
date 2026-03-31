@@ -39,7 +39,14 @@ namespace ProjectOrbitalRing.Patches.UI
             window.elecGroup.anchoredPosition = new Vector2(-80f, anchoredPosition.y);
             window.needInventory = false;
             window.fuelIcon0.sprite = TextureHelper.GetSprite("原子能");
-            window.fuelText0.text = "裂变能".TranslateFromJson();
+
+            PowerGeneratorComponent powerGeneratorComponent = window.powerSystem.genPool[window.generatorId];
+            int itemId = window.factory.entityPool[powerGeneratorComponent.entityId].protoId;
+            if (itemId == ProtoID.ISCP310恒燃之火) {
+                window.fuelText0.text = "恒燃之火".TranslateFromJson();
+            } else {
+                window.fuelText0.text = "裂变能".TranslateFromJson();
+            }
             window.fuelText0.color = window.powerColor0;
             window.fuelCircle0.fillAmount = 1f;
         }

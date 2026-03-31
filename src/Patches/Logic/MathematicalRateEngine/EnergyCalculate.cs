@@ -14,6 +14,8 @@ namespace ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine
         public static long SecondLevelEnergy = 0;
         public static int[] SecondLevelLayer = new int[10];
 
+        public static readonly double ThirdLevelRatio = 150000000.0;
+
         [HarmonyPostfix]
         [HarmonyPatch(typeof(DysonSphere), "BeforeGameTick")]
         public static void BeforeGameTickPostPatch(ref DysonSphere __instance)
@@ -38,6 +40,39 @@ namespace ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine
             }
             //二阶及以上数学率引擎不计算游离帆的功率
             __instance.energyGenCurrentTick = (long)((double)(__instance.energyGenOriginalCurrentTick - __instance.energyGenCurrentTick_Swarm) * __instance.energyDFHivesDebuffCoef);
+        }
+
+        /// <summary>
+        /// 用于修复非戴森球 黑屋窃取能量显示不正常的bug
+        /// </summary>
+        /// <param name="__instance"></param>
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UIDEPowerDesc), "UpdateUI")]
+        public static void UIDEPowerDescUpdateUIPostPatch(ref UIDEPowerDesc __instance)
+        {
+            int StarIndex = __instance.dysonSphere.starData.index;
+            if (!GameMain.history.TechUnlocked(1952)) {
+                return; // 未解锁数学率引擎二阶
+            }
+            if (__instance.dysonSphere.starData.type != EStarType.BlackHole) {
+                return; // 仅修改黑洞恒星的戴森球
+            }
+            if (ProjectOrbitalRing.MoreMegaStructureCompatibility) {
+                try {
+                    // 使用反射动态获取类型
+                    var mmType = Type.GetType("MoreMegaStructure.MoreMegaStructure, MoreMegaStructure");
+                    var starMegaType = mmType?.GetField("StarMegaStructureType")?.GetValue(null) as int[];
+
+                    if (starMegaType?[__instance.dysonSphere.starData.index] != 0) {
+                        return; // 如果是巨构类型，则不修改
+                    }
+                } catch (Exception ex) {
+                }
+            }
+            var _this = __instance;
+            long num5 = (_this.dysonSphere.energyGenOriginalCurrentTick - _this.dysonSphere.energyGenCurrentTick_Swarm - _this.dysonSphere.energyGenCurrentTick) * 60L;
+            StringBuilderUtility.WriteKMG(_this.sb, 8, -num5, true);
+            _this.valueText4.text = _this.sb.ToString();
         }
 
 

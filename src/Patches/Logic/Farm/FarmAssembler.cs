@@ -14,7 +14,7 @@ namespace ProjectOrbitalRing.Patches.Logic.Farm
     {
         private static Dictionary<(int, int), int> NextAssemblerId = new Dictionary<(int, int), int>();
 
-        private static readonly Dictionary<int, int> AutoBackfill = new Dictionary<int, int> {
+        public static readonly Dictionary<int, int> AutoBackfill = new Dictionary<int, int> {
             { 409, 1 },
             { 518, 2 },
             { 550, 1 },

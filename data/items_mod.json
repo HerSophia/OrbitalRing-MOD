@@ -2115,7 +2115,7 @@
         "ID": 6260,
         "Name": "SCP-310恒燃之火",
         "Description": "ISCP-310恒燃之火",
-        "IconPath": "Icons/ItemRecipe/fusion-reactor",
+        "IconPath": "Assets/texpack/I恒燃之火",
         "GridIndex": 0,
         "StackSize": 1,
         "Type": 1,
@@ -2124,8 +2124,7 @@
             53,
             4,
             39,
-            6,
-            1
+            6
         ],
         "FuelType": 0,
         "HeatValue": 0,
@@ -3879,7 +3878,7 @@
         "ID": 6525,
         "Name": "自然降温",
         "Description": "I自然降温",
-        "IconPath": "Assets/texpack/电解角标",
+        "IconPath": "Assets/texpack/I伺服器能耗减免",
         "GridIndex": 0,
         "StackSize": 1,
         "Type": 1,
@@ -3924,7 +3923,7 @@
         "ID": 6526,
         "Name": "母星特质",
         "Description": "I母星特质",
-        "IconPath": "Assets/texpack/硝酸",
+        "IconPath": "Assets/texpack/防御",
         "GridIndex": 0,
         "StackSize": 1,
         "Type": 1,
@@ -4289,13 +4288,13 @@
     },
     {
         "ID": 6534,
-        "Name": "异常代码分析",
-        "Description": "I异常代码分析",
-        "IconPath": "Assets/texpack/恶意代码攻击",
+        "Name": "无星球特质",
+        "Description": "I无星球特质",
+        "IconPath": "Assets/texpack/I无星球特质",
         "GridIndex": 0,
         "StackSize": 1,
         "Type": 1,
-        "PreTechOverride": 1960,
+        "PreTechOverride": 0,
         "DescFields": [],
         "FuelType": 0,
         "HeatValue": 0,
@@ -6010,13 +6009,13 @@
         "BombType": 0,
         "CraftType": 0,
         "DropRate": 0.0,
-        "EnemyDropLevel": 0, //7,
+        "EnemyDropLevel": 0,
         "EnemyDropRange": [
-            0, //0.994,
-            0 //0.002
+            0,
+            0
         ],
-        "EnemyDropCount": 0, //0.7,
-        "EnemyDropMask": 0, //2147483647,
+        "EnemyDropCount": 0,
+        "EnemyDropMask": 0,
         "EnemyDropMaskRatio": 0.0
     },
     {
@@ -6055,13 +6054,13 @@
         "BombType": 0,
         "CraftType": 0,
         "DropRate": 0.0,
-        "EnemyDropLevel": 0, //7,
+        "EnemyDropLevel": 0,
         "EnemyDropRange": [
-            0, //0.994,
-            0 //0.002
+            0,
+            0
         ],
-        "EnemyDropCount": 0, //0.7,
-        "EnemyDropMask": 0, //2147483647,
+        "EnemyDropCount": 0,
+        "EnemyDropMask": 0,
         "EnemyDropMaskRatio": 0.0
     },
     {
@@ -6100,13 +6099,13 @@
         "BombType": 0,
         "CraftType": 0,
         "DropRate": 0.0,
-        "EnemyDropLevel": 0, //7,
+        "EnemyDropLevel": 0,
         "EnemyDropRange": [
-            0, //0.994,
-            0 //0.002
+            0,
+            0
         ],
-        "EnemyDropCount": 0, //0.7,
-        "EnemyDropMask": 0, //2147483647,
+        "EnemyDropCount": 0,
+        "EnemyDropMask": 0,
         "EnemyDropMaskRatio": 0.0
     },
     {
@@ -6257,7 +6256,7 @@
         "Description": "I乾坤",
         "IconPath": "Assets/texpack/I乾坤",
         "GridIndex": 1313,
-        "StackSize": 50,
+        "StackSize": 100,
         "Type": 4,
         "PreTechOverride": 0,
         "DescFields": [

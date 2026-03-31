@@ -213,6 +213,7 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                         techProto.Items = new int[] { 6001 };
                         techProto.ItemPoints = new int[] { techProto.ItemPoints[0] };
                         techProto.IsLabTech = true;
+                        techProto.IconTag = "jjhx1".Translate();
                         break;
                     case 2102:
                         break;
@@ -904,26 +905,26 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                 }
                 long DysonEnergy = (__instance.energyGenCurrentTick - __instance.energyReqCurrentTick);
                 if (!GameMain.history.TechUnlocked(1952)) {
-                    if (DysonEnergy > 40000000) {
+                    if (DysonEnergy > 80000000) {
                         GameMain.history.UnlockTech(1952); // 解锁穿透现实，2阶
                         LDB.techs.Select(1960).IsHiddenTech = false; // 解除宇宙的齿轮的隐藏状态
                     }
                 } else if (LDB.techs.Select(1934).IsHiddenTech == true) {
-                    if (DysonEnergy > 50000000) {
+                    if (DysonEnergy > 90000000) {
                         LDB.techs.Select(1934).IsHiddenTech = false; // 解除坐标引擎的隐藏状态
                     }
                 } else if (LDB.techs.Select(1959).IsHiddenTech == true) {
-                    if (DysonEnergy > 50000000) {
+                    if (DysonEnergy > 90000000) {
                         LDB.techs.Select(1959).IsHiddenTech = false; // 解除开弦修正的隐藏状态
                     }
                 } else if (LDB.techs.Select(1987).IsHiddenTech == true) {
-                    if (DysonEnergy > 50000000) {
+                    if (DysonEnergy > 90000000) {
                         LDB.techs.Select(1987).IsHiddenTech = false; // 解除无限应用课题的隐藏状态
                     }
                 } else if (GameMain.history.TechUnlocked(1960) && LDB.techs.Select(1989).IsHiddenTech == true) {
                     long ThirdLevelEnergy = DysonEnergy - EnergyCalculate.SecondLevelEnergy;
-                    double coefficient = ThirdLevelEnergy / 4000000.0;
-                    if ((long)((EnergyCalculate.SecondLevelEnergy / 2000) * coefficient) > 50000000) {
+                    double coefficient = ThirdLevelEnergy / EnergyCalculate.ThirdLevelRatio;
+                    if ((long)((EnergyCalculate.SecondLevelEnergy / 10000) * coefficient) > 9000) {
                         LDB.techs.Select(1989).IsHiddenTech = false; // 解除光速修改的隐藏状态
                     }
                     //} else if (!GameMain.history.TechUnlocked(1960)) {
@@ -932,8 +933,8 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                     //    }
                 } else if (!GameMain.history.TechUnlocked(1814) && GameMain.history.TechUnlocked(1960)) {
                     long ThirdLevelEnergy = DysonEnergy - EnergyCalculate.SecondLevelEnergy;
-                    double coefficient = ThirdLevelEnergy / 4000000.0;
-                    if ((long)((EnergyCalculate.SecondLevelEnergy / 2000) * coefficient) > 2000000000) {
+                    double coefficient = ThirdLevelEnergy / EnergyCalculate.ThirdLevelRatio;
+                    if ((long)((EnergyCalculate.SecondLevelEnergy / 10000) * coefficient) > 20000) {
                         GameMain.history.UnlockTech(1814);
                     }
                 }

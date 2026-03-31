@@ -70,7 +70,7 @@ namespace ProjectOrbitalRing.Patches.UI.PlanetFocus
                         ProjectOrbitalRing.PlanetFocusWindow.FocusId = 6529;
                         break;
                     default:
-                        ProjectOrbitalRing.PlanetFocusWindow.FocusId = 0;
+                        ProjectOrbitalRing.PlanetFocusWindow.FocusId = 6534;
                         break;
                 }
 

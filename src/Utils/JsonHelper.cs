@@ -41,6 +41,7 @@ namespace ProjectOrbitalRing.Utils
             public string Name { get; set; }
             public string Description { get; set; }
             public string IconPath { get; set; }
+            public string IconTag { get; set; }
             public int GridIndex { get; set; }
             public int StackSize { get; set; }
             public int Type { get; set; }
@@ -84,6 +85,7 @@ namespace ProjectOrbitalRing.Utils
                 Name = i.Name,
                 Description = i.Description,
                 IconPath = i.IconPath,
+                IconTag = i.IconTag,
                 GridIndex = i.GridIndex,
                 StackSize = i.StackSize,
                 FuelType = i.FuelType,
@@ -130,6 +132,7 @@ namespace ProjectOrbitalRing.Utils
             proto.Name = Name;
             proto.Description = Description;
             proto.IconPath = IconPath;
+            proto.IconTag = IconTag;
             proto.GridIndex = GridIndex;
             proto.StackSize = StackSize;
             proto.FuelType = FuelType;

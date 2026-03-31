@@ -175,11 +175,11 @@ namespace ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine
                         } else if (!GameMain.history.TechUnlocked(1952)) {
                             RightMaxPowGenValueText.text = Capacity2Str(DysonEnergy) + " g";
                         } else if (!GameMain.history.TechUnlocked(1960)) {
-                            RightMaxPowGenValueText.text = Capacity2Str(DysonEnergy / 2000) + "休谟".TranslateFromJson();
+                            RightMaxPowGenValueText.text = Capacity2Str(DysonEnergy / 10000) + "休谟".TranslateFromJson();
                         } else {
                             long ThirdLevelEnergy = DysonEnergy - EnergyCalculate.SecondLevelEnergy;
-                            double coefficient = ThirdLevelEnergy / 4000000.0;
-                            RightMaxPowGenValueText.text = Capacity2Str((long)((EnergyCalculate.SecondLevelEnergy / 2000) * coefficient)) + "休谟".TranslateFromJson();
+                            double coefficient = ThirdLevelEnergy / EnergyCalculate.ThirdLevelRatio;
+                            RightMaxPowGenValueText.text = Capacity2Str((long)((EnergyCalculate.SecondLevelEnergy / 10000) * coefficient)) + "休谟".TranslateFromJson();
                             //RightMaxPowGenValueText.text = coefficient.ToString() + "休谟";
                         }
                     }

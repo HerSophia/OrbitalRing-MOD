@@ -1096,7 +1096,7 @@
         "Input": [
             1016,
             6271,
-            1402
+            7501
         ],
         "InCounts": [
             12,
@@ -5365,14 +5365,14 @@
         "IconPath": "Assets/texpack/R纳米晶体管",
         "Type": 10,
         "GridIndex": 1502,
-        "Time": 120,
+        "Time": 180,
         "Input": [
             1124,
             1106,
             1104
         ],
         "InCounts": [
-            2,
+            1,
             1,
             1
         ],
@@ -5380,7 +5380,7 @@
             1302
         ],
         "OutCounts": [
-            6
+            16
         ],
         "Explicit": true,
         "Handcraft": false,
@@ -7210,7 +7210,7 @@
         "IconPath": "",
         "Type": 10,
         "GridIndex": 5304,
-        "Time": 60,
+        "Time": 360,
         "Input": [
             7608,
             6271,
@@ -8374,7 +8374,7 @@
         "Name": "天枢座",
         "Description": "",
         "IconPath": "",
-        "Type": 4,
+        "Type": 9,
         "GridIndex": 2708,
         "Time": 3600,
         "Input": [
@@ -8489,7 +8489,7 @@
             7015
         ],
         "InCounts": [
-            3,
+            1,
             3,
             1
         ],
@@ -8735,7 +8735,7 @@
             7806
         ],
         "OutCounts": [
-            1
+            2
         ],
         "Explicit": false,
         "Handcraft": false,

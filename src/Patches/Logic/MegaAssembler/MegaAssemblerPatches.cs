@@ -9,7 +9,7 @@ using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalAssembler;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.OrbitalRingStorageCalculate;
 using static ProjectOrbitalRing.Patches.Logic.PlanetFocus.WaterWorldPatch;
 using static ProjectOrbitalRing.Patches.Logic.Farm.FarmAssembler;
-using ProjectOrbitalRing.Patches.Logic.AssemblerModule;
+using static ProjectOrbitalRing.ProjectOrbitalRing;
 
 // ReSharper disable InconsistentNaming
 
@@ -132,12 +132,20 @@ namespace ProjectOrbitalRing.Patches.Logic.MegaAssembler
 
             // 水世界星球特质处理入口
             SetAssmeblerWaterFull(ref __instance, factory);
-
+            bool flag;
             // 如果产物和原料是同一种东西，产物会内部直接填回原料，不再需要在绿塔外拉个回环线
-            if (buildIngItemId == ProtoID.I生态温室 || buildIngItemId == ProtoID.I轨道水培舱) {
-                for (int i = 0; i < __instance.recipeExecuteData.products.Length; i++) {
-                    for (int j = 0; j < __instance.needs.Length; j++) {
-                        if (__instance.recipeExecuteData.products[i] == __instance.needs[j] && __instance.produced[i] > 0) {
+            if (buildIngItemId == ProtoID.I生态温室 || buildIngItemId == ProtoID.I轨道水培舱 || buildIngItemId == 2310 || buildIngItemId == ProtoID.I星环对撞机 || buildIngItemId == ProtoID.I黑盒) {
+                for (int i = 0; i < __instance.produced.Length; i++) {
+                    for (int j = 0; j < __instance.recipeExecuteData.requireCounts.Length; j++) {
+                        flag = __instance.recipeExecuteData.products[i] == __instance.needs[j] && __instance.produced[i] > 0;
+                        if (__instance.recipeExecuteData.products[i] == __instance.recipeExecuteData.requires[j]) {
+                            if (__instance.produced[i] > __instance.recipeExecuteData.productCounts[i] * 19) {
+                                if (__instance.served[j] < __instance.recipeExecuteData.requireCounts[i] * 20) {
+                                    flag = true;
+                                }
+                            }
+                        }
+                        if (flag) {
                             if (__instance.produced[i] >= __instance.recipeExecuteData.requireCounts[j] * 2) {
                                 __instance.produced[i] -= __instance.recipeExecuteData.requireCounts[j] * 2;
                                 __instance.served[j] += __instance.recipeExecuteData.requireCounts[j] * 2;

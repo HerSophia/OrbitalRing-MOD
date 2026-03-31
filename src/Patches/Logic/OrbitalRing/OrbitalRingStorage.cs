@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using ProjectOrbitalRing.Patches.Logic.PlanetFocus;
 using System;
 using System.Collections.Generic;
+using ProjectOrbitalRing.Patches.Logic.Farm;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.EquatorRing;
 using static ProjectOrbitalRing.Patches.Logic.OrbitalRing.PosTool;
 using static ProjectOrbitalRing.ProjectOrbitalRing;
@@ -205,6 +206,21 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                             }
                             for (int i = 0; i < assemblerComponent.needs.Length; i++) {
                                 itemId = assemblerComponent.needs[i];
+                                if (pair.elevatorPoolId != -1) {
+                                    StationStore[] storage = factory.factory.transport.stationPool[pair.elevatorPoolId].storage;
+                                    bool flag = false;
+                                    for (int z = 0; z < storage.Length; z++) {
+                                        if (storage[z].itemId == itemId) {
+                                            if (!planetOrbitalRingData.Rings[ringId].orbitalRingStorage.storageShare[pair.elevatorPoolId][z]) {
+                                                flag = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (flag) {
+                                        continue; // 太空电梯对该物品设置不接入共享空间时，则轨道设施产物不输入到共享空间
+                                    }
+                                }
                                 lock (storageItem) {
                                     if (storageItem.ContainsKey(itemId)) {
                                         count = assemblerComponent.recipeExecuteData.requireCounts[i] * num;
