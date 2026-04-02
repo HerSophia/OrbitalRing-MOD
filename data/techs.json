@@ -233,10 +233,10 @@
     },
     {
         "ID": 1103,
-        "Name": "加氢裂解",
+        "Name": "加氢工艺",
         "IconPath": "Icons/Tech/1103",
         "IconTag": "txsxlj",
-        "Desc": "加氢裂解描述",
+        "Desc": "加氢工艺描述",
         "Conclusion": "X射线裂解结果",
         "IsHiddenTech": false,
         "PreItem": null,
@@ -256,7 +256,8 @@
         ],
         "HashNeeded": 36000,
         "UnlockRecipes": [
-            58
+            58,
+            624
         ],
         "UnlockFunctions": [],
         "UnlockValues": [],

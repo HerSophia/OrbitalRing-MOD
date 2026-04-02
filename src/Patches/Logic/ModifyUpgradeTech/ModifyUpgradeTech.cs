@@ -907,7 +907,6 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                 if (!GameMain.history.TechUnlocked(1952)) {
                     if (DysonEnergy > 80000000) {
                         GameMain.history.UnlockTech(1952); // 解锁穿透现实，2阶
-                        LDB.techs.Select(1960).IsHiddenTech = false; // 解除宇宙的齿轮的隐藏状态
                     }
                 } else if (LDB.techs.Select(1934).IsHiddenTech == true) {
                     if (DysonEnergy > 90000000) {
@@ -920,6 +919,10 @@ namespace ProjectOrbitalRing.Patches.Logic.ModifyUpgradeTech
                 } else if (LDB.techs.Select(1987).IsHiddenTech == true) {
                     if (DysonEnergy > 90000000) {
                         LDB.techs.Select(1987).IsHiddenTech = false; // 解除无限应用课题的隐藏状态
+                    }
+                } else if (LDB.techs.Select(1960).IsHiddenTech == true) {
+                    if (DysonEnergy > 90000000) {
+                        LDB.techs.Select(1960).IsHiddenTech = false; // 解除宇宙的齿轮的隐藏状态
                     }
                 } else if (GameMain.history.TechUnlocked(1960) && LDB.techs.Select(1989).IsHiddenTech == true) {
                     long ThirdLevelEnergy = DysonEnergy - EnergyCalculate.SecondLevelEnergy;

@@ -55,7 +55,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
                 NewVein(15, "辉银矿脉", "I辉银矿", "Assets/texpack/铝矿脉", ProtoID.I石墨矿, 34, 3, 60),
                 NewVein(16, "深层熔岩", "I深层熔岩", "Icons/Vein/oil-vein", ProtoID.I深层熔岩, 0, 6, 60),
                 NewVein(17, "铀矿脉", "I铀矿", "Assets/texpack/V铀矿脉", ProtoID.I放射性矿物, 35, 2, 90),
-                NewVein(18, "黄铁矿脉", "I黄铁矿", "Assets/texpack/V黄铁矿脉", ProtoID.I黄铁矿, 36, 1, 90),
+                NewVein(18, "硫磺矿脉", "I硫磺矿", "Assets/texpack/V黄铁矿脉", ProtoID.I硫磺矿, 36, 1, 60),
                 NewVein(19, "地下冰层", "I地下冰层", "Icons/Vein/oil-vein", ProtoID.I水, 0, 6, 60));
             return;
 
@@ -547,7 +547,7 @@ namespace ProjectOrbitalRing.Patches.Logic.AddVein
                     array3[17] = 0.5f;
 
                     array[18] = 5;
-                    array2[18] = 0.4f;
+                    array2[18] = 0.2f;
                     array3[18] = 0.6f;
 
                     array[19] = 12;

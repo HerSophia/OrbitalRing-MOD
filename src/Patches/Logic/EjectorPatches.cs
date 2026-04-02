@@ -45,16 +45,27 @@ namespace ProjectOrbitalRing.Patches.Logic
 
             if (component.bulletId != 1501) PilerEjectorLevel = 1;
 
-            var count = PilerEjectorLevel > bulletCount ? bulletCount : PilerEjectorLevel;
+            var consumeCount = PilerEjectorLevel > bulletCount ? bulletCount : PilerEjectorLevel;
+            int ejectorCount = consumeCount;
 
-            for (int i = 0; i < count; i++) swarm.AddBullet(sailBullet, component.runtimeOrbitId);
+            if (component.bulletId == 1804) {
+                ejectorCount = 5;
+            }
+
+            for (int i = 0; i < ejectorCount; i++) {
+                swarm.AddBullet(sailBullet, component.runtimeOrbitId);
+            }
 
             int bulletInc = component.bulletInc / bulletCount;
-            if (!component.incUsed) component.incUsed = bulletInc > 0;
-            component.bulletInc -= bulletInc * count;
-            bulletCount -= count;
-            if (bulletCount == 0) component.bulletInc = 0;
-            lock (consumeRegister) consumeRegister[component.bulletId] += count;
+            if (!component.incUsed) {
+                component.incUsed = bulletInc > 0;
+            }
+            component.bulletInc -= bulletInc * consumeCount;
+            bulletCount -= consumeCount;
+            if (bulletCount == 0) {
+                component.bulletInc = 0;
+            }
+            lock (consumeRegister) consumeRegister[component.bulletId] += consumeCount;
         }
     }
 }

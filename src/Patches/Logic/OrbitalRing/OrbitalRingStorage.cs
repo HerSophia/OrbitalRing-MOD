@@ -54,6 +54,58 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
     internal class OrbitalRingStorageCalculate
     {
         private static readonly int OrbitalRingStorageMax = 200000;
+        private static readonly int OrbitalRingStorage200Max = 200;
+        private static readonly int OrbitalRingStorage100Max = 100;
+        private static readonly int OrbitalRingStorage50Max = 50;
+
+        private static readonly HashSet<int> OrbitalRingStorage200MaxItemId = new HashSet<int>() {
+            1210, // 翘曲器
+            6512, // 预制星舰模块
+            1503, // 小型运载火箭
+            6504, // 数学率引擎-起振焦点-运载火箭
+            6502, // 数学率引擎-深蓝之井-运载火箭
+        };
+        private static readonly HashSet<int> OrbitalRingStorage100MaxItemId = new HashSet<int>() {
+            5002, // 太空运输船
+            6230, // 深空货舰
+            2103, // 物流立交
+            6258, // 太空电梯
+            6514, // 轨道空投引导站
+            6280, // 勘探船
+            5111, // 护卫舰
+            2312, // 电磁弹射井
+        };
+        private static readonly HashSet<int> OrbitalRingStorage50MaxItemId = new HashSet<int>() {
+            5112, // 驱逐舰
+            2104, // 太空物流港
+            6267, // 深空物流港
+            6257, // 太空船坞
+            6264, // 轨道水培舱
+            6273, // 轨道观测站
+            6501, // 轨道熔炼站
+            6506, // 轨道反物质堆基座
+            6261, // 轨道反物质堆核心
+            6259, // 天枢座
+            6265, // 星环对撞机总控站
+            2105, // 轨道采集器
+            6281, // 超空间中继器基座
+            6511, // 超空间中继器核心
+        };
+
+        // \n在星环共享空间中储存上限为<color=\"#FD965ECC\">50</color>
+        // \nThe storage capacity limit in the Star Ring shared space is <color=\"#FD965ECC\">50</color>
+
+        private static int CheckItemStorageMax(int itemId)
+        {
+            if (OrbitalRingStorage200MaxItemId.Contains(itemId)) {
+                return OrbitalRingStorage200Max;
+            } else if (OrbitalRingStorage100MaxItemId.Contains(itemId)) {
+                return OrbitalRingStorage100Max;
+            } else if (OrbitalRingStorage50MaxItemId.Contains(itemId)) {
+                return OrbitalRingStorage50Max;
+            }
+            return OrbitalRingStorageMax;
+        }
 
         [HarmonyPatch(typeof(PlanetTransport), nameof(PlanetTransport.GameTick))]
         [HarmonyPostfix]
@@ -123,10 +175,7 @@ namespace ProjectOrbitalRing.Patches.Logic.OrbitalRing
                                     orbitalRingStorage.storageItem[storage.itemId] = new int[] { 0, 0 };
                                 }
                                 int count = storage.count - (storage.max / 2);
-                                int StorageMax = OrbitalRingStorageMax;
-                                if (storage.itemId == 1210) {
-                                    StorageMax = 200;
-                                }
+                                int StorageMax = CheckItemStorageMax(storage.itemId);
                                 if (orbitalRingStorage.storageItem[storage.itemId][0] < StorageMax) {
                                     count = (StorageMax - orbitalRingStorage.storageItem[storage.itemId][0]) > count ? count : (StorageMax - orbitalRingStorage.storageItem[storage.itemId][0]);
                                     orbitalRingStorage.storageItem[storage.itemId][0] += count;

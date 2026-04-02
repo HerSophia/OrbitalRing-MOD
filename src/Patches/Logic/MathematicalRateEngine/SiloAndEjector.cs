@@ -32,47 +32,34 @@ namespace ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine
 
             int bulletIdExpected = 1503;
 
-            if (GameMain.galaxy.stars[starIndex].type == EStarType.BlackHole)
-            {
-                if (ProjectOrbitalRing.MoreMegaStructureCompatibility)
-                {
-                    try
-                    {
+            if (GameMain.galaxy.stars[starIndex].type == EStarType.BlackHole) {
+                if (ProjectOrbitalRing.MoreMegaStructureCompatibility) {
+                    try {
                         // 使用反射动态获取类型
                         var mmType = Type.GetType("MoreMegaStructure.MoreMegaStructure, MoreMegaStructure");
                         var starMegaType = mmType?.GetField("StarMegaStructureType")?.GetValue(null) as int[];
 
-                        if (starMegaType?[starIndex] != 0)
-                        {
-                            if (__instance.bulletId == 6228 || __instance.bulletId == 6504 || __instance.bulletId == 6502)
-                            {
+                        if (starMegaType?[starIndex] != 0) {
+                            if (__instance.bulletId == 6228 || __instance.bulletId == 6504 || __instance.bulletId == 6502) {
                                 __instance.bulletCount = 0;
                                 __instance.bulletInc = 0;
                                 __instance.bulletId = 1503;
                             }
                             return;
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                    // ignored
+                    } catch (Exception ex) {
+                        // ignored
                     }
                 }
-                if (!GameMain.history.TechUnlocked(1952))
-                {
+                if (!GameMain.history.TechUnlocked(1952)) {
                     bulletIdExpected = 6228; // 默认无法发射火箭
-                }
-                else if (!GameMain.history.TechUnlocked(1960))
-                {
+                } else if (!GameMain.history.TechUnlocked(1960)) {
                     bulletIdExpected = 6502; // 进入二阶，发射深蓝之井火箭
-                }
-                else
-                {
+                } else {
                     bulletIdExpected = 6504; // 进入三阶，发射深蓝之井火箭
                 }
 
-                if (__instance.bulletId != bulletIdExpected)
-                {
+                if (__instance.bulletId != bulletIdExpected) {
                     __instance.bulletCount = 0;
                     __instance.bulletInc = 0;
                     __instance.bulletId = bulletIdExpected;
@@ -99,21 +86,16 @@ namespace ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine
                 return;
             }
             int bulletIdExpected = 1501;
-            if (GameMain.galaxy.stars[starIndex].type == EStarType.BlackHole)
-            {
-                if (ProjectOrbitalRing.MoreMegaStructureCompatibility)
-                {
-                    try
-                    {
+            if (GameMain.galaxy.stars[starIndex].type == EStarType.BlackHole) {
+                if (ProjectOrbitalRing.MoreMegaStructureCompatibility) {
+                    try {
                         // 使用反射动态获取类型
                         var mmType = Type.GetType("MoreMegaStructure.MoreMegaStructure, MoreMegaStructure");
                         var starMegaType = mmType?.GetField("StarMegaStructureType")?.GetValue(null) as int[];
 
-                        if (starMegaType?[starIndex] != 0)
-                        {
+                        if (starMegaType?[starIndex] != 0) {
                             int targetBulletId = (starMegaType?[starIndex] == 2) ? 6006 : 1501;
-                            if (__instance.bulletId != targetBulletId)
-                            {
+                            if (__instance.bulletId != targetBulletId) {
                                 __instance.bulletCount = 0;
                                 __instance.bulletInc = 0;
                                 __instance.bulletId = targetBulletId;
@@ -122,34 +104,101 @@ namespace ProjectOrbitalRing.Patches.Logic.MathematicalRateEngine
                             return;
                         }
 
-                    }
-                    catch (Exception ex)
-                    {
+                    } catch (Exception ex) {
                         // ignored
                     }
                 }
-                if (!GameMain.history.TechUnlocked(1802))
-                {
+                if (!GameMain.history.TechUnlocked(1802)) {
                     bulletIdExpected = 6228; // 默认无法发射弹射物
-                }
-                else if (!GameMain.history.TechUnlocked(1952))
-                {
+                } else if (!GameMain.history.TechUnlocked(1952)) {
                     bulletIdExpected = 9480; // 进入一阶，发射引力发生装置
-                }
-                else if (!GameMain.history.TechUnlocked(1960))
-                {
+                } else if (!GameMain.history.TechUnlocked(1960)) {
                     bulletIdExpected = 1803; // 进入二阶，发射反物质燃料棒
-                }
-                else
-                {
+                } else {
                     bulletIdExpected = 9482; // 进入三阶，发射引力钻头
                 }
-            
-                if (__instance.bulletId != bulletIdExpected)
-                {
+
+                if (GameMain.history.TechUnlocked(1952) && !GameMain.history.TechUnlocked(1960) && __instance.bulletCount == 0) {
+                    __instance.needs[0] = ((__instance.bulletCount >= 20) ? 0 : 1803);
+                    __instance.needs[1] = ((__instance.bulletCount >= 20) ? 0 : 1804);
+                }
+
+                if (GameMain.history.TechUnlocked(1952) && !GameMain.history.TechUnlocked(1960) && __instance.bulletId == 1804) {
+                    bulletIdExpected = 1804;
+                }
+                if (__instance.bulletId != bulletIdExpected) {
                     __instance.bulletCount = 0;
                     __instance.bulletInc = 0;
                     __instance.bulletId = bulletIdExpected;
+                }
+            }
+        }
+
+        // 疑似用不到，看上去只有矿机和电厂Component会用到这个InsertInto
+        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto), new[]
+        {
+            typeof(int), typeof(int), typeof(int), typeof(byte),
+            typeof(byte), typeof(byte),
+        }, new[]
+        {
+            ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal,
+            ArgumentType.Normal, ArgumentType.Out,
+        })]
+        [HarmonyPrefix]
+        public static void PlanetFactory_Ejector_InsertInto_Patch(PlanetFactory __instance, int entityId, int offset, int itemId, byte itemCount, byte itemInc)
+        {
+            int beltId = __instance.entityPool[entityId].beltId;
+            if (beltId <= 0) {
+                int[] array = __instance.entityNeeds[entityId];
+                int ejectorId = __instance.entityPool[entityId].ejectorId;
+                if (ejectorId > 0) {
+                    if (array == null) {
+                        return;
+                    }
+                    EjectorComponent ejector = __instance.factorySystem.ejectorPool[ejectorId];
+                    if (ejector.bulletId == 1803 && ejector.bulletCount == 0 && itemId == 1804) {
+                        ejector.needs[0] = 1804;
+                        __instance.entityNeeds[entityId][0] = 1804;
+                        ejector.bulletId = 1804;
+                    }
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(PlanetFactory), nameof(PlanetFactory.InsertInto), new[]
+        {
+            typeof(uint), typeof(int), typeof(int), typeof(byte),
+            typeof(byte), typeof(byte),
+        }, new[]
+        {
+            ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal,
+            ArgumentType.Normal, ArgumentType.Out,
+        })]
+        [HarmonyPrefix]
+        public static void PlanetFactory_Ejector_InsertInto2_Patch(ref PlanetFactory __instance, int ioTargetTypedId, int offset, int itemId, byte itemCount, byte itemInc)
+        {
+            int num = (int)(ioTargetTypedId & 16777215U);
+            EFactoryIOTargetType efactoryIOTargetType = (EFactoryIOTargetType)(ioTargetTypedId & 4278190080U);
+            if (efactoryIOTargetType <= EFactoryIOTargetType.Silo) {
+                if (efactoryIOTargetType == EFactoryIOTargetType.Ejector) {
+                    ref EjectorComponent ejector = ref __instance.factorySystem.ejectorPool[num];
+                    if (ejector.id <= 0) {
+                        return;
+                    }
+                    int entityId3 = ejector.entityId;
+                    int[] array4 = __instance.entityNeeds[entityId3];
+                    if (array4 == null) {
+                        return;
+                    }
+                    if (ejector.bulletId == 1803 && ejector.bulletCount == 0 && itemId == 1804) {
+                        ejector.needs[0] = 1804;
+                        __instance.entityNeeds[entityId3][0] = 1804;
+                        ejector.bulletId = 1804;
+                    } else if (ejector.bulletId == 1804 && ejector.bulletCount == 0 && itemId == 1803) {
+                        ejector.needs[0] = 1803;
+                        __instance.entityNeeds[entityId3][0] = 1803;
+                        ejector.bulletId = 1803;
+                    }
                 }
             }
         }

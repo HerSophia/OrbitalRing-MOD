@@ -616,7 +616,7 @@
         "IconPath": "",
         "Type": 2,
         "GridIndex": 4406,
-        "Time": 360,
+        "Time": 180,
         "Input": [
             6207,
             1000
@@ -626,12 +626,10 @@
             4
         ],
         "Output": [
-            1116,
-            1101
+            1116
         ],
         "OutCounts": [
-            6,
-            1
+            3
         ],
         "Explicit": false,
         "Handcraft": false,
@@ -643,7 +641,7 @@
         "Description": "R磁单极子构成",
         "IconPath": "",
         "Type": 5,
-        "GridIndex": 4803,
+        "GridIndex": 4805,
         "Time": 240,
         "Input": [
             1208,
@@ -1041,7 +1039,7 @@
         "Description": "",
         "IconPath": "",
         "Type": 5,
-        "GridIndex": 4701,
+        "GridIndex": 4801,
         "Time": 150,
         "Input": [
             1120
@@ -1536,7 +1534,7 @@
     {
         "ID": 58,
         "Name": "加氢裂解",
-        "Description": "加氢裂解描述",
+        "Description": "R加氢裂解",
         "IconPath": "Icons/ItemRecipe/X-ray",
         "Type": 3,
         "GridIndex": 4301,
@@ -1969,7 +1967,7 @@
         "Description": "R光子物质化",
         "IconPath": "Icons/ItemRecipe/photon-formula",
         "Type": 5,
-        "GridIndex": 4703,
+        "GridIndex": 4804,
         "Time": 120,
         "Input": [
             1208
@@ -2782,7 +2780,7 @@
         "Description": "I奇异物质",
         "IconPath": "",
         "Type": 5,
-        "GridIndex": 4702,
+        "GridIndex": 4802,
         "Time": 480,
         "Input": [
             1206,
@@ -2892,7 +2890,7 @@
         "Description": "",
         "IconPath": "",
         "Type": 2,
-        "GridIndex": 4503,
+        "GridIndex": 4602,
         "Time": 180,
         "Input": [
             7006,
@@ -3254,7 +3252,7 @@
         "Description": "R奇异同化反应",
         "IconPath": "Assets/texpack/R奇夸克同化",
         "Type": 5,
-        "GridIndex": 4802,
+        "GridIndex": 4803,
         "Time": 240,
         "Input": [
             6244,
@@ -6095,30 +6093,24 @@
     },
     {
         "ID": 624,
-        "Name": "高级有机合金",
-        "Description": "R高级有机合金",
+        "Name": "加氢脱硫",
+        "Description": "R加氢脱硫",
         "IconPath": "",
-        "Type": 14,
-        "GridIndex": 0,
-        "Time": 1440,
+        "Type": 3,
+        "GridIndex": 4501,
+        "Time": 60,
         "Input": [
-            6212,
-            1030,
-            1031,
-            1106
+            1114,
+            1120
         ],
         "InCounts": [
             1,
-            24,
-            16,
-            12
+            1
         ],
         "Output": [
-            1118,
-            7002
+            6207
         ],
         "OutCounts": [
-            2,
             1
         ],
         "Explicit": true,
@@ -7379,7 +7371,7 @@
         "Description": "R黄铁矿炼铁",
         "IconPath": "Assets/texpack/R黄铁炼铁",
         "Type": 1,
-        "GridIndex": 3202,
+        "GridIndex": 0,
         "Time": 60,
         "Input": [
             6207
@@ -8429,7 +8421,7 @@
         "Description": "",
         "IconPath": "",
         "Type": 3,
-        "GridIndex": 4501,
+        "GridIndex": 4601,
         "Time": 120,
         "Input": [
             7009,
